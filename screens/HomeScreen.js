@@ -17,6 +17,11 @@ export default function HomeScreen({ navigation }) {
         title="navigation test to Login"
         onPress={() => navigation.navigate("Login")}
       />
+
+      <Button
+        title="Asset History"
+        onPress={() => navigation.navigate("AssetHistory")}
+      />
     </View>
   );
 }

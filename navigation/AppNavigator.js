@@ -5,6 +5,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import MainTabNavigator from "./MainTabNavigator";
 import RegisterScreen from "../screens/RegisterText";
 import LoginScreen from "../screens/LoginText";
+import AssetHistory from "../screens/AssetHistory";
 
 // export default createAppContainer(
 //   createSwitchNavigator({
@@ -21,7 +22,8 @@ export default createAppContainer(
       // Read more at https://reactnavigation.org/docs/en/auth-flow.html
       Main: MainTabNavigator,
       Register: RegisterScreen,
-      Login: LoginScreen
+      Login: LoginScreen,
+      AssetHistory: AssetHistory,
     },
     {
       initialRouteName: "Main",
