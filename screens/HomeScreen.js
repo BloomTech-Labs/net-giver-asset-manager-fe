@@ -5,8 +5,8 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { Text, Checkbox } from 'galio-framework'
-
+import { Text, Button } from 'galio-framework'
+import BarcodeScannerExample from "./BarcodeScannerExample";
 
 export default function HomeScreen() {
   return (
@@ -19,7 +19,10 @@ export default function HomeScreen() {
         </Text>
 
       </View>
-
+      <View style={styles.contentContainer}>
+        <Button>SCAN NOW!</Button>
+      </View>
+      <BarcodeScannerExample />
     </View >
   );
 }
