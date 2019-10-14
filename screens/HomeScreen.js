@@ -4,25 +4,30 @@ import {
   Platform,
   StyleSheet,
   View,
+  Button,
 } from 'react-native';
 import { Text, Checkbox } from 'galio-framework'
 
 
-export default function HomeScreen() {
+export default function HomeScreen(props) {
   return (
     <View style={styles.container}>
-
 
       <View style={styles.contentContainer}>
         <Text h2>
           Hey, Welcome to Net Giver Asset Manager
         </Text>
 
+        <Button 
+          title="Item History"
+          onPress={() => props.navigation.navigate('ItemHistory')}
+        />
+      
       </View>
 
     </View >
   );
-}
+};
 
 HomeScreen.navigationOptions = {
   header: null,
