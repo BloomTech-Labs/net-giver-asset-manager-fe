@@ -2,30 +2,44 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Button, TextInput } from "react-native";
 
 const LoginScreen = ({ navigation }) => {
-  const [fname, setFname] = useState();
-  const [lme, setLname] = useState();
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
 
   return (
     <View>
-      <Text>Simple Asset Tracker</Text>
-      <Text style={styles.label}>Enter Email:</Text>
+      <Text style={styles.title}>Simple Asset Tracker</Text>
+      <Text style={styles.label}>Username:</Text>
       <TextInput
         style={styles.input}
-        value={email}
-        onChangeText={text => setEmail(text)}
+        value={username}
+        onChangeText={text => setUsername(text)}
       />
-      <Text style={styles.label}>Enter Password:</Text>
+      <Text style={styles.label}>Password:</Text>
       <TextInput
         style={styles.input}
         value={password}
         onChangeText={text => setPassword(text)}
       />
+
+      {/* TODO: add reset pw/username */}
+      <Text>Forgot password or username? Click here.</Text>
+
       <Button title="Login" />
+      
+      <Text>Don't have an account? Register  
+        <Text style={{ color: 'blue'}}
+          onPress={() => navigation.navigate("Register")}> here</Text>
+      </Text>
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  title: {
+    textAlign: "center",
+    fontSize: 20,
+  },
   input: {
     fontSize: 18,
     borderWidth: 1,

@@ -8,7 +8,7 @@ const RegisterNameScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>Simple Asset Tracker</Text>
+      <Text style={styles.title}>Simple Asset Tracker</Text>
       <Text style={styles.label}>First Name</Text>
       <TextInput
         style={styles.input}
@@ -30,6 +30,10 @@ const RegisterNameScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  title: {
+    textAlign: "center",
+    fontSize: 20
+  },
   input: {
     fontSize: 18,
     borderWidth: 1,

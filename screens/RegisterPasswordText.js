@@ -3,47 +3,51 @@ import { Text, View, StyleSheet, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
 const RegisterPasswordScreen = ({ navigation }) => {
-  const [password, setPassword] = useState();
-  const [confPassword, setConfPassword] = useState();
+    const [password, setPassword] = useState();
+    const [confPassword, setConfPassword] = useState();
 
-  return (
-    <View>
-      <Text>Simple Asset Tracker</Text>
-      <Text style={styles.label}>Password:</Text>
-      <TextInput
-        style={styles.input}
-        value={password}
-        onChangeText={text => setPassword(text)}
-      />
-      <Text style={styles.label}>Confirm Password:</Text>
-      <TextInput
-        style={styles.input}
-        value={confPassword}
-        onChangeText={text => setConfPassword(text)}
-      />
-      <Button 
-        title="Register" 
-        // onPress={() => navigation.navigate("Register")}
-      />
+    return (
+        <View>
+            <Text style={styles.title}>Simple Asset Tracker</Text>
+            <Text style={styles.label}>Password:</Text>
+            <TextInput
+                style={styles.input}
+                value={password}
+                onChangeText={text => setPassword(text)}
+            />
+            <Text style={styles.label}>Confirm Password:</Text>
+            <TextInput
+                style={styles.input}
+                value={confPassword}
+                onChangeText={text => setConfPassword(text)}
+            />
+            <Button
+                title="Register"
+            // onPress={() => navigation.navigate("Register")}
+            />
 
-    </View>
-  );
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  input: {
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: "black",
-    marginBottom: 15,
-    padding: 5,
-    margin: 5
-  },
-  label: {
-    fontSize: 20,
-    marginBottom: 5,
-    marginLeft: 5
-  }
+    title: {
+        textAlign: "center",
+        fontSize: 20,
+    },
+    input: {
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: "black",
+        marginBottom: 15,
+        padding: 5,
+        margin: 5
+    },
+    label: {
+        fontSize: 20,
+        marginBottom: 5,
+        marginLeft: 5
+    }
 });
 
 export default RegisterPasswordScreen;
