@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterNameScreen = ({ navigation }) => {
   const [fname, setFname] = useState();
   const [lname, setLname] = useState();
 
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default RegisterScreen;
+export default RegisterNameScreen;
