@@ -6,7 +6,8 @@ import MainTabNavigator from "./MainTabNavigator";
 import RegisterScreen from "../screens/RegisterText";
 import LoginScreen from "../screens/LoginText";
 import AssetHistory from "../screens/AssetHistory";
-import BarcodeScanner from "../screens/BarcodeScanner"
+import BarcodeScanner from "../screens/BarcodeScanner";
+import { Provider as AuthProvider } from "../context/AuthContext";
 
 // export default createAppContainer(
 //   createSwitchNavigator({
@@ -16,24 +17,40 @@ import BarcodeScanner from "../screens/BarcodeScanner"
 //   })
 // );
 
-export default createAppContainer(
-  createStackNavigator(
-    {
-      // You could add another route here for authentication.
-      // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-      Main: MainTabNavigator,
-      Register: RegisterScreen,
-      Login: LoginScreen,
-      AssetHistory: AssetHistory,
-      BarcodeScanner: BarcodeScanner,
-    },
-    {
-      initialRouteName: "Main",
-      defaultNavigationOptions: {
-        title: "Net Giver"
-      }
+// export default createAppContainer(
+//   createStackNavigator(
+//     {
+//       // You could add another route here for authentication.
+//       // Read more at https://reactnavigation.org/docs/en/auth-flow.html
+//       Main: MainTabNavigator,
+//       Register: RegisterScreen,
+//       Login: LoginScreen,
+//       AssetHistory: AssetHistory,
+//       BarcodeScanner: BarcodeScanner,
+//     },
+//     {
+//       initialRouteName: "Main",
+//       defaultNavigationOptions: {
+//         title: "Net Giver"
+//       }
+//     }
+//   )
+// );
+
+const stackNavigator = createStackNavigator(
+  {
+    Main: MainTabNavigator,
+    Register: RegisterScreen,
+    Login: LoginScreen,
+    AssetHistory: AssetHistory,
+    BarcodeScanner: BarcodeScanner
+  },
+  {
+    initialRouteName: "Main",
+    defaultNavigationOptions: {
+      title: "Net Giver"
     }
-  )
+  }
 );
 
 // const navigator = createStackNavigator(
@@ -49,10 +66,12 @@ export default createAppContainer(
 //   }
 // )
 
-// const App = createAppContainer(navigator);
+const App = createAppContainer(stackNavigator);
 
-// export default () => {
-//   return (
-//     <App />
-//   )
-// }
+export default () => {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  );
+};
