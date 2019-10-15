@@ -1,6 +1,7 @@
 import React from "react";
-import { Platform, StyleSheet, View, Button, Text } from "react-native";
-// import { Text, Checkbox } from "galio-framework";
+import { Platform, StyleSheet, View, Button } from "react-native";
+
+import { Text } from 'galio-framework'
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -22,7 +23,13 @@ export default function HomeScreen({ navigation }) {
         title="Asset History"
         onPress={() => navigation.navigate("AssetHistory")}
       />
+      <Button
+        title="SCAN NOW!"
+        onPress={() => navigation.navigate("BarcodeScanner")}
+      />
     </View>
+
+
   );
 }
 

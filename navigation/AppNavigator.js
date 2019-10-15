@@ -6,6 +6,7 @@ import MainTabNavigator from "./MainTabNavigator";
 import RegisterScreen from "../screens/RegisterText";
 import LoginScreen from "../screens/LoginText";
 import AssetHistory from "../screens/AssetHistory";
+import BarcodeScanner from "../screens/BarcodeScanner"
 
 // export default createAppContainer(
 //   createSwitchNavigator({
@@ -24,6 +25,7 @@ export default createAppContainer(
       Register: RegisterScreen,
       Login: LoginScreen,
       AssetHistory: AssetHistory,
+      BarcodeScanner: BarcodeScanner,
     },
     {
       initialRouteName: "Main",
