@@ -3,14 +3,12 @@ import { Text, View, StyleSheet, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
 const RegisterScreen = ({ navigation }) => {
-  const [firstName, setfirstName] = useState();
-  const [lastName, setlastName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [fname, setFname] = useState();
+  const [lname, setLname] = useState();
 
   return (
     <View>
-      <Text style={styles.label}>Enter FirstName:</Text>
+      {/* <Text style={styles.label}>Enter FirstName:</Text>
       <TextInput
         style={styles.input}
         value={firstName}
@@ -34,7 +32,26 @@ const RegisterScreen = ({ navigation }) => {
         value={password}
         onChangeText={text => setPassword(text)}
       />
-      <Button title="Login" />
+      <Button title="Login" /> */}
+
+      <Text>Simple Asset Tracker</Text>
+      <Text style={styles.label}>First Name</Text>
+      <TextInput
+        style={styles.input}
+        value={fname}
+        onChangeText={text => setFname(text)}
+      />
+      <Text style={styles.label}>Last Name</Text>
+      <TextInput
+        style={styles.input}
+        value={lname}
+        onChangeText={text => setLname(text)}
+      />
+      <Button 
+        title="Next" 
+        onPress={() => navigation.navigate("Username")}
+      />
+
     </View>
   );
 };

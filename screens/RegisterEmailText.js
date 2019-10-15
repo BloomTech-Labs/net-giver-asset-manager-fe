@@ -1,26 +1,24 @@
 import React, { useState } from "react";
-import { Text, View, StyleSheet, Button, TextInput } from "react-native";
+import { Text, View, StyleSheet, Button } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
 
-const LoginScreen = ({ navigation }) => {
-  const [fname, setFname] = useState();
-  const [lme, setLname] = useState();
+const RegisterEmailScreen = ({ navigation }) => {
+  const [email, setEmail] = useState();
 
   return (
     <View>
       <Text>Simple Asset Tracker</Text>
-      <Text style={styles.label}>Enter Email:</Text>
+      <Text style={styles.label}>Email:</Text>
       <TextInput
         style={styles.input}
         value={email}
         onChangeText={text => setEmail(text)}
       />
-      <Text style={styles.label}>Enter Password:</Text>
-      <TextInput
-        style={styles.input}
-        value={password}
-        onChangeText={text => setPassword(text)}
+      <Button 
+        title="Next" 
+        onPress={() => navigation.navigate("Password")}
       />
-      <Button title="Login" />
+
     </View>
   );
 };
@@ -41,4 +39,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginScreen;
+export default RegisterEmailScreen;

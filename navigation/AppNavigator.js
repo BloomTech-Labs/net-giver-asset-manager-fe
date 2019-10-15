@@ -4,6 +4,9 @@ import { createStackNavigator } from "react-navigation-stack";
 
 import MainTabNavigator from "./MainTabNavigator";
 import RegisterScreen from "../screens/RegisterText";
+import RegisterEmailScreen from "../screens/RegisterEmailText";
+import RegisterUsernameScreen from "../screens/RegisterUsernameText";
+import RegisterPasswordScreen from "../screens/RegisterPasswordText";
 import LoginScreen from "../screens/LoginText";
 import AssetHistory from "../screens/AssetHistory";
 import BarcodeScanner from "../screens/BarcodeScanner";
@@ -41,6 +44,9 @@ const stackNavigator = createStackNavigator(
   {
     Main: MainTabNavigator,
     Register: RegisterScreen,
+    Email: RegisterEmailScreen,
+    Username: RegisterUsernameScreen,
+    Password: RegisterPasswordScreen,
     Login: LoginScreen,
     AssetHistory: AssetHistory,
     BarcodeScanner: BarcodeScanner
