@@ -8,32 +8,6 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <View>
-      {/* <Text style={styles.label}>Enter FirstName:</Text>
-      <TextInput
-        style={styles.input}
-        value={firstName}
-        onChangeText={text => setfirstName(text)}
-      />
-      <Text style={styles.label}>Enter lastName:</Text>
-      <TextInput
-        style={styles.input}
-        value={lastName}
-        onChangeText={text => setlastName(text)}
-      />
-      <Text style={styles.label}>Enter Email:</Text>
-      <TextInput
-        style={styles.input}
-        value={email}
-        onChangeText={text => setEmail(text)}
-      />
-      <Text style={styles.label}>Enter Password:</Text>
-      <TextInput
-        style={styles.input}
-        value={password}
-        onChangeText={text => setPassword(text)}
-      />
-      <Button title="Login" /> */}
-
       <Text>Simple Asset Tracker</Text>
       <Text style={styles.label}>First Name</Text>
       <TextInput
@@ -51,7 +25,6 @@ const RegisterScreen = ({ navigation }) => {
         title="Next" 
         onPress={() => navigation.navigate("Username")}
       />
-
     </View>
   );
 };
