@@ -1,117 +1,122 @@
+import React from "react";
+import { Platform, StyleSheet, View, Button } from "react-native";
 
-import React from 'react';
-import {
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
-import { Text, Button } from 'galio-framework'
-import BarcodeScannerExample from "./BarcodeScannerExample";
+import { Text } from 'galio-framework'
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-
-
       <View style={styles.contentContainer}>
-        <Text h2>
-          Hey, Welcome to Net Giver Asset Manager
-        </Text>
+        <Text h2>Hey, Welcome to Net Giver Asset Manager</Text>
+      </View>
+      <Button
+        title="navigation test to Register"
+        onPress={() => navigation.navigate("Register")}
+      />
 
-      </View>
-      <View style={styles.contentContainer}>
-        <Button>SCAN NOW!</Button>
-      </View>
-      <BarcodeScannerExample />
-    </View >
+      <Button
+        title="navigation test to Login"
+        onPress={() => navigation.navigate("Login")}
+      />
+
+      <Button
+        title="Asset History"
+        onPress={() => navigation.navigate("AssetHistory")}
+      />
+      <Button
+        title="SCAN NOW!"
+        onPress={() => navigation.navigate("BarcodeScanner")}
+      />
+    </View>
+
+
   );
 }
 
 HomeScreen.navigationOptions = {
-  header: null,
+  header: null
 };
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff"
   },
   contentContainer: {
     paddingTop: 30,
     paddingLeft: 30,
-    textAlign: 'center',
+    textAlign: "center"
   },
   welcomeContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 20
   },
   welcomeImage: {
     width: 100,
     height: 80,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginTop: 3,
-    marginLeft: -10,
+    marginLeft: -10
   },
   getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+    alignItems: "center",
+    marginHorizontal: 50
   },
   homeScreenFilename: {
-    marginVertical: 7,
+    marginVertical: 7
   },
   codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+    color: "rgba(96,100,109, 0.8)"
   },
   codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: "rgba(0,0,0,0.05)",
     borderRadius: 3,
-    paddingHorizontal: 4,
+    paddingHorizontal: 4
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: "center"
   },
   tabBarInfoContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
     ...Platform.select({
       ios: {
-        shadowColor: 'black',
+        shadowColor: "black",
         shadowOffset: { width: 0, height: -3 },
         shadowOpacity: 0.1,
-        shadowRadius: 3,
+        shadowRadius: 3
       },
       android: {
-        elevation: 20,
-      },
+        elevation: 20
+      }
     }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
+    alignItems: "center",
+    backgroundColor: "#fbfbfb",
+    paddingVertical: 20
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+    color: "rgba(96,100,109, 1)",
+    textAlign: "center"
   },
   navigationFilename: {
-    marginTop: 5,
+    marginTop: 5
   },
   helpContainer: {
     marginTop: 15,
-    alignItems: 'center',
+    alignItems: "center"
   },
   helpLink: {
-    paddingVertical: 15,
+    paddingVertical: 15
   },
   helpLinkText: {
     fontSize: 14,
-    color: '#2e78b7',
-  },
+    color: "#2e78b7"
+  }
 });
