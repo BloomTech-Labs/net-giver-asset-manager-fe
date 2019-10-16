@@ -1,4 +1,5 @@
 import axios from "axios";
-import { AsyncStorage } from "react-native";
 
-// this is where we will import the backend api enpoint connections
+export default axios.create({
+  baseURL: "https://net-giver-asset-mngr.herokuapp.com/api/auth"
+});
