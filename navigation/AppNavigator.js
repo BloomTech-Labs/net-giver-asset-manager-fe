@@ -3,7 +3,10 @@ import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
 import MainTabNavigator from "./MainTabNavigator";
-import RegisterScreen from "../screens/RegisterText";
+import RegisterNameScreen from "../screens/RegisterNameText";
+import RegisterEmailScreen from "../screens/RegisterEmailText";
+import RegisterUsernameScreen from "../screens/RegisterUsernameText";
+import RegisterPasswordScreen from "../screens/RegisterPasswordText";
 import LoginScreen from "../screens/LoginText";
 import AssetHistory from "../screens/AssetHistory";
 import BarcodeScanner from "../screens/BarcodeScanner";
@@ -40,7 +43,10 @@ import { Provider as AuthProvider } from "../context/AuthContext";
 const stackNavigator = createStackNavigator(
   {
     Main: MainTabNavigator,
-    Register: RegisterScreen,
+    Register: RegisterNameScreen,
+    Email: RegisterEmailScreen,
+    Username: RegisterUsernameScreen,
+    Password: RegisterPasswordScreen,
     Login: LoginScreen,
     AssetHistory: AssetHistory,
     BarcodeScanner: BarcodeScanner
