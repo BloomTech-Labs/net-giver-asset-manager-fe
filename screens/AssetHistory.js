@@ -1,19 +1,39 @@
-import React from "react";
-import axios from 'axios';
-import { View, Text, StyleSheet } from "react-native";
-import SingleAsset from '../components/SingleAsset';
+import React, { useState, useEffect } from "react";
+import { View, Text, FlatList } from "react-native";
+import axios from "axios";
+import SingleAsset from "../components/SingleAsset";
 
 const AssetHistory = props => {
-  console.log(props);
+  const [history, setHistory] = useState([]);
+
+  // Fetch asset history
+  const getAssetHistory = () => {
+    axios
+      .get("https://net-giver-asset-mngr.herokuapp.com/api/history")
+      .then(response => {
+        console.log(response.data);
+        setHistory(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  };
+
+  useEffect(() => {
+    getAssetHistory();
+  }, []);
 
   return (
     <View>
       <Text>Asset History</Text>
-      <SingleAsset />
+      <FlatList
+        keyExtractor={item => item.id}
+        data={history}
+        renderItem={({ item }) => {
+          return <SingleAsset data={history} />}}
+      />
     </View>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default AssetHistory;
