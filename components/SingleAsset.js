@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const SingleAsset = (props) => {
-  console.log("PROPS", props)
-  
+const SingleAsset = ({data}) => {
+
   return (
     <View style={styles.assetWrapper}>
       <View style={styles.imageWrapper}>
@@ -11,10 +10,10 @@ const SingleAsset = (props) => {
         <Text>Images goes here</Text>
       </View>
       <View style={styles.textWrapper}>
-        <Text>Asset ID: { props.data.asset_id }</Text>
-        <Text>Checked out: { props.data.time_out }</Text>
-        <Text>Checked in: { props.data.time_in }</Text>
-        <Text>User: { props.data.user_id }</Text>
+        <Text>Asset ID: { data.asset_id }</Text>
+        <Text>Checked out: { data.time_out }</Text>
+        <Text>Checked in: { data.time_in }</Text>
+        <Text>User: { data.user_id }</Text>
       </View>
     </View>
   );

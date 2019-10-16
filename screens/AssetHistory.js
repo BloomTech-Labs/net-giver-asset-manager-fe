@@ -30,7 +30,7 @@ const AssetHistory = props => {
         keyExtractor={item => item.id}
         data={history}
         renderItem={({ item }) => {
-          return <SingleAsset data={history} />}}
+          return <SingleAsset data={item} />}}
       />
     </View>
   );
