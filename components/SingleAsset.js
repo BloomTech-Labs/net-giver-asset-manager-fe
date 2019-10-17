@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 const SingleAsset = ({data}) => {
-
   return (
     <View style={styles.assetWrapper}>
       <View style={styles.imageWrapper}>
