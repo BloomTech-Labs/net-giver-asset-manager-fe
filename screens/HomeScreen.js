@@ -1,7 +1,9 @@
 import React from "react";
-import { Platform, StyleSheet, View, Button } from "react-native";
-
-import { Text } from 'galio-framework'
+import { Platform, StyleSheet, View, TouchableOpacity } from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import { Text } from "galio-framework";
+import { Button } from "react-native-elements";
+import Spacer from "../components/Spacer";
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -9,27 +11,38 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.contentContainer}>
         <Text h2>Hey, Welcome to Net Giver Asset Manager</Text>
       </View>
-      <Button
-        title="navigation test to Register"
-        onPress={() => navigation.navigate("Register")}
-      />
-
-      <Button
-        title="navigation test to Login"
-        onPress={() => navigation.navigate("Login")}
-      />
-
-      <Button
-        title="Asset History"
-        onPress={() => navigation.navigate("AssetHistory")}
-      />
-      <Button
-        title="SCAN NOW!"
-        onPress={() => navigation.navigate("BarcodeScanner")}
-      />
+      <Spacer>
+        <Button
+          title="navigation test to Register"
+          onPress={() => navigation.navigate("Register")}
+        />
+      </Spacer>
+      <Spacer>
+        <Button
+          title="navigation test to Login"
+          onPress={() => navigation.navigate("Login")}
+        />
+      </Spacer>
+      <Spacer>
+        <Button
+          title="Asset History"
+          onPress={() => navigation.navigate("AssetHistory")}
+        />
+      </Spacer>
+      <Spacer>
+        <Button
+          title="SCAN NOW!"
+          onPress={() => navigation.navigate("BarcodeScanner")}
+        />
+      </Spacer>
+      {/* <Button
+        title="Say Cheese"
+        onPress={() => navigation.navigate("Camera")}
+      /> */}
+      <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+        <FontAwesome style={styles.camera} name="camera-retro" size={40} />
+      </TouchableOpacity>
     </View>
-
-
   );
 }
 
@@ -118,5 +131,9 @@ const styles = StyleSheet.create({
   helpLinkText: {
     fontSize: 14,
     color: "#2e78b7"
+  },
+  camera: {
+    marginLeft: 185,
+    marginTop: 15
   }
 });
