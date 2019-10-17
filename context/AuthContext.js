@@ -32,12 +32,12 @@ const signup = dispatch => async ({ email, password }) => {
     console.log("context test:", response.data);
     dispatch({ type: "signin", payload: response.data.token });
 
-    navigate("BarcodeScanner");
+    navigate("Login");
   } catch (err) {
     console.log("test context", err);
     dispatch({
       type: "add_error",
-      payload: "Something went wrong with sign up"
+      payload: "Something went wrong with sign up!"
     });
   }
 };
