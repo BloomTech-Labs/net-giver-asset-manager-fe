@@ -1,7 +1,7 @@
 import { AsyncStorage } from "react-native";
 import createDataContext from "./createDataContext";
 import assetsApi from "../api/assets";
-import { navigate } from "../navigation/navigationRef";
+import { navigate } from "../navigationRef";
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -32,12 +32,12 @@ const signup = dispatch => async ({ email, password }) => {
     console.log("context test:", response.data);
     dispatch({ type: "signin", payload: response.data.token });
 
-    navigate("BarcodeScanner");
+    navigate("Login");
   } catch (err) {
     console.log("test context", err);
     dispatch({
       type: "add_error",
-      payload: "Something went wrong with sign up"
+      payload: "Something went wrong with sign up!"
     });
   }
 };

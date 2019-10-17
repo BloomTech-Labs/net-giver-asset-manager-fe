@@ -11,6 +11,7 @@ import LoginScreen from "../screens/LoginText";
 import AssetHistory from "../screens/AssetHistory";
 import BarcodeScanner from "../screens/BarcodeScanner";
 import { Provider as AuthProvider } from "../context/AuthContext";
+import { setNavigator } from "../navigationRef";
 
 // export default createAppContainer(
 //   createSwitchNavigator({
@@ -77,7 +78,11 @@ const App = createAppContainer(stackNavigator);
 export default () => {
   return (
     <AuthProvider>
-      <App />
+      <App
+        ref={navigator => {
+          setNavigator(navigator);
+        }}
+      />
     </AuthProvider>
   );
 };
