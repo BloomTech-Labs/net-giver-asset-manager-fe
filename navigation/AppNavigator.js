@@ -2,6 +2,7 @@ import React from "react";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
+import Camera from "../screens/Camera";
 import MainTabNavigator from "./MainTabNavigator";
 import RegisterNameScreen from "../screens/RegisterNameText";
 import RegisterEmailScreen from "../screens/RegisterEmailText";
@@ -50,7 +51,8 @@ const stackNavigator = createStackNavigator(
     Password: RegisterPasswordScreen,
     Login: LoginScreen,
     AssetHistory: AssetHistory,
-    BarcodeScanner: BarcodeScanner
+    BarcodeScanner: BarcodeScanner,
+    Camera: Camera
   },
   {
     initialRouteName: "Main",
