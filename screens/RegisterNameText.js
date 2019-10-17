@@ -66,7 +66,7 @@ const SignupScreen = ({ navigation }) => {
     <View style={styles.container}>
       <NavigationEvents onWillBlur={clearErrorMessage} />
       <LoginForm
-        headerText="Sign Up for Tracker"
+        headerText="Sign Up for Net Giver Tracker"
         errorMessage={state.errorMessage}
         submitButtonText="Sign Up"
         onSubmit={signup}

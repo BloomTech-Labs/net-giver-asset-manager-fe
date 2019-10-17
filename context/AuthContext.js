@@ -1,7 +1,7 @@
 import { AsyncStorage } from "react-native";
 import createDataContext from "./createDataContext";
 import assetsApi from "../api/assets";
-import { navigate } from "../navigation/navigationRef";
+import { navigate } from "../navigationRef";
 
 const authReducer = (state, action) => {
   switch (action.type) {
