@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Image } from "react-native";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import { Alert } from "react-native";
@@ -22,8 +22,8 @@ export default class BarcodeScanner extends React.Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
-    console.log("props test:", this.props.navigation);
+    // const { navigate } = this.props.navigation;
+    // console.log("props test:", this.props.navigation);
 
     const { hasCameraPermission, scanned } = this.state;
 
@@ -45,6 +45,19 @@ export default class BarcodeScanner extends React.Component {
           onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
         />
+        {/* <BarCodeScanner
+          onBarCodeRead={this.handleBarCodeScanned}
+          style={[StyleSheet.absoluteFill, styles.container]}
+        >
+          <Text style={styles.description}>Scan your QR code</Text>
+          <Image style={styles.qr} source={require("../assets/img/QR.png")} />
+          <Text
+            onPress={() => this.props.navigation.pop()}
+            style={styles.cancel}
+          >
+            Cancel
+          </Text>
+        </BarCodeScanner> */}
 
         {scanned && (
           <Button
@@ -65,9 +78,17 @@ export default class BarcodeScanner extends React.Component {
       [
         {
           text: "Check in",
-          onPress: () => this.props.navigation.navigate("Login")
+          onPress: () => {
+            this.props.navigation.navigate("AssetForm", { data });
+            // console.log("press test:", data);
+          }
         }
       ]
     );
   };
 }
+
+// const { width } = Dimensions.get("window");
+// const qrSize = width * 0.7;
+
+const styles = StyleSheet.create({});

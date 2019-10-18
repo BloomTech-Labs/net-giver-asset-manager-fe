@@ -24,7 +24,7 @@ const clearErrorMessage = dispatch => () => {
 
 const signup = dispatch => async ({ email, password }) => {
   try {
-    const response = await assetsApi.post("/register", {
+    const response = await assetsApi.post("auth/register", {
       email,
       password
     });
@@ -32,7 +32,7 @@ const signup = dispatch => async ({ email, password }) => {
     console.log("context test:", response.data);
     dispatch({ type: "signin", payload: response.data.token });
 
-    navigate("Login");
+    navigate("BarcodeScanner");
   } catch (err) {
     console.log("test context", err);
     dispatch({
@@ -44,7 +44,7 @@ const signup = dispatch => async ({ email, password }) => {
 
 const signin = dispatch => async ({ email, password }) => {
   try {
-    const response = await assetsApi.post("/api/auth/login", {
+    const response = await assetsApi.post("/auth/login", {
       email,
       password
     });
