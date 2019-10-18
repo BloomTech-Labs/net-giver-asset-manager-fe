@@ -79,7 +79,9 @@ export default class BarcodeScanner extends React.Component {
         {
           text: "Check in",
           onPress: () => {
-            this.props.navigation.navigate("AssetForm", { data });
+            this.props.navigation.navigate("AssetForm", {
+              asset: data
+            });
             // console.log("press test:", data);
           }
         }

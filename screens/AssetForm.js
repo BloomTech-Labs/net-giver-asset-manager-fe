@@ -4,20 +4,19 @@ import { Text, Button, Input } from "react-native-elements";
 import Spacer from "../components/Spacer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const AssetForm = props => {
-  console.log("form test:", props.navigation.state.params);
+const AssetForm = ({ navigation }) => {
+  //   console.log("form test:", props.navigation.state.params);
   //   const [name, setName] = useState("");
   //   const [description, setDescription] = useState("");
   //   const [other, setOther] = (useState = useState(""));
 
-  //   const data = props.state.params.data;
-  //   console.log("data test:", props.state.params.data);
+  const asset = navigation.getParam("asset");
+  //   const asset = JSON.stringify(navigation.getParam("asset"));
+  console.log("asset test", asset);
 
   return (
     <>
-      <TouchableOpacity
-        onPress={() => props.navigation.navigate("BarcodeScanner")}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate("BarcodeScanner")}>
         <MaterialCommunityIcons
           style={styles.upc}
           name="qrcode-scan"
@@ -28,7 +27,7 @@ const AssetForm = props => {
       <Spacer>
         <Input
           label="Scan goes here"
-          //   value={props.params.data}
+          value={asset}
           //   onChangeText={setDescription}
           //   autoCapitalize="none"
           //   autoCorrect={false}
