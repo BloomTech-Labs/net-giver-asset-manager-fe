@@ -10,4 +10,6 @@ const assetReducer = (state, action) => {
   }
 };
 
+const populateAssetForm = () => {};
+
 export const { Provider, Context } = createDataContext(assetReducer, {});
