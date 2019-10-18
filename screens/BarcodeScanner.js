@@ -7,10 +7,13 @@ import { Alert } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
 export default class BarcodeScanner extends React.Component {
-  state = {
-    hasCameraPermission: null,
-    scanned: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasCameraPermission: null,
+      scanned: false
+    };
+  }
 
   async componentDidMount() {
     this.getPermissionsAsync();
@@ -32,41 +35,43 @@ export default class BarcodeScanner extends React.Component {
     }
     if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
-    }
-    return (
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "column",
-          justifyContent: "flex-end"
-        }}
-      >
-        <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
-        />
-        {/* <BarCodeScanner
-          onBarCodeRead={this.handleBarCodeScanned}
-          style={[StyleSheet.absoluteFill, styles.container]}
-        >
-          <Text style={styles.description}>Scan your QR code</Text>
-          <Image style={styles.qr} source={require("../assets/img/QR.png")} />
-          <Text
+    } else {
+
+      return (
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "column",
+            justifyContent: "flex-end"
+          }}
+          >
+          <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
+            style={StyleSheet.absoluteFillObject}
+            />
+          {/* <BarCodeScanner
+            onBarCodeRead={this.handleBarCodeScanned}
+            style={[StyleSheet.absoluteFill, styles.container]}
+            >
+            <Text style={styles.description}>Scan your QR code</Text>
+            <Image style={styles.qr} source={require("../assets/img/QR.png")} />
+            <Text
             onPress={() => this.props.navigation.pop()}
             style={styles.cancel}
-          >
+            >
             Cancel
-          </Text>
-        </BarCodeScanner> */}
+            </Text>
+          </BarCodeScanner> */}
 
-        {scanned && (
-          <Button
+          {scanned && (
+            <Button
             title={"Tap to Scan Again"}
             onPress={() => this.setState({ scanned: false })}
-          />
-        )}
-      </View>
-    );
+            />
+            )}
+        </View>
+      );
+    }
   }
 
   handleBarCodeScanned = ({ type, data }) => {
@@ -79,7 +84,7 @@ export default class BarcodeScanner extends React.Component {
         {
           text: "Check in",
           onPress: () => {
-            this.props.navigation.navigate("AssetForm", { data });
+            this.props.navigation.navigate("AssetForm", { data } );
             // console.log("press test:", data);
           }
         }

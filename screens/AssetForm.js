@@ -5,7 +5,9 @@ import Spacer from "../components/Spacer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const AssetForm = props => {
-  console.log("form test:", props.navigation.state.params);
+  if(props.navigation.state.params){
+    console.log("form test:", props.navigation.state.params.data);
+  }
   //   const [name, setName] = useState("");
   //   const [description, setDescription] = useState("");
   //   const [other, setOther] = (useState = useState(""));
