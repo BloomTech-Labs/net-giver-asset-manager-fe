@@ -13,6 +13,7 @@ import AssetHistory from "../screens/AssetHistory";
 import BarcodeScanner from "../screens/BarcodeScanner";
 import { Provider as AuthProvider } from "../context/AuthContext";
 import { setNavigator } from "../navigationRef";
+import AssetsList from "../screens/assets/AssetsList";
 
 // export default createAppContainer(
 //   createSwitchNavigator({
@@ -52,7 +53,8 @@ const stackNavigator = createStackNavigator(
     Login: LoginScreen,
     AssetHistory: AssetHistory,
     BarcodeScanner: BarcodeScanner,
-    Camera: Camera
+    Camera: Camera,
+    AssetsList: AssetsList
   },
   {
     initialRouteName: "Main",
