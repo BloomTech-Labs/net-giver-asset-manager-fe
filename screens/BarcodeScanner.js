@@ -70,7 +70,6 @@ export default class BarcodeScanner extends React.Component {
   }
 
   handleBarCodeScanned = ({ type, data }) => {
-    console.log("barcode start:", type, data);
     this.setState({ scanned: true });
     Alert.alert(
       `Bar code with type ${type} and data ${data} has been scanned!`,
@@ -78,7 +77,9 @@ export default class BarcodeScanner extends React.Component {
       [
         {
           text: "Check in",
-          onPress: () => this.props.navigation.navigate("Login")
+          onPress: () => this.props.navigation.navigate("AssetForm", {
+            asset: data,
+          })
         }
       ]
     );
