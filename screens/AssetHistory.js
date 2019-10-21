@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from "react-native";
 import axios from "axios";
+import HeaderBar from "../components/HeaderBar";
 import SingleAsset from "../components/SingleAsset";
 
 
@@ -34,7 +35,7 @@ const AssetHistory = () => {
   } else {
     return (
       <View>
-        <Text>Asset History</Text>
+        <HeaderBar />
         <FlatList
           keyExtractor={item => item.id}
           data={history}
