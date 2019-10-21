@@ -22,8 +22,8 @@ export default class BarcodeScanner extends React.Component {
   };
 
   render() {
-    const { navigate } = this.props.navigation;
-    console.log("props test:", this.props.navigation);
+    // const { navigate } = this.props.navigation;
+    // console.log("props test:", this.props.navigation);
 
     const { hasCameraPermission, scanned } = this.state;
 

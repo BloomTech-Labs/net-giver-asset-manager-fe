@@ -45,13 +45,13 @@ export default function HomeScreen({ navigation }) {
         title="Say Cheese"
         onPress={() => navigation.navigate("Camera")}
       /> */}
-      <TouchableOpacity onPress={() => navigation.navigate("BarcodeScanner")}>
+      {/* <TouchableOpacity onPress={() => navigation.navigate("BarcodeScanner")}>
         <MaterialCommunityIcons
           style={styles.upc}
           name="qrcode-scan"
           size={40}
         />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
         <FontAwesome style={styles.camera} name="camera-retro" size={40} />
