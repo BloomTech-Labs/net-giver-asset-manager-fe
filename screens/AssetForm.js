@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Button, Input, Icon } from "react-native-elements";
 import Spacer from "../components/Spacer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const AssetForm = ({navigation}) => {
+const AssetForm = ({ navigation }) => {
   const [name, setName] = useState("");
   const [userID, setUserID] = useState("");
   const [checkedIn, setCheckedIn] = useState(false);
@@ -15,13 +15,13 @@ const AssetForm = ({navigation}) => {
   };
 
   const asset = navigation.getParam(("asset"));
-  //   const data = props.state.params.data;
+  // const data = props.state.params.data;
   //   console.log("data test:", props.state.params.data);
 
   return (
     <>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate("BarcodeScanner")}
+        onPress={() => navigation.navigate("BarcodeScanner")}
       >
         <MaterialCommunityIcons
           style={styles.upc}
