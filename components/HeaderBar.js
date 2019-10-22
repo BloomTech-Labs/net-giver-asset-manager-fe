@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontWeight: "bold",
     alignSelf: "center",
-    flex: "9",
+    flex: 9,
     paddingLeft: 10,
   },
   menuIcon: {
     flexDirection: "row",
     alignSelf: "center",
-    flex: "1",
+    flex: 1,
     paddingRight: 10,
   },
 });
