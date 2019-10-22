@@ -5,7 +5,6 @@ import { Icon } from "react-native-elements";
 const HeaderBar = props => {
   return (
     <View>
-
       <View style={styles.headerWrapper}>
         <Text style={styles.headerTitle}>Simple Asset Tracker</Text>
         <TouchableOpacity 
@@ -29,7 +28,6 @@ const HeaderBar = props => {
           <Text style={styles.allMyAssets}>MY ASSETS</Text>
         </TouchableOpacity>
       </View>
-
     </View>
   );
 };
@@ -48,6 +46,7 @@ const styles = StyleSheet.create({
     flex: 9,
     paddingLeft: 20,
     color: "white"
+
   },
   menuIcon: {
     flexDirection: "row",
