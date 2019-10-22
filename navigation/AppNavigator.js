@@ -2,6 +2,7 @@ import React from "react";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
+import AssetForm from "../screens/AssetForm";
 import Camera from "../screens/Camera";
 import MainTabNavigator from "./MainTabNavigator";
 import RegisterNameScreen from "../screens/RegisterNameText";
@@ -12,6 +13,7 @@ import LoginScreen from "../screens/LoginText";
 import AssetHistory from "../screens/AssetHistory";
 import BarcodeScanner from "../screens/BarcodeScanner";
 import { Provider as AuthProvider } from "../context/AuthContext";
+import { Provider as AssetProvider } from "../context/AssetContext";
 import { setNavigator } from "../navigationRef";
 import AssetsList from "../screens/assets/AssetsList";
 
@@ -54,7 +56,8 @@ const stackNavigator = createStackNavigator(
     AssetHistory: AssetHistory,
     BarcodeScanner: BarcodeScanner,
     Camera: Camera,
-    AssetsList: AssetsList
+    AssetsList: AssetsList,
+    AssetForm: AssetForm
   },
   {
     initialRouteName: "Main",
@@ -82,11 +85,13 @@ const App = createAppContainer(stackNavigator);
 export default () => {
   return (
     <AuthProvider>
-      <App
-        ref={navigator => {
-          setNavigator(navigator);
-        }}
-      />
+      <AssetProvider>
+        <App
+          ref={navigator => {
+            setNavigator(navigator);
+          }}
+        />
+      </AssetProvider>
     </AuthProvider>
   );
 };

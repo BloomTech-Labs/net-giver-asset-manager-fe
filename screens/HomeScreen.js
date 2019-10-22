@@ -1,6 +1,6 @@
 import React from "react";
 import { Platform, StyleSheet, View, TouchableOpacity } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text } from "galio-framework";
 import { Button } from "react-native-elements";
 import Spacer from "../components/Spacer";
@@ -9,8 +9,14 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <Text h2>Hey, Welcome to Net Giver Asset Manager</Text>
+        {/* <Text h2>Hey, Welcome to Net Giver Asset Manager</Text> */}
       </View>
+      <Spacer>
+        <Button
+          title="Asset Entry"
+          onPress={() => navigation.navigate("AssetForm")}
+        />
+      </Spacer>
       <Spacer>
         <Button
           title="navigation test to Register"
@@ -30,10 +36,10 @@ export default function HomeScreen({ navigation }) {
         />
       </Spacer>
       <Spacer>
-        <Button
+        {/* <Button
           title="SCAN NOW!"
           onPress={() => navigation.navigate("BarcodeScanner")}
-        />
+        /> */}
       </Spacer>
       <Spacer>
         <Button
@@ -45,6 +51,14 @@ export default function HomeScreen({ navigation }) {
         title="Say Cheese"
         onPress={() => navigation.navigate("Camera")}
       /> */}
+      {/* <TouchableOpacity onPress={() => navigation.navigate("BarcodeScanner")}>
+        <MaterialCommunityIcons
+          style={styles.upc}
+          name="qrcode-scan"
+          size={40}
+        />
+      </TouchableOpacity> */}
+
       <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
         <FontAwesome style={styles.camera} name="camera-retro" size={40} />
       </TouchableOpacity>
@@ -141,5 +155,9 @@ const styles = StyleSheet.create({
   camera: {
     marginLeft: 185,
     marginTop: 15
+  },
+  upc: {
+    marginBottom: 30,
+    marginLeft: 185
   }
 });
