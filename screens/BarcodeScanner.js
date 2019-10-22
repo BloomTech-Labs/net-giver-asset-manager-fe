@@ -45,7 +45,15 @@ export default class BarcodeScanner extends React.Component {
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned2}
           style={StyleSheet.absoluteFillObject}
-        />
+        >
+          <View style={styles.layerTop} />
+          <View style={styles.layerCenter}>
+            <View style={styles.layerLeft} />
+            <View style={styles.focused} />
+            <View style={styles.layerRight} />
+          </View>
+          <View style={styles.layerBottom} />
+        </BarCodeScanner>
         {/* <BarCodeScanner
           onBarCodeRead={this.handleBarCodeScanned}
           style={[StyleSheet.absoluteFill, styles.container]}
@@ -114,4 +122,33 @@ export default class BarcodeScanner extends React.Component {
 // const { width } = Dimensions.get("window");
 // const qrSize = width * 0.7;
 
-const styles = StyleSheet.create({});
+const opacity = "rgba(0, 0, 0, .6)";
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column"
+  },
+  layerTop: {
+    flex: 2,
+    backgroundColor: opacity
+  },
+  layerCenter: {
+    flex: 1,
+    flexDirection: "row"
+  },
+  layerLeft: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  focused: {
+    flex: 10
+  },
+  layerRight: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  layerBottom: {
+    flex: 2,
+    backgroundColor: opacity
+  }
+});
