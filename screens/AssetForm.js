@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Text, Button, Input } from "react-native-elements";
+import { Button, Input, Icon } from "react-native-elements";
 import Spacer from "../components/Spacer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const AssetForm = props => {
-  // console.log("form test:", props.navigation.state);
-  //   const [name, setName] = useState("");
-  //   const [description, setDescription] = useState("");
-  //   const [other, setOther] = (useState = useState(""));
+const AssetForm = ({ navigation }) => {
+  const [name, setName] = useState("");
+  const [userID, setUserID] = useState("");
+  const [checkedIn, setCheckedIn] = useState(false);
 
-  //   const data = props.state.params.data;
+  // This function can make our POST request to the backend
+  const handleSubmit = () => {
+    console.log("You have successfully added this asset to the database.");
+  };
+
+  const asset = navigation.getParam(("asset"));
+  // const data = props.state.params.data;
   //   console.log("data test:", props.state.params.data);
 
   return (
     <>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate("BarcodeScanner")}
+        onPress={() => navigation.navigate("BarcodeScanner")}
       >
         <MaterialCommunityIcons
           style={styles.upc}
@@ -27,47 +32,73 @@ const AssetForm = props => {
 
       <Spacer>
         <Input
-          label="Scan goes here"
-          //   value={props.params.data}
-          //   onChangeText={setDescription}
-          //   autoCapitalize="none"
-          //   autoCorrect={false}
+          label="Barcode"
+          value={asset}
+          autoCapitalize={false}
+          blurOnSubmit={true}
         />
       </Spacer>
 
-      <Input
-        label="Name"
-        // value={name}
-        // onChangeText={setName}
-        // autoCapitalize="none"
-        // autoCorrect={false}
-      />
       <Spacer>
         <Input
-          label="Description"
-          //   value={description}
-          //   onChangeText={setDescription}
-          //   autoCapitalize="none"
-          //   autoCorrect={false}
+          label="Name"
+          value={name}
+          onChange={setName}
+          autoCapitalize="word"
+          autoCorrect={false}
+          blurOnSubmit={true}
         />
       </Spacer>
-      <Input
-        label="Other"
-        // value={other}
-        // onChangeText={setOther}
-        // autoCapitalize="none"
-        // autoCorrect={false}
+
+      <Spacer>
+        <Input
+          label="Checked in"
+          value={checkedIn}
+          onChangeText={setCheckedIn}
+          defaultValue="false"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </Spacer>
+
+      <Spacer>
+        <Input
+          label="User ID"
+          value={userID}
+          onChangeText={setUserID}
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </Spacer>
+
+      <Button 
+        title="Submit"
+        iconRight={false}
+        type="solid"
+        color="blue"
+        onPress={handleSubmit}
+        icon={
+          <Icon 
+            name="check"
+            color="white"
+          />
+        }
+        containerStyle={styles.button}
       />
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  button: {
+    width: "80%",
+    alignSelf: "center",
+  },
   upc: {
     marginBottom: 30,
     marginLeft: 185,
     marginTop: 20
-  }
+  },
 });
 
 export default AssetForm;
