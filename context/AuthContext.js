@@ -24,7 +24,7 @@ const clearErrorMessage = dispatch => () => {
 
 const signup = dispatch => async ({ email, password }) => {
   try {
-    const response = await assetsApi.post("auth/register", {
+    const response = await assetsApi.post("/auth/register", {
       email,
       password
     });

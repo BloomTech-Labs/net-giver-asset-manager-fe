@@ -2,6 +2,7 @@ import React from "react";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 
+import Text from "../components/CustomText";
 import AssetForm from "../screens/AssetForm";
 import Camera from "../screens/Camera";
 import MainTabNavigator from "./MainTabNavigator";
