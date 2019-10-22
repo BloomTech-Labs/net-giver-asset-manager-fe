@@ -5,13 +5,13 @@ import { Icon } from "react-native-elements";
 const HeaderBar = props => {
   return (
     <View style={styles.headerWrapper}>
-      <Text style={styles.headerTitle}>The Simple Asset Manager</Text>
+      <Text style={styles.headerTitle}>Simple Asset Tracker</Text>
       <TouchableOpacity 
         style={styles.menuIcon}
         onPress={() => Alert.alert("You clicked the menu hamburger!")}>
         <Icon
           name="menu"
-          color="black"
+          color="white"
           size="40"
         />
       </TouchableOpacity>
@@ -22,20 +22,23 @@ const HeaderBar = props => {
 const styles = StyleSheet.create({
   headerWrapper: {
     flexDirection: "row",
-    backgroundColor: "white",
+    backgroundColor: "#3366FF",
     borderBottomColor: "black",
+    height: 111
   },
   headerTitle: {
     fontWeight: "bold",
+    fontSize: 20,
     alignSelf: "center",
     flex: 9,
-    paddingLeft: 10,
+    paddingLeft: 20,
+    color: "white"
   },
   menuIcon: {
     flexDirection: "row",
     alignSelf: "center",
     flex: 1,
-    paddingRight: 10,
+    paddingRight: 15
   },
 });
 
