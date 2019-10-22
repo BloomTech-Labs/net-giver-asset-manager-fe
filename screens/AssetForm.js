@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Button, Input, Icon } from "react-native-elements";
 import Spacer from "../components/Spacer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -21,7 +21,7 @@ const AssetForm = ({navigation}) => {
   return (
     <>
       <TouchableOpacity
-        onPress={() => props.navigation.navigate("BarcodeScanner")}
+        onPress={() => navigation.navigate("BarcodeScanner")}
       >
         <MaterialCommunityIcons
           style={styles.upc}

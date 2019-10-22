@@ -7,10 +7,13 @@ import { Alert } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
 export default class BarcodeScanner extends React.Component {
-  state = {
-    hasCameraPermission: null,
-    scanned: false
-  };
+  constructor(props) {
+        super(props);
+        this.state = {
+            hasCameraPermission: null,
+            scanned: false
+        };
+    }
 
   async componentDidMount() {
     this.getPermissionsAsync();
