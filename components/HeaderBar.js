@@ -4,17 +4,32 @@ import { Icon } from "react-native-elements";
 
 const HeaderBar = props => {
   return (
-    <View style={styles.headerWrapper}>
-      <Text style={styles.headerTitle}>Simple Asset Tracker</Text>
-      <TouchableOpacity 
-        style={styles.menuIcon}
-        onPress={() => Alert.alert("You clicked the menu hamburger!")}>
-        <Icon
-          name="menu"
-          color="white"
-          size="40"
-        />
-      </TouchableOpacity>
+    <View>
+
+      <View style={styles.headerWrapper}>
+        <Text style={styles.headerTitle}>Simple Asset Tracker</Text>
+        <TouchableOpacity 
+          style={styles.menuIcon}
+          onPress={() => Alert.alert("You clicked the menu hamburger!")}>
+          <Icon
+            name="menu"
+            color="white"
+            size="40"
+          />
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.assetSection}>
+        <TouchableOpacity
+          style={styles.allAssets}
+        >
+          <Text style={styles.allMyAssets}>ALL ASSETS</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text style={styles.allMyAssets}>MY ASSETS</Text>
+        </TouchableOpacity>
+      </View>
+
     </View>
   );
 };
@@ -24,7 +39,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#3366FF",
     borderBottomColor: "black",
-    height: 111
+    height: 95
   },
   headerTitle: {
     fontWeight: "bold",
@@ -40,6 +55,16 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingRight: 15
   },
+  assetSection: {
+    flexDirection: "row",
+    backgroundColor: "#3366FF",
+    justifyContent: "space-around",
+    height: 40
+  },
+  allMyAssets: {
+    color: "white",
+    fontSize: 18
+  }
 });
 
 export default HeaderBar;

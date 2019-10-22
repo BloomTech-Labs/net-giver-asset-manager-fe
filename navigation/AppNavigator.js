@@ -58,7 +58,7 @@ const stackNavigator = createStackNavigator(
     AssetForm: AssetForm
   },
   {
-    initialRouteName: "AssetHistory",
+    initialRouteName: "Main",
     defaultNavigationOptions: {
       title: "Net Giver"
     }
