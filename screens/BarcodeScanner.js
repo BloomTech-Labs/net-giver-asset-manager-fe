@@ -95,7 +95,7 @@ export default class BarcodeScanner extends React.Component {
       .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
       .then(response => {
         storedAssets = response.data;
-         storedAssets.map(asset => (
+        storedAssets.map(asset => (
           this.setState({ asset: asset.barcode })
         ))
 
