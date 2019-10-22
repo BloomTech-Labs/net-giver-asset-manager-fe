@@ -3,10 +3,11 @@ import { Text, View, StyleSheet, Button, Image } from "react-native";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import { Alert } from "react-native";
-
 import { BarCodeScanner } from "expo-barcode-scanner";
+import axios from "axios";
 
 export default class BarcodeScanner extends React.Component {
+<<<<<<< HEAD
   constructor(props) {
         super(props);
         this.state = {
@@ -14,6 +15,13 @@ export default class BarcodeScanner extends React.Component {
             scanned: false
         };
     }
+=======
+  state = {
+    hasCameraPermission: null,
+    scanned: false,
+    asset: null,
+  };
+>>>>>>> a842375274adf754e192d51fdb93be7f9c067b0f
 
   async componentDidMount() {
     this.getPermissionsAsync();
@@ -25,7 +33,7 @@ export default class BarcodeScanner extends React.Component {
   };
 
   render() {
-    // const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation;
     // console.log("props test:", this.props.navigation);
 
     const { hasCameraPermission, scanned } = this.state;
@@ -45,7 +53,7 @@ export default class BarcodeScanner extends React.Component {
         }}
       >
         <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
+          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned2}
           style={StyleSheet.absoluteFillObject}
         />
         {/* <BarCodeScanner
@@ -70,24 +78,50 @@ export default class BarcodeScanner extends React.Component {
         )}
       </View>
     );
-  }
-
-  handleBarCodeScanned = ({ type, data }) => {
-    this.setState({ scanned: true });
-    Alert.alert(
-      `Bar code with type ${type} and data ${data} has been scanned!`,
-      "time to leave",
-      [
-        {
-          text: "Check in",
-          onPress: () => this.props.navigation.navigate("AssetForm", {
-            asset: data,
-          })
-        }
-      ]
-    );
   };
-}
+
+  // handleBarCodeScanned = ({ type, data }) => {
+  //   this.setState({ scanned: true });
+  //   Alert.alert(
+  //     `Bar code with type ${type} and data ${data} has been scanned!`,
+  //     "time to leave",
+  //     [
+  //       {
+  //         text: "Check in",
+  //         onPress: () => this.props.navigation.navigate("AssetForm", {
+  //           asset: data,
+  //         })
+  //       }
+  //     ]
+  //   );
+  // };
+
+  handleBarCodeScanned2 = ({ type, data }) => {
+    this.setState({ scanned: true });
+    Alert.alert(`Barcode with type ${type} and data ${data} has been scanned!`);
+
+    // Axios call to fetch assets
+    axios
+      .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
+      .then(response => {
+        storedAssets = response.data;
+         storedAssets.map(asset => (
+          this.setState({ asset: asset.barcode })
+        ))
+
+        // Conditional logic handling the routing -- pages aren't correct, just wanted
+        // an example
+        if (this.state.asset === data) {
+          this.props.navigation.navigate("AssetForm")
+        } else {
+          this.props.navigation.navigate("AssetHistory")
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
 
 // const { width } = Dimensions.get("window");
 // const qrSize = width * 0.7;

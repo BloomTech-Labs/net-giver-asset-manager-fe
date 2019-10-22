@@ -4,7 +4,7 @@ import { Button, Input, Icon } from "react-native-elements";
 import Spacer from "../components/Spacer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const AssetForm = ({navigation}) => {
+const AssetForm = ({ navigation }) => {
   const [name, setName] = useState("");
   const [userID, setUserID] = useState("");
   const [checkedIn, setCheckedIn] = useState(false);
@@ -15,7 +15,7 @@ const AssetForm = ({navigation}) => {
   };
 
   const asset = navigation.getParam(("asset"));
-  //   const data = props.state.params.data;
+  // const data = props.state.params.data;
   //   console.log("data test:", props.state.params.data);
 
   return (

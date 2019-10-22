@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
-import { Text, Button, Input } from "react-native-elements";
+import { TextInput, Text, StyleSheet } from "react-native";
+import { Button } from "react-native-elements";
 import Spacer from "./Spacer";
 
 const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
@@ -9,22 +9,26 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
 
   return (
     <>
-      <Spacer>{/* <Text h3>{headerText}</Text> */}</Spacer>
-      <Input
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
+        <Text style={styles.inputLabels}>Email</Text>
+        <TextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize="none"
+          autoCorrect={false}
+          style={styles.inputField}
+        />
       <Spacer />
-      <Input
+
+      <Text style={styles.inputLabels}>Password</Text>
+      <TextInput
         secureTextEntry
-        label="Password"
+        placeholder="Password"
         value={password}
         onChangeText={setPassword}
         autoCapitalize="none"
         autoCorrect={false}
+        style={styles.inputField}
       />
       {errorMessage ? (
         <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -32,7 +36,9 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
       <Spacer>
         <Button
           title={submitButtonText}
+          iconRight={true}
           onPress={() => onSubmit({ email, password })}
+          style={{marginTop: 80}}
         />
       </Spacer>
     </>
@@ -45,6 +51,21 @@ const styles = StyleSheet.create({
     color: "red",
     marginLeft: 15,
     marginTop: 15
+  },
+  inputField: {
+    height: 40,
+    width: "91%",
+    borderColor: "gray",
+    borderRadius: 5,
+    borderWidth: 1,
+    alignSelf: "center",
+    paddingLeft: 10,
+    marginTop: 20
+  },
+  inputLabels: {
+    width: "91%",
+    alignSelf: "center",
+    fontSize: 17,
   }
 });
 
