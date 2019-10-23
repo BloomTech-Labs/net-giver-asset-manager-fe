@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   StyleSheet,
@@ -6,15 +6,20 @@ import {
   TouchableOpacity,
   Picker,
   ActivityIndicator,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TextInput
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ModalDropdown from "react-native-modal-dropdown";
 import { Tile, Button, Input, Text, Icon, Image } from "react-native-elements";
 import Spacer from "../components/Spacer";
 import HeadBar from "../components/HeaderBar";
+import LocField from "../components/LocField";
+import { Context } from "../context/LocationContext";
 
 const LocationForm = () => {
+  const { state, addLocation, clearErrorMessage } = useContext(Context);
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
       <HeadBar />
@@ -40,14 +45,26 @@ const LocationForm = () => {
           PlaceholderContent={<ActivityIndicator />}
         />
       </Spacer>
-      <Input
-        placeholder="Location....."
-        errorStyle={{ color: "red" }}
-        errorMessage="ENTER A VALID LOCATION"
+      {/* <Text style={styles.inputLabels}>Location</Text>
+      <TextInput
+        style={styles.inputField}
+        value={name}
+        onChangeText={setName}
+        autoCapitalize="none"
+        autoCorrect={false}
       />
-      <Button
+      <Text style={styles.inputLabels}>Description</Text>
+      <TextInput
+        style={styles.inputField}
+        value={description}
+        onChangeText={setDescription}
+        autoCapitalize="none"
+        autoCorrect={false}
+      /> */}
+      <Spacer />
+      {/* <Button
         iconRight={false}
-        title="Add Location"
+        title="Add New Location"
         type="solid"
         color="blue"
         //   onPress={handleSubmit}
@@ -55,6 +72,12 @@ const LocationForm = () => {
         // disabled={!isValid}
         //   onPress={handleSubmit}
         containerStyle={styles.button}
+      /> */}
+      <LocField
+        headerText=""
+        errorMessage={state.errorMessage}
+        onSubmit={addLocation}
+        submitButtonText="add location"
       />
 
       <Spacer />
@@ -80,6 +103,27 @@ const styles = StyleSheet.create({
   button: {
     width: "80%",
     alignSelf: "center"
+  },
+  container: {
+    backgroundColor: "#76e3d4",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  inputField: {
+    height: 40,
+    width: "91%",
+    borderColor: "gray",
+    borderRadius: 5,
+    borderWidth: 1,
+    alignSelf: "center",
+    paddingLeft: 10,
+    marginTop: 20
+  },
+  inputLabels: {
+    width: "91%",
+    alignSelf: "center",
+    fontSize: 17
   }
 });
 
