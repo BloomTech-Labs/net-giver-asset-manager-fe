@@ -10,7 +10,7 @@ export default class BarcodeScanner extends React.Component {
   state = {
     hasCameraPermission: null,
     scanned: false,
-    asset: null,
+    asset: null
   };
 
   async componentDidMount() {
@@ -45,7 +45,15 @@ export default class BarcodeScanner extends React.Component {
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned2}
           style={StyleSheet.absoluteFillObject}
-        />
+        >
+          <View style={styles.layerTop} />
+          <View style={styles.layerCenter}>
+            <View style={styles.layerLeft} />
+            <View style={styles.focused} />
+            <View style={styles.layerRight} />
+          </View>
+          <View style={styles.layerBottom} />
+        </BarCodeScanner>
         {/* <BarCodeScanner
           onBarCodeRead={this.handleBarCodeScanned}
           style={[StyleSheet.absoluteFill, styles.container]}
@@ -68,7 +76,7 @@ export default class BarcodeScanner extends React.Component {
         )}
       </View>
     );
-  };
+  }
 
   // handleBarCodeScanned = ({ type, data }) => {
   //   this.setState({ scanned: true });
@@ -95,25 +103,49 @@ export default class BarcodeScanner extends React.Component {
       .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
       .then(response => {
         storedAssets = response.data;
-         storedAssets.map(asset => (
-          this.setState({ asset: asset.barcode })
-        ))
+        storedAssets.map(asset => this.setState({ asset: asset.barcode }));
 
         // Conditional logic handling the routing -- pages aren't correct, just wanted
         // an example
         if (this.state.asset === data) {
-          this.props.navigation.navigate("AssetForm")
+          this.props.navigation.navigate("AssetForm");
         } else {
-          this.props.navigation.navigate("AssetHistory")
+          this.props.navigation.navigate("AssetHistory");
         }
       })
       .catch(error => {
         console.log(error);
       });
   };
-};
+}
 
-// const { width } = Dimensions.get("window");
-// const qrSize = width * 0.7;
-
-const styles = StyleSheet.create({});
+const opacity = "rgba(0, 0, 0, .6)";
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column"
+  },
+  layerTop: {
+    flex: 2,
+    backgroundColor: opacity
+  },
+  layerCenter: {
+    flex: 1,
+    flexDirection: "row"
+  },
+  layerLeft: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  focused: {
+    flex: 10
+  },
+  layerRight: {
+    flex: 1,
+    backgroundColor: opacity
+  },
+  layerBottom: {
+    flex: 2,
+    backgroundColor: opacity
+  }
+});
