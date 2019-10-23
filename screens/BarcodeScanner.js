@@ -7,21 +7,11 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 
 export default class BarcodeScanner extends React.Component {
-<<<<<<< HEAD
-  constructor(props) {
-        super(props);
-        this.state = {
-            hasCameraPermission: null,
-            scanned: false
-        };
-    }
-=======
   state = {
     hasCameraPermission: null,
     scanned: false,
     asset: null,
   };
->>>>>>> a842375274adf754e192d51fdb93be7f9c067b0f
 
   async componentDidMount() {
     this.getPermissionsAsync();
