@@ -47,6 +47,12 @@ export default function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate("AssetsList")}
         />
       </Spacer>
+      <Spacer>
+        <Button
+          title="Location Form"
+          onPress={() => navigation.navigate("Location")}
+        />
+      </Spacer>
       {/* <Button
         title="Say Cheese"
         onPress={() => navigation.navigate("Camera")}
