@@ -2,7 +2,7 @@ import React, { useState, Component, Fragment } from "react";
 import { Button, Input, Icon } from "react-native-elements";
 import axios from 'axios';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
-
+import KeyboardShift from '../constants/KeyboardShift'
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import * as yup from 'yup';
@@ -45,7 +45,7 @@ export default class AssetForm extends Component {
 
         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
 
-          <>
+          <KeyboardShift>
 
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate("BarcodeScanner")}
@@ -138,7 +138,7 @@ export default class AssetForm extends Component {
               buttonStyle={styles.button}
             />
 
-          </>
+          </KeyboardShift>
         )}
       </Formik >
     );
