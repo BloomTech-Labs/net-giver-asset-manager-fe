@@ -119,9 +119,6 @@ export default class BarcodeScanner extends React.Component {
   };
 }
 
-// const { width } = Dimensions.get("window");
-// const qrSize = width * 0.7;
-
 const opacity = "rgba(0, 0, 0, .6)";
 const styles = StyleSheet.create({
   container: {
