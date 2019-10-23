@@ -38,6 +38,8 @@ const LocField = ({ errorMessage, onSubmit, submitButtonText }) => {
           iconRight={true}
           onPress={() => onSubmit({ name, description })}
           style={{ marginTop: 80 }}
+          onPress={() => setName("")}
+          onPress={() => setDescription("")}
         />
       </Spacer>
     </>
