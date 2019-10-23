@@ -39,3 +39,5 @@ export const { Provider, Context } = createDataContext(
   { clearErrorMessage, addLocation },
   { errorMessage: "" }
 );
+
+// context can be fun!!
