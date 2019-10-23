@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7c5b770-ba69-43d7-8ad6-00d2807960e2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/components/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LoginForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/LoginText.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/LoginText.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/HeaderBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HeaderBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/AssetForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/AssetForm.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +25,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -38,7 +37,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">

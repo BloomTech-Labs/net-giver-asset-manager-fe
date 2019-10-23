@@ -44,7 +44,7 @@ const AssetForm = ({ navigation }) => {
           label="Name"
           value={name}
           onChange={setName}
-          autoCapitalize="word"
+          autoCapitalize="words"
           autoCorrect={false}
           blurOnSubmit={true}
         />
