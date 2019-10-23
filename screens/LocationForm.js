@@ -31,11 +31,6 @@ const LocationForm = () => {
         <Picker.Item label="House" value="house" />
       </Picker>
       <Spacer>
-        {/* <Image
-          source={{ uri: "https://i.imgur.com/YQJKz2w.jpg" }}
-          style={{ width: 200, height: 200 }}
-          PlaceholderContent={<ActivityIndicator />}
-        /> */}
         <Tile
           //   imageSrc={require("../assets/images/MapImg.jpg")}
           imageSrc={{ uri: "https://i.imgur.com/YQJKz2w.jpg" }}
