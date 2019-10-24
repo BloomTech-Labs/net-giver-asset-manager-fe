@@ -4,6 +4,7 @@ import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import { Alert } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import BarcodeMask from 'react-native-barcode-mask';
 import axios from "axios";
 
 export default class BarcodeScanner extends React.Component {
@@ -51,10 +52,19 @@ export default class BarcodeScanner extends React.Component {
           <View style={styles.layerTop} />
           <View style={styles.layerCenter}>
             <View style={styles.layerLeft} />
+            {/* <View style={styles.focused}> */}
+
+            <BarcodeMask width={300} height={120} backgroundColor="transparent" animatedLineColor="red" />
             <View style={styles.focused} />
+            {/* <View style={styles.focused2} />
+              <View style={styles.focused3} /> */}
+            {/* <Text>Something Here</Text> */}
+
+            {/* </View> */}
             <View style={styles.layerRight} />
           </View>
           <View style={styles.layerBottom} />
+          {/* <Text>Something Here</Text> */}
         </BarCodeScanner>
         {/* <BarCodeScanner
           onBarCodeRead={this.handleBarCodeScanned}
@@ -151,7 +161,16 @@ const styles = StyleSheet.create({
     backgroundColor: opacity
   },
   focused: {
-    flex: 10
+    // flex: 10,
+    // borderBottomColor: "red",
+    flex: 10,
+    // backgroundColor: 'orange',
+    // borderRadius: 5,
+    // padding: 15,
+    // paddingHorizontal: 20,
+    alignSelf: 'center',
+    // margin: 20,
+    // position: "relative",
   },
   layerRight: {
     flex: 1,
