@@ -16,6 +16,7 @@ export default class AssetForm extends React.Component {
       var barkode = this.props.navigation.state.params.data
     }
 
+    console.log('test', barkode)
 
     return (
 
@@ -26,21 +27,24 @@ export default class AssetForm extends React.Component {
           name: '',
           category: '',
           description: '',
-          barcode: 524642620,
+          barcode: '',
           check_in_status: 1,
           user_id: 1,
           location_id: 1
         }}
-        onSubmit={values => axios
+
+        onSubmit={(values) => axios
           .post("https://net-giver-asset-mngr.herokuapp.com/api/assets", values)
           .then(res => {
             resetForm();
             setAssets(res.data)
-            console.log('inside axios', values)
+            console.log(initialValues)
           })
           .catch(err => {
             "Can not add"
           })
+
+
         }
 
 
@@ -76,7 +80,7 @@ export default class AssetForm extends React.Component {
               placeholder="Barcode ID"
               name="barcode"
               value={barkode}
-
+              value={values.barcode = barkode}
               onBlur={() => setFieldTouched('barcode')}
               autoCapitalize="none"
               inputStyle={styles.inputField}
