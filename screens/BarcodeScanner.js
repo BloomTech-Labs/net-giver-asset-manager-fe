@@ -23,6 +23,8 @@ export default class BarcodeScanner extends React.Component {
   };
 
   render() {
+
+
     const { navigate } = this.props.navigation;
     // console.log("props test:", this.props.navigation);
 
@@ -43,7 +45,7 @@ export default class BarcodeScanner extends React.Component {
         }}
       >
         <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned2}
+          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
         >
           <View style={styles.layerTop} />
@@ -78,26 +80,36 @@ export default class BarcodeScanner extends React.Component {
     );
   }
 
-  // handleBarCodeScanned = ({ type, data }) => {
-  //   this.setState({ scanned: true });
-  //   Alert.alert(
-  //     `Bar code with type ${type} and data ${data} has been scanned!`,
-  //     "time to leave",
-  //     [
-  //       {
-  //         text: "Check in",
-  //         onPress: () => this.props.navigation.navigate("AssetForm", {
-  //           asset: data,
-  //         })
-  //       }
-  //     ]
-  //   );
-  // };
+  handleBarCodeScanned = ({ type, data }) => {
+    console.log("barcode start:", type, data);
+    this.setState({ scanned: true });
+    Alert.alert(
+      `Bar code with type ${type} and data ${data} has been scanned!`,
+      "time to leave",
+      [
+        {
+          text: "Check in",
+          onPress: () => {
+            this.props.navigation.navigate("AssetForm", { data });
+          }
+        }
+      ]
+    );
+  };
+
 
   handleBarCodeScanned2 = ({ type, data }) => {
     this.setState({ scanned: true });
-    Alert.alert(`Barcode with type ${type} and data ${data} has been scanned!`);
-
+    Alert.alert(`Barcode with type ${type} and data ${data} has been scanned!`,
+      [
+        {
+          text: "Check in",
+          onPress: () => {
+            this.props.navigation.navigate("AssetForm", { data });
+          }
+        }
+      ]);
+    console.log("from barcodescanner componenet", data)
     // Axios call to fetch assets
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
@@ -108,9 +120,10 @@ export default class BarcodeScanner extends React.Component {
         // Conditional logic handling the routing -- pages aren't correct, just wanted
         // an example
         if (this.state.asset === data) {
-          this.props.navigation.navigate("AssetForm");
-        } else {
           this.props.navigation.navigate("AssetHistory");
+
+        } else {
+          this.props.navigation.navigate("AssetForm");
         }
       })
       .catch(error => {
