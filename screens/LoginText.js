@@ -31,9 +31,6 @@ const LoginText = () => {
     </View>
   );
 };
-LoginText.navigationOptions = {
-  header: null
-};
 
 const styles = StyleSheet.create({
   logo: {
