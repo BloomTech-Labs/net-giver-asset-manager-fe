@@ -7,6 +7,7 @@ import NavLink from "../navigation/NavLink";
 
 const SignupScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessage } = useContext(AuthContext);
+  console.log("STATE:", state);
 
   return (
     <View style={styles.container}>
@@ -15,7 +16,7 @@ const SignupScreen = ({ navigation }) => {
       <NavigationEvents onWillBlur={clearErrorMessage} />
       <LoginForm
         headerText="Sign Up for Net Giver Tracker"
-        errorMessage={state.errorMessage}
+        errorMessage={clearErrorMessage}
         submitButtonText="Register"
         onSubmit={signup}
       />
@@ -25,12 +26,6 @@ const SignupScreen = ({ navigation }) => {
       />
     </View>
   );
-};
-
-SignupScreen.navigationOptions = () => {
-  return {
-    header: null
-  };
 };
 
 const styles = StyleSheet.create({
