@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     // flex: 10,
     // borderBottomColor: "red",
     flex: 10,
-    backgroundColor: 'orange',
+    // backgroundColor: 'orange',
     // borderRadius: 5,
     // padding: 15,
     // paddingHorizontal: 20,
@@ -159,48 +159,6 @@ const styles = StyleSheet.create({
     // margin: 20,
     // position: "relative",
   },
-  // mask: {
-  //   backgroundColor: rgba(255, 255, 255, .4)
-  // },
-  // focused2: {
-  //   display: "none",
-  //   height: 60,
-  //   // height: .5,
-  //   // backgroundColor: "pink",
-  //   // borderBottomColor: "red",
-  //   position: "relative",
-  //   borderWidth: 1,
-  //   borderStyle: "solid",
-  //   borderColor: "blue",
-
-  //   // left:9px;
-  //   // width:100px;
-  //   // border:1px solid black;
-  //   padding: 20,
-  //   backgroundColor: '#d9d9d9',
-  //   shadowColor: "yellow",
-  //   shadowOpacity: 0.8,
-  //   shadowRadius: 2,
-  //   shadowOffset: {
-  //     height: 1,
-  //     width: 1
-  //   },
-  //   top: -1,
-
-  // },
-  // focused3: {
-  //   display: "none",
-  //   height: 60,
-  //   // height: .5,
-  //   backgroundColor: "pink",
-  //   // borderRadius: 15,
-  //   borderWidth: 1,
-  //   borderStyle: "solid",
-  //   position: "relative",
-  //   top: 1,
-  //   borderColor: "yellow"
-  //   // borderBottomColor: "red"
-  // },
   layerRight: {
     flex: 1,
     backgroundColor: opacity
