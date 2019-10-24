@@ -7,11 +7,14 @@ import NavLink from "../navigation/NavLink";
 
 const SignupScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessage } = useContext(AuthContext);
+  console.log(state);
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Create an account</Text>
-      <Text style={styles.description}>Anybody is welcome to use Asset Tracker for free once you sign up!</Text>
+      <Text style={styles.description}>
+        Anybody is welcome to use Asset Tracker for free once you sign up!
+      </Text>
       <NavigationEvents onWillBlur={clearErrorMessage} />
       <LoginForm
         headerText="Sign Up for Net Giver Tracker"
@@ -37,14 +40,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#EFEFF4",
+    backgroundColor: "#EFEFF4"
   },
   header: {
     marginTop: 10,
     width: "91%",
     paddingLeft: 10,
     fontSize: 25,
-    fontWeight: "500",
+    fontWeight: "500"
   },
   description: {
     marginTop: 5,
@@ -52,8 +55,8 @@ const styles = StyleSheet.create({
     width: "91%",
     paddingLeft: 10,
     fontSize: 18,
-    color: "#7C7777",
-  },
+    color: "#7C7777"
+  }
 });
 
 export default SignupScreen;
