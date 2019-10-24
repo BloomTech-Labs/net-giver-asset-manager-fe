@@ -42,6 +42,7 @@ export default class AssetForm extends React.Component {
             resetForm();
             setAssets(res.data)
             console.log(initialValues)
+
           })
           .catch(err => {
             "Can not add"
@@ -87,6 +88,8 @@ export default class AssetForm extends React.Component {
 
               autoCapitalize="none"
               inputStyle={styles.inputField}
+
+              editable={false}
             />
             {touched.barcode && errors.barcode && (
               <Text style={{ fontSize: 10, color: "red" }}>
@@ -152,11 +155,17 @@ export default class AssetForm extends React.Component {
               type="solid"
               color="blue"
               onPress={handleSubmit}
-              disabled={!isValid}
-              onPress={handleSubmit}
+
               buttonStyle={styles.button}
             />
+
+            <Button
+              title="Go to Asset List"
+              onPress={() => this.props.navigation.navigate('AssetsList')}
+            />
+
             <OrderUpc />
+
           </KeyboardShift>
         )}
       </Formik>
