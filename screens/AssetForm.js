@@ -1,39 +1,42 @@
-import React, { useState, Component, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input, Icon } from "react-native-elements";
 import axios from 'axios';
 import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 import KeyboardShift from '../constants/KeyboardShift'
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import * as yup from 'yup';
-import { Formik, withFormik } from 'formik';
+import { Formik } from 'formik';
 
 
-
-export default class AssetForm extends Component {
+export default class AssetForm extends React.Component {
 
   render() {
-    const asset = this.props.navigation.getParam(("assets"));
+
+    if (this.props.navigation.state.params) {
+      var barkode = this.props.navigation.state.params.data
+    }
+
 
     return (
 
       <Formik
 
         initialValues={{
-          barcode: '',
+
           name: '',
           category: '',
           description: '',
-          check_in_status: null,
+          barcode: 524642620,
+          check_in_status: 1,
           user_id: 1,
-          location_id: null
+          location_id: 1
         }}
         onSubmit={values => axios
           .post("https://net-giver-asset-mngr.herokuapp.com/api/assets", values)
           .then(res => {
             resetForm();
             setAssets(res.data)
-
+            console.log('inside axios', values)
           })
           .catch(err => {
             "Can not add"
@@ -45,7 +48,7 @@ export default class AssetForm extends Component {
 
         {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
 
-          <KeyboardShift>
+          <KeyboardShift mainContainer={styles.formContainer}>
 
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate("BarcodeScanner")}
@@ -72,8 +75,8 @@ export default class AssetForm extends Component {
             <Input
               placeholder="Barcode ID"
               name="barcode"
-              value={values.barcode}
-              onChangeText={handleChange('barcode')}
+              value={barkode}
+
               onBlur={() => setFieldTouched('barcode')}
               autoCapitalize="none"
               inputStyle={styles.inputField}
@@ -160,7 +163,6 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   inputField: {
-
     height: 40,
     width: "91%",
     borderColor: "gray",
@@ -170,7 +172,9 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     marginTop: 20,
     borderBottomWidth: 0
+  },
+  formContainer: {
+    marginBottom: 30,
   }
 
 });
-
