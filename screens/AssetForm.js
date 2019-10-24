@@ -39,6 +39,7 @@ export default class AssetForm extends React.Component {
             resetForm();
             setAssets(res.data)
             console.log(initialValues)
+
           })
           .catch(err => {
             "Can not add"
@@ -139,9 +140,11 @@ export default class AssetForm extends React.Component {
               title='Add New Asset'
               type="solid"
               color="blue"
+              onPress={() => this.props.navigation.navigate('AssetList')}
               onPress={handleSubmit}
               disabled={!isValid}
               onPress={handleSubmit}
+
               buttonStyle={styles.button}
             />
 
