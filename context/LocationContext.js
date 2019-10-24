@@ -32,8 +32,6 @@ const clearErrorMessage = dispatch => () => {
   dispatch({ type: "clear_error_message" });
 };
 
-const populateAssetForm = () => {};
-
 export const { Provider, Context } = createDataContext(
   locationReducer,
   { clearErrorMessage, addLocation },

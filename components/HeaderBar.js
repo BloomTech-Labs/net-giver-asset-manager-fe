@@ -7,13 +7,13 @@ const HeaderBar = props => {
     <View>
       <View style={styles.headerWrapper}>
         <Text style={styles.headerTitle}>Simple Asset Tracker</Text>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.menuIcon}
           onPress={() => Alert.alert("You clicked the menu hamburger!")}>
           <Icon
             name="menu"
             color="white"
-            size="40"
+            size={40}
           />
         </TouchableOpacity>
       </View>
