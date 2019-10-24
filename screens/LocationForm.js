@@ -7,40 +7,44 @@ import {
   Picker,
   ActivityIndicator,
   KeyboardAvoidingView,
-  TextInput
+  TextInput,
+  ScrollView
 } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import ModalDropdown from "react-native-modal-dropdown";
 import { Tile, Button, Input, Text, Icon, Image } from "react-native-elements";
 import Spacer from "../components/Spacer";
 import HeadBar from "../components/HeaderBar";
 import LocField from "../components/LocField";
 import { Context } from "../context/LocationContext";
+import KeyboardShift from "../constants/KeyboardShift";
+import OrderUpc from "../components/OrderUpc";
 
 const LocationForm = () => {
   const { state, addLocation, clearErrorMessage } = useContext(Context);
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-      <HeadBar />
-      <Text style={styles.header}>Choose Locations</Text>
-      <Picker style={styles.picker} itemStyle={styles.pickerItem}>
-        <Picker.Item label="Office" value="office" />
-        <Picker.Item label="Locker" value="locker" />
-        <Picker.Item label="Garage" value="garage" />
-        <Picker.Item label="House" value="house" />
-      </Picker>
-      <Spacer>
-        <Tile
-          //   imageSrc={require("../assets/images/MapImg.jpg")}
-          imageSrc={{ uri: "https://i.imgur.com/YQJKz2w.jpg" }}
-          title="you can lose a lot of things don't forget to add the location"
-          featured
-          caption="Net Giver here to help"
-          PlaceholderContent={<ActivityIndicator />}
-        />
-      </Spacer>
-      {/* <Text style={styles.inputLabels}>Location</Text>
+    <KeyboardShift>
+      <ScrollView>
+        <HeadBar />
+        <Text style={styles.header}>Choose Locations</Text>
+        <Picker style={styles.picker} itemStyle={styles.pickerItem}>
+          <Picker.Item label="Office" value="office" />
+          <Picker.Item label="Locker" value="locker" />
+          <Picker.Item label="Garage" value="garage" />
+          <Picker.Item label="House" value="house" />
+        </Picker>
+        <Spacer>
+          <Tile
+            //   imageSrc={require("../assets/images/MapImg.jpg")}
+            //   imageSrc={{ uri: "https://i.imgur.com/YQJKz2w.jpg" }}
+            imageSrc={{ uri: "https://i.imgur.com/tEM7UOQ.jpg" }}
+            title="you can lose a lot of things don't forget to add the location"
+            titleStyle={"black"}
+            featured
+            caption="Net Giver here to help"
+            PlaceholderContent={<ActivityIndicator />}
+          />
+        </Spacer>
+        {/* <Text style={styles.inputLabels}>Location</Text>
       <TextInput
         style={styles.inputField}
         value={name}
@@ -56,8 +60,8 @@ const LocationForm = () => {
         autoCapitalize="none"
         autoCorrect={false}
       /> */}
-      <Spacer />
-      {/* <Button
+        <Spacer />
+        {/* <Button
         iconRight={false}
         title="Add New Location"
         type="solid"
@@ -68,15 +72,18 @@ const LocationForm = () => {
         //   onPress={handleSubmit}
         containerStyle={styles.button}
       /> */}
-      <LocField
-        headerText=""
-        errorMessage={state.errorMessage}
-        onSubmit={addLocation}
-        submitButtonText="add location"
-      />
+        <LocField
+          headerText=""
+          errorMessage={state.errorMessage}
+          onSubmit={addLocation}
+          submitButtonText="Add New Storage Location"
+        />
+        <Spacer />
+        <OrderUpc />
 
-      <Spacer />
-    </KeyboardAvoidingView>
+        <Spacer />
+      </ScrollView>
+    </KeyboardShift>
   );
 };
 
@@ -119,6 +126,9 @@ const styles = StyleSheet.create({
     width: "91%",
     alignSelf: "center",
     fontSize: 17
+  },
+  scrollView: {
+    marginHorizontal: 20
   }
 });
 
