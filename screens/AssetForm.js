@@ -85,7 +85,7 @@ export default class AssetForm extends React.Component {
               onBlur={() => setFieldTouched('barcode')}
               autoCapitalize="none"
               inputStyle={styles.inputField}
-
+              editable={false}
             />
             {touched.barcode && errors.barcode &&
               <Text style={{ fontSize: 10, color: 'red' }}>{errors.barcode}</Text>
@@ -140,12 +140,13 @@ export default class AssetForm extends React.Component {
               title='Add New Asset'
               type="solid"
               color="blue"
-              onPress={() => this.props.navigation.navigate('AssetList')}
-              onPress={handleSubmit}
-              disabled={!isValid}
               onPress={handleSubmit}
 
               buttonStyle={styles.button}
+            />
+            <Button
+              title="Go to Asset List"
+              onPress={() => this.props.navigation.navigate('AssetsList')}
             />
 
           </KeyboardShift>
