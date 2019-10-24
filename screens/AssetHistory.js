@@ -11,12 +11,7 @@ import LoginText from "../screens/LoginText";
 const AssetHistory = () => {
   const [history, setHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
-
-  createDrawerNavigator({
-    Login: LoginText,
-    Home: HomeScreen,
-  })
-
+  
   // Fetch asset history
   const getAssetHistory = () => {
     axios

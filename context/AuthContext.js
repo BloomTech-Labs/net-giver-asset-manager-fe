@@ -24,7 +24,7 @@ const clearErrorMessage = dispatch => () => {
 
 const signup = dispatch => async ({ email, password }) => {
   try {
-    const response = await assetsApi.post("auth/register", {
+    const response = await assetsApi.post("/auth/register", {
       email,
       password
     });
@@ -32,7 +32,7 @@ const signup = dispatch => async ({ email, password }) => {
     console.log("context test:", response.data);
     dispatch({ type: "signin", payload: response.data.token });
 
-    navigate("BarcodeScanner");
+    navigate("App");
   } catch (err) {
     console.log("test context", err);
     dispatch({
@@ -50,11 +50,11 @@ const signin = dispatch => async ({ email, password }) => {
     });
     await AsyncStorage.setItem("token", response.data.token);
     dispatch({ type: "signin", payload: response.data.token });
-    navigate("BarcodeScanner");
+    navigate("App");
   } catch (err) {
     dispatch({
       type: "add_error",
-      payload: "Something went wrong with sign in"
+      payload: "Something went wrong with sign in!"
     });
   }
 };

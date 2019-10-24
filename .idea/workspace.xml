@@ -4,6 +4,11 @@
     <list default="true" id="e7c5b770-ba69-43d7-8ad6-00d2807960e2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/components/HeaderBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/HeaderBar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens/AssetForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/AssetForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fonts/SpaceMono-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/LoginForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens/LoginText.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/LoginText.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +26,12 @@
     <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
+<<<<<<< HEAD
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes />
+=======
     <navigator currentView="ProjectPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
@@ -39,6 +50,7 @@
       </pane>
       <pane id="PackagesPane" />
     </panes>
+>>>>>>> a842375274adf754e192d51fdb93be7f9c067b0f
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
@@ -75,7 +87,11 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
+<<<<<<< HEAD
+      <window_info content_ui="combo" id="Project" order="1" weight="0.3296875" />
+=======
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.329294" />
+>>>>>>> a842375274adf754e192d51fdb93be7f9c067b0f
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />

@@ -4,19 +4,25 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 import { Provider as AuthProvider } from "../context/AuthContext";
 import { Provider as LocationProvider } from "../context/LocationContext";
 import { setNavigator } from "../navigationRef";
-import HomeScreen from "../screens/HomeScreen";
 import RegisterNameText from "../screens/RegisterNameText";
 import LoginText from "../screens/LoginText";
 import AssetHistory from "../screens/AssetHistory";
 import Landing from "../screens/Landing";
+import BarcodeScanner from "../screens/BarcodeScanner";
+import HomeScreen from "../screens/HomeScreen";
+import AssetForm from "../screens/AssetForm";
 
-const DrawerNavigator = createDrawerNavigator(
-  {
-    Home: HomeScreen,
-    Register: RegisterNameText,
-    Login: LoginText,
-  }
-);
+const DevStack = createStackNavigator({
+  Home: HomeScreen,
+  AssetForm: AssetForm,
+});
+
+const AppStack = createDrawerNavigator({
+  Home: AssetHistory,
+  Scanner: BarcodeScanner,
+  Register: RegisterNameText,
+  Login: LoginText,
+});
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -39,11 +45,6 @@ const AuthStack = createStackNavigator({
   },
 });
 
-const AppStack = createStackNavigator({
-  Dashboard: DrawerNavigator,
-    screen: AssetHistory
-});
-
 const RootNavigation = createSwitchNavigator({
   Landing: {
     screen: Landing,
@@ -53,6 +54,9 @@ const RootNavigation = createSwitchNavigator({
   },
   Auth: {
     screen: AuthStack,
+  },
+  Dev: {
+    screen: DevStack,
   },
 },
 {

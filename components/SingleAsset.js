@@ -6,13 +6,16 @@ const SingleAsset = ({data}) => {
     <View style={styles.assetWrapper}>
       <View style={styles.imageWrapper}>
         {/* Needs to be replaced with an image primitive component */}
-        <Text>Images goes here</Text>
+        {/* <Text>Images goes here</Text> */}
       </View>
       <View style={styles.textWrapper}>
-        <Text>Asset ID: { data.asset_id }</Text>
-        <Text>Checked out: { data.time_out }</Text>
-        <Text>Checked in: { data.time_in }</Text>
+        <Text style={styles.assetName}>** Asset Name Here **</Text>
+        <Text style={styles.assetID}>Serial # { data.asset_id }</Text>
+        <Text>** Asset Description Here **</Text>
+        <Text>Checked In: { data.time_in }</Text>
+        <Text>Checked Out: { data.time_out }</Text>
         <Text>User: { data.user_id }</Text>
+        <Text style={styles.assetLocation}>Location: ** Enter Location Here **</Text>
       </View>
     </View>
   );
@@ -21,17 +24,31 @@ const SingleAsset = ({data}) => {
 const styles = StyleSheet.create({
   assetWrapper: {
     flexDirection: "row",
+    marginTop: 25,
+    marginLeft: 35
   },
   imageWrapper: {
-    flex: 1,
     textAlign: "center",
     alignItems: "center",
-    alignSelf: "center",
+    backgroundColor: "grey",
+    width: 100,
+    height: 100,
+    borderRadius: 100/2
   },
   textWrapper: {
     flex: 3,
-    marginLeft: 50,
-    padding: 20,
+    marginLeft: 30,
+    fontSize: 15
+  },
+  assetName: {
+    fontWeight: "bold"
+  },
+  assetID: {
+    color: "#7C7777",
+    fontStyle: "italic"
+  },
+  assetLocation: {
+    color: "#82A0FD"
   }
 });
 

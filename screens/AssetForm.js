@@ -1,103 +1,201 @@
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
 import { Button, Input, Icon } from "react-native-elements";
-import Spacer from "../components/Spacer";
+import axios from "axios";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import KeyboardShift from "../constants/KeyboardShift";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import LoginText from "./LoginText";
+import OrderUpc from "../components/OrderUpc";
 
-const AssetForm = ({ navigation }) => {
-  const [name, setName] = useState("");
-  const [userID, setUserID] = useState("");
-  const [checkedIn, setCheckedIn] = useState(false);
+import { Formik } from 'formik';
 
-  // This function can make our POST request to the backend
-  const handleSubmit = () => {
-    console.log("You have successfully added this asset to the database.");
-  };
 
-  const asset = navigation.getParam(("asset"));
+export default class AssetForm extends React.Component {
 
-  return (
-    <>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("BarcodeScanner")}
-      >
-        <MaterialCommunityIcons
-          style={styles.upc}
-          name="qrcode-scan"
-          size={40}
-        />
-      </TouchableOpacity>
+  render() {
 
-      <Spacer>
-        <Input
-          label="Barcode"
-          value={asset}
-          autoCapitalize={false}
-          blurOnSubmit={true}
-        />
-      </Spacer>
+    if (this.props.navigation.state.params) {
+      var barkode = this.props.navigation.state.params.data
+    }
 
-      <Spacer>
-        <Input
-          label="Name"
-          value={name}
-          onChange={setName}
-          autoCapitalize="words"
-          autoCorrect={false}
-          blurOnSubmit={true}
-        />
-      </Spacer>
+    console.log('test', barkode)
 
-      <Spacer>
-        <Input
-          label="Checked in"
-          value={checkedIn}
-          onChangeText={setCheckedIn}
-          defaultValue="false"
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-      </Spacer>
 
-      <Spacer>
-        <Input
-          label="User ID"
-          value={userID}
-          onChangeText={setUserID}
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-      </Spacer>
+    return (
+      <Formik
+        initialValues={{
 
-      <Button 
-        title="Submit"
-        iconRight={false}
-        type="solid"
-        color="blue"
-        onPress={handleSubmit}
-        icon={
-          <Icon 
-            name="check"
-            color="white"
-          />
+
+          name: '',
+          category: '',
+          description: '',
+          barcode: '',
+          check_in_status: 1,
+
+          user_id: 1,
+          location_id: 1
+        }}
+
+
+        onSubmit={(values) => axios
+          .post("https://net-giver-asset-mngr.herokuapp.com/api/assets", values)
+          .then(res => {
+            resetForm();
+            setAssets(res.data)
+            console.log(initialValues)
+
+          })
+          .catch(err => {
+            "Can not add"
+          })
+
         }
-        containerStyle={styles.button}
-      />
-    </>
-  );
-};
+      >
+
+
+        {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
+
+          <KeyboardShift mainContainer={styles.formContainer}>
+
+
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate("BarcodeScanner")}
+            >
+              <MaterialCommunityIcons
+                style={styles.upc}
+                name="qrcode-scan"
+                size={40}
+              />
+            </TouchableOpacity>
+
+            <Input
+              placeholder="Asset Name"
+              value={values.name}
+              onChangeText={handleChange("name")}
+              onBlur={() => setFieldTouched("name")}
+              clearButtonMode="always"
+              inputStyle={styles.inputField}
+            />
+            {touched.name && errors.name && (
+              <Text style={{ fontSize: 10, color: "red" }}>{errors.name}</Text>
+            )}
+            <Input
+              placeholder="Barcode ID"
+              name="barcode"
+
+              value={barkode}
+              value={values.barcode = barkode}
+              onBlur={() => setFieldTouched('barcode')}
+
+              autoCapitalize="none"
+              inputStyle={styles.inputField}
+
+              editable={false}
+            />
+            {touched.barcode && errors.barcode && (
+              <Text style={{ fontSize: 10, color: "red" }}>
+                {errors.barcode}
+              </Text>
+            )}
+
+            <Input
+              placeholder="description"
+              value={values.description}
+              onChangeText={handleChange("description")}
+              onBlur={() => setFieldTouched("description")}
+              inputStyle={styles.inputField}
+            />
+            {touched.description && errors.description && (
+              <Text style={{ fontSize: 10, color: "red" }}>
+                {errors.description}
+              </Text>
+            )}
+
+            <Input
+              placeholder="Category"
+              value={values.category}
+              onChangeText={handleChange("category")}
+              onBlur={() => setFieldTouched("category")}
+              inputStyle={styles.inputField}
+            />
+            {touched.category && errors.category && (
+              <Text style={{ fontSize: 10, color: "red" }}>
+                {errors.category}
+              </Text>
+            )}
+
+            <Input
+              placeholder="Checkin Status"
+              value={values.check_in_status}
+              onChangeText={handleChange("check_in_status")}
+              onBlur={() => setFieldTouched("check_in_status")}
+              inputStyle={styles.inputField}
+            />
+            {touched.check_in_status && errors.check_in_status && (
+              <Text style={{ fontSize: 10, color: "red" }}>
+                {errors.check_in_status}
+              </Text>
+            )}
+
+            <Input
+              placeholder="Choose A Location"
+              value={values.location_id}
+              onChangeText={handleChange("location_id")}
+              onBlur={() => setFieldTouched("location_id")}
+              inputStyle={styles.inputField}
+            />
+            {touched.location_id && errors.location_id && (
+              <Text style={{ fontSize: 10, color: "red" }}>
+                {errors.location_id}
+              </Text>
+            )}
+
+            <Button
+              iconRight={false}
+              title="Add New Asset"
+              type="solid"
+              color="blue"
+              onPress={handleSubmit}
+
+              buttonStyle={styles.button}
+            />
+
+            <Button
+              title="Go to Asset List"
+              onPress={() => this.props.navigation.navigate('AssetsList')}
+            />
+
+            <OrderUpc />
+
+          </KeyboardShift>
+        )}
+      </Formik>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   button: {
-    width: "80%",
+    width: "90%",
     alignSelf: "center",
+    marginVertical: 20
   },
   upc: {
     marginBottom: 30,
     marginLeft: 185,
     marginTop: 20
   },
+  inputField: {
+    height: 40,
+    width: "91%",
+    borderColor: "gray",
+    borderRadius: 5,
+    borderWidth: 1,
+    alignSelf: "center",
+    paddingLeft: 10,
+    marginTop: 20,
+    borderBottomWidth: 0
+  },
+  formContainer: {
+    marginBottom: 30,
+  }
 });
-
-export default AssetForm;

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { NavigationEvents } from "react-navigation";
+import { Context as AuthContext } from "../context/AuthContext";
 import LoginForm from "../components/LoginForm";
 import NavLink from "../navigation/NavLink";
 
-const SignupScreen = ({ clearErrorMessage, signup }) => {
+const SignupScreen = ({ navigation }) => {
+  const { state, signup, clearErrorMessage } = useContext(AuthContext);
+  console.log("STATE:", state);
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Create an account</Text>
