@@ -4,6 +4,7 @@ import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import { Alert } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import BarcodeMask from 'react-native-barcode-mask';
 import axios from "axios";
 
 export default class BarcodeScanner extends React.Component {
@@ -49,10 +50,19 @@ export default class BarcodeScanner extends React.Component {
           <View style={styles.layerTop} />
           <View style={styles.layerCenter}>
             <View style={styles.layerLeft} />
+            {/* <View style={styles.focused}> */}
+
+            <BarcodeMask width={300} height={120} backgroundColor="transparent" animatedLineColor="red" />
             <View style={styles.focused} />
+            {/* <View style={styles.focused2} />
+              <View style={styles.focused3} /> */}
+            {/* <Text>Something Here</Text> */}
+
+            {/* </View> */}
             <View style={styles.layerRight} />
           </View>
           <View style={styles.layerBottom} />
+          {/* <Text>Something Here</Text> */}
         </BarCodeScanner>
         {/* <BarCodeScanner
           onBarCodeRead={this.handleBarCodeScanned}
@@ -138,8 +148,59 @@ const styles = StyleSheet.create({
     backgroundColor: opacity
   },
   focused: {
-    flex: 10
+    // flex: 10,
+    // borderBottomColor: "red",
+    flex: 10,
+    backgroundColor: 'orange',
+    // borderRadius: 5,
+    // padding: 15,
+    // paddingHorizontal: 20,
+    alignSelf: 'center',
+    // margin: 20,
+    // position: "relative",
   },
+  // mask: {
+  //   backgroundColor: rgba(255, 255, 255, .4)
+  // },
+  // focused2: {
+  //   display: "none",
+  //   height: 60,
+  //   // height: .5,
+  //   // backgroundColor: "pink",
+  //   // borderBottomColor: "red",
+  //   position: "relative",
+  //   borderWidth: 1,
+  //   borderStyle: "solid",
+  //   borderColor: "blue",
+
+  //   // left:9px;
+  //   // width:100px;
+  //   // border:1px solid black;
+  //   padding: 20,
+  //   backgroundColor: '#d9d9d9',
+  //   shadowColor: "yellow",
+  //   shadowOpacity: 0.8,
+  //   shadowRadius: 2,
+  //   shadowOffset: {
+  //     height: 1,
+  //     width: 1
+  //   },
+  //   top: -1,
+
+  // },
+  // focused3: {
+  //   display: "none",
+  //   height: 60,
+  //   // height: .5,
+  //   backgroundColor: "pink",
+  //   // borderRadius: 15,
+  //   borderWidth: 1,
+  //   borderStyle: "solid",
+  //   position: "relative",
+  //   top: 1,
+  //   borderColor: "yellow"
+  //   // borderBottomColor: "red"
+  // },
   layerRight: {
     flex: 1,
     backgroundColor: opacity
