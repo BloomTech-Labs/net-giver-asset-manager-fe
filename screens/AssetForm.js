@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { Button, Input, Icon } from "react-native-elements";
 import Spacer from "../components/Spacer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import LoginText from "./LoginText";
 
 const AssetForm = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -15,8 +16,6 @@ const AssetForm = ({ navigation }) => {
   };
 
   const asset = navigation.getParam(("asset"));
-  // const data = props.state.params.data;
-  //   console.log("data test:", props.state.params.data);
 
   return (
     <>

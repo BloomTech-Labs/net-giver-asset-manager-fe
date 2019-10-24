@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { NavigationEvents } from "react-navigation";
-import { Context as AuthContext } from "../context/AuthContext";
 import LoginForm from "../components/LoginForm";
 import NavLink from "../navigation/NavLink";
 
-const SignupScreen = ({ navigation }) => {
-  const { state, signup, clearErrorMessage } = useContext(AuthContext);
-
+const SignupScreen = ({ clearErrorMessage, signup }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Create an account</Text>
@@ -15,7 +12,7 @@ const SignupScreen = ({ navigation }) => {
       <NavigationEvents onWillBlur={clearErrorMessage} />
       <LoginForm
         headerText="Sign Up for Net Giver Tracker"
-        errorMessage={state.errorMessage}
+        errorMessage={clearErrorMessage}
         submitButtonText="Register"
         onSubmit={signup}
       />
@@ -25,12 +22,6 @@ const SignupScreen = ({ navigation }) => {
       />
     </View>
   );
-};
-
-SignupScreen.navigationOptions = () => {
-  return {
-    header: null
-  };
 };
 
 const styles = StyleSheet.create({

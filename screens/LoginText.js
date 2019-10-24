@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { NavigationEvents } from "react-navigation";
 import LoginForm from "../components/LoginForm";
 import NavLink from "../navigation/NavLink";
-import { Context } from "../context/AuthContext";
 
 const LoginText = () => {
-  const { state, signin, clearErrorMessage } = useContext(Context);
+  const { state, signin, clearErrorMessage } = useState("");
 
   return (
     <View>
@@ -25,14 +24,11 @@ const LoginText = () => {
       />
       <NavLink
         text="Dont have an account? Sign up instead"
-        routeName="Register"
+        routeName="AppStack"
         style={styles.toRegister}
       />
     </View>
   );
-};
-LoginText.navigationOptions = {
-  header: null
 };
 
 const styles = StyleSheet.create({

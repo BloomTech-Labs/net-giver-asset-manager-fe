@@ -4,6 +4,7 @@ import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text } from "galio-framework";
 import { Button } from "react-native-elements";
 import Spacer from "../components/Spacer";
+import AppNavigator from "../navigation/AppNavigator";
 
 export default function HomeScreen({ navigation }) {
   return (

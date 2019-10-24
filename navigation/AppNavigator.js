@@ -1,95 +1,76 @@
 import React from "react";
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-
-import AssetForm from "../screens/AssetForm";
-import Camera from "../screens/Camera";
-import MainTabNavigator from "./MainTabNavigator";
-import RegisterNameScreen from "../screens/RegisterNameText";
-import RegisterEmailScreen from "../screens/RegisterEmailText";
-import RegisterUsernameScreen from "../screens/RegisterUsernameText";
-import RegisterPasswordScreen from "../screens/RegisterPasswordText";
-import LoginScreen from "../screens/LoginText";
-import AssetHistory from "../screens/AssetHistory";
-import BarcodeScanner from "../screens/BarcodeScanner";
+import { createAppContainer, createSwitchNavigator, createStackNavigator } from "react-navigation";
+import { createDrawerNavigator } from "react-navigation-drawer";
 import { Provider as AuthProvider } from "../context/AuthContext";
-import { Provider as AssetProvider } from "../context/AssetContext";
+import { Provider as LocationProvider } from "../context/LocationContext";
 import { setNavigator } from "../navigationRef";
+import HomeScreen from "../screens/HomeScreen";
+import RegisterNameText from "../screens/RegisterNameText";
+import LoginText from "../screens/LoginText";
+import AssetHistory from "../screens/AssetHistory";
+import Landing from "../screens/Landing";
 
-// export default createAppContainer(
-//   createSwitchNavigator({
-//     // You could add another route here for authentication.
-//     // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-//     Main: MainTabNavigator,
-//   })
-// );
-
-// export default createAppContainer(
-//   createStackNavigator(
-//     {
-//       // You could add another route here for authentication.
-//       // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-//       Main: MainTabNavigator,
-//       Register: RegisterScreen,
-//       Login: LoginScreen,
-//       AssetHistory: AssetHistory,
-//       BarcodeScanner: BarcodeScanner,
-//     },
-//     {
-//       initialRouteName: "Main",
-//       defaultNavigationOptions: {
-//         title: "Net Giver"
-//       }
-//     }
-//   )
-// );
-
-const stackNavigator = createStackNavigator(
+const DrawerNavigator = createDrawerNavigator(
   {
-    Main: MainTabNavigator,
-    Register: RegisterNameScreen,
-    Email: RegisterEmailScreen,
-    Username: RegisterUsernameScreen,
-    Password: RegisterPasswordScreen,
-    Login: LoginScreen,
-    AssetHistory: AssetHistory,
-    BarcodeScanner: BarcodeScanner,
-    Camera: Camera,
-    AssetForm: AssetForm
-  },
-  {
-    initialRouteName: "Main",
-    defaultNavigationOptions: {
-      title: "Net Giver"
-    }
+    Home: HomeScreen,
+    Register: RegisterNameText,
+    Login: LoginText,
   }
 );
 
-// const navigator = createStackNavigator(
-//   {
-//     Register: RegisterScreen,
-//     Login: LoginScreen
-//   },
-//   {
-//     initialRouteName: 'Main',
-//     defaultNavigationOptions: {
-//       title: "Net Giver"
-//     }
-//   }
-// )
+const AuthStack = createStackNavigator({
+  Login: {
+    screen: LoginText,
+    navigationOptions: {
+      headerTitle: "Login"
+    },
+  },
+  Landing: {
+    screen: Landing,
+    navigationOptions: {
+      headerTitle: "Landing"
+    },
+  },
+  Register: {
+    screen: RegisterNameText,
+    navigationOptions: {
+      headerTitle: "Register"
+    },
+  },
+});
 
-const App = createAppContainer(stackNavigator);
+const AppStack = createStackNavigator({
+  Dashboard: DrawerNavigator,
+    screen: AssetHistory
+});
+
+const RootNavigation = createSwitchNavigator({
+  Landing: {
+    screen: Landing,
+  },
+  App: {
+    screen: AppStack,
+  },
+  Auth: {
+    screen: AuthStack,
+  },
+},
+{
+  initialRouteName: "Landing",
+});
+
+const AppContainer = createAppContainer(RootNavigation);
 
 export default () => {
   return (
     <AuthProvider>
-      <AssetProvider>
-        <App
+      <LocationProvider>
+        <AppContainer
           ref={navigator => {
             setNavigator(navigator);
           }}
         />
-      </AssetProvider>
-    </AuthProvider>
+      </LocationProvider>
+    </AuthProvider>   
   );
 };
