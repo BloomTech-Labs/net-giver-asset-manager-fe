@@ -1,52 +1,54 @@
 import React, { useState, Component, Fragment } from "react";
 import { Button, Input, Icon } from "react-native-elements";
-import axios from 'axios';
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
-import KeyboardShift from '../constants/KeyboardShift'
+import axios from "axios";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
+import KeyboardShift from "../constants/KeyboardShift";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import OrderUpc from "../components/OrderUpc";
 
-import * as yup from 'yup';
-import { Formik, withFormik } from 'formik';
-
-
+import * as yup from "yup";
+import { Formik, withFormik } from "formik";
 
 export default class AssetForm extends Component {
-
   render() {
-    const asset = this.props.navigation.getParam(("assets"));
+    const asset = this.props.navigation.getParam("assets");
 
     return (
-
       <Formik
-
         initialValues={{
-          barcode: '',
-          name: '',
-          category: '',
-          description: '',
+          barcode: "",
+          name: "",
+          category: "",
+          description: "",
           check_in_status: null,
           user_id: 1,
           location_id: null
         }}
-        onSubmit={values => axios
-          .post("https://net-giver-asset-mngr.herokuapp.com/api/assets", values)
-          .then(res => {
-            resetForm();
-            setAssets(res.data)
-
-          })
-          .catch(err => {
-            "Can not add"
-          })
+        onSubmit={values =>
+          axios
+            .post(
+              "https://net-giver-asset-mngr.herokuapp.com/api/assets",
+              values
+            )
+            .then(res => {
+              resetForm();
+              setAssets(res.data);
+            })
+            .catch(err => {
+              "Can not add";
+            })
         }
-
-
       >
-
-        {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
-
+        {({
+          values,
+          handleChange,
+          errors,
+          setFieldTouched,
+          touched,
+          isValid,
+          handleSubmit
+        }) => (
           <KeyboardShift>
-
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate("BarcodeScanner")}
             >
@@ -57,79 +59,87 @@ export default class AssetForm extends Component {
               />
             </TouchableOpacity>
 
-
             <Input
               placeholder="Asset Name"
               value={values.name}
-              onChangeText={handleChange('name')}
-              onBlur={() => setFieldTouched('name')}
+              onChangeText={handleChange("name")}
+              onBlur={() => setFieldTouched("name")}
               clearButtonMode="always"
               inputStyle={styles.inputField}
             />
-            {touched.name && errors.name &&
-              <Text style={{ fontSize: 10, color: 'red' }}>{errors.name}</Text>
-            }
+            {touched.name && errors.name && (
+              <Text style={{ fontSize: 10, color: "red" }}>{errors.name}</Text>
+            )}
             <Input
               placeholder="Barcode ID"
               name="barcode"
               value={values.barcode}
-              onChangeText={handleChange('barcode')}
-              onBlur={() => setFieldTouched('barcode')}
+              onChangeText={handleChange("barcode")}
+              onBlur={() => setFieldTouched("barcode")}
               autoCapitalize="none"
               inputStyle={styles.inputField}
-
             />
-            {touched.barcode && errors.barcode &&
-              <Text style={{ fontSize: 10, color: 'red' }}>{errors.barcode}</Text>
-            }
+            {touched.barcode && errors.barcode && (
+              <Text style={{ fontSize: 10, color: "red" }}>
+                {errors.barcode}
+              </Text>
+            )}
 
             <Input
               placeholder="description"
               value={values.description}
-              onChangeText={handleChange('description')}
-              onBlur={() => setFieldTouched('description')}
+              onChangeText={handleChange("description")}
+              onBlur={() => setFieldTouched("description")}
               inputStyle={styles.inputField}
             />
-            {touched.description && errors.description &&
-              <Text style={{ fontSize: 10, color: 'red' }}>{errors.description}</Text>
-            }
+            {touched.description && errors.description && (
+              <Text style={{ fontSize: 10, color: "red" }}>
+                {errors.description}
+              </Text>
+            )}
 
             <Input
               placeholder="Category"
               value={values.category}
-              onChangeText={handleChange('category')}
-              onBlur={() => setFieldTouched('category')}
+              onChangeText={handleChange("category")}
+              onBlur={() => setFieldTouched("category")}
               inputStyle={styles.inputField}
             />
-            {touched.category && errors.category &&
-              <Text style={{ fontSize: 10, color: 'red' }}>{errors.category}</Text>
-            }
+            {touched.category && errors.category && (
+              <Text style={{ fontSize: 10, color: "red" }}>
+                {errors.category}
+              </Text>
+            )}
 
             <Input
               placeholder="Checkin Status"
               value={values.check_in_status}
-              onChangeText={handleChange('check_in_status')}
-              onBlur={() => setFieldTouched('check_in_status')}
+              onChangeText={handleChange("check_in_status")}
+              onBlur={() => setFieldTouched("check_in_status")}
               inputStyle={styles.inputField}
             />
-            {touched.check_in_status && errors.check_in_status &&
-              <Text style={{ fontSize: 10, color: 'red' }}>{errors.check_in_status}</Text>
-            }
+            {touched.check_in_status && errors.check_in_status && (
+              <Text style={{ fontSize: 10, color: "red" }}>
+                {errors.check_in_status}
+              </Text>
+            )}
 
             <Input
               placeholder="Choose A Location"
               value={values.location_id}
-              onChangeText={handleChange('location_id')}
-              onBlur={() => setFieldTouched('location_id')}
+              onChangeText={handleChange("location_id")}
+              onBlur={() => setFieldTouched("location_id")}
               inputStyle={styles.inputField}
             />
-            {touched.location_id && errors.location_id &&
-              <Text style={{ fontSize: 10, color: 'red' }}>{errors.location_id}</Text>
-            }
+            {touched.location_id && errors.location_id && (
+              <Text style={{ fontSize: 10, color: "red" }}>
+                {errors.location_id}
+              </Text>
+            )}
 
             <Button
               iconRight={false}
-              title='Add New Asset'
+              title="Add New Asset"
               type="solid"
               color="blue"
               onPress={handleSubmit}
@@ -137,16 +147,13 @@ export default class AssetForm extends Component {
               onPress={handleSubmit}
               buttonStyle={styles.button}
             />
-
+            <OrderUpc />
           </KeyboardShift>
         )}
-      </Formik >
+      </Formik>
     );
   }
 }
-
-
-
 
 const styles = StyleSheet.create({
   button: {
@@ -160,7 +167,6 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   inputField: {
-
     height: 40,
     width: "91%",
     borderColor: "gray",
@@ -171,6 +177,4 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderBottomWidth: 0
   }
-
 });
-
