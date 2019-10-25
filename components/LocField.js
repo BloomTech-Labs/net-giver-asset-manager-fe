@@ -53,6 +53,7 @@ const LocField = ({ errorMessage, onSubmit, submitButtonText }) => {
           title={submitButtonText}
           iconRight={true}
           onPress={() => {
+            console.log("im pressed");
             onSubmit({ name, description });
             setName("");
             setDescription("");

@@ -10,11 +10,11 @@ const Landing = ({ navigation }) => {
   // the splash screen.  When you're done, change back to "Auth".
   useEffect(() => {
     setTimeout(() => {
-      console.log("Take to login in 2 seconds")
-      navigation.navigate("Auth")
+      console.log("Take to login in 2 seconds");
+      navigation.navigate("Dev");
     }, 1000);
-  })
-  
+  });
+
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Loading...</Text>
