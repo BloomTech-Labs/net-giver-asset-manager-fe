@@ -32,8 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "grey",
     width: 100,
-    height: 100,
-    borderRadius: 100/2
+    height: 100
   },
   textWrapper: {
     flex: 3,
