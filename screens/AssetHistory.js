@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, ActivityIndicator, StyleSheet } from "react-native";
+import { createDrawerNavigator } from "react-navigation-drawer";
 import axios from "axios";
-import HeaderBar from "../components/HeaderBar";
+import NavigationHeader from "../components/NavigationHeader";
 import SingleAsset from "../components/SingleAsset";
+import HomeScreen from "../screens/HomeScreen";
+import LoginText from "../screens/LoginText";
 
 
 const AssetHistory = () => {
   const [history, setHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(true)
-
+  
   // Fetch asset history
   const getAssetHistory = () => {
     axios
@@ -35,7 +38,7 @@ const AssetHistory = () => {
   } else {
     return (
       <View>
-        <HeaderBar />
+        <NavigationHeader />
         <FlatList
           keyExtractor={item => item.id}
           data={history}
