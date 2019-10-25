@@ -11,10 +11,17 @@ import Landing from "../screens/Landing";
 import BarcodeScanner from "../screens/BarcodeScanner";
 import HomeScreen from "../screens/HomeScreen";
 import AssetForm from "../screens/AssetForm";
+import LocationForm from "../screens/LocationForm";
 
 const DevStack = createStackNavigator({
   Home: HomeScreen,
   AssetForm: AssetForm,
+  BarcodeScanner: BarcodeScanner,
+  Location: LocationForm,
+  AssetHistory: AssetHistory,
+},
+{
+  initialRouteName: "Home"
 });
 
 const AppStack = createDrawerNavigator({
