@@ -52,11 +52,12 @@ export default class CameraExample extends React.Component {
                         <SafeAreaView style={{
                             color: 'white', alignItems: 'center', flex: 0,
                             alignItems: 'center',
-                            marginBottom: 95,
+                            // marginBottom: 95,
                             justifyContent: 'center',
-                            paddingBottom: 30,
+                            paddingBottom: 80,
                             flexDirection: 'row',
-                            padding: 10
+                            padding: 20,
+                            backgroundColor: "rgba(0, 0, 0, .6)"
 
                         }} >
                             {/* <View style={{ justifyContent: 'flex-start' }}><Text>Touchable stuff</Text></View> */}
