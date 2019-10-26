@@ -12,23 +12,30 @@ import BarcodeScanner from "../screens/BarcodeScanner";
 import HomeScreen from "../screens/HomeScreen";
 import AssetForm from "../screens/AssetForm";
 import LocationForm from "../screens/LocationForm";
+import CustomDrawer from "../components/CustomDrawer";
 
 const DevStack = createStackNavigator({
   Home: HomeScreen,
   AssetForm: AssetForm,
   BarcodeScanner: BarcodeScanner,
   Location: LocationForm,
-  AssetHistory: AssetHistory,
 },
 {
   initialRouteName: "Home"
 });
 
 const AppStack = createDrawerNavigator({
-  Home: AssetHistory,
+  History: AssetHistory,
   Scanner: BarcodeScanner,
   Register: RegisterNameText,
   Login: LoginText,
+},
+{
+  initialRouteName: "History",
+  contentComponent: CustomDrawer,
+  contentOption: {
+    activeTintColor: "grey",
+  },
 });
 
 const AuthStack = createStackNavigator({
