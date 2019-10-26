@@ -12,6 +12,7 @@ import BarcodeScanner from "../screens/BarcodeScanner";
 import HomeScreen from "../screens/HomeScreen";
 import AssetForm from "../screens/AssetForm";
 import LocationForm from "../screens/LocationForm";
+import Camera from "../screens/Camera"
 
 const DevStack = createStackNavigator({
   Home: HomeScreen,
@@ -19,10 +20,11 @@ const DevStack = createStackNavigator({
   BarcodeScanner: BarcodeScanner,
   Location: LocationForm,
   AssetHistory: AssetHistory,
+  Camera: Camera
 },
-{
-  initialRouteName: "Home"
-});
+  {
+    initialRouteName: "Home"
+  });
 
 const AppStack = createDrawerNavigator({
   Home: AssetHistory,
@@ -66,9 +68,9 @@ const RootNavigation = createSwitchNavigator({
     screen: DevStack,
   },
 },
-{
-  initialRouteName: "Landing",
-});
+  {
+    initialRouteName: "Landing",
+  });
 
 const AppContainer = createAppContainer(RootNavigation);
 
@@ -82,6 +84,6 @@ export default () => {
           }}
         />
       </LocationProvider>
-    </AuthProvider>   
+    </AuthProvider>
   );
 };
