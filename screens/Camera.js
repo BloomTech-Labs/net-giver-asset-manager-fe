@@ -42,7 +42,7 @@ export default class CameraExample extends React.Component {
         uploadPhoto(photo).then(
             response => {
                 console.log(response);
-                this.props.navigation.navigate('AssetForm', {
+                this.props.navigation.navigate('Previewer', {
                     music: response
                 });
             }

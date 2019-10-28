@@ -12,7 +12,8 @@ import BarcodeScanner from "../screens/BarcodeScanner";
 import HomeScreen from "../screens/HomeScreen";
 import AssetForm from "../screens/AssetForm";
 import LocationForm from "../screens/LocationForm";
-import Camera from "../screens/Camera"
+import Camera from "../screens/Camera";
+import Previewer from "../screens/PictureCapturePreview"
 
 const DevStack = createStackNavigator({
   Home: HomeScreen,
@@ -20,7 +21,8 @@ const DevStack = createStackNavigator({
   BarcodeScanner: BarcodeScanner,
   Location: LocationForm,
   AssetHistory: AssetHistory,
-  Camera: Camera
+  Camera: Camera,
+  Previewer: Previewer
 },
   {
     initialRouteName: "Home"
