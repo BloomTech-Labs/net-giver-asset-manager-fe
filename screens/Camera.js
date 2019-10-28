@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import * as Permissions from 'expo-permissions';
 import { Camera } from 'expo-camera';
+import uploadPhoto from '../utils/UploadPhoto'
 import { AuthSession } from 'expo';
 
 export default class CameraExample extends React.Component {
@@ -24,6 +25,30 @@ export default class CameraExample extends React.Component {
         }
     };
 
+    setCamera = ref => {
+        console.log('set ref');
+        this.camera = ref;
+    };
+
+    TakePhoto = async () => {
+        console.log('taking photo');
+        if (!this.camera)
+            return;
+
+        let photo = await this.camera.takePictureAsync();
+
+        console.log(photo);
+
+        uploadPhoto(photo).then(
+            response => {
+                console.log(response);
+                this.props.navigation.navigate('Shower', {
+                    music: response
+                });
+            }
+        );
+    };
+
 
 
     ///---
@@ -37,11 +62,14 @@ export default class CameraExample extends React.Component {
         } else {
             return (
                 <View style={{ flex: 1 }}>
-                    <Camera style={{ flex: 1 }} type={this.state.type}
-                        // aspect={Camera.constants.Aspect.fill}
+                    <Camera
                         ref={ref => {
                             this.camera = ref;
                         }}
+                        style={{ flex: 1 }}
+                        type={this.state.type}
+                        // aspect={Camera.constants.Aspect.fill}
+                        setCamera={this.setCamera}
                     >
                         <View
                             style={{
@@ -87,19 +115,25 @@ export default class CameraExample extends React.Component {
                                 </TouchableOpacity>
 
                             </View>
-                            <Text style={{
-                                backgroundColor: '#3366FF',
-                                borderRadius: 50,
-                                padding: 15,
-                                left: -25
-                            }}
-                                onPress={this.takePicture.bind(this)}
-                            >
-                                <FontAwesome style={{
-                                    color: 'white', alignItems: 'center'
-                                }} name="check" size={40}
-                                />
-                            </Text>
+                            <View>
+                                <TouchableOpacity>
+                                    <Text style={{
+                                        backgroundColor: '#3366FF',
+                                        borderRadius: 50,
+                                        padding: 15,
+                                        left: -25
+                                    }}
+                                        // onPress={this.takePicture.bind(this)}
+
+                                        onPress={this.TakePhoto}
+                                    >
+                                        <FontAwesome style={{
+                                            color: 'white', alignItems: 'center'
+                                        }} name="check" size={40}
+                                        />
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
                         </SafeAreaView>
                     </Camera>
                 </View>
