@@ -54,6 +54,12 @@ export default function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate("Location")}
         />
       </Spacer>
+      <Spacer>
+        <Button
+          title="Picture Capture Preview"
+          onPress={() => navigation.navigate("Previewer")}
+        />
+      </Spacer>
       {/* <Button
         title="Say Cheese"
         onPress={() => navigation.navigate("Camera")}
