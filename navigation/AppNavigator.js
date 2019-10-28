@@ -25,7 +25,7 @@ const DevStack = createStackNavigator({
   Previewer: Previewer
 },
   {
-    initialRouteName: "Home"
+    initialRouteName: "AssetHistory"
   });
 
 const AppStack = createDrawerNavigator({
