@@ -7,8 +7,8 @@ const LocField = ({ errorMessage, onSubmit, submitButtonText }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
-  const initialState = { name: "", description: "" };
-  const clearState = () => {};
+  // const initialState = { name: "", description: "" };
+  // const clearState = () => {};
 
   return (
     <>
@@ -20,6 +20,7 @@ const LocField = ({ errorMessage, onSubmit, submitButtonText }) => {
         onChangeText={setName}
         autoCapitalize="none"
         autoCorrect={false}
+        np
         style={styles.inputField}
       />
       <TouchableOpacity>
@@ -52,6 +53,7 @@ const LocField = ({ errorMessage, onSubmit, submitButtonText }) => {
           title={submitButtonText}
           iconRight={true}
           onPress={() => {
+            console.log("im pressed");
             onSubmit({ name, description });
             setName("");
             setDescription("");

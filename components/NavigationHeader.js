@@ -20,19 +20,24 @@ const NavigationHeader = (props) => {
         </TouchableOpacity> */}
       </View>
 
-      {/* <View style={styles.assetSection}>
-        <TouchableOpacity
-          style={styles.allAssets}
-          // onPress={props.all}
-        >
-          <Text style={styles.allMyAssets}>ALL ASSETS</Text>
+      <View style={styles.assetSection}>
+        <TouchableOpacity>
+          <Text
+            style={styles.allMyAssets}
+            onPress={() => Alert.alert('text pressed')}
+          >
+            ALL ASSETS
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={props.mine}
-        >
-          <Text style={styles.allMyAssets}>MY ASSETS</Text>
+        <TouchableOpacity>
+          <Text 
+            style={styles.allMyAssets}
+            onPress={() => Alert.alert('text pressed')}
+          >
+            MY ASSETS
+          </Text>
         </TouchableOpacity>
-      </View> */}
+      </View>
     </View>
   );
 };
@@ -51,7 +56,6 @@ const styles = StyleSheet.create({
     flex: 9,
     paddingLeft: 20,
     color: "white"
-
   },
   menuIcon: {
     flexDirection: "row",
@@ -61,14 +65,15 @@ const styles = StyleSheet.create({
   },
   assetSection: {
     flexDirection: "row",
-    backgroundColor: "#3366FF",
+    color: "white",
     justifyContent: "space-around",
-    height: 40
+    backgroundColor: "#3366FF",
+    height: 40,
   },
   allMyAssets: {
     color: "white",
     fontSize: 18
-  }
+  },
 });
 
 export default NavigationHeader;

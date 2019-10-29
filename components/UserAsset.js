@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const SingleAsset = ({data}) => {
+const UserAsset = ({data}) => {
   return (
     <View style={styles.assetWrapper}>
+      <Text>User Assets Will Go Here!</Text>
       <View style={styles.imageWrapper}>
         {/* Needs to be replaced with an image primitive component */}
         {/* <Text>Images goes here</Text> */}
@@ -51,4 +52,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SingleAsset;
+export default UserAsset;

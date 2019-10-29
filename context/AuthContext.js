@@ -32,7 +32,7 @@ const signup = dispatch => async ({ email, password }) => {
     console.log("context test:", response.data);
     dispatch({ type: "signin", payload: response.data.token });
 
-    navigate("App");
+    navigate("Location");
   } catch (err) {
     console.log("test context", err);
     dispatch({

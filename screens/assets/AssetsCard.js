@@ -1,19 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 const AssetsCard = ({ data }) => {
     return (
         <View style={styles.assetWrapper}>
-            <View style={styles.imageWrapper}>
-                {/* Needs to be replaced with an image primitive component */}
-                <Text>Image: {data.photo}</Text>
-            </View>
+            {/* Needs to be replaced with an image primitive component */}
+            <Image 
+                style={styles.imageWrapper}
+                source={require('../../assets/images/macbook100.jpg')}
+            />
             <View style={styles.textWrapper}>
-                <Text>Name: {data.name}</Text>
+                <Text style={styles.assetName}>{data.name}</Text>
+                <Text style={styles.assetID}>Barcode # {data.barcode}</Text>
                 <Text>Category: {data.category}</Text>
                 <Text>Description: {data.description}</Text>
-                <Text>Check_In_Status: {data.check_in_status}</Text>
-                <Text>Barcode ID: {data.barcode}</Text>
+                <Text>Status: {data.check_in_status}</Text>
             </View>
         </View>
     );
@@ -22,18 +23,30 @@ const AssetsCard = ({ data }) => {
 const styles = StyleSheet.create({
     assetWrapper: {
         flexDirection: "row",
-        margin: 20,
+        // marginTop: 25,
+        marginLeft: 25
     },
     imageWrapper: {
-        flex: 1,
-        textAlign: "center",
         alignItems: "center",
         alignSelf: "center",
+        width: 100,
+        height: 100,
+        marginLeft: 10
     },
     textWrapper: {
         flex: 3,
-        marginLeft: 50,
-        padding: 20,
+        marginLeft: 30,
+        padding: 15,
+    },
+    assetName: {
+        fontWeight: "bold"
+    },
+    assetID: {
+        color: "#7C7777",
+        fontStyle: "italic"
+    },
+    assetLocation: {
+        color: "#82A0FD"
     }
 });
 

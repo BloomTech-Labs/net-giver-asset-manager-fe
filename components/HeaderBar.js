@@ -18,16 +18,14 @@ const HeaderBar = props => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.assetSection}>
-        <TouchableOpacity
-          style={styles.allAssets}
-        >
+      {/* <View style={styles.assetSection}>
+        <TouchableOpacity style={styles.allAssets}>
           <Text style={styles.allMyAssets}>ALL ASSETS</Text>
         </TouchableOpacity>
         <TouchableOpacity>
           <Text style={styles.allMyAssets}>MY ASSETS</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };
