@@ -5,6 +5,11 @@ import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import AppContainer from './navigation/AppNavigator';
+import ExpoMixpanelAnalytics from 'expo-mixpanel-analytics';
+// const analytics = new ExpoMixpanelAnalytics('4f0442138531910f4b5f5ead7c55d514') //planning on putting token it in an env file if it passes
+
+//analytics.track("Event name");
+//analytics.track("Signed Up", { "Referred By": "Friend" });
 
 
 export default function App(props) {
