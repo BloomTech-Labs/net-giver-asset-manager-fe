@@ -18,16 +18,23 @@ import CustomDrawer from "../components/CustomDrawer";
 // The keys in each stack need to be named something different even if they're
 // pointing to the same screen.
 
+import Camera from "../screens/Camera";
+import Previewer from "../screens/PictureCapturePreview";
+import AssetsList from "../screens/assets/AssetsList";
+
 const DevStack = createStackNavigator({
   Home: HomeScreen,
   AssetForm: AssetForm,
   BarcodeScanner: BarcodeScanner,
   Location: LocationForm,
   AssetHistory: AssetHistory,
+  AssetList: AssetsList,
+  Camera: Camera,
+  Previewer: Previewer
 },
-{
-  initialRouteName: "Home"
-});
+  {
+    initialRouteName: "Home"
+  });
 
 const DashboardScreen = createStackNavigator(
   {
@@ -59,39 +66,41 @@ const AuthStack = createStackNavigator({
     screen: LoginText,
     navigationOptions: {
       headerTitle: "Login"
-    },
+    }
   },
   Landing: {
     screen: Landing,
     navigationOptions: {
       headerTitle: "Landing"
-    },
+    }
   },
   Register: {
     screen: RegisterNameText,
     navigationOptions: {
       headerTitle: "Register"
-    },
-  },
+    }
+  }
 });
 
-const RootNavigation = createSwitchNavigator({
-  Landing: {
-    screen: Landing,
+const RootNavigation = createSwitchNavigator(
+  {
+    Landing: {
+      screen: Landing
+    },
+    App: {
+      screen: AppStack
+    },
+    Auth: {
+      screen: AuthStack
+    },
+    Dev: {
+      screen: DevStack
+    }
   },
-  App: {
-    screen: AppStack,
-  },
-  Auth: {
-    screen: AuthStack,
-  },
-  Dev: {
-    screen: DevStack,
-  },
-},
-{
-  initialRouteName: "Landing",
-});
+  {
+    initialRouteName: "Landing"
+  }
+);
 
 const AppContainer = createAppContainer(RootNavigation);
 
@@ -105,6 +114,6 @@ export default () => {
           }}
         />
       </LocationProvider>
-    </AuthProvider>   
+    </AuthProvider>
   );
 };

@@ -31,6 +31,23 @@ const NavigationHeader = (props) => {
           onPress={props.mine}
         >
           <Text style={styles.allMyAssets}>MY ASSETS</Text>
+
+      <View style={styles.assetSection}>
+        <TouchableOpacity>
+          <Text
+            style={styles.allMyAssets}
+            onPress={() => Alert.alert('text pressed')}
+          >
+            ALL ASSETS
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text 
+            style={styles.allMyAssets}
+            onPress={() => Alert.alert('text pressed')}
+          >
+            MY ASSETS
+          </Text>
         </TouchableOpacity>
       </View> */}
     </View>
@@ -51,7 +68,6 @@ const styles = StyleSheet.create({
     flex: 9,
     paddingLeft: 20,
     color: "white"
-
   },
   menuIcon: {
     flexDirection: "row",
@@ -61,14 +77,15 @@ const styles = StyleSheet.create({
   },
   assetSection: {
     flexDirection: "row",
-    backgroundColor: "#3366FF",
+    color: "white",
     justifyContent: "space-around",
-    height: 40
+    backgroundColor: "#3366FF",
+    height: 40,
   },
   allMyAssets: {
     color: "white",
     fontSize: 18
-  }
+  },
 });
 
 export default NavigationHeader;
