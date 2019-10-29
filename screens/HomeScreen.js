@@ -45,7 +45,7 @@ export default function HomeScreen({ navigation }) {
       <Spacer>
         <Button
           title="All Assets"
-          onPress={() => navigation.navigate("AssetsList")}
+          onPress={() => navigation.navigate("AssetList")}
         />
       </Spacer>
       <Spacer>
@@ -55,11 +55,14 @@ export default function HomeScreen({ navigation }) {
         />
       </Spacer>
 
+<<<<<<< HEAD
       <Button
         title="aws test"
         onPress={() => navigation.navigate("GetImage")}
       />
 
+=======
+>>>>>>> 453634a4bb121f74919b0b00dd65f37d880ab3e9
       {/* <Button
         title="Say Cheese"
         onPress={() => navigation.navigate("Camera")}

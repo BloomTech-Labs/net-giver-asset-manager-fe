@@ -16,6 +16,7 @@ import BarcodeScanner from "../screens/BarcodeScanner";
 import HomeScreen from "../screens/HomeScreen";
 import AssetForm from "../screens/AssetForm";
 import LocationForm from "../screens/LocationForm";
+<<<<<<< HEAD
 import getImage from "../screens/getImage";
 import s3getsend from "../screens/s3getsend";
 
@@ -32,6 +33,25 @@ const DevStack = createStackNavigator(
     initialRouteName: "Home"
   }
 );
+=======
+import Camera from "../screens/Camera";
+import Previewer from "../screens/PictureCapturePreview";
+import AssetsList from "../screens/assets/AssetsList";
+
+const DevStack = createStackNavigator({
+  Home: HomeScreen,
+  AssetForm: AssetForm,
+  BarcodeScanner: BarcodeScanner,
+  Location: LocationForm,
+  AssetHistory: AssetHistory,
+  AssetList: AssetsList,
+  Camera: Camera,
+  Previewer: Previewer
+},
+  {
+    initialRouteName: "Home"
+  });
+>>>>>>> 453634a4bb121f74919b0b00dd65f37d880ab3e9
 
 const AppStack = createDrawerNavigator({
   Home: AssetHistory,
@@ -76,10 +96,17 @@ const RootNavigation = createSwitchNavigator(
       screen: DevStack
     }
   },
+<<<<<<< HEAD
   {
     initialRouteName: "Landing"
   }
 );
+=======
+},
+  {
+    initialRouteName: "Landing",
+  });
+>>>>>>> 453634a4bb121f74919b0b00dd65f37d880ab3e9
 
 const AppContainer = createAppContainer(RootNavigation);
 
