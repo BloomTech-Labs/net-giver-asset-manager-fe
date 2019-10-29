@@ -1,5 +1,9 @@
 import React from "react";
-import { createAppContainer, createSwitchNavigator, createStackNavigator } from "react-navigation";
+import {
+  createAppContainer,
+  createSwitchNavigator,
+  createStackNavigator
+} from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { Provider as AuthProvider } from "../context/AuthContext";
 import { Provider as LocationProvider } from "../context/LocationContext";
@@ -12,23 +16,28 @@ import BarcodeScanner from "../screens/BarcodeScanner";
 import HomeScreen from "../screens/HomeScreen";
 import AssetForm from "../screens/AssetForm";
 import LocationForm from "../screens/LocationForm";
+import getImage from "../screens/getImage";
+import s3getsend from "../screens/s3getsend";
 
-const DevStack = createStackNavigator({
-  Home: HomeScreen,
-  AssetForm: AssetForm,
-  BarcodeScanner: BarcodeScanner,
-  Location: LocationForm,
-  AssetHistory: AssetHistory,
-},
-{
-  initialRouteName: "Home"
-});
+const DevStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+    AssetForm: AssetForm,
+    BarcodeScanner: BarcodeScanner,
+    Location: LocationForm,
+    AssetHistory: AssetHistory,
+    GetImage: getImage
+  },
+  {
+    initialRouteName: "Home"
+  }
+);
 
 const AppStack = createDrawerNavigator({
   Home: AssetHistory,
   Scanner: BarcodeScanner,
   Register: RegisterNameText,
-  Login: LoginText,
+  Login: LoginText
 });
 
 const AuthStack = createStackNavigator({
@@ -36,39 +45,41 @@ const AuthStack = createStackNavigator({
     screen: LoginText,
     navigationOptions: {
       headerTitle: "Login"
-    },
+    }
   },
   Landing: {
     screen: Landing,
     navigationOptions: {
       headerTitle: "Landing"
-    },
+    }
   },
   Register: {
     screen: RegisterNameText,
     navigationOptions: {
       headerTitle: "Register"
-    },
-  },
+    }
+  }
 });
 
-const RootNavigation = createSwitchNavigator({
-  Landing: {
-    screen: Landing,
+const RootNavigation = createSwitchNavigator(
+  {
+    Landing: {
+      screen: Landing
+    },
+    App: {
+      screen: AppStack
+    },
+    Auth: {
+      screen: AuthStack
+    },
+    Dev: {
+      screen: DevStack
+    }
   },
-  App: {
-    screen: AppStack,
-  },
-  Auth: {
-    screen: AuthStack,
-  },
-  Dev: {
-    screen: DevStack,
-  },
-},
-{
-  initialRouteName: "Landing",
-});
+  {
+    initialRouteName: "Landing"
+  }
+);
 
 const AppContainer = createAppContainer(RootNavigation);
 
@@ -82,6 +93,6 @@ export default () => {
           }}
         />
       </LocationProvider>
-    </AuthProvider>   
+    </AuthProvider>
   );
 };
