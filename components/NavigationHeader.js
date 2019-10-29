@@ -19,7 +19,7 @@ const NavigationHeader = props => {
         </TouchableOpacity>
       </View>
 
-      {/* <View style={styles.assetSection}>
+      <View style={styles.assetSection}>
         <TouchableOpacity>
           <Text
             style={styles.allMyAssets}
@@ -36,7 +36,7 @@ const NavigationHeader = props => {
             MY ASSETS
           </Text>
         </TouchableOpacity>
-      </View> */}
+      </View>
     </View>
   );
 };

@@ -13,7 +13,8 @@ import HomeScreen from "../screens/HomeScreen";
 import AssetForm from "../screens/AssetForm";
 import LocationForm from "../screens/LocationForm";
 import Camera from "../screens/Camera";
-import Previewer from "../screens/PictureCapturePreview"
+import Previewer from "../screens/PictureCapturePreview";
+import AssetsList from "../screens/assets/AssetsList";
 
 const DevStack = createStackNavigator({
   Home: HomeScreen,
@@ -21,11 +22,12 @@ const DevStack = createStackNavigator({
   BarcodeScanner: BarcodeScanner,
   Location: LocationForm,
   AssetHistory: AssetHistory,
+  AssetList: AssetsList,
   Camera: Camera,
   Previewer: Previewer
 },
   {
-    initialRouteName: "AssetHistory"
+    initialRouteName: "Home"
   });
 
 const AppStack = createDrawerNavigator({
