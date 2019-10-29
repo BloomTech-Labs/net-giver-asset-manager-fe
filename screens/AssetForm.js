@@ -14,7 +14,7 @@ export default class AssetForm extends React.Component {
   render() {
 
     if (this.props.navigation.state.params) {
-      var barkode = this.props.navigation.state.params
+      var barkode = this.props.navigation.state.params.data
     }
 
     console.log('test', barkode)

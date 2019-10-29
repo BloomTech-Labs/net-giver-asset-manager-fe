@@ -13,6 +13,7 @@ import HomeScreen from "../screens/HomeScreen";
 import AssetForm from "../screens/AssetForm";
 import LocationForm from "../screens/LocationForm";
 import Camera from "../screens/Camera"
+import AssetsList from "../screens/assets/AssetsList"
 
 const DevStack = createStackNavigator({
   Home: HomeScreen,
@@ -20,6 +21,7 @@ const DevStack = createStackNavigator({
   BarcodeScanner: BarcodeScanner,
   Location: LocationForm,
   AssetHistory: AssetHistory,
+  AssetsList: AssetsList,
   Camera: Camera
 },
   {
@@ -27,7 +29,7 @@ const DevStack = createStackNavigator({
   });
 
 const AppStack = createDrawerNavigator({
-  Home: AssetHistory,
+  Home: HomeScreen,
   Scanner: BarcodeScanner,
   Register: RegisterNameText,
   Login: LoginText,

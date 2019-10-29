@@ -25,30 +25,20 @@ export default class BarcodeScanner extends React.Component {
   };
 
   handleBarCodeScanned2 = ({ type, data }) => {
+    console.log("barcode start:", type, data);
     this.setState({ scanned: true });
-    Alert.alert(`Barcode with type ${type} and data ${data} has been scanned!`);
-
-    // Axios call to fetch assets
-    axios
-      .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
-      .then(response => {
-        storedAssets = response.data;
-        storedAssets.map(asset => this.setState({ asset: asset.barcode }));
-
-        console.log("inside axios", data)
-        // Conditional logic handling the routing -- pages aren't correct, just wanted
-        // an example
-        if (this.state.asset === data) {
-          this.props.navigation.navigate("AssetHistory");
-        } else {
-          this.props.navigation.navigate("AssetForm");
+    Alert.alert(
+      `Bar code with type ${type} and data ${data} has been scanned!`,
+      "time to leave",
+      [
+        {
+          text: "Check in",
+          onPress: () => {
+            this.props.navigation.navigate("AssetForm", { data });
+          }
         }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    return data
+      ]
+    );
   };
 
 
@@ -121,22 +111,64 @@ export default class BarcodeScanner extends React.Component {
 
   }
 
-  // handleBarCodeScanned = ({ type, data }) => {
-  //   console.log("barcode start:", type, data);
-  //   this.setState({ scanned: true });
-  //   Alert.alert(
-  //     `Bar code with type ${type} and data ${data} has been scanned!`,
-  //     "time to leave",
-  //     [
-  //       {
-  //         text: "Check in",
-  //         onPress: () => {
-  //           this.props.navigation.navigate("AssetForm", { data });
-  //         }
-  //       }
-  //     ]
-  //   );
-  // };
+  handleBarCodeScanned = ({ type, data }) => {
+
+    console.log("Inside HandleBarcodeScanner", data);
+    this.setState({ scanned: true });
+    Alert.alert(
+      `Bar code with type ${type} and data ${data} has been scanned!`,
+      "time to leave",
+
+
+    );
+    var barcodeExist;
+    // Axios call to fetch assets
+    axios
+      .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
+      .then(response => {
+        storedAssets = response.data.barcode;
+        storedAssets.map(function (asset) {
+          barcodeExist = [asset.barcode];
+
+          console.log("inside MAP for DATA", storedAssets)
+          return barcodeExist;
+          // if (JSON.stringify(asset.barcode) === data) {
+          //   alert('Already in the system');
+          // } else {
+          //   alert('NOT IN THE SYSTEM YET');
+          //   // [
+
+          //   //   {
+          //   //     text: "Check in",
+          //   //     onPress: () => {
+          //   //       this.props.navigation.navigate("AssetForm", { data });
+          //   //     }
+          //   //   }
+          //   // ]
+          // }
+
+
+        });
+
+        console.log("Outside MAP", barcodeExist)
+        switch (barcodeExist) {
+          case data:
+            console.log('Already in the system');
+            break;
+          case data:
+            console.log('NOT IN THE SYSTEM YET');
+            break;
+          default:
+            console.log('WHAT');
+        }
+
+        // asset => this.setState({ asset: asset.barcode }));
+
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
 
 
