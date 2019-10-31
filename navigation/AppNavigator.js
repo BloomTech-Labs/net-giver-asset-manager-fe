@@ -20,6 +20,8 @@ import AssetsList from "../screens/assets/AssetsList";
 import getImage from "../screens/getImage";
 import ImageUpload from "../screens/ImageUpload";
 
+import CustomDrawer from "../components/CustomDrawer";
+
 const DevStack = createStackNavigator(
   {
     Home: HomeScreen,
@@ -36,9 +38,7 @@ const DevStack = createStackNavigator(
   {
     initialRouteName: "Home"
   }
-
-import CustomDrawer from "../components/CustomDrawer";
-
+);
 // The keys in each stack need to be named something different even if they're
 // pointing to the same screen.
 
