@@ -1,23 +1,36 @@
 import React from "react";
 import { View, Text, StyleSheet, Alert, TouchableOpacity } from "react-native";
-import { createDrawerNavigator } from "react-navigation-drawer";
 import { Icon } from "react-native-elements";
 
-const NavigationHeader = props => {
+const NavigationHeader = (props) => {
+  console.log(props)
   return (
     <View>
       <View style={styles.headerWrapper}>
         <Text style={styles.headerTitle}>Simple Asset Tracker</Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.menuIcon}
-          onPress={() => Alert.alert("You clicked the menu hamburger!")}>
+        >  
           <Icon
             name="menu"
             color="white"
             size={40}
+            // onPress={() => props.navigation.toggleDrawer()}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
+
+      {/* <View style={styles.assetSection}>
+        <TouchableOpacity
+          style={styles.allAssets}
+          // onPress={props.all}
+        >
+          <Text style={styles.allMyAssets}>ALL ASSETS</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={props.mine}
+        >
+          <Text style={styles.allMyAssets}>MY ASSETS</Text>
 
       <View style={styles.assetSection}>
         <TouchableOpacity>
@@ -36,7 +49,7 @@ const NavigationHeader = props => {
             MY ASSETS
           </Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -46,7 +59,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#3366FF",
     borderBottomColor: "black",
-    height: 95
+    height: 50
   },
   headerTitle: {
     fontWeight: "bold",

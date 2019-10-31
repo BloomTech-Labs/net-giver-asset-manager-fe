@@ -12,6 +12,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@benawad/expo-mixpanel-analytics": "^0.1.7",
     "@expo/samples": "~3.0.3",
     "@expo/vector-icons": "^10.0.3",
     "@material-ui/core": "^4.5.1",

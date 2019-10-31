@@ -1,9 +1,6 @@
 import React from "react";
-import {
-  createAppContainer,
-  createSwitchNavigator,
-  createStackNavigator
-} from "react-navigation";
+import { Icon } from "react-native";
+import { createAppContainer, createSwitchNavigator, createStackNavigator } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { Provider as AuthProvider } from "../context/AuthContext";
 import { Provider as LocationProvider } from "../context/LocationContext";
@@ -16,6 +13,7 @@ import BarcodeScanner from "../screens/BarcodeScanner";
 import HomeScreen from "../screens/HomeScreen";
 import AssetForm from "../screens/AssetForm";
 import LocationForm from "../screens/LocationForm";
+
 import Camera from "../screens/Camera";
 import Previewer from "../screens/PictureCapturePreview";
 import AssetsList from "../screens/assets/AssetsList";
@@ -38,13 +36,37 @@ const DevStack = createStackNavigator(
   {
     initialRouteName: "Home"
   }
+
+import CustomDrawer from "../components/CustomDrawer";
+
+// The keys in each stack need to be named something different even if they're
+// pointing to the same screen.
+
+
+const DashboardScreen = createStackNavigator(
+  {
+    DashboardScreen: {
+      screen: AssetHistory,
+    },
+  },
+
 );
 
 const AppStack = createDrawerNavigator({
-  Home: AssetHistory,
+  // Dashboard: {
+  //   name: "DashboardScreen",
+  //   screen: DashboardScreen,
+  // },
+  History: AssetHistory,
   Scanner: BarcodeScanner,
   Register: RegisterNameText,
-  Login: LoginText
+  Login: LoginText,
+},
+{
+  contentComponent: CustomDrawer,
+  contentOption: {
+    activeTintColor: "grey",
+  },
 });
 
 const AuthStack = createStackNavigator({
