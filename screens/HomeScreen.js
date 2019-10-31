@@ -54,6 +54,15 @@ export default function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate("Location")}
         />
       </Spacer>
+      <Spacer>
+        <Button title="Avatar" onPress={() => navigation.navigate("Avatar")} />
+      </Spacer>
+      <Spacer>
+        <Button
+          title="ImageUpload"
+          onPress={() => navigation.navigate("Upload")}
+        />
+      </Spacer>
 
       {/* <Button
         title="Say Cheese"
