@@ -8,7 +8,7 @@ const NavigationHeader = (props) => {
     <View>
       <View style={styles.headerWrapper}>
         <Text style={styles.headerTitle}>Simple Asset Tracker</Text>
-        {/* <TouchableOpacity
+        <TouchableOpacity
           style={styles.menuIcon}
         >  
           <Icon
@@ -17,25 +17,21 @@ const NavigationHeader = (props) => {
             size={40}
             // onPress={() => props.navigation.toggleDrawer()}
           />
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
 
       <View style={styles.assetSection}>
-        <TouchableOpacity>
-          <Text
-            style={styles.allMyAssets}
-            onPress={() => Alert.alert('text pressed')}
-          >
-            ALL ASSETS
-          </Text>
+        <TouchableOpacity
+          style={styles.allAssets}
+          onPress={props.all}
+          onPress={props.toggle}
+        >
+          <Text style={styles.allMyAssets}>ALL ASSETS</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Text 
-            style={styles.allMyAssets}
-            onPress={() => Alert.alert('text pressed')}
-          >
-            MY ASSETS
-          </Text>
+        <TouchableOpacity
+          onPress={props.mine}
+        >
+          <Text style={styles.allMyAssets}>MY ASSETS</Text>
         </TouchableOpacity>
       </View>
     </View>

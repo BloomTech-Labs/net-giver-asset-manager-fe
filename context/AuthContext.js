@@ -29,7 +29,6 @@ const signup = dispatch => async ({ email, password }) => {
       password
     });
     await AsyncStorage.setItem("token", response.data.token)
-    console.log("context test:", response.data);
     dispatch({ type: "signin", payload: response.data.token });
 
     navigate("Location");
@@ -50,7 +49,6 @@ const signin = dispatch => async ({ email, password, id }) => {
       id
     });
     await AsyncStorage.multiSet([["token", response.data.token], ["user_id", JSON.stringify(response.data.user.id)]])
-    console.log("LOGIN RESPONSE", response.data.user)
     dispatch({ type: "signin", payload: response.data.token });
     navigate("App");
   } catch (err) {
