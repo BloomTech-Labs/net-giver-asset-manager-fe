@@ -65,7 +65,7 @@ export default class BarcodeScanner extends React.Component {
         }}
       >
         <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned2}
+          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
           style={StyleSheet.absoluteFillObject}
         >
           <View style={styles.layerTop} />
@@ -115,61 +115,34 @@ export default class BarcodeScanner extends React.Component {
 
     console.log("Inside HandleBarcodeScanner", data);
     this.setState({ scanned: true });
-    Alert.alert(
-      `Bar code with type ${type} and data ${data} has been scanned!`,
-      "time to leave",
+    // Alert.alert(
+    //   `Bar code with type ${type} and data ${data} has been scanned!`,
+    //   "time to leave",
 
-
-    );
-    var barcodeExist;
+    // );
+    const { navigate } = this.props.navigation;
     // Axios call to fetch assets
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
       .then(response => {
-        storedAssets = response.data.barcode;
-        storedAssets.map(function (asset) {
-          barcodeExist = [asset.barcode];
+        var storedAssets = response.data;
+        storedAssets.map(asset => this.setState({ asset: asset.barcode }));
 
-          console.log("inside MAP for DATA", storedAssets)
-          return barcodeExist;
-          // if (JSON.stringify(asset.barcode) === data) {
-          //   alert('Already in the system');
-          // } else {
-          //   alert('NOT IN THE SYSTEM YET');
-          //   // [
+        // Conditional logic handling the routing -- pages aren't correct, just wanted
+        // an example
+        console.log("this.state.asset", this.state.asset)
+        if (this.state.asset === data) {
+          this.props.navigation.navigate("AssetHistory");
+          Alert.alert('CHECK IN')
 
-          //   //   {
-          //   //     text: "Check in",
-          //   //     onPress: () => {
-          //   //       this.props.navigation.navigate("AssetForm", { data });
-          //   //     }
-          //   //   }
-          //   // ]
-          // }
-
-
-        });
-
-        console.log("Outside MAP", barcodeExist)
-        switch (barcodeExist) {
-          case data:
-            console.log('Already in the system');
-            break;
-          case data:
-            console.log('NOT IN THE SYSTEM YET');
-            break;
-          default:
-            console.log('WHAT');
+        } else {
+          this.props.navigation.navigate("AssetForm", { data });
         }
-
-        // asset => this.setState({ asset: asset.barcode }));
-
       })
       .catch(error => {
         console.log(error);
       });
   };
-
 
 
 

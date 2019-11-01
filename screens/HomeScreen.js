@@ -45,7 +45,7 @@ export default function HomeScreen({ navigation }) {
       <Spacer>
         <Button
           title="All Assets"
-          onPress={() => navigation.navigate("AssetsList")}
+          onPress={() => navigation.navigate("AssetList")}
         />
       </Spacer>
       <Spacer>
@@ -54,6 +54,16 @@ export default function HomeScreen({ navigation }) {
           onPress={() => navigation.navigate("Location")}
         />
       </Spacer>
+      <Spacer>
+        <Button title="Avatar" onPress={() => navigation.navigate("Avatar")} />
+      </Spacer>
+      <Spacer>
+        <Button
+          title="ImageUpload"
+          onPress={() => navigation.navigate("Upload")}
+        />
+      </Spacer>
+
       {/* <Button
         title="Say Cheese"
         onPress={() => navigation.navigate("Camera")}

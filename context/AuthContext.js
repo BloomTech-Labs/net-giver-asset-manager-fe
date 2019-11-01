@@ -28,8 +28,7 @@ const signup = dispatch => async ({ email, password }) => {
       email,
       password
     });
-    await AsyncStorage.setItem("token", response.data.token);
-    console.log("context test:", response.data);
+    await AsyncStorage.setItem("token", response.data.token)
     dispatch({ type: "signin", payload: response.data.token });
 
     navigate("Location");
@@ -42,13 +41,14 @@ const signup = dispatch => async ({ email, password }) => {
   }
 };
 
-const signin = dispatch => async ({ email, password }) => {
+const signin = dispatch => async ({ email, password, id }) => {
   try {
     const response = await assetsApi.post("/auth/login", {
       email,
-      password
+      password,
+      id
     });
-    await AsyncStorage.setItem("token", response.data.token);
+    await AsyncStorage.multiSet([["token", response.data.token], ["user_id", JSON.stringify(response.data.user.id)]])
     dispatch({ type: "signin", payload: response.data.token });
     navigate("App");
   } catch (err) {
