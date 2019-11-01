@@ -20,7 +20,7 @@ const NavigationHeader = (props) => {
         </TouchableOpacity>
       </View>
 
-      {/* <View style={styles.assetSection}>
+      <View style={styles.assetSection}>
         <TouchableOpacity
           style={styles.allAssets}
           // onPress={props.all}
@@ -31,6 +31,8 @@ const NavigationHeader = (props) => {
           onPress={props.mine}
         >
           <Text style={styles.allMyAssets}>MY ASSETS</Text>
+        </TouchableOpacity>
+      </View>
 
       <View style={styles.assetSection}>
         <TouchableOpacity>

@@ -53,9 +53,8 @@ const AssetHistory = ({ navigation }) => {
   const fetchMyAssets = () => {
     history.map(asset => {
       if (asset.user_id == userId) {
-        setMyHistory(asset, () => {
-          console.log("MY HISTORY", myHistory)
-        })
+        setMyHistory(asset)
+        console.log("MY HISTORY", myHistory)
       } else {
         return asset
       }
@@ -71,7 +70,7 @@ const AssetHistory = ({ navigation }) => {
     )
   } else {
     return (
-      <SafeAreaView>
+      <View>
       <View style={styles.assetSection}>
         <TouchableOpacity 
           style={styles.allAssets}
@@ -82,6 +81,7 @@ const AssetHistory = ({ navigation }) => {
           <Text style={styles.allMyAssets}>ALL ASSETS</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          style={styles.allAssets}
           onPress={() => {
             fetchMyAssets();
             setIsMine(true);}
@@ -104,7 +104,7 @@ const AssetHistory = ({ navigation }) => {
                 return <SingleAsset data={myItem} />}}
             />
         }
-      </SafeAreaView>
+      </View>
     );
   };
 }
@@ -144,7 +144,12 @@ const styles = StyleSheet.create({
     color: "white",
     justifyContent: "space-around",
     backgroundColor: "#3366FF",
-    height: 40,
+    height: 50,
+    borderTopColor: "white",
+  },
+  allAssets: {
+    flexDirection: "column",
+    justifyContent: "center",
   },
   allMyAssets: {
     color: "white",
