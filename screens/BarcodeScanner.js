@@ -46,7 +46,7 @@ export default class BarcodeScanner extends React.Component {
         }}
       >
         <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
+          onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned2}
           style={StyleSheet.absoluteFillObject}
         >
           <View style={styles.layerTop} />
@@ -125,6 +125,7 @@ export default class BarcodeScanner extends React.Component {
       .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
       .then(response => {
         storedAssets = response.data;
+        console.log("STORED ASSETS", response.data)
         storedAssets.map(asset => this.setState({ asset: asset.barcode }));
 
         // Conditional logic handling the routing -- pages aren't correct, just wanted
