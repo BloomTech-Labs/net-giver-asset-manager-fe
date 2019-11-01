@@ -13,27 +13,37 @@ import BarcodeScanner from "../screens/BarcodeScanner";
 import HomeScreen from "../screens/HomeScreen";
 import AssetForm from "../screens/AssetForm";
 import LocationForm from "../screens/LocationForm";
+import Camera from "../screens/Camera";
+import Previewer from "../screens/PictureCapturePreview";
+import AssetsList from "../screens/assets/AssetsList";
+import getImage from "../screens/getImage";
+import ImageUpload from "../screens/ImageUpload";
+
 import CustomDrawer from "../components/CustomDrawer";
 
+const DevStack = createStackNavigator(
+  {
+    Home: HomeScreen,
+    AssetForm: AssetForm,
+    BarcodeScanner: BarcodeScanner,
+    Location: LocationForm,
+    AssetHistory: AssetHistory,
+    AssetList: AssetsList,
+    Camera: Camera,
+    Previewer: Previewer,
+    Avatar: getImage,
+    Upload: ImageUpload
+  },
+  {
+    initialRouteName: "Home"
+  }
+);
 // The keys in each stack need to be named something different even if they're
 // pointing to the same screen.
 import Camera from "../screens/Camera";
 import Previewer from "../screens/PictureCapturePreview";
 import AssetsList from "../screens/assets/AssetsList";
 
-const DevStack = createStackNavigator({
-  Home: HomeScreen,
-  AssetForm: AssetForm,
-  BarcodeScanner: BarcodeScanner,
-  Location: LocationForm,
-  AssetHistory: AssetHistory,
-  AssetList: AssetsList,
-  Camera: Camera,
-  Previewer: Previewer
-},
-  {
-    initialRouteName: "Home"
-  });
 
 const DashboardScreen = createStackNavigator(
   {
@@ -41,6 +51,7 @@ const DashboardScreen = createStackNavigator(
       screen: AssetHistory,
     },
   },
+
 );
 
 const AppStack = createDrawerNavigator({
