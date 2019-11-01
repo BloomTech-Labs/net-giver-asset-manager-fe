@@ -52,20 +52,20 @@ const DashboardScreen = createStackNavigator(
         headerTitleStyle: {
           color: "white",
         },
-        headerRight: 
+        headerRight:
           <SafeAreaView>
-          <View style={{marginRight: 10}}>
-            <TouchableOpacity
-              onPress={() => props.navigation.toggleDrawer()}
-            >
-              <Icon 
-                name="menu"
-                size={30}
-                color="white"
-              />
-            </TouchableOpacity>
-          </View>
-        </SafeAreaView>
+            <View style={{ marginRight: 10 }}>
+              <TouchableOpacity
+                onPress={() => props.navigation.toggleDrawer()}
+              >
+                <Icon
+                  name="menu"
+                  size={30}
+                  color="white"
+                />
+              </TouchableOpacity>
+            </View>
+          </SafeAreaView>
       }),
     },
   },
@@ -80,12 +80,12 @@ const AppStack = createDrawerNavigator({
   Register: RegisterNameText,
   Login: LoginText,
 },
-{
-  contentComponent: CustomDrawer,
-  contentOption: {
-    activeTintColor: "grey",
-  },
-});
+  {
+    contentComponent: CustomDrawer,
+    contentOption: {
+      activeTintColor: "grey",
+    },
+  });
 
 const AuthStack = createStackNavigator({
   Login: {
