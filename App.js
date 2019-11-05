@@ -6,12 +6,16 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import AppContainer from './navigation/AppNavigator';
 import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
-const analytics = new ExpoMixpanelAnalytics("4f0442138531910f4b5f5ead7c55d514"); //planning on putting token it in an env file if it passes
+const analytics = new ExpoMixpanelAnalytics(process.env.MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
 
 
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
+  // const [mixpanel, setMixpanel] = useState([{
+  //   event: 'tracking event'
+  // }]);
+
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
@@ -65,8 +69,9 @@ const styles = StyleSheet.create({
   },
 });
 
+analytics.track("Splash Page Loaded");
 
-analytics.track("Event name");
+// analytics.track("Event name");
 analytics.track("Signed Up", { "Referred By": "Friend" });
 //Set People properties (warning: if no mixpanel profile has been assigned to the current user when this method is called, it will automatically create a new mixpanel profile and the user will no longer be anonymous in Mixpanel)
 // analytics.set("Email", { "$email": "elvis@email.com" });
@@ -79,6 +84,7 @@ analytics.track("Signed Up", { "Referred By": "Friend" });
 // analytics.timeEvent("Image Upload");
 // // to be followed by a tracking event to define the end time
 analytics.track("Image Upload");
+// analytics.set("Email", { "$email": "elvis@email.com" });
 
 // // Register super properties
 // analytics.registerSuperProperties({ "Account type": "Free", "User Type": "Vendor" });
@@ -115,5 +121,3 @@ analytics.track("Image Upload");
 // // get the last distinct id set with identify or, if identify hasn't been
 // // called, the default mixpanel id for this device.
 // analytics.getDistinctId(function (id) { })
-
-
