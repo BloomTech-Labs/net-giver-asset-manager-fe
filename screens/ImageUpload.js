@@ -158,7 +158,8 @@ export default class App extends Component {
 }
 
 async function uploadImageAsync(uri) {
-  let apiUrl = "https://file-upload-example-backend-dkhqoilqqn.now.sh/upload";
+  let apiUrl =
+    "https://net-giver-asset-mngr.herokuapp.com/api/aws/api/files/IMG_0009-1572629657203.PNG";
 
   let uriParts = uri.split(".");
   let fileType = uriParts[uriParts.length - 1];
