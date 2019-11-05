@@ -47,6 +47,7 @@ import * as Permissions from "expo-permissions";
 import { RNS3 } from "react-native-aws3";
 import { ActivityIndicator } from "react-native";
 import { Button, Image, Avatar } from "react-native-elements";
+import { AWS_SECRET_ACCESS_KEY, AWS_ACCESS_KEY } from "react-native-dotenv";
 
 export default class Cameron extends React.Component {
   state = {
@@ -62,6 +63,16 @@ export default class Cameron extends React.Component {
           title="Pick an image from camera roll"
           onPress={this.chooseImage}
         />
+
+        {/* <Avatar
+          PlaceholderContent={<ActivityIndicator />}
+          source={
+            image ? result.uri : { uri: "https://i.imgur.com/ltNMlnA.png" }
+          }
+          rounded
+          showEditButton
+          size="xlarge"
+        /> */}
         {image && (
           <Image
             style={styles.image}
@@ -72,19 +83,6 @@ export default class Cameron extends React.Component {
       </View>
     );
   }
-
-  componentDidMount() {
-    this.getPermissionAsync();
-  }
-
-  getPermissionAsync = async () => {
-    if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== "granted") {
-        alert("Sorry, we need camera roll permissions to make this work!");
-      }
-    }
-  };
 
   chooseImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -109,8 +107,8 @@ export default class Cameron extends React.Component {
       keyPrefix: "uploads/",
       bucket: "netgiver",
       region: "us-east-2",
-      accessKey: "AKIA4JDPGAQ6N4BUKFVZ",
-      secretKey: "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",
+      accessKey: AWS_ACCESS_KEY,
+      secretKey: AWS_SECRET_ACCESS_KEY,
       successActionStatus: 201
     };
 
