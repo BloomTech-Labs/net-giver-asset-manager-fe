@@ -6,15 +6,14 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import AppContainer from './navigation/AppNavigator';
 import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
-const analytics = new ExpoMixpanelAnalytics(process.env.MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
+import { REACT_APP_MIXPANEL_SECRET_API_KEY } from 'react-native-dotenv';
+const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
+
 
 
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
-  // const [mixpanel, setMixpanel] = useState([{
-  //   event: 'tracking event'
-  // }]);
 
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
@@ -69,6 +68,8 @@ const styles = StyleSheet.create({
   },
 });
 
+
+console.log("analytics info=> ", analytics)
 analytics.track("Splash Page Loaded");
 
 // analytics.track("Event name");
@@ -84,6 +85,10 @@ analytics.track("Signed Up", { "Referred By": "Friend" });
 // analytics.timeEvent("Image Upload");
 // // to be followed by a tracking event to define the end time
 analytics.track("Image Upload");
+analytics.identify("12345")
+analytics.register({
+  "email": "ebi@aol.com"
+});
 // analytics.set("Email", { "$email": "elvis@email.com" });
 
 // // Register super properties
