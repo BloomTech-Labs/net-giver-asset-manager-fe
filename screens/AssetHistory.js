@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text } from "react-native";
+import { Button, Icon } from "react-native-elements";
 import _ from "lodash";
 import axios from "axios";
 import SingleAsset from "../components/SingleAsset";
  
-const AssetHistory = () => {
+const AssetHistory = ({navigation}) => {
   const [history, setHistory] = useState([]);
   const [myHistory, setMyHistory] = useState([]);
   const [isMine, setIsMine] = useState(false);
@@ -60,40 +61,57 @@ const AssetHistory = () => {
     )
   } else {
     return (
-      <View>
-      <View style={styles.assetSection}>
-        <TouchableOpacity 
-          style={styles.allAssets}
-          onPress={() => {
-            setIsMine(false)}
-          }  
-        >
-          <Text style={styles.allMyAssets}>ALL ASSETS</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.allAssets}
-          onPress={() => {
-            fetchMyAssets();
-            setIsMine(true);}
+      <View style={styles.mainWrapper}>
+        <View style={styles.assetSection}>
+          <TouchableOpacity 
+            style={styles.allAssets}
+            onPress={() => {
+              setIsMine(false)}
+            }  
+          >
+            <Text style={styles.allMyAssets}>ALL ASSETS</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.allAssets}
+            onPress={() => {
+              fetchMyAssets();
+              setIsMine(true);}
+            }
+          >
+            <Text style={styles.allMyAssets}>MY ASSETS</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.flatList}>
+          { !isMine 
+            ? <FlatList
+                keyExtractor={(item, index) => index.toString()} 
+                data={history}
+                renderItem={({ item }) => {
+                  return <SingleAsset data={item} />}}
+              />
+            : <FlatList
+                keyExtractor={(item, index) => index.toString()}
+                data={myHistory}
+                renderItem={({ item }) => {
+                  return <SingleAsset data={item} />}}
+              />
           }
-        >
-          <Text style={styles.allMyAssets}>MY ASSETS</Text>
-        </TouchableOpacity>
-      </View>
-        { !isMine 
-          ? <FlatList
-              keyExtractor={(item, index) => index.toString()} 
-              data={history}
-              renderItem={({ item }) => {
-                return <SingleAsset data={item} />}}
-            />
-          : <FlatList
-              keyExtractor={(item, index) => index.toString()}
-              data={myHistory}
-              renderItem={({ item }) => {
-                return <SingleAsset data={item} />}}
-            />
-        }
+        </View>
+
+          <Button
+            buttonStyle={styles.addBtn}
+            containerStyle={styles.addBtnWrapper}
+            title="Add Asset"
+            icon={
+              <Icon 
+                name="add"
+                color="white"
+              />
+            }
+            titleStyle={styles.titleStyle}
+            onPress={() => navigation.navigate("Scanner")}
+          />
       </View>
     );
   };
@@ -104,6 +122,10 @@ AssetHistory.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
+  mainWrapper: {
+    flexDirection: "column",
+    flex: 1,
+  },
   loading: {
     flex: 1,
     justifyContent: "center",
@@ -144,6 +166,25 @@ const styles = StyleSheet.create({
   allMyAssets: {
     color: "white",
     fontSize: 18
+  },
+  flatList: {
+    zIndex: 0,
+  },
+  addBtn: {
+    borderRadius: 10,
+    width: 148,
+    height: 48,
+  },
+  addBtnWrapper: {
+    bottom: 50,
+    zIndex: 1,
+    alignSelf: "flex-end",
+    position: "absolute",
+    bottom: 32,
+    right: 22,
+  },
+  titleStyle: {
+    paddingLeft: 5,
   },
 });
 
