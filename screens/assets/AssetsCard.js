@@ -1,23 +1,40 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-const AssetsCard = ({ data }) => {
-    return (
-        <View style={styles.assetWrapper}>
-            {/* Needs to be replaced with an image primitive component */}
-            <Image 
-                style={styles.imageWrapper}
-                source={require('../../assets/images/macbook100.jpg')}
-            />
-            <View style={styles.textWrapper}>
-                <Text style={styles.assetName}>{data.name}</Text>
-                <Text style={styles.assetID}>Barcode # {data.barcode}</Text>
-                <Text>Category: {data.category}</Text>
-                <Text>Description: {data.description}</Text>
-                <Text>Status: {data.check_in_status}</Text>
-            </View>
-        </View>
-    );
+
+export default class AssetsCard extends React.Component {
+
+    render() {
+
+
+        showDetails = () => {
+            const id = this.props.data.id
+            console.log('the ID', id)
+            this.props.navigation.navigate("SingleAssetCard", { id });
+
+        }
+
+        return (
+            <TouchableOpacity
+                onPress={showDetails}
+                style={styles.assetWrapper}>
+                {/* Needs to be replaced with an image primitive component */}
+                <Image
+                    style={styles.imageWrapper}
+                    source={require('../../assets/images/macbook100.jpg')}
+                />
+                <View style={styles.textWrapper}>
+                    <Text style={styles.assetName}>{this.props.data.id}</Text>
+                    <Text style={styles.assetName}>{this.props.data.name}</Text>
+                    <Text style={styles.assetID}>Barcode # {this.props.data.barcode}</Text>
+                    <Text>Category: {this.props.data.category}</Text>
+                    <Text>Description: {this.props.data.description}</Text>
+                    <Text>Status: {this.props.data.check_in_status}</Text>
+
+                </View>
+            </TouchableOpacity>
+        );
+    }
 };
 
 const styles = StyleSheet.create({
@@ -49,5 +66,3 @@ const styles = StyleSheet.create({
         color: "#82A0FD"
     }
 });
-
-export default AssetsCard;

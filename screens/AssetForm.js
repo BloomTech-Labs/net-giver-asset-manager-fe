@@ -7,6 +7,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import OrderUpc from "../components/OrderUpc";
 
 import { Formik } from 'formik';
+import { REACT_APP_MIXPANEL_SECRET_API_KEY } from 'react-native-dotenv';
+// const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
+
 
 
 export default class AssetForm extends React.Component {
@@ -42,6 +45,7 @@ export default class AssetForm extends React.Component {
             resetForm();
             setAssets(res.data)
             console.log(initialValues)
+            // analytics.track("Asset Added Successfully");
 
           })
           .catch(err => {

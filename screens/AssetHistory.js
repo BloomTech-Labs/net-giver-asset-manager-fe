@@ -4,7 +4,10 @@ import { Button, Icon } from "react-native-elements";
 import _ from "lodash";
 import axios from "axios";
 import SingleAsset from "../components/SingleAsset";
- 
+import { REACT_APP_MIXPANEL_SECRET_API_KEY } from 'react-native-dotenv';
+import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
+const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
+
 const AssetHistory = ({navigation}) => {
   const [history, setHistory] = useState([]);
   const [myHistory, setMyHistory] = useState([]);
@@ -16,7 +19,7 @@ const AssetHistory = ({navigation}) => {
     fetchAllAssets();
     fetchUserId();
   }, []);
-  
+
   // Fetches the logged in user's ID
   const fetchUserId = () => {
     AsyncStorage.getItem("user_id")
@@ -24,24 +27,25 @@ const AssetHistory = ({navigation}) => {
         const user_id = JSON.parse(response);
         setUserId(user_id);
         console.log("User ID fetched!")
-        })
-    .catch(error => {
-      console.log(error)
-    });
+      })
+      .catch(error => {
+        console.log(error)
+      });
   };
-  
+
   // Fetches all assets upon rendering regardless of user
   const fetchAllAssets = () => {
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/history")
       .then(response => {
-        console.log("RESPONSE", response.data)
+
         setHistory(response.data);
         setIsLoading(false);
+        analytics.track("Asset History Tracking");
       })
       .catch(error => {
         console.log(error);
-    });
+      });
   };
 
   // Fetches only the assets associated with the logged in user
@@ -55,7 +59,7 @@ const AssetHistory = ({navigation}) => {
   // Conditional rendering
   if (isLoading) {
     return (
-      <SafeAreaView style={ styles.loading } >
+      <SafeAreaView style={styles.loading} >
         <ActivityIndicator size="large" color="blue" />
       </SafeAreaView>
     )
@@ -75,7 +79,7 @@ const AssetHistory = ({navigation}) => {
             style={styles.allAssets}
             onPress={() => {
               fetchMyAssets();
-              setIsMine(true);}
+              setIsMine(true);
             }
           >
             <Text style={styles.allMyAssets}>MY ASSETS</Text>
@@ -187,5 +191,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
 });
+
+// analytics.track("Asset History Tracking");
 
 export default AssetHistory;
