@@ -4,23 +4,17 @@ import _ from "lodash";
 import axios from "axios";
 import SingleAsset from "../components/SingleAsset";
  
-const AssetHistory = ({ navigation }) => {
+const AssetHistory = () => {
   const [history, setHistory] = useState([]);
   const [myHistory, setMyHistory] = useState([]);
   const [isMine, setIsMine] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [userId, setUserId] = useState(1)
+  const [userId, setUserId] = useState(0)
 
   useEffect(() => {
     fetchAllAssets();
-    // fetchUserId();
+    fetchUserId();
   }, []);
-  
-  // Toggles state to determine which assets to display
-  const toggleAssetState = () => {
-    setIsMine(!isMine)
-    console.log("STATE CHANGED!")
-  };
   
   // Fetches the logged in user's ID
   const fetchUserId = () => {
@@ -51,14 +45,10 @@ const AssetHistory = ({ navigation }) => {
 
   // Fetches only the assets associated with the logged in user
   const fetchMyAssets = () => {
-    history.map(asset => {
-      if (asset.user_id == userId) {
-        setMyHistory(asset)
-        console.log("MY HISTORY", myHistory)
-      } else {
-        return asset
-      }
-    });
+    const myAssets = history.filter(asset => {
+      return asset.user_id === userId
+    })
+    setMyHistory(myAssets);
   };
 
   // Conditional rendering
@@ -100,8 +90,8 @@ const AssetHistory = ({ navigation }) => {
           : <FlatList
               keyExtractor={(item, index) => index.toString()}
               data={myHistory}
-              renderItem={({ myItem }) => {
-                return <SingleAsset data={myItem} />}}
+              renderItem={({ item }) => {
+                return <SingleAsset data={item} />}}
             />
         }
       </View>
