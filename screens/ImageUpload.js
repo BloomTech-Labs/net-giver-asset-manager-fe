@@ -227,3 +227,30 @@ const styles = StyleSheet.create({
     paddingVertical: 10
   }
 });
+
+// import React from 'react';
+// import {
+//   Text,
+//   View,
+//   TouchableOpacity
+// } from 'react-native';
+// import ImagePicker from 'react-native-image-picker';
+// import { RNS3 } from 'react-native-aws3';
+
+// const ImageUpload = props => {
+//   const uploadImage = () => {
+//     ImagePicker.showImagePicker({}, res => {
+//       console.log('ImagePicker', res);
+//     })
+//   }
+
+//   return (
+//     <View>
+//       <TouchableOpacity onPress={uploadImage}>
+//         <Text>Upload Image</Text>
+//       </TouchableOpacity>
+//     </View>
+//   )
+// }
+
+// export default ImageUpload;

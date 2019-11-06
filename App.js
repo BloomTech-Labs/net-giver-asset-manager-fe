@@ -65,6 +65,9 @@ const styles = StyleSheet.create({
 console.log("analytics info=> ", analytics);
 analytics.track("Splash Page Loaded");
 
+console.log("analytics info=> ", analytics);
+analytics.track("Splash Page Loaded");
+
 // analytics.track("Event name");
 analytics.track("Signed Up", { "Referred By": "Friend" });
 //Set People properties (warning: if no mixpanel profile has been assigned to the current user when this method is called, it will automatically create a new mixpanel profile and the user will no longer be anonymous in Mixpanel)
