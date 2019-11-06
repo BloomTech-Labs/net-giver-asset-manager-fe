@@ -1,74 +1,111 @@
 import React from "react";
-import { Platform, StyleSheet, View, TouchableOpacity } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  KeyboardAvoidingView
+} from "react-native";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text } from "galio-framework";
 import { Button } from "react-native-elements";
 import Spacer from "../components/Spacer";
 import AppNavigator from "../navigation/AppNavigator";
+import KeyboardShift from "../constants/KeyboardShift";
 
 export default function HomeScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        {/* <Text h2>Hey, Welcome to Net Giver Asset Manager</Text> */}
-      </View>
-      <Spacer>
-        <Button
-          title="Asset Entry"
-          onPress={() => navigation.navigate("AssetForm")}
-        />
-      </Spacer>
-      <Spacer>
-        <Button
-          title="navigation test to Register"
-          onPress={() => navigation.navigate("Register")}
-        />
-      </Spacer>
-      <Spacer>
-        <Button
-          title="navigation test to Login"
-          onPress={() => navigation.navigate("Login")}
-        />
-      </Spacer>
-      <Spacer>
-        <Button
-          title="Asset History"
-          onPress={() => navigation.navigate("AssetHistory")}
-        />
-      </Spacer>
-      <Spacer>
-        {/* <Button
+    <KeyboardShift>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.contentContainer}>
+            {/* <Text h2>Hey, Welcome to Net Giver Asset Manager</Text> */}
+          </View>
+          <Spacer>
+            <Button
+              title="Asset Entry"
+              onPress={() => navigation.navigate("AssetForm")}
+            />
+          </Spacer>
+          <Spacer>
+            <Button
+              title="navigation test to Register"
+              onPress={() => navigation.navigate("Register")}
+            />
+          </Spacer>
+          <Spacer>
+            <Button
+              title="navigation test to Login"
+              onPress={() => navigation.navigate("Login")}
+            />
+          </Spacer>
+          <Spacer>
+            <Button
+              title="Asset History"
+              onPress={() => navigation.navigate("AssetHistory")}
+            />
+          </Spacer>
+          <Spacer>
+            {/* <Button
           title="SCAN NOW!"
           onPress={() => navigation.navigate("BarcodeScanner")}
         /> */}
-      </Spacer>
-      <Spacer>
-        <Button
-          title="All Assets"
-          onPress={() => navigation.navigate("AssetList")}
-        />
-      </Spacer>
-      <Spacer>
-        <Button
-          title="Location Form"
-          onPress={() => navigation.navigate("Location")}
-        />
-      </Spacer>
-      <Spacer>
-        <Button title="Avatar" onPress={() => navigation.navigate("Avatar")} />
-      </Spacer>
-      <Spacer>
-        <Button
-          title="ImageUpload"
-          onPress={() => navigation.navigate("Upload")}
-        />
-      </Spacer>
+          </Spacer>
+          <Spacer>
+            <Button
+              title="All Assets"
+              onPress={() => navigation.navigate("AssetList")}
+            />
+          </Spacer>
+          <Spacer>
+            <Button
+              title="Location Form"
+              onPress={() => navigation.navigate("Location")}
+            />
+          </Spacer>
+          <Spacer>
+            <Button
+              title="ImagePicker"
+              onPress={() => navigation.navigate("Ipick")}
+            />
+          </Spacer>
+          <Spacer>
+            <Button
+              title="Avatar"
+              onPress={() => navigation.navigate("Avatar")}
+            />
+          </Spacer>
+          <Spacer>
+            <Button
+              title="Legal"
+              onPress={() => navigation.navigate("Legal")}
+            />
+          </Spacer>
+          <Spacer>
+            <Button
+              title="About"
+              onPress={() => navigation.navigate("About")}
+            />
+          </Spacer>
+          <Spacer>
+            <Button
+              title="Contact"
+              onPress={() => navigation.navigate("Contact")}
+            />
+          </Spacer>
+          <Spacer>
+            <Button
+              title="Single Asset"
+              onPress={() => navigation.navigate("SingleAssetCard")}
+            />
+          </Spacer>
 
-      {/* <Button
+          {/* <Button
         title="Say Cheese"
         onPress={() => navigation.navigate("Camera")}
       /> */}
-      {/* <TouchableOpacity onPress={() => navigation.navigate("BarcodeScanner")}>
+          {/* <TouchableOpacity onPress={() => navigation.navigate("BarcodeScanner")}>
         <MaterialCommunityIcons
           style={styles.upc}
           name="qrcode-scan"
@@ -76,10 +113,12 @@ export default function HomeScreen({ navigation }) {
         />
       </TouchableOpacity> */}
 
-      <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
-        <FontAwesome style={styles.camera} name="camera-retro" size={40} />
-      </TouchableOpacity>
-    </View>
+          <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+            <FontAwesome style={styles.camera} name="camera-retro" size={40} />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </KeyboardShift>
   );
 }
 

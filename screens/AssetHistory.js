@@ -3,7 +3,10 @@ import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStora
 import _ from "lodash";
 import axios from "axios";
 import SingleAsset from "../components/SingleAsset";
- 
+import { REACT_APP_MIXPANEL_SECRET_API_KEY } from 'react-native-dotenv';
+import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
+const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
+
 const AssetHistory = () => {
   const [history, setHistory] = useState([]);
   const [myHistory, setMyHistory] = useState([]);
@@ -15,7 +18,7 @@ const AssetHistory = () => {
     fetchAllAssets();
     fetchUserId();
   }, []);
-  
+
   // Fetches the logged in user's ID
   const fetchUserId = () => {
     AsyncStorage.getItem("user_id")
@@ -23,24 +26,25 @@ const AssetHistory = () => {
         const user_id = JSON.parse(response);
         setUserId(user_id);
         console.log("User ID fetched!")
-        })
-    .catch(error => {
-      console.log(error)
-    });
+      })
+      .catch(error => {
+        console.log(error)
+      });
   };
-  
+
   // Fetches all assets upon rendering regardless of user
   const fetchAllAssets = () => {
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/history")
       .then(response => {
-        console.log("RESPONSE", response.data)
+
         setHistory(response.data);
         setIsLoading(false);
+        analytics.track("Asset History Tracking");
       })
       .catch(error => {
         console.log(error);
-    });
+      });
   };
 
   // Fetches only the assets associated with the logged in user
@@ -54,39 +58,42 @@ const AssetHistory = () => {
   // Conditional rendering
   if (isLoading) {
     return (
-      <SafeAreaView style={ styles.loading } >
+      <SafeAreaView style={styles.loading} >
         <ActivityIndicator size="large" color="blue" />
       </SafeAreaView>
     )
   } else {
     return (
       <View>
-      <View style={styles.assetSection}>
-        <TouchableOpacity 
-          style={styles.allAssets}
-          onPress={() => {
-            setIsMine(false)}
-          }  
-        >
-          <Text style={styles.allMyAssets}>ALL ASSETS</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.allAssets}
-          onPress={() => {
-            fetchMyAssets();
-            setIsMine(true);}
-          }
-        >
-          <Text style={styles.allMyAssets}>MY ASSETS</Text>
-        </TouchableOpacity>
-      </View>
-        { !isMine 
+        <View style={styles.assetSection}>
+          <TouchableOpacity
+            style={styles.allAssets}
+            onPress={() => {
+              setIsMine(false)
+            }
+            }
+          >
+            <Text style={styles.allMyAssets}>ALL ASSETS</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.allAssets}
+            onPress={() => {
+              fetchMyAssets();
+              setIsMine(true);
+            }
+            }
+          >
+            <Text style={styles.allMyAssets}>MY ASSETS</Text>
+          </TouchableOpacity>
+        </View>
+        {!isMine
           ? <FlatList
-              keyExtractor={(item, index) => index.toString()} 
-              data={history}
-              renderItem={({ item }) => {
-                return <SingleAsset data={item} />}}
-            />
+            keyExtractor={(item, index) => index.toString()}
+            data={history}
+            renderItem={({ item }) => {
+              return <SingleAsset data={item} />
+            }}
+          />
           : <FlatList
               keyExtractor={(item, index) => index.toString()}
               data={myHistory}
@@ -146,5 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
 });
+
+// analytics.track("Asset History Tracking");
 
 export default AssetHistory;

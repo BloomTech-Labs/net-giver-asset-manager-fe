@@ -31,7 +31,7 @@ export default class PictureCapturePreview extends React.Component {
     };
 
     AcceptPhoto = async () => {
-        this.props.navigation.navigate('AssetForm');
+        this.props.navigation.navigate('AssetsAdd');
     };
 
     DenyPhoto = async () => {

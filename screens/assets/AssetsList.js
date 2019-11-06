@@ -10,9 +10,9 @@ const AssetsList = props => {
   // Fetch assets
   const getAssetsList = () => {
     axios
-      .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
+      .get("https://net-giver-asset-mngr.herokuapp.com/api/assets/")
       .then(response => {
-        console.log(response.data);
+
         setAssets(response.data);
       })
       .catch(error => {
@@ -29,7 +29,7 @@ const AssetsList = props => {
       <View style={styles.headerWrapper}>
         <Text style={styles.headerTitle}>All Assets</Text>
       </View>
-        {/* <FlatList
+      {/* <FlatList
           keyExtractor={(item, index) => item.id}
           data={assets}
           renderItem={({ item }) => {
@@ -37,15 +37,15 @@ const AssetsList = props => {
             // return <AssetsCard data={item} />
           }}
         /> */}
-     
-        <FlatList
-          keyExtractor={(item, index) => item.id}
-          data={assets}
-          renderItem={({ item }) => {
-            return <AssetsCard data={item} />;
-          }}
-        />
-      
+
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={assets}
+        renderItem={({ item }) => {
+          return <AssetsCard data={item} />;
+        }}
+      />
+
     </View>
   );
 };
