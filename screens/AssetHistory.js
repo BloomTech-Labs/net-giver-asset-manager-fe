@@ -43,7 +43,7 @@ const AssetHistory = ({ navigation }) => {
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/history")
       .then(response => {
-        console.log("RESPONSE", response.data)
+
         setHistory(response.data);
         setIsLoading(false);
         analytics.track("Asset History Tracking");

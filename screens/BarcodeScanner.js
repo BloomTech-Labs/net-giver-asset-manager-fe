@@ -12,7 +12,6 @@ export default class BarcodeScanner extends React.Component {
     hasCameraPermission: null,
     scanned: false,
     asset: null
-
   };
 
   async componentDidMount() {
@@ -34,7 +33,7 @@ export default class BarcodeScanner extends React.Component {
         {
           text: "Check in",
           onPress: () => {
-            this.props.navigation.navigate("AssetForm", { data });
+            this.props.navigation.navigate("AssetsAdd", { data });
           }
         }
       ]
@@ -127,16 +126,15 @@ export default class BarcodeScanner extends React.Component {
       .then(response => {
         var storedAssets = response.data;
         storedAssets.map(asset => this.setState({ asset: asset.barcode }));
-
         // Conditional logic handling the routing -- pages aren't correct, just wanted
         // an example
         console.log("this.state.asset", this.state.asset)
         if (this.state.asset === data) {
+
           this.props.navigation.navigate("AssetHistory");
-          Alert.alert('CHECK IN')
 
         } else {
-          this.props.navigation.navigate("AssetForm", { data });
+          this.props.navigation.navigate("AssetsAdd", { data });
         }
       })
       .catch(error => {

@@ -16,7 +16,7 @@ import AssetHistory from "../screens/AssetHistory";
 import Landing from "../screens/Landing";
 import BarcodeScanner from "../screens/BarcodeScanner";
 import HomeScreen from "../screens/HomeScreen";
-import AssetForm from "../screens/AssetForm";
+import AssetsAdd from "../screens/assets/AssetsAdd";
 import LocationForm from "../screens/LocationForm";
 import Camera from "../screens/Camera";
 import Previewer from "../screens/PictureCapturePreview";
@@ -25,6 +25,8 @@ import getImage from "../screens/getImage";
 import ImageUpload from "../screens/ImageUpload";
 import Splash from "../screens/Splash";
 import CustomDrawer from "../components/CustomDrawer";
+import SingleAssetCard from "../screens/assets/singleAsset/SingleAssetCard";
+import AssetsCard from "../screens/assets/AssetsCard";
 import Cameron from "../screens/Cameron";
 import Contact from "../screens/Contact";
 import Legal from "../screens/Legal";
@@ -33,7 +35,7 @@ import About from "../screens/About";
 const DevStack = createStackNavigator(
   {
     Home: HomeScreen,
-    AssetForm: AssetForm,
+    AssetsAdd: AssetsAdd,
     BarcodeScanner: BarcodeScanner,
     Location: LocationForm,
     AssetHistory: AssetHistory,
@@ -42,6 +44,8 @@ const DevStack = createStackNavigator(
     Previewer: Previewer,
     Avatar: getImage,
     Upload: ImageUpload,
+    SingleAssetCard: SingleAssetCard,
+    AssetsCard: AssetsCard,
     Ipick: Cameron,
     Contact: Contact,
     Legal: Legal,
