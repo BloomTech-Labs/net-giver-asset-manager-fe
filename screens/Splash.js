@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const Splash = ({navigation}) => {
+const Splash = ({ navigation }) => {
   // Use useEffect or ComponentDidMount to check sign-in status of user
   // If the user isn't signed in, direct to auth.  If user is, direct to app.
 
@@ -11,7 +11,7 @@ const Splash = ({navigation}) => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate("Auth");
+      navigation.navigate("Dev");
     }, 2000);
   });
 
