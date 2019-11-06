@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, TextInput } from "react-native";
-import { Button, Image } from "react-native-elements";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity
+} from "react-native";
+import { Button, Image, Avatar } from "react-native-elements";
 import axios from "axios";
 import { ActivityIndicator } from "react-native";
 import Spacer from "../components/Spacer";
+import { RNS3 } from "react-native-aws3";
 
-const avatarPicture = () => {
+const avatarPicture = ({ navigation }) => {
   const [photo, setPhoto] = useState("");
 
   // const photo = "https://i.imgur.com/kbBQbe7.jpg";
@@ -38,9 +45,27 @@ const avatarPicture = () => {
       <Spacer />
       <Text>I'm a user profile form</Text>
       <Spacer />
-      <Image
-        source={{ uri: "https://i.imgur.com/ltNMlnA.png" }}
-        style={{ width: 200, height: 200 }}
+
+      {/* <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+        <Avatar
+          rounded
+          showEditButton
+          source={{
+            uri: "https://i.imgur.com/ltNMlnA.png"
+          }}
+          style={{ width: 200, height: 200 }}
+          PlaceholderContent={<ActivityIndicator />}
+        />
+      </TouchableOpacity> */}
+      <Avatar
+        rounded
+        showEditButton
+        source={{
+          uri: "https://i.imgur.com/ltNMlnA.png"
+        }}
+        onPress={() => navigation.navigate("Camera")}
+        size="xlarge"
+        // style={{ width: 200, height: 200 }}
         PlaceholderContent={<ActivityIndicator />}
       />
       <Spacer />
@@ -49,12 +74,12 @@ const avatarPicture = () => {
       <TextInput
         style={styles.inputField}
         value={photo}
-        placeholder="pic address"
+        placeholder="email"
         // onChangeText={e => setPhoto(e.target.value)}
       />
-      {/* <TextInput style={styles.inputField} placeholder="username" /> */}
+      <TextInput style={styles.inputField} placeholder="username" />
       <Spacer />
-      <Button title="Submit Profile" onPress={postImage} />
+      <Button title="Submit Profile" />
     </View>
   );
 };
@@ -80,3 +105,5 @@ const styles = StyleSheet.create({
 });
 
 export default avatarPicture;
+
+//  source={{ uri: "https://i.imgur.com/ltNMlnA.png" }}
