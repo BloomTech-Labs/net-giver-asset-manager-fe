@@ -45,7 +45,7 @@ export default class AssetForm extends React.Component {
             resetForm();
             setAssets(res.data)
             console.log(initialValues)
-            // analytics.track("Asset Added Successfully");
+            analytics.track("Asset Added Successfully");
 
           })
           .catch(err => {
