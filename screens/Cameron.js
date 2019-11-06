@@ -111,6 +111,7 @@ export default class Cameron extends React.Component {
       secretKey: AWS_SECRET_ACCESS_KEY,
       successActionStatus: 201
     };
+    console.log("options test", options);
 
     RNS3.put(file, options).then(res => {
       if (res.status !== 201) throw new Error("Failed to upload image to S3");
