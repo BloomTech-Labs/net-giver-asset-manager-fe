@@ -1,7 +1,11 @@
 import React from "react";
 import { SafeAreaView, View, TouchableOpacity, StyleSheet } from "react-native";
-import { Icon } from "react-native-elements"
-import { createAppContainer, createSwitchNavigator, createStackNavigator } from "react-navigation";
+import { Icon } from "react-native-elements";
+import {
+  createAppContainer,
+  createSwitchNavigator,
+  createStackNavigator
+} from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { Provider as AuthProvider } from "../context/AuthContext";
 import { Provider as LocationProvider } from "../context/LocationContext";
@@ -23,6 +27,10 @@ import Splash from "../screens/Splash";
 import CustomDrawer from "../components/CustomDrawer";
 import SingleAssetCard from "../screens/assets/singleAsset/SingleAssetCard";
 import AssetsCard from "../screens/assets/AssetsCard";
+import Cameron from "../screens/Cameron";
+import Contact from "../screens/Contact";
+import Legal from "../screens/Legal";
+import About from "../screens/About";
 
 const DevStack = createStackNavigator(
   {
@@ -37,59 +45,57 @@ const DevStack = createStackNavigator(
     Avatar: getImage,
     Upload: ImageUpload,
     SingleAssetCard: SingleAssetCard,
-    AssetsCard: AssetsCard
+    AssetsCard: AssetsCard,
+    Ipick: Cameron,
+    Contact: Contact,
+    Legal: Legal,
+    About: About
   },
   {
     initialRouteName: "Home"
   }
 );
 
-const DashboardScreen = createStackNavigator(
+const DashboardScreen = createStackNavigator({
+  DashboardScreen: {
+    screen: AssetHistory,
+    navigationOptions: props => ({
+      title: "Dashboard",
+      headerStyle: {
+        backgroundColor: "#3366FF"
+      },
+      headerTitleStyle: {
+        color: "white"
+      },
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      )
+    })
+  }
+});
+
+const AppStack = createDrawerNavigator(
   {
-    DashboardScreen: {
-      screen: AssetHistory,
-      navigationOptions: (props) => ({
-        title: "Dashboard",
-        headerStyle: {
-          backgroundColor: "#3366FF",
-        },
-        headerTitleStyle: {
-          color: "white",
-        },
-        headerRight:
-          <SafeAreaView>
-            <View style={{ marginRight: 10 }}>
-              <TouchableOpacity
-                onPress={() => props.navigation.toggleDrawer()}
-              >
-                <Icon
-                  name="menu"
-                  size={30}
-                  color="white"
-                />
-              </TouchableOpacity>
-            </View>
-          </SafeAreaView>
-      }),
+    Dashboard: {
+      screen: DashboardScreen
     },
+    Scanner: BarcodeScanner,
+    Register: RegisterNameText,
+    Login: LoginText
   },
-
-);
-
-const AppStack = createDrawerNavigator({
-  Dashboard: {
-    screen: DashboardScreen,
-  },
-  Scanner: BarcodeScanner,
-  Register: RegisterNameText,
-  Login: LoginText,
-},
   {
     contentComponent: CustomDrawer,
     contentOption: {
-      activeTintColor: "grey",
-    },
-  });
+      activeTintColor: "grey"
+    }
+  }
+);
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -150,6 +156,6 @@ export default () => {
 
 const styles = StyleSheet.create({
   stackHeader: {
-    backgroundColor: "#3366FF",
-  },
-})
+    backgroundColor: "#3366FF"
+  }
+});

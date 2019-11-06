@@ -28,13 +28,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#3366FF",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   text: {
     color: "white",
     fontSize: 24,
     fontWeight: "bold"
-  },
+  }
 });
 
 export default Splash;

@@ -3,6 +3,9 @@ import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStora
 import _ from "lodash";
 import axios from "axios";
 import SingleAsset from "../components/SingleAsset";
+import { REACT_APP_MIXPANEL_SECRET_API_KEY } from 'react-native-dotenv';
+import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
+const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
 
 const AssetHistory = ({ navigation }) => {
   const [history, setHistory] = useState([]);
@@ -43,6 +46,7 @@ const AssetHistory = ({ navigation }) => {
 
         setHistory(response.data);
         setIsLoading(false);
+        analytics.track("Asset History Tracking");
       })
       .catch(error => {
         console.log(error);
@@ -160,5 +164,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
 });
+
+// analytics.track("Asset History Tracking");
 
 export default AssetHistory;
