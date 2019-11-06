@@ -11,7 +11,7 @@ const Splash = ({navigation}) => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate("Auth");
+      navigation.navigate("Dev");
     }, 2000);
   });
 
