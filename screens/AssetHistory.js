@@ -121,10 +121,6 @@ const AssetHistory = ({navigation}) => {
   };
 }
 
-AssetHistory.navigationOptions = {
-  title: "Dashboard",
-};
-
 const styles = StyleSheet.create({
   mainWrapper: {
     flexDirection: "column",

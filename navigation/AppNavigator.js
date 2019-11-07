@@ -78,7 +78,38 @@ const DashboardScreen = createStackNavigator({
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-      )
+      ),
+    })
+  }
+});
+
+const ScannerScreen = createStackNavigator({
+  DashboardScreen: {
+    screen: BarcodeScanner,
+    navigationOptions: props => ({
+      title: "Scanner",
+      headerTitleStyle: {
+        color: "white"
+      },
+      headerTransparent: true,
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+      headerLeft: (
+        <SafeAreaView>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+              <Icon name="arrow-back" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
     })
   }
 });
@@ -88,7 +119,9 @@ const AppStack = createDrawerNavigator(
     Dashboard: {
       screen: DashboardScreen
     },
-    Scanner: BarcodeScanner,
+    Scanner: {
+      screen: ScannerScreen,
+    },
     Register: RegisterNameText,
     Login: LoginText
   },
@@ -101,16 +134,16 @@ const AppStack = createDrawerNavigator(
 );
 
 const AuthStack = createStackNavigator({
-  Login: {
-    screen: LoginText,
-    navigationOptions: {
-      headerTitle: "Login"
-    }
-  },
   Landing: {
     screen: Landing,
     navigationOptions: {
       headerTitle: "Landing"
+    }
+  },
+  Login: {
+    screen: LoginText,
+    navigationOptions: {
+      headerTitle: "Login"
     }
   },
   Register: {
@@ -118,7 +151,7 @@ const AuthStack = createStackNavigator({
     navigationOptions: {
       headerTitle: "Register"
     }
-  }
+  },
 });
 
 const RootNavigation = createSwitchNavigator(
