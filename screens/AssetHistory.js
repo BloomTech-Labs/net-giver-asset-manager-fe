@@ -79,7 +79,7 @@ const AssetHistory = ({navigation}) => {
             style={styles.allAssets}
             onPress={() => {
               fetchMyAssets();
-              setIsMine(true);
+              setIsMine(true)}
             }
           >
             <Text style={styles.allMyAssets}>MY ASSETS</Text>
