@@ -26,7 +26,7 @@ const AssetHistory = ({navigation}) => {
       .then(response => {
         const user_id = JSON.parse(response);
         setUserId(user_id);
-        console.log("User ID fetched!")
+        console.log("User ID fetched!", user_id)
       })
       .catch(error => {
         console.log(error)
@@ -73,7 +73,14 @@ const AssetHistory = ({navigation}) => {
               setIsMine(false)}
             }  
           >
-            <Text style={styles.allMyAssets}>ALL ASSETS</Text>
+            { !isMine
+              ? <Text style={styles.activeText}>ALL ASSETS</Text>
+              : <Text style={styles.inactiveText}>ALL ASSETS</Text>
+            }
+            { !isMine
+              ? <View style={styles.activeTab} />
+              : <View style={styles.inactiveTab} />
+            }
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.allAssets}
@@ -82,7 +89,14 @@ const AssetHistory = ({navigation}) => {
               setIsMine(true)}
             }
           >
-            <Text style={styles.allMyAssets}>MY ASSETS</Text>
+            { !isMine
+              ? <Text style={styles.inactiveText}>MY ASSETS</Text>
+              : <Text style={styles.activeText}>MY ASSETS</Text>
+            }
+            { !isMine
+              ? <View style={styles.inactiveTab} />
+              : <View style={styles.activeTab} />
+            }
           </TouchableOpacity>
         </View>
 
@@ -154,18 +168,15 @@ const styles = StyleSheet.create({
   assetSection: {
     flexDirection: "row",
     color: "white",
-    justifyContent: "space-around",
-    backgroundColor: "#3366FF",
+    backgroundColor: "#EFEFF4",
     height: 50,
+    width: "100%",
     borderTopColor: "white",
   },
   allAssets: {
     flexDirection: "column",
     justifyContent: "center",
-  },
-  allMyAssets: {
-    color: "white",
-    fontSize: 18
+    width: "50%",
   },
   flatList: {
     zIndex: 0,
@@ -185,6 +196,32 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     paddingLeft: 5,
+  },
+  // Active/inactive styling <Views> at the buttom of each button
+  activeTab: {
+    width: "100%",
+    height: 1,
+    position: "absolute",
+    bottom: 0,
+    backgroundColor: "#3366FF",
+  },
+  inactiveTab: {
+    width: "100%",
+    height: 1,
+    position: "absolute",
+    bottom: 0,
+    backgroundColor: "#EFEFF4",
+  },
+  // Active/inactive styling for the text font inside the buttons
+  activeText: {
+    color: "#3366FF",
+    fontSize: 18,
+    textAlign: "center",
+  },
+  inactiveText: {
+    color: "black",
+    fontSize: 18,
+    textAlign: "center",
   },
 });
 
