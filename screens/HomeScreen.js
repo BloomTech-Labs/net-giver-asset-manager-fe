@@ -42,6 +42,13 @@ export default function HomeScreen({ navigation }) {
           </Spacer>
           <Spacer>
             <Button
+              title="Authy Register"
+              onPress={() => navigation.navigate("AuthyRegister")}
+            />
+          </Spacer>
+
+          <Spacer>
+            <Button
               title="Asset History"
               onPress={() => navigation.navigate("AssetHistory")}
             />
