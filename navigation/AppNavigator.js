@@ -131,16 +131,16 @@ const AppStack = createDrawerNavigator(
 );
 
 const AuthStack = createStackNavigator({
-  Login: {
-    screen: LoginText,
-    navigationOptions: {
-      headerTitle: "Login"
-    }
-  },
   Landing: {
     screen: Landing,
     navigationOptions: {
       headerTitle: "Landing"
+    }
+  },
+  Login: {
+    screen: LoginText,
+    navigationOptions: {
+      headerTitle: "Login"
     }
   },
   Register: {
@@ -148,7 +148,7 @@ const AuthStack = createStackNavigator({
     navigationOptions: {
       headerTitle: "Register"
     }
-  }
+  },
 });
 
 const RootNavigation = createSwitchNavigator(

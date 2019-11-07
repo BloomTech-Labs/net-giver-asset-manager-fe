@@ -6,55 +6,62 @@ import NavLink from "../navigation/NavLink";
 const Landing = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View styles={styles.bottomZ}>
-        <Image 
-          source={require("../assets/images/real_cog.jpg")}  
-        />
-      </View>
-      <View style={styles.topZ}>
-        <View style={styles.logo}>
+      <View>
+        <View styles={styles.bottomZ}>
           <Image
-            source={require("../assets/images/assetTracker.jpg")}
+            source={require("../assets/images/real_cog.jpg")}
           />
         </View>
-
-        <Text style={styles.purpose}>Asset Tracker makes it simple to keep track of all assets.</Text>
-
-        <View style={styles.mainPointsContainer}>
-          <View style={styles.mainPoints}>
-            <Icon 
-              name="check"
-              color="blue"
+        <View style={styles.topZ}>
+          <View style={styles.logo}>
+            <Image style={styles.topImg}
+              source={require("../assets/images/assetTracker.jpg")}
             />
-            <Text style={styles.text}>No trials.</Text>
           </View>
-          <View style={styles.mainPoints}>
-            <Icon 
-              name="check"
-              color="blue"
-            />
-            <Text style={styles.text}>No more losing valuable items.</Text>
+
+          <Text style={styles.purpose}>Asset Tracker makes it simple to keep track of all assets.</Text>
+
+          <View style={styles.mainPointsContainer}>
+            <View style={styles.mainPoints}>
+              <Icon
+                name="check"
+                color="blue"
+              />
+              <Text style={styles.text}>No trials.</Text>
+            </View>
+            <View style={styles.mainPoints}>
+              <Icon
+                name="check"
+                color="blue"
+              />
+              <Text style={styles.text}>No more losing valuable items.</Text>
+            </View>
+            <View style={styles.mainPoints}>
+              <Icon
+                name="check"
+                color="blue"
+              />
+              <Text style={styles.text}>No more time wasted looking for an asset.</Text>
+            </View>
           </View>
-          <View style={styles.mainPoints}>
-            <Icon 
-              name="check"
-              color="blue"
+
+          <View style={styles.button}>
+
+            <Button
+              title="Free Sign Up"
+              onPress={() => navigation.navigate("Register")}
             />
-            <Text style={styles.text}>No more time wasted looking for an asset.</Text>
+
+          </View>
+
+          <View style={styles.navLink}>
+            <NavLink
+              text="Have an account already?  Login here."
+              routeName="Login"
+
+            />
           </View>
         </View>
-
-        <Button
-          title="Free Sign Up"
-          style={styles.button}
-          onPress={() => navigation.navigate("Register")}
-        />
-
-        <NavLink 
-          text="Have an account already?  Login here."
-          routeName="Login"
-          style={styles.navLink}
-        />
       </View>
     </SafeAreaView>
   );
@@ -68,7 +75,9 @@ const styles = StyleSheet.create({
     marginTop: 72,
   },
   purpose: {
-    marginTop: 46,
+    paddingTop: 40,
+    paddingLeft: 50,
+    marginTop: 56,
     marginBottom: 46,
     fontSize: 23,
     width: "50%",
@@ -79,18 +88,25 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   mainPointsContainer: {
-    flex: 1,
+    flex: 0.2,
+    paddingLeft: 15,
+    width: "50%",
   },
   text: {
     fontSize: 18,
   },
   button: {
     backgroundColor: "#3366FF",
-    marginTop: 32,
-    borderRadius: 5,
+    borderRadius: 20,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    marginLeft: 20,
+    marginRight: 20,
+    width: '50%'
   },
   navLink: {
-    margin: "auto",
+    paddingLeft: 40,
+    paddingRight: 40,
   },
   bottomZ: {
     position: "absolute",
@@ -102,6 +118,11 @@ const styles = StyleSheet.create({
     left: 0,
     zIndex: 0,
   },
+  topImg: {
+    top: "50%",
+    left: 60,
+    right: 60
+  }
 })
 
 export default Landing;
