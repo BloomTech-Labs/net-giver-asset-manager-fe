@@ -55,7 +55,7 @@ const DevStack = createStackNavigator(
     AuthyRegister: AuthyRegisterScreen
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "AuthyRegister"
   }
 );
 
@@ -170,7 +170,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Splash"
+    initialRouteName: "Dev"
   }
 );
 

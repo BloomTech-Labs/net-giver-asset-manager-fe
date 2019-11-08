@@ -11,7 +11,7 @@ const AuthyForm = ({ errorMessage, onSubmit, submitButtonText }) => {
         <>
             <Text style={styles.inputLabels}>Phone Number</Text>
             <TextInput
-                placeholder="(111)111-1111"
+                placeholder="(111) 111-1111"
                 value={phone}
                 onChangeText={setPhone}
                 autoCapitalize="none"
@@ -24,6 +24,7 @@ const AuthyForm = ({ errorMessage, onSubmit, submitButtonText }) => {
             ) : null}
             <Spacer>
                 <Button
+                    style={styles.registerButton}
                     title={submitButtonText}
                     iconRight={true}
                     onPress={() => onSubmit({ phone })}
@@ -43,17 +44,23 @@ const styles = StyleSheet.create({
   inputField: {
     height: 40,
     width: "91%",
-    borderColor: "gray",
+    borderColor: "#D9D9D9",
     borderRadius: 8,
     borderWidth: 1,
     alignSelf: "center",
     paddingLeft: 10,
-    marginTop: 20
+    marginTop: 20,
+    fontSize: 17
   },
   inputLabels: {
     width: "91%",
     alignSelf: "center",
     fontSize: 17,
+  },
+  registerButton: {
+    height: 40,
+    marginLeft: 16,
+    marginRight: 16
   }
 });
 
