@@ -14,8 +14,7 @@ const AuthyForm = ({ errorMessage, onSubmit, submitButtonText }) => {
                 placeholder="(111) 111-1111"
                 value={phone}
                 onChangeText={setPhone}
-                autoCapitalize="none"
-                autoCorrect={false}
+                // keyboardType="number-pad"
                 style={styles.inputField}
             />
             <Spacer />

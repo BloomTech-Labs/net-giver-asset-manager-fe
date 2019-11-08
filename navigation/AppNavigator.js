@@ -57,7 +57,7 @@ const DevStack = createStackNavigator(
     AuthyLogin: AuthyLoginScreen
   },
   {
-    initialRouteName: "AuthyLogin"
+    initialRouteName: "Home"
   }
 );
 
