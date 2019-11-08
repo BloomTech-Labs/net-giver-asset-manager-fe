@@ -5,7 +5,7 @@ import { Context as AuthContext } from "../context/AuthContext";
 import AuthyForm from "../components/AuthyForm";
 import NavLink from "../navigation/NavLink";
 
-const AuthyRegisterScreen = ({ navigation }) => {
+const AuthyLoginScreen = ({ navigation }) => {
     const { state, signup, clearErrorMessage } = useContext(AuthContext);
     console.log("STATE:", state);
 
@@ -17,20 +17,20 @@ const AuthyRegisterScreen = ({ navigation }) => {
                     style={styles.logo}
                 />
             </View>
-            <View style={styles.newAcct}>
-                <Text style={styles.header}>Create an account</Text>
+            <View style={styles.loginAcct}>
+                <Text style={styles.header}>Welcome back!</Text>
                 <Text style={styles.description}>
-                    Anybody is welcome to use Asset Tracker for free once you sign up!
+                    Please enter your 10-digit phone number to receive your authentication code.
                 </Text>
             </View>
             <AuthyForm
                 style={styles.phoneForm}
-                submitButtonText="Register"
+                submitButtonText="Continue"
                 onSubmit={signup}
             />
             <NavLink
-                routeName="AuthyLogin"
-                text="Already have an account? Sign in instead!"
+                routeName="AuthyRegister"
+                text="Don't have an account? Register here."
             />
         </View>
     );
@@ -44,15 +44,16 @@ const styles = StyleSheet.create({
     height: 109,
     width: 225
   },
-  newAcct: {
-    marginLeft: 10,
+  loginAcct: {
+    marginLeft: 10
   },   
   header: {
     marginTop: 10,
     width: "91%",
     paddingLeft: 10,
     fontSize: 20,
-    fontWeight: "500"
+    fontWeight: "500",
+    textAlign: "center"
   },
   description: {
     marginTop: 5,
@@ -60,8 +61,9 @@ const styles = StyleSheet.create({
     width: "91%",
     paddingLeft: 10,
     fontSize: 18,
-    color: "#D9D9D9"
+    color: "#D9D9D9",
+    textAlign: "center"
   }
 });
 
-export default AuthyRegisterScreen;
+export default AuthyLoginScreen;

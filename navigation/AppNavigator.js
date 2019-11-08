@@ -33,6 +33,7 @@ import Legal from "../screens/Legal";
 import About from "../screens/About";
 
 import AuthyRegisterScreen from "../screens/AuthyRegister";
+import AuthyLoginScreen from "../screens/AuthyLogin";
 
 const DevStack = createStackNavigator(
   {
@@ -52,10 +53,11 @@ const DevStack = createStackNavigator(
     Contact: Contact,
     Legal: Legal,
     About: About,
-    AuthyRegister: AuthyRegisterScreen
+    AuthyRegister: AuthyRegisterScreen,
+    AuthyLogin: AuthyLoginScreen
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "AuthyLogin"
   }
 );
 
@@ -170,7 +172,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Splash"
+    initialRouteName: "Dev"
   }
 );
 
