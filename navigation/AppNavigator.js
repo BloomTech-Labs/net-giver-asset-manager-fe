@@ -34,6 +34,7 @@ import About from "../screens/About";
 
 import AuthyRegisterScreen from "../screens/AuthyRegister";
 import AuthyLoginScreen from "../screens/AuthyLogin";
+import AuthyConfirmScreen from "../screens/AuthyConfirm";
 
 const DevStack = createStackNavigator(
   {
@@ -54,10 +55,11 @@ const DevStack = createStackNavigator(
     Legal: Legal,
     About: About,
     AuthyRegister: AuthyRegisterScreen,
-    AuthyLogin: AuthyLoginScreen
+    AuthyLogin: AuthyLoginScreen,
+    AuthyConfirm: AuthyConfirmScreen
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "AuthyConfirm"
   }
 );
 
