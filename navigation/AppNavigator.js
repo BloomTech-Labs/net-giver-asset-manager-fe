@@ -75,7 +75,7 @@ const DashboardScreen = createStackNavigator({
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-      ),
+      )
     })
   }
 });
@@ -106,7 +106,7 @@ const ScannerScreen = createStackNavigator({
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-      ),
+      )
     })
   }
 });
@@ -117,7 +117,7 @@ const AppStack = createDrawerNavigator(
       screen: DashboardScreen
     },
     Scanner: {
-      screen: ScannerScreen,
+      screen: ScannerScreen
     },
     Register: RegisterNameText,
     Login: LoginText

@@ -4,7 +4,7 @@ import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import { Alert } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import BarcodeMask from 'react-native-barcode-mask';
+import BarcodeMask from "react-native-barcode-mask";
 import axios from "axios";
 
 export default class BarcodeScanner extends React.Component {
@@ -40,9 +40,7 @@ export default class BarcodeScanner extends React.Component {
     );
   };
 
-
   render() {
-
     const { navigate } = this.props.navigation;
     // console.log("props test:", this.props.navigation);
 
@@ -72,7 +70,12 @@ export default class BarcodeScanner extends React.Component {
             <View style={styles.layerLeft} />
             {/* <View style={styles.focused}> */}
 
-            <BarcodeMask width={300} height={120} backgroundColor="transparent" animatedLineColor="red" />
+            <BarcodeMask
+              width={300}
+              height={120}
+              backgroundColor="transparent"
+              animatedLineColor="red"
+            />
             <View style={styles.focused} />
             {/* <View style={styles.focused2} />
               <View style={styles.focused3} /> */}
@@ -106,12 +109,9 @@ export default class BarcodeScanner extends React.Component {
         )}
       </View>
     );
-
-
   }
 
   handleBarCodeScanned = ({ type, data }) => {
-
     console.log("Inside HandleBarcodeScanner", data);
     this.setState({ scanned: true });
     // Alert.alert(
@@ -128,11 +128,9 @@ export default class BarcodeScanner extends React.Component {
         storedAssets.map(asset => this.setState({ asset: asset.barcode }));
         // Conditional logic handling the routing -- pages aren't correct, just wanted
         // an example
-        console.log("this.state.asset", this.state.asset)
+        console.log("this.state.asset", this.state.asset);
         if (this.state.asset === data) {
-
           this.props.navigation.navigate("AssetHistory");
-
         } else {
           this.props.navigation.navigate("AssetsAdd", { data });
         }
@@ -141,13 +139,7 @@ export default class BarcodeScanner extends React.Component {
         console.log(error);
       });
   };
-
-
-
-
 }
-
-
 
 const opacity = "rgba(0, 0, 0, .6)";
 const styles = StyleSheet.create({
@@ -175,7 +167,7 @@ const styles = StyleSheet.create({
     // borderRadius: 5,
     // padding: 15,
     // paddingHorizontal: 20,
-    alignSelf: 'center',
+    alignSelf: "center"
     // margin: 20,
     // position: "relative",
   },

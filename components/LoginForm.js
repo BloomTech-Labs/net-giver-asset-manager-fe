@@ -2,13 +2,27 @@ import React, { useState } from "react";
 import { TextInput, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import Spacer from "./Spacer";
+import { UserNameContext } from "../context/UsernameContext";
 
 const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUserName] = useState("");
 
   return (
     <>
+      <UserNameContext.Provider value={{ username }}>
+        <Text style={styles.inputLabels}>UserName</Text>
+        <TextInput
+          placeholder="UserName"
+          value={username}
+          onChangeText={setUserName}
+          autoCapitalize="none"
+          autoCorrect={false}
+          style={styles.inputField}
+        />
+        <Spacer />
+
         <Text style={styles.inputLabels}>Email</Text>
         <TextInput
           placeholder="Email"
@@ -18,29 +32,30 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
           autoCorrect={false}
           style={styles.inputField}
         />
-      <Spacer />
+        <Spacer />
 
-      <Text style={styles.inputLabels}>Password</Text>
-      <TextInput
-        secureTextEntry
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        autoCapitalize="none"
-        autoCorrect={false}
-        style={styles.inputField}
-      />
-      {errorMessage ? (
-        <Text style={styles.errorMessage}>{errorMessage}</Text>
-      ) : null}
-      <Spacer>
-        <Button
-          title={submitButtonText}
-          iconRight={true}
-          onPress={() => onSubmit({ email, password })}
-          style={{marginTop: 80}}
+        <Text style={styles.inputLabels}>Password</Text>
+        <TextInput
+          secureTextEntry
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          autoCapitalize="none"
+          autoCorrect={false}
+          style={styles.inputField}
         />
-      </Spacer>
+        {errorMessage ? (
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
+        ) : null}
+        <Spacer>
+          <Button
+            title={submitButtonText}
+            iconRight={true}
+            onPress={() => onSubmit({ email, password })}
+            style={{ marginTop: 80 }}
+          />
+        </Spacer>
+      </UserNameContext.Provider>
     </>
   );
 };
@@ -65,7 +80,7 @@ const styles = StyleSheet.create({
   inputLabels: {
     width: "91%",
     alignSelf: "center",
-    fontSize: 17,
+    fontSize: 17
   }
 });
 
