@@ -9,7 +9,7 @@ const AssetHistory = ({ navigation }) => {
   const [myHistory, setMyHistory] = useState([]);
   const [isMine, setIsMine] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [userId, setUserId] = useState(1)
+  const [userId, setUserId] = useState(0)
 
   useEffect(() => {
     fetchAllAssets();
@@ -50,17 +50,13 @@ const AssetHistory = ({ navigation }) => {
   };
 
   // Fetches only the assets associated with the logged in user
-  const fetchMyAssets = () => {
-    history.map(asset => {
-      if (asset.user_id == userId) {
-        setMyHistory(asset)
-        console.log("MY HISTORY", myHistory)
-      } else {
-        return asset
-      }
-    });
+    const fetchMyAssets = () => {
+    const filteredAssets = history.filter(asset => {
+      return asset.user_id === userId
+    })
+    setMyHistory(filteredAssets);
   };
-
+  console.log("myHistory", myHistory);
   // Conditional rendering
   if (isLoading) {
     return (
@@ -71,37 +67,42 @@ const AssetHistory = ({ navigation }) => {
   } else {
     return (
       <View>
-      <View style={styles.assetSection}>
-        <TouchableOpacity 
-          style={styles.allAssets}
-          onPress={() => {
-            setIsMine(false)}
-          }  
-        >
-          <Text style={styles.allMyAssets}>ALL ASSETS</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.allAssets}
-          onPress={() => {
-            fetchMyAssets();
-            setIsMine(true);}
-          }
-        >
-          <Text style={styles.allMyAssets}>MY ASSETS</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.assetSection}>
+          <TouchableOpacity 
+            style={styles.allAssets}
+            onPress={() => {
+              setIsMine(false)}
+            }  
+          >
+            <Text style={styles.allMyAssets}>ALL ASSETS</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.allAssets}
+            onPress={() => {
+              fetchMyAssets();
+              setIsMine(true);
+              }
+            }
+          >
+            <Text style={styles.allMyAssets}>MY ASSETS</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+        </View>
         { !isMine 
           ? <FlatList
               keyExtractor={(item, index) => index.toString()} 
               data={history}
+              ListEmptyComponent={() => (<Text>No assets</Text>)}
               renderItem={({ item }) => {
                 return <SingleAsset data={item} />}}
             />
           : <FlatList
               keyExtractor={(item, index) => index.toString()}
               data={myHistory}
-              renderItem={({ myItem }) => {
-                return <SingleAsset data={myItem} />}}
+              ListEmptyComponent={() => (<Text>No assets</Text>)}
+              renderItem={({ item }) => {
+                return <SingleAsset data={item} />}}
             />
         }
       </View>
