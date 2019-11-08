@@ -6,46 +6,76 @@ import NavLink from "../navigation/NavLink";
 const Landing = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View styles={styles.bottomZ}>
-        <Image source={require("../assets/images/real_cog.jpg")} />
-      </View>
-      <View style={styles.topZ}>
-        <View style={styles.logo}>
-          <Image source={require("../assets/images/assetTracker.jpg")} />
+      <View>
+        <View styles={styles.bottomZ}>
+          <Image source={require("../assets/images/real_cog.jpg")} />
         </View>
 
-        <Text style={styles.purpose}>
-          Asset Tracker makes it simple to keep track of all assets.
-        </Text>
+        <View
+          style={[
+            {
+              alignSelf: "center",
+              position: "absolute",
+              margin: "auto",
+              zIndex: 0
+            },
+            styles.logo
+          ]}
+        >
+          <Image
+            style={styles.topImg}
+            source={require("../assets/images/assetTracker.jpg")}
+          />
+        </View>
 
-        <View style={styles.mainPointsContainer}>
-          <View style={styles.mainPoints}>
-            <Icon name="check" color="blue" />
-            <Text style={styles.text}>No trials.</Text>
-          </View>
-          <View style={styles.mainPoints}>
-            <Icon name="check" color="blue" />
-            <Text style={styles.text}>No more losing valuable items.</Text>
-          </View>
-          <View style={styles.mainPoints}>
-            <Icon name="check" color="blue" />
-            <Text style={styles.text}>
-              No more time wasted looking for an asset.
-            </Text>
+        <View style={[styles.topZ]}>
+          <Text style={styles.purpose}>
+            Asset Tracker makes it simple to keep track of all assets.
+          </Text>
+
+          <View style={styles.mainPointsContainer}>
+            <View style={styles.mainPoints}>
+              <Icon name="check" color="blue" />
+              <Text style={styles.text}>No trials.</Text>
+            </View>
+            <View style={styles.mainPoints}>
+              <Icon name="check" color="blue" />
+              <Text style={styles.text}>No more losing valuable items.</Text>
+            </View>
+            <View style={styles.mainPoints}>
+              <Icon name="check" color="blue" />
+              <Text style={styles.text}>
+                No more time wasted looking for an asset.
+              </Text>
+            </View>
           </View>
         </View>
 
-        <Button
-          title="Free Sign Up"
-          style={styles.button}
-          onPress={() => navigation.navigate("Register")}
-        />
+        <View
+          style={[
+            {
+              alignSelf: "center",
+              padding: 2,
+              width: "100%",
+              position: "relative",
+              top: "45%"
+            }
+          ]}
+        >
+          <View style={styles.button}>
+            <Button
+              title="Free Sign Up"
+              onPress={() => navigation.navigate("Register")}
+            />
+          </View>
 
-        <NavLink
-          text="Have an account already?  Login here."
-          routeName="Login"
-          style={styles.navLink}
-        />
+          <View style={styles.navLink}>
+            <NavLink
+              text="Have an account already?  Login here."
+              routeName="Login"
+            />
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -59,10 +89,13 @@ const styles = StyleSheet.create({
     // alignItems: "center"
   },
   logo: {
-    marginTop: 72
+    // marginTop: 42,
+    position: "absolute"
   },
   purpose: {
-    marginTop: 46,
+    paddingTop: 40,
+    paddingLeft: 50,
+    marginTop: 56,
     marginBottom: 46,
     fontSize: 23,
     width: "50%"
@@ -73,18 +106,23 @@ const styles = StyleSheet.create({
     marginBottom: 5
   },
   mainPointsContainer: {
-    flex: 1
+    flex: 0.2,
+    paddingLeft: 20,
+    width: "50%"
   },
   text: {
     fontSize: 18
   },
   button: {
     backgroundColor: "#3366FF",
-    marginTop: 32,
-    borderRadius: 5
+    borderRadius: 20,
+    overflow: "hidden",
+    width: "80%",
+    alignSelf: "center"
   },
   navLink: {
-    margin: "auto"
+    paddingLeft: 40,
+    paddingRight: 40
   },
   bottomZ: {
     position: "absolute",
@@ -92,9 +130,12 @@ const styles = StyleSheet.create({
   },
   topZ: {
     position: "absolute",
-    top: 0,
+    top: "25%",
     left: 0,
     zIndex: 0
+  },
+  topImg: {
+    top: "50%"
   }
 });
 
