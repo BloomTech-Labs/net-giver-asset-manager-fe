@@ -1,21 +1,15 @@
-import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
-import * as Font from 'expo-font';
-import React, { useState } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import AppContainer from './navigation/AppNavigator';
-import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
-const analytics = new ExpoMixpanelAnalytics(process.env.MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
-
-
-
+import { AppLoading } from "expo";
+import { Asset } from "expo-asset";
+import * as Font from "expo-font";
+import React, { useState } from "react";
+import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import AppContainer from "./navigation/AppNavigator";
+import ExpoMixpanelAnalytics from "@benawad/expo-mixpanel-analytics";
+import { REACT_APP_MIXPANEL_SECRET_API_KEY } from "react-native-dotenv";
+const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
-  // const [mixpanel, setMixpanel] = useState([{
-  //   event: 'tracking event'
-  // }]);
-
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
@@ -28,9 +22,8 @@ export default function App(props) {
   } else {
     return (
       <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
         <AppContainer />
-
       </View>
     );
   }
@@ -39,16 +32,16 @@ export default function App(props) {
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
-      require('./assets/images/robot-dev.png'),
-      require('./assets/images/robot-prod.png'),
+      require("./assets/images/robot-dev.png"),
+      require("./assets/images/robot-prod.png")
     ]),
     Font.loadAsync({
       // This is the font that we are using for our tab bar
       ...Ionicons.font,
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
-      'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-    }),
+      "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+    })
   ]);
 }
 
@@ -65,10 +58,14 @@ function handleFinishLoading(setLoadingComplete) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-  },
+    backgroundColor: "#fff"
+  }
 });
 
+console.log("analytics info=> ", analytics);
+analytics.track("Splash Page Loaded");
+
+console.log("analytics info=> ", analytics);
 analytics.track("Splash Page Loaded");
 
 // analytics.track("Event name");
@@ -84,6 +81,10 @@ analytics.track("Signed Up", { "Referred By": "Friend" });
 // analytics.timeEvent("Image Upload");
 // // to be followed by a tracking event to define the end time
 analytics.track("Image Upload");
+analytics.identify("12345");
+analytics.register({
+  email: "ebi@aol.com"
+});
 // analytics.set("Email", { "$email": "elvis@email.com" });
 
 // // Register super properties
