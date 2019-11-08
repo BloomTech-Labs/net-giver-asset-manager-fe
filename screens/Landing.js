@@ -61,7 +61,7 @@ const Landing = ({ navigation }) => {
             padding: 2,
             width: '100%',
             position: 'relative',
-            top: '65%'
+            top: '45%'
 
           }]}
         >
@@ -94,9 +94,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logo: {
-    marginTop: 72,
+    // marginTop: 42,
     position: 'absolute'
-
 
   },
   purpose: {
@@ -138,7 +137,7 @@ const styles = StyleSheet.create({
   },
   topZ: {
     position: "absolute",
-    top: '45%',
+    top: '25%',
     left: 0,
     zIndex: 0,
   },
