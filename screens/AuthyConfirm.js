@@ -23,7 +23,8 @@ const AuthyConfirmScreen = ({ navigation }) => {
                     Please enter your authentication code.
                 </Text>
                 <Text style={styles.description2}>
-                    If you need a new code, click here.
+                    If you need a new code, 
+                    click here.
                 </Text>
             </View>
             <AuthyCode 
