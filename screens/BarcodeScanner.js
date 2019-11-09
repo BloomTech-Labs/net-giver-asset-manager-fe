@@ -4,7 +4,7 @@ import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
 import { Alert } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import BarcodeMask from 'react-native-barcode-mask';
+import BarcodeMask from "react-native-barcode-mask";
 import axios from "axios";
 
 export default class BarcodeScanner extends React.Component {
@@ -40,11 +40,9 @@ export default class BarcodeScanner extends React.Component {
         storedAssets.map(asset => this.setState({ asset: asset.barcode }));
         // Conditional logic handling the routing -- pages aren't correct, just wanted
         // an example
-        console.log("this.state.asset", this.state.asset)
+        console.log("this.state.asset", this.state.asset);
         if (this.state.asset === data) {
-
           this.props.navigation.navigate("AssetHistory");
-
         } else {
           this.props.navigation.navigate("AssetsAdd", { data });
         }
@@ -86,13 +84,14 @@ export default class BarcodeScanner extends React.Component {
       <View style={styles.container}>
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : this.handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject} >
-            <BarcodeMask 
-              width={300} 
-              height={300} 
-              transparency={0.8}
-              animatedLineColor="red" 
-            />
+          style={StyleSheet.absoluteFillObject}
+        >
+          <BarcodeMask
+            width={300}
+            height={300}
+            transparency={0.8}
+            animatedLineColor="red"
+          />
         </BarCodeScanner>
 
         {scanned && (
@@ -103,8 +102,8 @@ export default class BarcodeScanner extends React.Component {
         )}
       </View>
     );
-  };
-};
+  }
+}
 
 const smoky = "rgba(0, 0, 0, .6)";
 
@@ -112,11 +111,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   smoky: {
     flex: 1,
     backgroundColor: smoky,
-    zIndex: 0,
-  },
+    zIndex: 0
+  }
 });

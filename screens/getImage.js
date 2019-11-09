@@ -82,12 +82,15 @@
 
 //  source={{ uri: "https://i.imgur.com/ltNMlnA.png" }}
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import axios from "axios";
+// import AuthContext from "../context/AuthContext";
 
 const getImage = () => {
   const [photo, setPhoto] = useState([]);
+  // const username = useContext(AuthContext);
+  // console.log("testContext:", username);
 
   // useEffect(() => {
   //   axios
@@ -103,9 +106,9 @@ const getImage = () => {
 
   return (
     <View>
-      <Text>display photo from aws3</Text>
+      <Text>Username Form</Text>
 
-      {photo && (
+      {/* {photo && (
         <Image
           style={styles.image}
           source={{
@@ -113,7 +116,7 @@ const getImage = () => {
           }}
           style={{ width: 300, height: 300 }}
         />
-      )}
+      )} */}
     </View>
   );
 };
