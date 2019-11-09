@@ -57,6 +57,13 @@ export default function HomeScreen({ navigation }) {
 
           <Spacer>
             <Button
+              title="Authy Authentication"
+              onPress={() => navigation.navigate("AuthyConfirm")}
+            />
+          </Spacer>
+
+          <Spacer>
+            <Button
               title="Asset History"
               onPress={() => navigation.navigate("AssetHistory")}
             />

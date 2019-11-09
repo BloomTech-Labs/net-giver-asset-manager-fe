@@ -24,7 +24,12 @@ const AuthyConfirmScreen = ({ navigation }) => {
                 </Text>
                 <Text style={styles.description2}>
                     If you need a new code, 
-                    click here.
+                    <Text 
+                        style={styles.newCode}
+                        // Send new auth code to phone when clicked
+                        // onPress={() => }
+                    > click here.
+                    </Text>
                 </Text>
             </View>
             <AuthyCode 
@@ -32,6 +37,7 @@ const AuthyConfirmScreen = ({ navigation }) => {
                 submitButtonText="Confirm"
                 // onSubmit={}
             />
+
             {/* <NavLink
                 routeName="AuthyRegister"
                 text="Don't have an account? Register here."
@@ -61,7 +67,6 @@ const styles = StyleSheet.create({
   },
   description: {
     marginTop: 5,
-    // marginBottom: 32,
     width: "91%",
     paddingLeft: 10,
     fontSize: 18,
@@ -76,6 +81,9 @@ const styles = StyleSheet.create({
     color: "#D9D9D9",
     textAlign: "center"
   },
+  newCode: {
+    color: "#3366FF"
+  }
 });
 
 export default AuthyConfirmScreen;

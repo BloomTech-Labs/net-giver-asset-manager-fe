@@ -177,7 +177,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Splash"
+    initialRouteName: "Dev"
   }
 );
 

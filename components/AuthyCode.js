@@ -9,7 +9,11 @@ const AuthyCode = ({ errorMessage, onSubmit, submitButtonText }) => {
 
     return (
         <>
-            <Text style={styles.inputLabels}>Phone Number: *Input #*</Text>
+            <Text style={styles.inputLabels}>
+                Phone Number: *Input #*
+                <Text style={styles.changeNum}> change</Text>
+            </Text>
+
             <TextInput
                 placeholder="1234"
                 value={verifyCode}
@@ -17,10 +21,13 @@ const AuthyCode = ({ errorMessage, onSubmit, submitButtonText }) => {
                 // keyboardType="number-pad"
                 style={styles.inputField}
             />
+            
             <Spacer />
+
             {errorMessage ? (
             <Text style={styles.errorMessage}>{errorMessage}</Text>
             ) : null}
+
             <Spacer>
                 <Button
                     style={styles.confirmButton}
@@ -60,6 +67,9 @@ const styles = StyleSheet.create({
     height: 40,
     marginLeft: 16,
     marginRight: 16
+  },
+  changeNum: {
+    color: "#3366FF"
   }
 });
 
