@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text } from "react-native";
+import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text, StatusBar } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import _ from "lodash";
 import axios from "axios";
@@ -65,7 +65,8 @@ const AssetHistory = ({navigation}) => {
     )
   } else {
     return (
-      <View style={styles.mainWrapper}>
+      <SafeAreaView style={styles.mainWrapper}>
+        <StatusBar barStyle="dark-content" />
         <View style={styles.assetSection}>
           <TouchableOpacity 
             style={styles.allAssets}
@@ -130,7 +131,7 @@ const AssetHistory = ({navigation}) => {
             titleStyle={styles.titleStyle}
             onPress={() => navigation.navigate("Scanner")}
           />
-      </View>
+      </SafeAreaView>
     );
   };
 }
@@ -145,33 +146,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
   },
-  headerWrapper: {
-    flexDirection: "row",
-    backgroundColor: "#3366FF",
-    borderBottomColor: "black",
-    height: 50
-  },
-  headerTitle: {
-    fontWeight: "bold",
-    fontSize: 20,
-    alignSelf: "center",
-    flex: 9,
-    paddingLeft: 20,
-    color: "white"
-  },
-  menuIcon: {
-    flexDirection: "row",
-    alignSelf: "center",
-    flex: 1,
-    paddingRight: 15
-  },
   assetSection: {
     flexDirection: "row",
     color: "white",
     backgroundColor: "#EFEFF4",
     height: 50,
     width: "100%",
-    borderTopColor: "white",
   },
   allAssets: {
     flexDirection: "column",
@@ -181,6 +161,7 @@ const styles = StyleSheet.create({
   flatList: {
     zIndex: 0,
   },
+  // Floating action button styling at bottom of page
   addBtn: {
     borderRadius: 10,
     width: 148,
@@ -215,12 +196,14 @@ const styles = StyleSheet.create({
   // Active/inactive styling for the text font inside the buttons
   activeText: {
     color: "#3366FF",
-    fontSize: 18,
+    fontSize: 15,
+    fontWeight: "500",
     textAlign: "center",
   },
   inactiveText: {
     color: "black",
-    fontSize: 18,
+    fontSize: 15,
+    fontWeight: "500",
     textAlign: "center",
   },
 });

@@ -67,18 +67,20 @@ const DashboardScreen = createStackNavigator({
   DashboardScreen: {
     screen: AssetHistory,
     navigationOptions: props => ({
-      title: "Dashboard",
+      title: "Simple Asset Tracker",
       headerStyle: {
-        backgroundColor: "#3366FF"
+        backgroundColor: "#EFEFF4"
       },
       headerTitleStyle: {
-        color: "white"
+        color: "black",
+        fontSize: 20,
+        fontWeight: "500",
       },
       headerRight: (
         <SafeAreaView>
           <View style={{ marginRight: 10 }}>
             <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
-              <Icon name="menu" size={30} color="white" />
+              <Icon name="menu" size={30} color="black" />
             </TouchableOpacity>
           </View>
         </SafeAreaView>
@@ -131,6 +133,7 @@ const AppStack = createDrawerNavigator(
   },
   {
     contentComponent: CustomDrawer,
+    drawerPosition: "right",
     contentOption: {
       activeTintColor: "grey"
     }
