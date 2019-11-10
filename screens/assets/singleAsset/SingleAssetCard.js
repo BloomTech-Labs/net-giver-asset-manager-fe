@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, StyleSheet, Button, AsyncStorage } from "react-native";
 import axios from "axios";
-import AssetsCard from "../AssetsCard";
+import OneAsset from "./OneAsset";
 import { ListItem } from "react-native-elements";
 import { withNavigation } from 'react-navigation';
 
@@ -29,7 +29,7 @@ const SingleAssetCard = (props) => {
 
 
 
-    const [assets, setAssets] = useState({ id: currentAssetId });
+    const [singleAsset, setSingleAsset] = useState({ id: currentAssetId });
     const assetHistory = { asset_id: currentAssetId, user_id: userId }
     const [assetStatus, setAssetStatus] = useState({});
 
@@ -38,7 +38,7 @@ const SingleAssetCard = (props) => {
 
     const checkInStatus = () => {
 
-        var statusAsset = assets.map(function (e) {
+        var statusAsset = singleAsset.map(function (e) {
 
             if (e.check_in_status == true) {
                 return e.check_in_status = { check_in_status: false };
@@ -47,7 +47,7 @@ const SingleAssetCard = (props) => {
             }
         });
 
-        var AssetID = assets.map(function (ids) {
+        var AssetID = singleAsset.map(function (ids) {
 
             return ids.id;
 
@@ -87,7 +87,7 @@ const SingleAssetCard = (props) => {
             .get(`https://net-giver-asset-mngr.herokuapp.com/api/assets/${currentAssetId}`)
             .then(response => {
 
-                setAssets(response.data);
+                setSingleAsset(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -109,13 +109,19 @@ const SingleAssetCard = (props) => {
 
             <FlatList
                 keyExtractor={(item, index) => item.id}
-                data={assets}
+                data={singleAsset}
                 renderItem={({ item }) => {
-                    return <AssetsCard data={item} />;
+                    return <OneAsset data={item} />;
                 }}
             />
             <Button
-                title="RETURN and ADD ASSET HISTORY"
+                title="CHECK-OUT"
+                onPress={checkInStatus}
+
+            />
+
+            <Button
+                title="RETURN"
                 onPress={checkInStatus}
 
             />

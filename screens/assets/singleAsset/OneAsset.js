@@ -1,27 +1,43 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-const OneAsset = ({ data }) => {
+class OneAsset extends React.Component {
 
-    console.log('currectID in oneasset', data.id)
-    return (
-        <View style={styles.assetWrapper}>
-            {/* Needs to be replaced with an image primitive component */}
-            <Image
-                style={styles.imageWrapper}
-                source={require('../../../assets/images/macbook100.jpg')}
-            />
-            <View style={styles.textWrapper}>
-                <Text style={styles.assetName}>{data.name}</Text>
-                <Text style={styles.assetID}>Barcode # {data.barcode}</Text>
-                <Text>Category: {data.category}</Text>
-                <Text>Description: {data.description}</Text>
-                <Text>Status: {data.check_in_status}</Text>
 
+    render() {
+        console.log('currectID in oneasset', this.props.data.id)
+        return (
+            <View style={styles.assetWrapper}>
+                {/* Needs to be replaced with an image primitive component */}
+                <Image
+                    style={styles.imageWrapper}
+                    source={require('../../../assets/images/macbook100.jpg')}
+                />
+                <View style={styles.textWrapper}>
+                    <Text style={styles.assetName}>{this.props.data.id}</Text>
+                    <Text style={styles.assetName}>{this.props.data.name}</Text>
+                    <Text style={styles.assetID}>Barcode # {this.props.data.barcode}</Text>
+                    <Text>Category: {this.props.data.category}</Text>
+                    <Text>Description: {this.props.data.description}</Text>
+                    <View>
+                        {this.props.data.check_in_status == true ?
+                            (<View>
+                                <Text>Status: Check-In</Text>
+                            </View>)
+                            :
+                            (<View>
+                                <Text>Status: Check-Out</Text>
+                            </View>)
+                        }
+                    </View>
+
+                </View>
             </View>
-        </View>
-    );
+        );
+    }
 };
+
+
 
 const styles = StyleSheet.create({
     assetWrapper: {
