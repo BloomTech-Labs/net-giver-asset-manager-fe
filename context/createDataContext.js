@@ -20,3 +20,5 @@ export default (reducer, actions, defaultValue) => {
 
   return { Context, Provider };
 };
+
+// this function automates the process setting up the context and provider

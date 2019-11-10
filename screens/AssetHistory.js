@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text } from "react-native";
+import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text, StatusBar } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import _ from "lodash";
 import axios from "axios";
@@ -66,7 +66,8 @@ const AssetHistory = ({ navigation }) => {
     )
   } else {
     return (
-      <View style={styles.mainWrapper}>
+      <SafeAreaView style={styles.mainWrapper}>
+        <StatusBar barStyle="dark-content" />
         <View style={styles.assetSection}>
           <TouchableOpacity
             style={styles.allAssets}
@@ -75,7 +76,14 @@ const AssetHistory = ({ navigation }) => {
             }
             }
           >
-            <Text style={styles.allMyAssets}>ALL ASSETS</Text>
+            {!isMine
+              ? <Text style={styles.activeText}>ALL ASSETS</Text>
+              : <Text style={styles.inactiveText}>ALL ASSETS</Text>
+            }
+            {!isMine
+              ? <View style={styles.activeTab} />
+              : <View style={styles.inactiveTab} />
+            }
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.allAssets}
@@ -85,7 +93,14 @@ const AssetHistory = ({ navigation }) => {
             }
             }
           >
-            <Text style={styles.allMyAssets}>MY ASSETS</Text>
+            {!isMine
+              ? <Text style={styles.inactiveText}>MY ASSETS</Text>
+              : <Text style={styles.activeText}>MY ASSETS</Text>
+            }
+            {!isMine
+              ? <View style={styles.inactiveTab} />
+              : <View style={styles.activeTab} />
+            }
           </TouchableOpacity>
         </View>
 
@@ -121,14 +136,10 @@ const AssetHistory = ({ navigation }) => {
           titleStyle={styles.titleStyle}
           onPress={() => navigation.navigate("Scanner")}
         />
-      </View>
+      </SafeAreaView>
     );
   };
 }
-
-AssetHistory.navigationOptions = {
-  title: "Dashboard",
-};
 
 const styles = StyleSheet.create({
   mainWrapper: {
@@ -140,45 +151,22 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
   },
-  headerWrapper: {
-    flexDirection: "row",
-    backgroundColor: "#3366FF",
-    borderBottomColor: "black",
-    height: 50
-  },
-  headerTitle: {
-    fontWeight: "bold",
-    fontSize: 20,
-    alignSelf: "center",
-    flex: 9,
-    paddingLeft: 20,
-    color: "white"
-  },
-  menuIcon: {
-    flexDirection: "row",
-    alignSelf: "center",
-    flex: 1,
-    paddingRight: 15
-  },
   assetSection: {
     flexDirection: "row",
     color: "white",
-    justifyContent: "space-around",
-    backgroundColor: "#3366FF",
+    backgroundColor: "#EFEFF4",
     height: 50,
-    borderTopColor: "white",
+    width: "100%",
   },
   allAssets: {
     flexDirection: "column",
     justifyContent: "center",
-  },
-  allMyAssets: {
-    color: "white",
-    fontSize: 18
+    width: "50%",
   },
   flatList: {
     zIndex: 0,
   },
+  // Floating action button styling at bottom of page
   addBtn: {
     borderRadius: 10,
     width: 148,
@@ -194,6 +182,34 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     paddingLeft: 5,
+  },
+  // Active/inactive styling <Views> at the buttom of each button
+  activeTab: {
+    width: "100%",
+    height: 1,
+    position: "absolute",
+    bottom: 0,
+    backgroundColor: "#3366FF",
+  },
+  inactiveTab: {
+    width: "100%",
+    height: 1,
+    position: "absolute",
+    bottom: 0,
+    backgroundColor: "#EFEFF4",
+  },
+  // Active/inactive styling for the text font inside the buttons
+  activeText: {
+    color: "#3366FF",
+    fontSize: 15,
+    fontWeight: "500",
+    textAlign: "center",
+  },
+  inactiveText: {
+    color: "black",
+    fontSize: 15,
+    fontWeight: "500",
+    textAlign: "center",
   },
 });
 
