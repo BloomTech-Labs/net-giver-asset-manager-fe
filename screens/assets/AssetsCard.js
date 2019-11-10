@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 
-export default class AssetsCard extends React.Component {
+class AssetsCard extends React.Component {
 
     render() {
 
 
         showDetails = () => {
             const id = this.props.data.id
-            console.log('the ID', id)
+            console.log('the asset ID', id)
             this.props.navigation.navigate("SingleAssetCard", { id });
 
         }
@@ -66,3 +67,5 @@ const styles = StyleSheet.create({
         color: "#82A0FD"
     }
 });
+
+export default withNavigation(AssetsCard);

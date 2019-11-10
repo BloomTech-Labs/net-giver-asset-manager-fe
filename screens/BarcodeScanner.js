@@ -11,8 +11,10 @@ export default class BarcodeScanner extends React.Component {
   state = {
     hasCameraPermission: null,
     scanned: false,
-    asset: null
+    assetBarcode: null,
+    assetID: null
   };
+
 
   async componentDidMount() {
     this.getPermissionsAsync();
@@ -103,6 +105,62 @@ export default class BarcodeScanner extends React.Component {
       </View>
     );
   }
+
+  handleBarCodeScanned = ({ type, data }) => {
+    var dataArray = [data]
+
+    this.setState({ scanned: true });
+    // Alert.alert(
+    //   `Your QR Code # is ${[data]}`);
+    const { navigate } = this.props.navigation;
+    // Axios call to fetch assets
+    axios
+      .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
+      .then(response => {
+        var storedAssets = response.data;
+
+
+        var barcode = storedAssets.map(function (e) {
+          return e.barcode
+        });
+
+
+        var allIDS = storedAssets.map(function (e) {
+          return e.id
+        });
+
+        console.log("All Barcode", barcode)
+        console.log("All ID", allIDS)
+        let intersection = barcode.filter(x => dataArray.includes(x));
+
+        var dataString = dataArray.toString()
+        var intersectionString = intersection.toString()
+
+        console.log("filtered: ", intersectionString)
+        console.log("Scanned: ", dataString)
+
+
+        if (intersectionString === dataString) {
+          storedAssets.map(assetID => this.setState({ assetID: assetID.id }));
+          var id = this.state.assetID
+
+          this.props.navigation.navigate("SingleAssetCard", { id });
+
+        } else {
+
+          this.props.navigation.navigate("AssetsAdd", { dataString });
+
+
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+
+
+
 }
 
 const smoky = "rgba(0, 0, 0, .6)";

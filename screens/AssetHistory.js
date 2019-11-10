@@ -8,7 +8,7 @@ import { REACT_APP_MIXPANEL_SECRET_API_KEY } from 'react-native-dotenv';
 import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
 const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
 
-const AssetHistory = ({navigation}) => {
+const AssetHistory = ({ navigation }) => {
   const [history, setHistory] = useState([]);
   const [myHistory, setMyHistory] = useState([]);
   const [isMine, setIsMine] = useState(false);
@@ -32,6 +32,7 @@ const AssetHistory = ({navigation}) => {
         console.log(error)
       });
   };
+
 
   // Fetches all assets upon rendering regardless of user
   const fetchAllAssets = () => {
@@ -68,17 +69,18 @@ const AssetHistory = ({navigation}) => {
       <SafeAreaView style={styles.mainWrapper}>
         <StatusBar barStyle="dark-content" />
         <View style={styles.assetSection}>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.allAssets}
             onPress={() => {
-              setIsMine(false)}
-            }  
+              setIsMine(false)
+            }
+            }
           >
-            { !isMine
+            {!isMine
               ? <Text style={styles.activeText}>ALL ASSETS</Text>
               : <Text style={styles.inactiveText}>ALL ASSETS</Text>
             }
-            { !isMine
+            {!isMine
               ? <View style={styles.activeTab} />
               : <View style={styles.inactiveTab} />
             }
@@ -87,14 +89,15 @@ const AssetHistory = ({navigation}) => {
             style={styles.allAssets}
             onPress={() => {
               fetchMyAssets();
-              setIsMine(true)}
+              setIsMine(true)
+            }
             }
           >
-            { !isMine
+            {!isMine
               ? <Text style={styles.inactiveText}>MY ASSETS</Text>
               : <Text style={styles.activeText}>MY ASSETS</Text>
             }
-            { !isMine
+            {!isMine
               ? <View style={styles.inactiveTab} />
               : <View style={styles.activeTab} />
             }
@@ -102,35 +105,37 @@ const AssetHistory = ({navigation}) => {
         </View>
 
         <View style={styles.flatList}>
-          { !isMine 
+          {!isMine
             ? <FlatList
-                keyExtractor={(item, index) => index.toString()} 
-                data={history}
-                renderItem={({ item }) => {
-                  return <SingleAsset data={item} />}}
-              />
+              keyExtractor={(item, index) => index.toString()}
+              data={history}
+              renderItem={({ item }) => {
+                return <SingleAsset data={item} />
+              }}
+            />
             : <FlatList
-                keyExtractor={(item, index) => index.toString()}
-                data={myHistory}
-                renderItem={({ item }) => {
-                  return <SingleAsset data={item} />}}
-              />
+              keyExtractor={(item, index) => index.toString()}
+              data={myHistory}
+              renderItem={({ item }) => {
+                return <SingleAsset data={item} />
+              }}
+            />
           }
         </View>
 
-          <Button
-            buttonStyle={styles.addBtn}
-            containerStyle={styles.addBtnWrapper}
-            title="Add Asset"
-            icon={
-              <Icon 
-                name="add"
-                color="white"
-              />
-            }
-            titleStyle={styles.titleStyle}
-            onPress={() => navigation.navigate("Scanner")}
-          />
+        <Button
+          buttonStyle={styles.addBtn}
+          containerStyle={styles.addBtnWrapper}
+          title="Add Asset"
+          icon={
+            <Icon
+              name="add"
+              color="white"
+            />
+          }
+          titleStyle={styles.titleStyle}
+          onPress={() => navigation.navigate("Scanner")}
+        />
       </SafeAreaView>
     );
   };
