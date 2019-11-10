@@ -62,10 +62,9 @@ const styles = StyleSheet.create({
   }
 });
 
-console.log("analytics info=> ", analytics);
+
 analytics.track("Splash Page Loaded");
 
-console.log("analytics info=> ", analytics);
 analytics.track("Splash Page Loaded");
 
 // analytics.track("Event name");

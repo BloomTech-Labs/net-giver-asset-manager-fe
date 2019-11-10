@@ -49,7 +49,7 @@ const DevStack = createStackNavigator(
     Ipick: Cameron,
     Contact: Contact,
     Legal: Legal,
-    About: About
+    About: About,
   },
   {
     initialRouteName: "Home"

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 
 const OneAsset = ({ data }) => {
 
-
+    console.log('currectID in oneasset', data.id)
     return (
         <View style={styles.assetWrapper}>
             {/* Needs to be replaced with an image primitive component */}

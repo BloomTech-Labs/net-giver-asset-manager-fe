@@ -11,8 +11,10 @@ export default class BarcodeScanner extends React.Component {
   state = {
     hasCameraPermission: null,
     scanned: false,
-    asset: null
+    assetBarcode: null,
+    assetID: null
   };
+
 
   async componentDidMount() {
     this.getPermissionsAsync();
@@ -44,6 +46,8 @@ export default class BarcodeScanner extends React.Component {
   render() {
 
     const { navigate } = this.props.navigation;
+
+
     // console.log("props test:", this.props.navigation);
 
     const { hasCameraPermission, scanned } = this.state;
@@ -111,30 +115,50 @@ export default class BarcodeScanner extends React.Component {
   }
 
   handleBarCodeScanned = ({ type, data }) => {
+    var dataArray = [data]
 
-    console.log("Inside HandleBarcodeScanner", data);
     this.setState({ scanned: true });
     // Alert.alert(
-    //   `Bar code with type ${type} and data ${data} has been scanned!`,
-    //   "time to leave",
-
-    // );
+    //   `Your QR Code # is ${[data]}`);
     const { navigate } = this.props.navigation;
     // Axios call to fetch assets
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
       .then(response => {
         var storedAssets = response.data;
-        storedAssets.map(asset => this.setState({ asset: asset.barcode }));
-        // Conditional logic handling the routing -- pages aren't correct, just wanted
-        // an example
-        console.log("this.state.asset", this.state.asset)
-        if (this.state.asset === data) {
 
-          this.props.navigation.navigate("AssetHistory");
+
+        var barcode = storedAssets.map(function (e) {
+          return e.barcode
+        });
+
+
+        var allIDS = storedAssets.map(function (e) {
+          return e.id
+        });
+
+        console.log("All Barcode", barcode)
+        console.log("All ID", allIDS)
+        let intersection = barcode.filter(x => dataArray.includes(x));
+
+        var dataString = dataArray.toString()
+        var intersectionString = intersection.toString()
+
+        console.log("filtered: ", intersectionString)
+        console.log("Scanned: ", dataString)
+
+
+        if (intersectionString === dataString) {
+          storedAssets.map(assetID => this.setState({ assetID: assetID.id }));
+          var id = this.state.assetID
+
+          this.props.navigation.navigate("SingleAssetCard", { id });
 
         } else {
-          this.props.navigation.navigate("AssetsAdd", { data });
+
+          this.props.navigation.navigate("AssetsAdd", { dataString });
+
+
         }
       })
       .catch(error => {

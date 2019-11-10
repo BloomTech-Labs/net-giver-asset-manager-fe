@@ -25,7 +25,7 @@ export default function HomeScreen({ navigation }) {
           <Spacer>
             <Button
               title="Asset Entry"
-              onPress={() => navigation.navigate("AssetForm")}
+              onPress={() => navigation.navigate("AssetsAdd")}
             />
           </Spacer>
           <Spacer>
@@ -94,12 +94,7 @@ export default function HomeScreen({ navigation }) {
               onPress={() => navigation.navigate("Contact")}
             />
           </Spacer>
-          <Spacer>
-            <Button
-              title="Single Asset"
-              onPress={() => navigation.navigate("SingleAssetCard")}
-            />
-          </Spacer>
+
 
           {/* <Button
         title="Say Cheese"
