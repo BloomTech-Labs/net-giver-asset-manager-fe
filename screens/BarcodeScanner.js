@@ -119,18 +119,10 @@ export default class BarcodeScanner extends React.Component {
       .then(response => {
         var storedAssets = response.data;
 
-
         var barcode = storedAssets.map(function (e) {
           return e.barcode
         });
 
-
-        var allIDS = storedAssets.map(function (e) {
-          return e.id
-        });
-
-        console.log("All Barcode", barcode)
-        console.log("All ID", allIDS)
         let intersection = barcode.filter(x => dataArray.includes(x));
 
         var dataString = dataArray.toString()
@@ -141,8 +133,22 @@ export default class BarcodeScanner extends React.Component {
 
 
         if (intersectionString === dataString) {
-          storedAssets.map(assetID => this.setState({ assetID: assetID.id }));
-          var id = this.state.assetID
+          var correctID = storedAssets.map(function (theID) {
+
+            if (theID.barcode == intersectionString) {
+              console.log("Correct ID", theID.id)
+              var returnedID = theID.id
+
+            }
+            console.log("returned id", returnedID)
+            return returnedID;
+          });
+
+
+          var correctID2 = correctID.filter(Boolean);
+
+          var id = correctID2
+          console.log('ID getting sent', id)
 
           this.props.navigation.navigate("SingleAssetCard", { id });
 

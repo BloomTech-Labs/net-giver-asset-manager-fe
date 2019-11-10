@@ -30,7 +30,17 @@ class AssetsCard extends React.Component {
                     <Text style={styles.assetID}>Barcode # {this.props.data.barcode}</Text>
                     <Text>Category: {this.props.data.category}</Text>
                     <Text>Description: {this.props.data.description}</Text>
-                    <Text>Status: {this.props.data.check_in_status}</Text>
+                    <View>
+                        {this.props.data.check_in_status == true ?
+                            (<View>
+                                <Text>Status: Check-In</Text>
+                            </View>)
+                            :
+                            (<View>
+                                <Text>Status: Check-Out</Text>
+                            </View>)
+                        }
+                    </View>
 
                 </View>
             </TouchableOpacity>
