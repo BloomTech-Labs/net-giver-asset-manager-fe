@@ -159,6 +159,12 @@ const RootNavigation = createSwitchNavigator(
     Splash: {
       screen: Splash
     },
+    Landing: {
+      screen: Landing
+    },
+    Cameron: {
+      screen: Cameron
+    },
     App: {
       screen: AppStack
     },
@@ -170,7 +176,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Splash"
+    initialRouteName: "Landing"
   }
 );
 

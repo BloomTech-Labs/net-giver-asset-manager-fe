@@ -43,16 +43,17 @@ export default class Cameron extends React.Component {
     // console.log("testContextdata", signup);
 
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 0, alignItems: "center", justifyContent: "center", top: 50 }}>
         {/* <Button
           title="Pick an image from camera roll"
           onPress={this.chooseImage}
         /> */}
-        <Text h3 style={styles.welcome}>
-          Welcome MoniqueSmith!
+        <Text style={[{ fontSize: 33, textAlign: 'center' }, styles.welcome]}>
+          Welcome <Text style={{ color: '#3366FF' }}>Monique Smith!</Text>
+
         </Text>
-        <Text>
-          you are almost there, the final step is to add your avatar picture
+        <Text style={{ color: 'lightgrey', fontSize: 22, padding: 20 }}>
+          You are almost there, the final step is to add your avatar picture
         </Text>
 
         <Spacer>
@@ -68,11 +69,27 @@ export default class Cameron extends React.Component {
           />
         </Spacer>
         <TouchableOpacity onPress={this.chooseImage}>
-          <Entypo name="camera" size={30} />
+          <Entypo name="camera" size={30} color="#3366FF" />
         </TouchableOpacity>
         <Text>Add Photo</Text>
 
-        <Button title="Next" />
+        {/* <TouchableOpacity style={{ backgroundColor: 'pink' }}> */}
+
+        <View style={{
+          backgroundColor: '#3366FF', width: '80%',
+          borderRadius: 20,
+          overflow: "hidden",
+          width: "80%",
+          alignSelf: "center",
+          top: '30%',
+          padding: 5,
+
+        }}>
+          <Button title="Next" color="red" />
+        </View>
+        {/* </TouchableOpacity> */}
+
+
 
         {/* <Text style={styles.label}>Name</Text> */}
         {/* <TextInput
@@ -184,7 +201,10 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   welcome: {
-    alignSelf: "center"
+    // alignSelf: "center",
+    // color: 'pink',
+    // fontSize: 1
+
   }
 });
 
