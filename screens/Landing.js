@@ -58,7 +58,7 @@ const Landing = ({ navigation }) => {
               padding: 2,
               width: "100%",
               position: "relative",
-              top: "45%"
+              top: "65%"
             }
           ]}
         >
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   purpose: {
     paddingTop: 40,
     paddingLeft: 50,
-    marginTop: 56,
+    marginTop: "15%",
     marginBottom: 46,
     fontSize: 23,
     width: "50%"
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     zIndex: 0
   },
   topImg: {
-    top: "50%"
+    top: "80%"
   }
 });
 
