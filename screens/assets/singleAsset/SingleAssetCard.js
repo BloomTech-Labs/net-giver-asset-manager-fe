@@ -29,7 +29,7 @@ const SingleAssetCard = (props) => {
 
 
 
-    const [singleAsset, setSingleAsset] = useState({ id: currentAssetId });
+    const [singleAsset, setSingleAsset] = useState({ id: currentAssetId, check_in_status: false });
     const assetHistory = { asset_id: currentAssetId, user_id: userId }
     const [assetStatus, setAssetStatus] = useState({});
 
@@ -100,6 +100,7 @@ const SingleAssetCard = (props) => {
 
 
 
+    console.log('Checkin Status in SinglePage', singleAsset.check_in_status)
 
     return (
         <View>
@@ -114,18 +115,32 @@ const SingleAssetCard = (props) => {
                     return <OneAsset data={item} />;
                 }}
             />
-            <Button
-                title="CHECK-OUT"
-                onPress={checkInStatus}
 
+
+            <FlatList
+                keyExtractor={(item, index) => item.id}
+                data={singleAsset}
+                renderItem={({ item }) => {
+                    {
+                        return item.check_in_status == false ?
+                            (<View>
+                                <Button
+                                    title="RETURN"
+                                    onPress={checkInStatus}
+
+                                />
+                            </View>)
+                            :
+                            (<View>
+                                <Button
+                                    title="CHECK-OUT"
+                                    onPress={checkInStatus}
+
+                                />
+                            </View>)
+                    }
+                }}
             />
-
-            <Button
-                title="RETURN"
-                onPress={checkInStatus}
-
-            />
-
         </View>
     );
 };
