@@ -108,27 +108,28 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: "" };
     case "signout":
       return { token: null, errorMessage: "" };
-    case "update_user_name":
-      return { ...state, username };
+    // case "update_user_name":
+    //   return { ...state, username };
     default:
       return state;
   }
 };
 
-const updateUserName = dispatch => async ({ username }) => {
-  dispatch({ type: "update_user_name" });
-};
+// const updateUserName = dispatch => async ({ username }) => {
+//   dispatch({ type: "update_user_name" });
+// };
 
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: "clear_error_message" });
 };
 
-const signup = dispatch => async ({ email, password, username }) => {
+const signup = dispatch => async ({ email, password, username, id }) => {
   try {
     const response = await assetsApi.post("/auth/register", {
       email,
       password,
-      username
+      username,
+      id
     });
     await AsyncStorage.setItem("token", response.data.token);
     dispatch({ type: "signin", payload: response.data.token });
@@ -157,9 +158,10 @@ const signin = dispatch => async ({ email, password, username, id }) => {
       ["user_id", JSON.stringify(response.data.user.id)]
     ]);
     dispatch({ type: "signin", payload: response.data.token });
-    navigate("App");
+    navigate("DashboardScreen");
     analytics.track("Logged In", { Status: "Successful" });
   } catch (err) {
+    console.log("signinTest:", err);
     dispatch({
       type: "add_error",
       payload: "Something went wrong with sign in!"
@@ -176,6 +178,6 @@ const signout = dispatch => async () => {
 // destructure off of createdatacontest 3rd input is initialState values
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signup, signout, clearErrorMessage, updateUserName },
+  { signin, signup, signout, clearErrorMessage },
   { token: null, errorMessage: "" }
 );
