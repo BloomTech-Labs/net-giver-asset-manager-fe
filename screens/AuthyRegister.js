@@ -1,21 +1,17 @@
 import React, { useContext, useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput } from "react-native";
 import { NavigationEvents } from "react-navigation";
 import { Context as AuthContext } from "../context/AuthContext";
-import AuthyForm from "../components/AuthyForm";
+import AuthyForm from "./AuthyForm";
 import NavLink from "../navigation/NavLink";
 
-import AuthyCode from "../components/AuthyCode";
-import { TextInput } from "react-native";
-import { Button } from "react-native-elements";
-import Spacer from "../components/Spacer";
-
-const AuthyRegisterScreen = ({ navigation }) => {
+const AuthyRegisterScreen = ({ props, navigation }) => {
     
-    const { state, clearErrorMessage } = useContext(AuthContext);
+    const { authyregister, state, clearErrorMessage } = useContext(AuthContext);
     console.log("STATE:", state);
-    console.log("nav test", navigation);
+    // console.log("nav test", navigation);
     const [phone, setPhone] = useState("");
+    console.log(phone);
 
     return (
         <View>
@@ -31,44 +27,21 @@ const AuthyRegisterScreen = ({ navigation }) => {
                     Anybody is welcome to use Asset Tracker for free once you sign up!
                 </Text>
             </View>
-            {/* <AuthyForm
+
+            <Text style={styles.inputLabels}>Phone Number</Text>
+            <TextInput
+                placeholder="(111) 111-1111"
+                value={phone}
+                onChangeText={setPhone}
+                // keyboardType="number-pad"
+                style={styles.inputField}
+            />
+
+            <AuthyForm
                 style={styles.phoneForm}
                 submitButtonText="Register"
-                onSubmit={() => navigation.navigate("AuthyConfirm")}
-                // onSubmit={authyregister}
-                // onPress={() => navigate("AuthyConfirm")}
-            /> */}
-{/*  */}
-            <Text style={styles.inputLabels}>Phone Number</Text>
-              <TextInput
-                  placeholder="(111) 111-1111"
-                  value={phone}
-                  onChangeText={setPhone}
-                  // keyboardType="number-pad"
-                  style={styles.inputField}
-              />
-
-              <Spacer />
-
-              <AuthyForm
-                onPress={() => navigation.navigate("AuthyConfirm")}
-              />
-
-              {/* {errorMessage ? (
-              <Text style={styles.errorMessage}>{errorMessage}</Text>
-              ) : null} */}
-
-              {/* <Spacer>
-                  <Button
-                      style={styles.registerButton}
-                      title={submitButtonText}
-                      iconRight={true}
-                      // onPress={() => onSubmit({ phone })}
-                      onPress={() => navigation.navigate("AuthyConfirm")}
-                  />
-              </Spacer> */}
-{/*  */}
-
+                onSubmit={authyregister}
+            />
             <NavLink
                 routeName="AuthyLogin"
                 text="Already have an account? Sign in instead!"
@@ -103,12 +76,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#D9D9D9"
   },
-  // errorMessage: {
-  //   fontSize: 16,
-  //   color: "red",
-  //   marginLeft: 15,
-  //   marginTop: 15
-  // },
   inputField: {
     height: 40,
     width: "91%",
@@ -124,12 +91,7 @@ const styles = StyleSheet.create({
     width: "91%",
     alignSelf: "center",
     fontSize: 17,
-  },
-  // registerButton: {
-  //   height: 40,
-  //   marginLeft: 16,
-  //   marginRight: 16
-  // }
+  }
 });
 
 export default AuthyRegisterScreen;

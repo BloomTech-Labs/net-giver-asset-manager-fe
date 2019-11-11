@@ -108,8 +108,8 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: "" };
     case "signout":
       return { token: null, errorMessage: "" };
-    // case "authyregister":
-    //   return { errorMessage: "", token: action.payload };
+    case "authyregister":
+      return { errorMessage: "", token: action.payload };
     // case "update_user_name":
     //   return { ...state, username };
     default:
@@ -126,24 +126,22 @@ const clearErrorMessage = dispatch => () => {
 };
 
 
-// const authyregister = dispatch => async ({ phone }) => {
-//   try {
-//     const response = await assetsApi.post("/auth/register", {
-//       phone
-//     });
-//     await AsyncStorage.setItem("token", response.data.token)
-//     dispatch({ type: "authyregister", payload: response.data.token });
-//     navigate("AuthyConfirm");
-//   } catch (err) {
-//     console.log("test authy context", err);
-//     dispatch({
-//       type: "add_error",
-//       payload: "Something went wrong with Authy sign up!"
-//     });
-//   }
-// };
-
-// const signup = dispatch => async ({ email, password }) => {
+const authyregister = dispatch => async ({ phone }) => {
+  try {
+    // const response = await assetsApi.post("/auth/register", {
+    //   phone
+    // });
+    // await AsyncStorage.setItem("token", response.data.token)
+    // dispatch({ type: "authyregister", payload: response.data.token });
+    navigate("AuthyConfirm");
+  } catch (err) {
+    console.log("test authy context", err);
+    dispatch({
+      type: "add_error",
+      payload: "Something went wrong with Authy sign up!"
+    });
+  }
+};
 
 const signup = dispatch => async ({ email, password, username, id }) => {
   try {

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { NavigationEvents } from "react-navigation";
 import { Context as AuthContext } from "../context/AuthContext";
-import AuthyForm from "../components/AuthyForm";
+import AuthyForm from "./AuthyForm";
 import NavLink from "../navigation/NavLink";
 
 const AuthyLoginScreen = ({ navigation }) => {

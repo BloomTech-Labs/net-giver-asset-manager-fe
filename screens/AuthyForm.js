@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TextInput, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
-import Spacer from "./Spacer";
+import Spacer from "../components/Spacer";
 
-const AuthyForm = ({ props, errorMessage, onSubmit, submitButtonText }) => {
+import { Context as AuthContext } from "../context/AuthContext";
+
+const AuthyForm = ({ errorMessage, onSubmit, submitButtonText }) => {
   
-    const [phone, setPhone] = useState("");
+    // const [phone, setPhone] = useState("");
+    const { authyregister } = useContext(AuthContext);
 
     return (
         <>
@@ -16,22 +19,23 @@ const AuthyForm = ({ props, errorMessage, onSubmit, submitButtonText }) => {
                 onChangeText={setPhone}
                 // keyboardType="number-pad"
                 style={styles.inputField}
-            />
+            /> */}
 
-            <Spacer /> */}
+            <Spacer />
 
             {errorMessage ? (
             <Text style={styles.errorMessage}>{errorMessage}</Text>
             ) : null}
 
             <Spacer>
-                <Button
-                    style={styles.registerButton}
-                    title={submitButtonText}
-                    iconRight={true}
-                    // onPress={() => onSubmit({ phone })}
-                    onPress={() => props.onPress()}
-                />
+              <Button
+                  style={styles.registerButton}
+                  title={submitButtonText}
+                  iconRight={true}
+                  // onPress={() => onSubmit({ phone })}
+                  // onPress={() => props.onPress()}
+                  onPress={() => onSubmit({ authyregister })}
+              />
             </Spacer>
         </>
     );
