@@ -12,7 +12,7 @@ analytics.track("Logged In", { "Referred By": "Friend" });
 
 const LoginText = () => {
   const { state, signin, clearErrorMessage } = useContext(Context);
-  console.log(signin);
+  console.log("logTest:", state);
 
   return (
     <View>
