@@ -176,7 +176,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Cameron"
+    initialRouteName: "Landing"
   }
 );
 
