@@ -3,13 +3,13 @@ import { TextInput, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import Spacer from "./Spacer";
 
-const AuthyForm = ({ errorMessage, onSubmit, submitButtonText }) => {
+const AuthyForm = ({ props, errorMessage, onSubmit, submitButtonText }) => {
   
     const [phone, setPhone] = useState("");
 
     return (
         <>
-            <Text style={styles.inputLabels}>Phone Number</Text>
+            {/* <Text style={styles.inputLabels}>Phone Number</Text>
             <TextInput
                 placeholder="(111) 111-1111"
                 value={phone}
@@ -17,16 +17,20 @@ const AuthyForm = ({ errorMessage, onSubmit, submitButtonText }) => {
                 // keyboardType="number-pad"
                 style={styles.inputField}
             />
-            <Spacer />
+
+            <Spacer /> */}
+
             {errorMessage ? (
             <Text style={styles.errorMessage}>{errorMessage}</Text>
             ) : null}
+
             <Spacer>
                 <Button
                     style={styles.registerButton}
                     title={submitButtonText}
                     iconRight={true}
-                    onPress={() => onSubmit({ phone })}
+                    // onPress={() => onSubmit({ phone })}
+                    onPress={() => props.onPress()}
                 />
             </Spacer>
         </>

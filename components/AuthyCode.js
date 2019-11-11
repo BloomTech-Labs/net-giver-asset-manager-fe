@@ -3,14 +3,15 @@ import { TextInput, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import Spacer from "./Spacer";
 
-const AuthyCode = ({ errorMessage, onSubmit, submitButtonText }) => {
+const AuthyCode = ({ navigate, errorMessage, onSubmit, submitButtonText }) => {
   
     const [verifyCode, setVerifyCode] = useState("");
 
     return (
         <>
             <Text style={styles.inputLabels}>
-                Phone Number: *Input #*
+                Phone Number: {this.props.phone}
+                Phone Number: 
                 <Text style={styles.changeNum}> change</Text>
             </Text>
 

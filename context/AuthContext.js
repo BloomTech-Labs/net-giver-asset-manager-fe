@@ -15,6 +15,8 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: "" };
     case "signout":
       return { token: null, errorMessage: "" };
+    case "authyregister":
+      return { errorMessage: "", token: action.payload };
     default:
       return state;
   }
@@ -22,6 +24,23 @@ const authReducer = (state, action) => {
 
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: "clear_error_message" });
+};
+
+const authyregister = dispatch => async ({ phone }) => {
+  try {
+    const response = await assetsApi.post("/auth/register", {
+      phone
+    });
+    await AsyncStorage.setItem("token", response.data.token)
+    dispatch({ type: "authyregister", payload: response.data.token });
+    navigate("AuthyConfirm");
+  } catch (err) {
+    console.log("test authy context", err);
+    dispatch({
+      type: "add_error",
+      payload: "Something went wrong with Authy sign up!"
+    });
+  }
 };
 
 const signup = dispatch => async ({ email, password }) => {
@@ -72,6 +91,6 @@ const signout = dispatch => async () => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signup, signout, clearErrorMessage },
+  { authyregister, signin, signup, signout, clearErrorMessage },
   { token: null, errorMessage: "" }
 );
