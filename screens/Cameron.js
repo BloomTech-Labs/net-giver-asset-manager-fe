@@ -123,11 +123,11 @@ export default class Cameron extends React.Component {
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
       }
     }
-  }
+  };
 
   chooseImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -149,7 +149,8 @@ export default class Cameron extends React.Component {
     };
 
     const options = {
-      keyPrefix: `${this.state.userName}/`,
+      // keyPrefix: `${this.state.userName}/`,
+      keyPrefix: `monique/`,
       bucket: "netgiver",
       region: "us-east-2",
       accessKey: AWS_ACCESS_KEY,
@@ -161,13 +162,16 @@ export default class Cameron extends React.Component {
     RNS3.put(file, options).then(res => {
       if (res.status !== 201) throw new Error("Failed to upload image to S3");
       console.log("upload to aws test", res.body);
-      const imageUrl = res.data.postResponse.location;
-      const Id = res.data.postResponse.key;
-      // if (res.status === 201) {
-      //   axios.post("http://localhost:8000/api/location").then(res => {
-      //     console;
-      //   });
-      // }
+      const location = res.data.postResponse.location;
+      console.log("local test:", location);
+      const name = res.data.postResponse.key;
+      if (res.status === 201) {
+        axios
+          .post("http://localhost:8000/api/location", location, name)
+          .then(res => {
+            console.log("post to backend test:", res);
+          });
+      }
     });
   };
 }

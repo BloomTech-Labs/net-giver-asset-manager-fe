@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { TextInput, Text, StyleSheet } from "react-native";
 import { Button } from "react-native-elements";
 import Spacer from "./Spacer";
-import { UserNameContext } from "../context/UsernameContext";
 
 const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
   const [email, setEmail] = useState("");
@@ -11,51 +10,49 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
 
   return (
     <>
-      <UserNameContext.Provider value={{ username }}>
-        <Text style={styles.inputLabels}>UserName</Text>
-        <TextInput
-          placeholder="UserName"
-          value={username}
-          onChangeText={setUserName}
-          autoCapitalize="none"
-          autoCorrect={false}
-          style={styles.inputField}
-        />
-        <Spacer />
+      <Text style={styles.inputLabels}>UserName</Text>
+      <TextInput
+        placeholder="UserName"
+        value={username}
+        onChangeText={setUserName}
+        autoCapitalize="none"
+        autoCorrect={false}
+        style={styles.inputField}
+      />
+      <Spacer />
 
-        <Text style={styles.inputLabels}>Email</Text>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize="none"
-          autoCorrect={false}
-          style={styles.inputField}
-        />
-        <Spacer />
+      <Text style={styles.inputLabels}>Email</Text>
+      <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        autoCorrect={false}
+        style={styles.inputField}
+      />
+      <Spacer />
 
-        <Text style={styles.inputLabels}>Password</Text>
-        <TextInput
-          secureTextEntry
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          autoCapitalize="none"
-          autoCorrect={false}
-          style={styles.inputField}
+      <Text style={styles.inputLabels}>Password</Text>
+      <TextInput
+        secureTextEntry
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        autoCapitalize="none"
+        autoCorrect={false}
+        style={styles.inputField}
+      />
+      {errorMessage ? (
+        <Text style={styles.errorMessage}>{errorMessage}</Text>
+      ) : null}
+      <Spacer>
+        <Button
+          title={submitButtonText}
+          iconRight={true}
+          onPress={() => onSubmit({ email, password, username })}
+          style={{ marginTop: 80 }}
         />
-        {errorMessage ? (
-          <Text style={styles.errorMessage}>{errorMessage}</Text>
-        ) : null}
-        <Spacer>
-          <Button
-            title={submitButtonText}
-            iconRight={true}
-            onPress={() => onSubmit({ email, password })}
-            style={{ marginTop: 80 }}
-          />
-        </Spacer>
-      </UserNameContext.Provider>
+      </Spacer>
     </>
   );
 };
