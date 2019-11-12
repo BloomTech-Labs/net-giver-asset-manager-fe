@@ -4,7 +4,7 @@ import axios from "axios";
 import { StyleSheet, TouchableOpacity, Text, TextInput, View, AsyncStorage, Alert } from "react-native";
 import KeyboardShift from "../../constants/KeyboardShift";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import OrderUpc from "../../components/OrderUpc";
+// import OrderUpc from "../../components/OrderUpc";
 import { withNavigation } from 'react-navigation';
 
 import * as yup from 'yup'
@@ -86,6 +86,12 @@ const AssetsAdd = (props, { navigation }) => {
                     name: yup
                         .string()
                         .required(),
+                    description: yup
+                        .string()
+                        .required(),
+                    category: yup
+                        .string()
+                        .required(),
                     barcode: yup
                         .string()
                         .required(),
@@ -116,88 +122,74 @@ const AssetsAdd = (props, { navigation }) => {
                                 inputStyle={styles.inputField}
                             /> */}
                             <TextInput
-                                // placeholder="Asset Name"
                                 value={values.name}
                                 onChangeText={handleChange("name")}
                                 onBlur={() => setFieldTouched("name")}
-                                clearButtonMode="always"
+                                clearButtonMode="while-editing"
                                 style={styles.textInputField}
                             />
                             {touched.name && errors.name && (
-                                <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>{errors.name}</Text>
-                            )}
-
-                            {/* <Input
-                                placeholder="Barcode ID"
-                                name="barcode"
-
-                                value={barkode}
-                                value={values.barcode = barkode}
-                                onBlur={() => setFieldTouched('barcode')}
-
-                                autoCapitalize="none"
-                                inputStyle={styles.inputField}
-
-                                editable={false}
-                            />
-                            {touched.barcode && errors.barcode && (
-                                <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
-                                    {errors.barcode}
+                                <Text style={{ 
+                                    fontSize: 10, color: "red", paddingLeft: 20, marginTop: 5 }}>
+                                    {errors.name}
                                 </Text>
-                            )} */}
+                            )}
 
                             <Text style={styles.assetTitle}>Description</Text>
                             <TextInput
-                                // placeholder="Add Description"
                                 value={values.description}
                                 onChangeText={handleChange("description")}
                                 onBlur={() => setFieldTouched("description")}
+                                clearButtonMode="while-editing"
                                 style={styles.textInputField}
                             />
                             {touched.description && errors.description && (
-                                <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
+                                <Text style={{ 
+                                    fontSize: 10, color: "red", paddingLeft: 20, marginTop: 5 }}>
                                     {errors.description}
                                 </Text>
                             )}
 
                             <Text style={styles.assetTitle}>Location</Text>
                             <TextInput
-                                // placeholder="Choose A Location"
                                 value={values.location_id}
                                 onChangeText={handleChange("location_id")}
                                 onBlur={() => setFieldTouched("location_id")}
+                                clearButtonMode="while-editing"
                                 style={styles.textInputField}
                             />
                             {touched.location_id && errors.location_id && (
-                                <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
+                                <Text style={{ 
+                                    fontSize: 10, color: "red", paddingLeft: 20, marginTop: 5 }}>
                                     {errors.location_id}
                                 </Text>
                             )}
 
                             <Text style={styles.assetTitle}>Price</Text>
                             <TextInput
-                                // placeholder="Choose A Category"
                                 value={values.category}
                                 onChangeText={handleChange("category")}
                                 onBlur={() => setFieldTouched("category")}
+                                clearButtonMode="while-editing"
                                 style={styles.textInputField}
                             />
                             {touched.category && errors.category && (
-                                <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
+                                <Text style={{ 
+                                    fontSize: 10, color: "red", paddingLeft: 20, marginTop: 5 }}>
                                     {errors.category}
                                 </Text>
                             )}
 
                             <Button
                                 iconRight={false}
-                                title="Add New Asset"
+                                title="Submit"
                                 type="solid"
                                 color="blue"
                                 onPress={handleSubmit}
                                 buttonStyle={styles.button}
                             />
 
-                            <OrderUpc />
+                            {/* <OrderUpc /> */}
                         </KeyboardShift>
                     </View>
                 )}
@@ -215,7 +207,8 @@ const styles = StyleSheet.create({
     button: {
         width: "90%",
         alignSelf: "center",
-        marginVertical: 10
+        marginTop: 32,
+        borderRadius: 20
     },
     upc: {
         marginBottom: -20,
@@ -273,7 +266,9 @@ const styles = StyleSheet.create({
         flex: 1
     },
     qrCode: {
-        marginLeft: 50
+        marginLeft: 55,
+        color: "#BFBFBF",
+        fontStyle: "italic"
     },
     assetTitle: {
         marginLeft: 20,

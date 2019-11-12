@@ -17,7 +17,7 @@ const OrderUpc = () => {
           )
         }
       >
-        <Text style={{ color: "blue", fontSize: 12, alignSelf: "center" }}>
+        <Text style={{ color: "blue", fontSize: 12, alignSelf: "center", marginTop: 5 }}>
           Out of softac UPC stickers? Order more here!
         </Text>
       </TouchableOpacity>
