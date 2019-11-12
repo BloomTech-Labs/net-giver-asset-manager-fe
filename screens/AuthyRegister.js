@@ -5,11 +5,12 @@ import { Context as AuthContext } from "../context/AuthContext";
 import AuthyForm from "./AuthyForm";
 import NavLink from "../navigation/NavLink";
 
-const AuthyRegisterScreen = ({ props, navigation }) => {
+import { Button } from "react-native";
+
+const AuthyRegisterScreen = ({ navigation }) => {
     
     const { authyregister, state, clearErrorMessage } = useContext(AuthContext);
     console.log("STATE:", state);
-    // console.log("nav test", navigation);
     const [phone, setPhone] = useState("");
     console.log(phone);
 
@@ -32,7 +33,7 @@ const AuthyRegisterScreen = ({ props, navigation }) => {
             <TextInput
                 placeholder="(111) 111-1111"
                 value={phone}
-                onChangeText={setPhone}
+                onChangeText={(phone) => setPhone(phone)}
                 // keyboardType="number-pad"
                 style={styles.inputField}
             />
@@ -42,6 +43,13 @@ const AuthyRegisterScreen = ({ props, navigation }) => {
                 submitButtonText="Register"
                 onSubmit={authyregister}
             />
+
+            {/* <Button
+              style={styles.phoneForm}
+              title="Register"
+              onPress={() => navigation.navigate("AuthyConfirm")}
+            /> */}
+
             <NavLink
                 routeName="AuthyLogin"
                 text="Already have an account? Sign in instead!"

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useState, useContext } from "react";
+import { View, Text, StyleSheet, Image, TextInput } from "react-native";
 import { NavigationEvents } from "react-navigation";
 import { Context as AuthContext } from "../context/AuthContext";
 import AuthyForm from "./AuthyForm";
@@ -8,6 +8,7 @@ import NavLink from "../navigation/NavLink";
 const AuthyLoginScreen = ({ navigation }) => {
     const { state, signup, clearErrorMessage } = useContext(AuthContext);
     console.log("STATE:", state);
+    const [phone, setPhone] = useState("");
 
     return (
         <View>
@@ -23,6 +24,16 @@ const AuthyLoginScreen = ({ navigation }) => {
                     Please enter your 10-digit phone number to receive your authentication code.
                 </Text>
             </View>
+
+            <Text style={styles.inputLabels}>Phone Number</Text>
+            <TextInput
+                placeholder="(111) 111-1111"
+                value={phone}
+                onChangeText={setPhone}
+                // keyboardType="number-pad"
+                style={styles.inputField}
+            />
+
             <AuthyForm
                 style={styles.phoneForm}
                 submitButtonText="Continue"
@@ -63,6 +74,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#D9D9D9",
     textAlign: "center"
+  },
+  inputField: {
+    height: 40,
+    width: "91%",
+    borderColor: "#D9D9D9",
+    borderRadius: 8,
+    borderWidth: 1,
+    alignSelf: "center",
+    paddingLeft: 10,
+    marginTop: 20,
+    fontSize: 17
+  },
+  inputLabels: {
+    width: "91%",
+    alignSelf: "center",
+    fontSize: 17,
   }
 });
 

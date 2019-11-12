@@ -59,7 +59,7 @@ const DevStack = createStackNavigator(
     AuthyConfirm: AuthyConfirmScreen
   },
   {
-    initialRouteName: "AuthyRegister"
+    initialRouteName: "Home"
   }
 );
 

@@ -5,9 +5,11 @@ import { Context as AuthContext } from "../context/AuthContext";
 import AuthyCode from "./AuthyCode";
 import NavLink from "../navigation/NavLink";
 
-const AuthyConfirmScreen = ({ navigation }) => {
+const AuthyConfirmScreen = ({ phone, navigation }) => {
     const { state, signup, clearErrorMessage } = useContext(AuthContext);
     console.log("STATE:", state);
+    console.log("phone", phone);
+    console.log("state params", state.params)
 
     return (
         <View>
@@ -38,10 +40,10 @@ const AuthyConfirmScreen = ({ navigation }) => {
                 // onSubmit={}
             />
 
-            {/* <NavLink
+            <NavLink
                 routeName="AuthyRegister"
                 text="Don't have an account? Register here."
-            /> */}
+            />
         </View>
     );
 };
