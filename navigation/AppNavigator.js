@@ -183,7 +183,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Dev"
+    initialRouteName: "Landing"
   }
 );
 
