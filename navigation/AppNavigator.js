@@ -32,6 +32,10 @@ import Contact from "../screens/Contact";
 import Legal from "../screens/Legal";
 import About from "../screens/About";
 
+import AuthyRegisterScreen from "../screens/AuthyRegister";
+import AuthyLoginScreen from "../screens/AuthyLogin";
+import AuthyConfirmScreen from "../screens/AuthyConfirm";
+
 const DevStack = createStackNavigator(
   {
     Home: HomeScreen,
@@ -49,7 +53,10 @@ const DevStack = createStackNavigator(
     Ipick: Cameron,
     Contact: Contact,
     Legal: Legal,
-    About: About
+    About: About,
+    AuthyRegister: AuthyRegisterScreen,
+    AuthyLogin: AuthyLoginScreen,
+    AuthyConfirm: AuthyConfirmScreen
   },
   {
     initialRouteName: "Home"
