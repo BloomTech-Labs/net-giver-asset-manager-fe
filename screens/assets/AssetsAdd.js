@@ -10,6 +10,8 @@ import { withNavigation } from 'react-navigation';
 import * as yup from 'yup'
 import { Formik } from 'formik';
 
+import { Entypo } from "@expo/vector-icons";
+
 const AssetsAdd = (props, { navigation }) => {
     const [userId, setUserId] = useState(0)
     const fetchUserId = () => {
@@ -40,6 +42,15 @@ const AssetsAdd = (props, { navigation }) => {
             <View style={styles.assetSection}>
                 <Text style={styles.activeText}>ASSET ENTRY</Text>
                 <View style={styles.activeTab} />
+            </View>
+
+            <View style={styles.photoContainer}>
+                <View style={styles.photoIcon}>
+                    <TouchableOpacity>
+                        <Entypo name="camera" size={30} color="#3366FF" />
+                    </TouchableOpacity>
+                    <Text>Add Photo</Text>
+                </View>
             </View>
 
             <Formik
@@ -231,6 +242,19 @@ const styles = StyleSheet.create({
         backgroundColor: "#EFEFF4",
         height: 50,
         width: "100%",
+    },
+    photoContainer: {
+        backgroundColor: "#EFEFF4",
+        marginTop: 20,
+        marginLeft: 20,
+        marginRight: 20,
+        height: 165 
+    },
+    photoIcon: {
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1
     }
 });
 
