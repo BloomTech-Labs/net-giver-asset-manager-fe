@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text, StatusBar } from "react-native";
+import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text, StatusBar, TextInput } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import _ from "lodash";
 import axios from "axios";
@@ -13,7 +13,8 @@ const AssetHistory = ({ navigation }) => {
   const [myHistory, setMyHistory] = useState([]);
   const [isMine, setIsMine] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [userId, setUserId] = useState(0)
+  const [userId, setUserId] = useState(1);
+  const [searchedHistory, setSearchedHistory] = useState([]);
 
   useEffect(() => {
     fetchAllAssets();
@@ -39,7 +40,7 @@ const AssetHistory = ({ navigation }) => {
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/history")
       .then(response => {
-
+        console.log("history axios response: ", response);
         setHistory(response.data);
         setIsLoading(false);
         analytics.track("Asset History Tracking");
@@ -57,6 +58,21 @@ const AssetHistory = ({ navigation }) => {
     setMyHistory(myAssets);
   };
   console.log("myHistory", myHistory);
+
+  // const search = (items, query) => {
+
+  //   let filteredItems = items;
+
+  //   if(query.length) {
+  //       filteredItems = items.filter(item => {
+  //           return item.toLowerCase().includes(query.toLowerCase());
+  //       })
+  //       setSearchedHistory(filteredItems)
+  //   }
+
+  //   return filteredItems;
+  // }
+
   // Conditional rendering
   if (isLoading) {
     return (
@@ -103,6 +119,9 @@ const AssetHistory = ({ navigation }) => {
             }
           </TouchableOpacity>
         </View>
+        {/* <View>
+          <TextInput onChangeText={text => search(history, text)} />
+        </View> */}
         <View style={styles.flatList}>
           {!isMine
             ? <FlatList
