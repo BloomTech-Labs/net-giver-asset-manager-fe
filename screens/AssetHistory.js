@@ -37,9 +37,8 @@ const AssetHistory = ({ navigation }) => {
   // Fetches all assets upon rendering regardless of user
   const fetchAllAssets = () => {
     axios
-      .get("https://net-giver-asset-mngr.herokuapp.com/api/history")
+      .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
       .then(response => {
-
         setHistory(response.data);
         setIsLoading(false);
         analytics.track("Asset History Tracking");
@@ -67,7 +66,7 @@ const AssetHistory = ({ navigation }) => {
   } else {
     return (
       <SafeAreaView style={styles.mainWrapper}>
-        <StatusBar barStyle="dark-content" />
+        <StatusBar backgroundColor="#EEFF66" barStyle="dark-content" />
         <View style={styles.assetSection}>
           <TouchableOpacity
             style={styles.allAssets}
