@@ -10,12 +10,8 @@ import { withNavigation } from 'react-navigation';
 import * as yup from 'yup'
 import { Formik } from 'formik';
 
-
 const AssetsAdd = (props, { navigation }) => {
-
     const [userId, setUserId] = useState(0)
-
-
     const fetchUserId = () => {
         AsyncStorage.getItem("user_id")
             .then(response => {
@@ -27,11 +23,9 @@ const AssetsAdd = (props, { navigation }) => {
                 console.log(error)
             });
     };
-
     useEffect(() => {
         fetchUserId();
     }, []);
-
 
     if (props.navigation.state.params) {
         var barkode = props.navigation.state.params.dataString
@@ -41,166 +35,150 @@ const AssetsAdd = (props, { navigation }) => {
     //     props.navigation.navigate("AssetsList");
     // }
 
-
     return (
-        <Formik
+        <>
+            <View style={styles.assetSection}>
+                <Text style={styles.activeText}>ASSET ENTRY</Text>
+                <View style={styles.activeTab} />
+            </View>
 
-            enableReinitialize
-            initialValues={{
+            <Formik
+                enableReinitialize
+                initialValues={{
+                    name: '',
+                    category: '',
+                    description: '',
+                    barcode: '',
+                    check_in_status: 0,
+                    user_id: userId,
+                    location_id: 1
+                }}
 
+                onSubmit={(values) => axios
+                    .post("https://net-giver-asset-mngr.herokuapp.com/api/assets", values)
+                    .then(res => {
+                        Alert.alert(
+                            'Message',
+                            'Successfuly Added Item!',
+                            [
+                                { text: 'Ok', onPress: () => props.navigation.navigate("AssetsList") }
+                            ],
+                            { cancelable: false }
+                        );
+                    })
+                    .catch(err => {
+                        "Can not add"
+                    })
+                }
 
-                name: '',
-                category: '',
-                description: '',
-                barcode: '',
-                check_in_status: 0,
-                user_id: userId,
-                location_id: 1
-            }}
+                validationSchema={yup.object().shape({
+                    name: yup
+                        .string()
+                        .required(),
+                    barcode: yup
+                        .string()
+                        .required(),
+                })}
+            >
 
+                {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
+                    <View style={styles.container}>
+                        <KeyboardShift>
+                            <TouchableOpacity
+                                onPress={() => props.navigation.navigate("BarcodeScanner")}
+                            >
+                                <MaterialCommunityIcons
+                                    style={styles.upc}
+                                    name="qrcode-scan"
+                                    size={80}
+                                />
+                            </TouchableOpacity>
 
-            onSubmit={(values) => axios
-                .post("https://net-giver-asset-mngr.herokuapp.com/api/assets", values)
-                .then(res => {
-
-
-                    Alert.alert(
-                        'Message',
-                        'Successfuly Added Item!',
-                        [
-                            { text: 'Ok', onPress: () => props.navigation.navigate("AssetsList") }
-                        ],
-                        { cancelable: false }
-                    );
-
-                })
-
-
-                .catch(err => {
-                    "Can not add"
-                })
-
-            }
-
-            validationSchema={yup.object().shape({
-                name: yup
-                    .string()
-                    .required(),
-                barcode: yup
-                    .string()
-                    .required(),
-            })}
-        >
-
-
-            {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
-
-                <View style={styles.container}>
-                    <KeyboardShift>
-
-
-                        <TouchableOpacity
-
-                            onPress={() => props.navigation.navigate("BarcodeScanner")}
-                        >
-
-                            <MaterialCommunityIcons
-
-                                style={styles.upc}
-                                name="qrcode-scan"
-                                size={80}
+                            <Input
+                                placeholder="Asset Name"
+                                value={values.name}
+                                onChangeText={handleChange("name")}
+                                onBlur={() => setFieldTouched("name")}
+                                clearButtonMode="always"
+                                inputStyle={styles.inputField}
                             />
-                        </TouchableOpacity>
+                            {touched.name && errors.name && (
+                                <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>{errors.name}</Text>
+                            )}
 
-                        <Input
-                            placeholder="Asset Name"
-                            value={values.name}
-                            onChangeText={handleChange("name")}
-                            onBlur={() => setFieldTouched("name")}
-                            clearButtonMode="always"
-                            inputStyle={styles.inputField}
-                        />
-                        {touched.name && errors.name && (
-                            <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>{errors.name}</Text>
-                        )}
-                        <Input
-                            placeholder="Barcode ID"
-                            name="barcode"
+                            <Input
+                                placeholder="Barcode ID"
+                                name="barcode"
 
-                            value={barkode}
-                            value={values.barcode = barkode}
-                            onBlur={() => setFieldTouched('barcode')}
+                                value={barkode}
+                                value={values.barcode = barkode}
+                                onBlur={() => setFieldTouched('barcode')}
 
-                            autoCapitalize="none"
-                            inputStyle={styles.inputField}
+                                autoCapitalize="none"
+                                inputStyle={styles.inputField}
 
-                            editable={false}
-                        />
-                        {touched.barcode && errors.barcode && (
-                            <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
-                                {errors.barcode}
-                            </Text>
-                        )}
+                                editable={false}
+                            />
+                            {touched.barcode && errors.barcode && (
+                                <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
+                                    {errors.barcode}
+                                </Text>
+                            )}
 
-                        <Input
-                            placeholder="Add Description"
-                            value={values.description}
-                            onChangeText={handleChange("description")}
-                            onBlur={() => setFieldTouched("description")}
-                            inputStyle={styles.inputField}
-                        />
-                        {touched.description && errors.description && (
-                            <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
-                                {errors.description}
-                            </Text>
-                        )}
+                            <Input
+                                placeholder="Add Description"
+                                value={values.description}
+                                onChangeText={handleChange("description")}
+                                onBlur={() => setFieldTouched("description")}
+                                inputStyle={styles.inputField}
+                            />
+                            {touched.description && errors.description && (
+                                <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
+                                    {errors.description}
+                                </Text>
+                            )}
 
-                        <Input
-                            placeholder="Choose A Category"
-                            value={values.category}
-                            onChangeText={handleChange("category")}
-                            onBlur={() => setFieldTouched("category")}
-                            inputStyle={styles.inputField}
-                        />
-                        {touched.category && errors.category && (
-                            <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
-                                {errors.category}
-                            </Text>
-                        )}
+                            <Input
+                                placeholder="Choose A Category"
+                                value={values.category}
+                                onChangeText={handleChange("category")}
+                                onBlur={() => setFieldTouched("category")}
+                                inputStyle={styles.inputField}
+                            />
+                            {touched.category && errors.category && (
+                                <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
+                                    {errors.category}
+                                </Text>
+                            )}
 
+                            <Input
+                                placeholder="Choose A Location"
+                                value={values.location_id}
+                                onChangeText={handleChange("location_id")}
+                                onBlur={() => setFieldTouched("location_id")}
+                                inputStyle={styles.inputField}
+                            />
+                            {touched.location_id && errors.location_id && (
+                                <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
+                                    {errors.location_id}
+                                </Text>
+                            )}
 
+                            <Button
+                                iconRight={false}
+                                title="Add New Asset"
+                                type="solid"
+                                color="blue"
+                                onPress={handleSubmit}
+                                buttonStyle={styles.button}
+                            />
 
-                        <Input
-                            placeholder="Choose A Location"
-                            value={values.location_id}
-                            onChangeText={handleChange("location_id")}
-                            onBlur={() => setFieldTouched("location_id")}
-                            inputStyle={styles.inputField}
-                        />
-                        {touched.location_id && errors.location_id && (
-                            <Text style={{ fontSize: 10, color: "red", paddingLeft: 10 }}>
-                                {errors.location_id}
-                            </Text>
-                        )}
-
-                        <Button
-                            iconRight={false}
-                            title="Add New Asset"
-                            type="solid"
-                            color="blue"
-                            onPress={handleSubmit}
-
-
-                            buttonStyle={styles.button}
-                        />
-
-
-                        <OrderUpc />
-
-                    </KeyboardShift>
-                </View>
-            )}
-        </Formik>
+                            <OrderUpc />
+                        </KeyboardShift>
+                    </View>
+                )}
+            </Formik>
+        </>
     );
 
 }
@@ -209,7 +187,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-
     },
     button: {
         width: "90%",
@@ -230,6 +207,30 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         marginTop: 20,
         borderBottomWidth: 0
+    },
+    activeText: {
+        color: "#3366FF",
+        fontSize: 15,
+        fontWeight: "500",
+        textAlign: "center",
+        alignSelf: "center",
+        flexDirection: "column",
+        justifyContent: "center",
+        width: "50%",
+    },
+    activeTab: {
+        width: "50%",
+        height: 1,
+        position: "absolute",
+        bottom: 0,
+        backgroundColor: "#3366FF",
+    },
+    assetSection: {
+        flexDirection: "row",
+        color: "white",
+        backgroundColor: "#EFEFF4",
+        height: 50,
+        width: "100%",
     }
 });
 

@@ -166,6 +166,9 @@ const AppStack = createDrawerNavigator(
     Assets: {
       screen: AssetsScreen,
     },
+    AssetEntry: {
+      screen: AssetsAdd
+    }
   },
   {
     contentComponent: CustomDrawer,
