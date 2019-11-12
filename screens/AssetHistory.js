@@ -100,7 +100,6 @@ const AssetHistory = ({navigation}) => {
             }
           </TouchableOpacity>
         </View>
-
         <View style={styles.flatList}>
           { !isMine 
             ? <FlatList
