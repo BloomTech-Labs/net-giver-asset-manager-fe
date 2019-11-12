@@ -19,7 +19,6 @@ const AssetsAdd = (props, { navigation }) => {
             .then(response => {
                 const user_id = JSON.parse(response);
                 setUserId(user_id);
-
             })
             .catch(error => {
                 console.log(error)
@@ -46,13 +45,12 @@ const AssetsAdd = (props, { navigation }) => {
 
             <View style={styles.photoContainer}>
                 <View style={styles.photoIcon}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.navigation.navigate("Camera")}>
                         <Entypo name="camera" size={30} color="#3366FF" />
                     </TouchableOpacity>
                     <Text>Add Photo</Text>
                 </View>
             </View>
-
             <Formik
                 enableReinitialize
                 initialValues={{
@@ -92,6 +90,9 @@ const AssetsAdd = (props, { navigation }) => {
                     category: yup
                         .string()
                         .required(),
+                    location_id: yup
+                        .string()
+                        .required(),
                     barcode: yup
                         .string()
                         .required(),
@@ -109,18 +110,13 @@ const AssetsAdd = (props, { navigation }) => {
                                     name="qrcode-scan"
                                     size={25}
                                 />
-                                <Text style={styles.qrCode}>{barkode}</Text>
+                                {!barkode
+                                    ? <Text style={styles.noCode}>Scan QR Code</Text>
+                                    : <Text style={styles.qrCode}>{barkode}</Text>
+                                }
                             </TouchableOpacity>
 
                             <Text style={styles.assetTitle}>Name</Text>
-                            {/* <Input
-                                // placeholder="Asset Name"
-                                value={values.name}
-                                onChangeText={handleChange("name")}
-                                onBlur={() => setFieldTouched("name")}
-                                clearButtonMode="always"
-                                inputStyle={styles.inputField}
-                            /> */}
                             <TextInput
                                 value={values.name}
                                 onChangeText={handleChange("name")}
@@ -188,8 +184,6 @@ const AssetsAdd = (props, { navigation }) => {
                                 onPress={handleSubmit}
                                 buttonStyle={styles.button}
                             />
-
-                            {/* <OrderUpc /> */}
                         </KeyboardShift>
                     </View>
                 )}
@@ -264,6 +258,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         flex: 1
+    },
+    noCode: {
+        marginLeft: 55
     },
     qrCode: {
         marginLeft: 55,
