@@ -6,18 +6,30 @@ import Spacer from "./Spacer";
 const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUserName] = useState("");
 
   return (
     <>
-        <Text style={styles.inputLabels}>Email</Text>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize="none"
-          autoCorrect={false}
-          style={styles.inputField}
-        />
+      <Text style={styles.inputLabels}>UserName</Text>
+      <TextInput
+        placeholder="UserName"
+        value={username}
+        onChangeText={setUserName}
+        autoCapitalize="none"
+        autoCorrect={false}
+        style={styles.inputField}
+      />
+      <Spacer />
+
+      <Text style={styles.inputLabels}>Email</Text>
+      <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        autoCorrect={false}
+        style={styles.inputField}
+      />
       <Spacer />
 
       <Text style={styles.inputLabels}>Password</Text>
@@ -37,8 +49,8 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
         <Button
           title={submitButtonText}
           iconRight={true}
-          onPress={() => onSubmit({ email, password })}
-          style={{marginTop: 80}}
+          onPress={() => onSubmit({ email, password, username })}
+          style={{ marginTop: 80 }}
         />
       </Spacer>
     </>
@@ -65,7 +77,7 @@ const styles = StyleSheet.create({
   inputLabels: {
     width: "91%",
     alignSelf: "center",
-    fontSize: 17,
+    fontSize: 17
   }
 });
 

@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 
-export default class AssetsCard extends React.Component {
+class AssetsCard extends React.Component {
 
     render() {
 
 
         showDetails = () => {
             const id = this.props.data.id
-            console.log('the ID', id)
+            console.log('the asset ID', id)
             this.props.navigation.navigate("SingleAssetCard", { id });
 
         }
@@ -29,7 +30,17 @@ export default class AssetsCard extends React.Component {
                     <Text style={styles.assetID}>Barcode # {this.props.data.barcode}</Text>
                     <Text>Category: {this.props.data.category}</Text>
                     <Text>Description: {this.props.data.description}</Text>
-                    <Text>Status: {this.props.data.check_in_status}</Text>
+                    <View>
+                        {this.props.data.check_in_status == true ?
+                            (<View>
+                                <Text>Status: Check-In</Text>
+                            </View>)
+                            :
+                            (<View>
+                                <Text>Status: Check-Out</Text>
+                            </View>)
+                        }
+                    </View>
 
                 </View>
             </TouchableOpacity>
@@ -66,3 +77,5 @@ const styles = StyleSheet.create({
         color: "#82A0FD"
     }
 });
+
+export default withNavigation(AssetsCard);

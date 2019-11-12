@@ -1,31 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, StyleSheet, Button } from "react-native";
+import { View, Text, FlatList, StyleSheet, Button, AsyncStorage } from "react-native";
 import axios from "axios";
-import AssetsCard from "../AssetsCard";
+import OneAsset from "./OneAsset";
 import { ListItem } from "react-native-elements";
+import { withNavigation } from 'react-navigation';
 
 const SingleAssetCard = (props) => {
 
+    const [userId, setUserId] = useState(0)
+
+    useEffect(() => {
+        console.log('useeffect run')
+        AsyncStorage.getItem("user_id")
+            .then(response => {
+                var userId = JSON.parse(response);
+                setUserId(userId);
+
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    }, []);
+
+
     if (props.navigation.state.params) {
-        var id = props.navigation.state.params.id
+        var currentAssetId = props.navigation.state.params.id
     }
 
-    console.log('test', id)
 
 
-
-    const [assets, setAssets] = useState();
-    const [assetHistory, setAssetHistory] = useState({
-
-        user_id: 1,
-        asset_id: 4
-    })
-
+    const [singleAsset, setSingleAsset] = useState({ id: currentAssetId, check_in_status: false });
+    const assetHistory = { asset_id: currentAssetId, user_id: userId }
     const [assetStatus, setAssetStatus] = useState({});
+
+
+
 
     const checkInStatus = () => {
 
-        var statusAsset = assets.map(function (e) {
+        var statusAsset = singleAsset.map(function (e) {
 
             if (e.check_in_status == true) {
                 return e.check_in_status = { check_in_status: false };
@@ -34,45 +47,47 @@ const SingleAssetCard = (props) => {
             }
         });
 
-        var AssetID = assets.map(function (ids) {
+        var AssetID = singleAsset.map(function (ids) {
 
             return ids.id;
 
         });
 
+
         var newObj = Object.assign({}, ...statusAsset);
-        console.log(AssetID)
+
         axios
             .put(`https://net-giver-asset-mngr.herokuapp.com/api/assets/${AssetID}`, newObj)
             .then(response => {
-                console.log('Updated Status', newObj)
+                console.log('Updated Check In Status', newObj)
 
             })
             .catch(error => {
                 console.log(error);
             });
+
 
         axios
             .post("https://net-giver-asset-mngr.herokuapp.com/api/history/", assetHistory)
             .then(response => {
-                console.log('Added New History')
-
+                console.log("New Asset History Added!")
             })
             .catch(error => {
                 console.log(error);
             });
-    }
 
+
+    }
 
 
 
     // Fetch assets
     const getAssetsList = () => {
         axios
-            .get("https://net-giver-asset-mngr.herokuapp.com/api/assets/4")
+            .get(`https://net-giver-asset-mngr.herokuapp.com/api/assets/${currentAssetId}`)
             .then(response => {
 
-                setAssets(response.data);
+                setSingleAsset(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -85,7 +100,7 @@ const SingleAssetCard = (props) => {
 
 
 
-
+    console.log('Checkin Status in SinglePage', singleAsset.check_in_status)
 
     return (
         <View>
@@ -95,17 +110,37 @@ const SingleAssetCard = (props) => {
 
             <FlatList
                 keyExtractor={(item, index) => item.id}
-                data={assets}
+                data={singleAsset}
                 renderItem={({ item }) => {
-                    return <AssetsCard data={item} />;
+                    return <OneAsset data={item} />;
                 }}
             />
-            <Button
-                title="RETURN and ADD ASSET HISTORY"
-                onPress={checkInStatus}
 
+
+            <FlatList
+                keyExtractor={(item, index) => item.id}
+                data={singleAsset}
+                renderItem={({ item }) => {
+                    {
+                        return item.check_in_status == false ?
+                            (<View>
+                                <Button
+                                    title="RETURN"
+                                    onPress={checkInStatus}
+
+                                />
+                            </View>)
+                            :
+                            (<View>
+                                <Button
+                                    title="CHECK-OUT"
+                                    onPress={checkInStatus}
+
+                                />
+                            </View>)
+                    }
+                }}
             />
-
         </View>
     );
 };
@@ -127,4 +162,5 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SingleAssetCard;
+export default withNavigation(SingleAssetCard);
+

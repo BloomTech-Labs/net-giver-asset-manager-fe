@@ -10,7 +10,7 @@ import { createDrawerNavigator } from "react-navigation-drawer";
 import { Provider as AuthProvider } from "../context/AuthContext";
 import { Provider as LocationProvider } from "../context/LocationContext";
 import { setNavigator } from "../navigationRef";
-import RegisterNameText from "../screens/RegisterNameText";
+import RegisterNameText from "../screens/Register";
 import LoginText from "../screens/LoginText";
 import AssetHistory from "../screens/AssetHistory";
 import Landing from "../screens/Landing";
@@ -67,7 +67,7 @@ const DashboardScreen = createStackNavigator({
       headerTitleStyle: {
         color: "black",
         fontSize: 20,
-        fontWeight: "500",
+        fontWeight: "500"
       },
       headerRight: (
         <SafeAreaView>
@@ -77,7 +77,7 @@ const DashboardScreen = createStackNavigator({
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-      ),
+      )
     })
   }
 });
@@ -108,7 +108,7 @@ const ScannerScreen = createStackNavigator({
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-      ),
+      )
     })
   }
 });
@@ -119,7 +119,7 @@ const AppStack = createDrawerNavigator(
       screen: DashboardScreen
     },
     Scanner: {
-      screen: ScannerScreen,
+      screen: ScannerScreen
     },
     Register: RegisterNameText,
     Login: LoginText
@@ -151,13 +151,19 @@ const AuthStack = createStackNavigator({
     navigationOptions: {
       headerTitle: "Register"
     }
-  },
+  }
 });
 
 const RootNavigation = createSwitchNavigator(
   {
     Splash: {
       screen: Splash
+    },
+    Landing: {
+      screen: Landing
+    },
+    Cameron: {
+      screen: Cameron
     },
     App: {
       screen: AppStack
@@ -170,7 +176,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Splash"
+    initialRouteName: "Landing"
   }
 );
 
