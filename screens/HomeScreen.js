@@ -41,7 +41,7 @@ export default function HomeScreen({ navigation }) {
             />
           </Spacer>
 
-          <Spacer>
+          {/* <Spacer>
             <Button
               title="Authy Register"
               onPress={() => navigation.navigate("AuthyRegister")}
@@ -60,7 +60,7 @@ export default function HomeScreen({ navigation }) {
               title="Authy Authentication"
               onPress={() => navigation.navigate("AuthyConfirm")}
             />
-          </Spacer>
+          </Spacer> */}
 
           <Spacer>
             <Button
