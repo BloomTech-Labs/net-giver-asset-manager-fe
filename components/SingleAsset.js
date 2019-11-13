@@ -1,23 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { withNavigation } from "react-navigation";
 
-const SingleAsset = ({data}) => {
+const SingleAsset = ({ data, navigation }) => {
+  console.log("INDIVIDUAL ASSET DATA", data);
+  
+  // Handles clicking an individual asset in the Dashboard screen
+  const showDetails = () => {
+    const assetId = data.id;;
+    console.log("ASSET ID:", assetId);
+    navigation.navigate("SingleAssetCard", { assetId });
+  };
+
   return (
-    <View style={styles.assetWrapper}>
-      <View style={styles.imageWrapper}>
-        {/* Needs to be replaced with an image primitive component */}
-        {/* <Text>Images goes here</Text> */}
+    <TouchableOpacity onPress={showDetails}>
+      <View style={styles.assetWrapper}>
+        <View style={styles.imageWrapper} />
+        <View style={styles.textWrapper}>
+          <Text style={styles.assetName}>{ data.name }</Text>
+          <Text style={styles.assetID}>QR ID: { data.barcode }</Text>
+          <Text>{ data.description }</Text>
+          <Text style={styles.assetLocation}>Returned: True</Text>
+        </View>
       </View>
-      <View style={styles.textWrapper}>
-        <Text style={styles.assetName}>** Asset Name Here **</Text>
-        <Text style={styles.assetID}>Serial # { data.asset_id }</Text>
-        <Text>** Asset Description Here **</Text>
-        <Text>Checked In: { data.time_in }</Text>
-        <Text>Checked Out: { data.time_out }</Text>
-        <Text>User: { data.user_id }</Text>
-        <Text style={styles.assetLocation}>Location: ** Enter Location Here **</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -36,19 +42,27 @@ const styles = StyleSheet.create({
   },
   textWrapper: {
     flex: 3,
+    flexDirection: "column",
+    justifyContent: "space-between",
     marginLeft: 30,
     fontSize: 15
   },
   assetName: {
-    fontWeight: "bold"
+    fontSize: 15,
+    fontWeight: "500"
   },
   assetID: {
+    fontSize: 14,
     color: "#7C7777",
     fontStyle: "italic"
   },
+  assetDescription: {
+    fontSize: 14,
+    fontWeight: "normal",
+  },
   assetLocation: {
     color: "#82A0FD"
-  }
+  },
 });
 
-export default SingleAsset;
+export default withNavigation(SingleAsset);

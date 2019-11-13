@@ -67,6 +67,8 @@ const signin = dispatch => async ({ email, password, username, id }) => {
     ]);
     dispatch({ type: "signin", payload: response.data.token });
     navigate("Ipick");
+
+
     analytics.track("Logged In", { Status: "Successful" });
   } catch (err) {
     dispatch({
