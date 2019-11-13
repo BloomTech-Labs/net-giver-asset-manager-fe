@@ -27,6 +27,7 @@ import { Formik } from "formik";
 import { Entypo } from "@expo/vector-icons";
 
 const AssetsAdd = (props, { navigation }) => {
+  console.log("state test:", props);
   const [userId, setUserId] = useState(0);
   const [image, setImage] = useState(null);
 
@@ -75,7 +76,7 @@ const AssetsAdd = (props, { navigation }) => {
     };
 
     const options = {
-      keyPrefix: `${userId}/assetID`,
+      keyPrefix: `${userId}/${asseItd}`,
       bucket: "netgiver",
       region: "us-east-2",
       accessKey: AWS_ACCESS_KEY,
