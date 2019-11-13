@@ -1,5 +1,12 @@
 import * as React from "react";
-import { View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  AsyncStorage,
+  FlatList
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
 import * as Permissions from "expo-permissions";
@@ -18,43 +25,76 @@ import axios from "axios";
 export default class Cameron extends React.Component {
   constructor(props) {
     super(props);
-    console.log("cameron:", props);
+    // console.log("cameron:", props);
     this.state = {
       image: null,
       userName: "",
-      name: ""
+      name: "",
+      userId: 0,
+      email: ""
     };
   }
 
-  handleinput = (name, value) => {
-    this.setState(() => ({ [name]: value }));
+  getUser = () => {
+    axios
+      .get("https://net-giver-asset-mngr.herokuapp.com/api/auth/users")
+      .then(res => {
+        console.log("usertest:", res.data);
+        //  ( res.data === this.state.userId ? this.setState({ email: res.data.email}) : this.state.email)
+        if (res.data.id === this.state.userId) {
+          // console.log("logicTest:", this.state.userId);
+          this.setState({ email: email });
+          console.log("emailtest:", email);
+        }
+      })
+      .catch(err => {
+        console.log("failed to get user:", err);
+      });
+  };
+
+  fetchUserId = () => {
+    AsyncStorage.getItem("user_id")
+      .then(response => {
+        const user_id = JSON.parse(response);
+        this.setState({ userId: user_id });
+        console.log("User ID fetched! on cameron", user_id);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   render() {
-    // const { updateUserName } = useContext(AuthContext);
     let { image } = this.state;
-    let { userName } = this.state;
-    // let username = this.context;
+    let { email } = this.state;
 
-    // console.log("state test with context:", username);
-    console.log(":", this.state.userName);
-    console.log("name test:", this.state.name);
-    // const { signup } = useContext(AuthContext);
-    // console.log("testContextdata", signup);
+    console.log("anotherStateTest:", email);
 
     return (
-      <View style={{ flex: 0, alignItems: "center", justifyContent: "center", top: 50 }}>
-        {/* <Button
-          title="Pick an image from camera roll"
-          onPress={this.chooseImage}
-        /> */}
-        <Text style={[{ fontSize: 33, textAlign: 'center' }, styles.welcome]}>
-          Welcome <Text style={{ color: '#3366FF' }}>Monique Smith!</Text>
-
+      <View
+        style={{
+          flex: 0,
+          alignItems: "center",
+          justifyContent: "center",
+          top: 50
+        }}
+      >
+        {/* <Text style={{ color: "#3366FF" }}>Monique Smith!</Text> */}
+        <Text style={[{ fontSize: 33, textAlign: "center" }, styles.welcome]}>
+          Welcome{" "}
         </Text>
-        <Text style={{ color: 'lightgrey', fontSize: 22, padding: 20 }}>
+        <FlatList
+          data={email}
+          keyExtractor={email => email.email}
+          renderItem={({ item }) => {
+            return item;
+          }}
+        />
+        <Text style={{ color: "lightgrey", fontSize: 22, padding: 20 }}>
           You are almost there, the final step is to add your avatar picture
         </Text>
+        <Text>{this.state.userId}</Text>
+        {/* <Text>{this.state.email}</Text> */}
 
         <Spacer>
           <Avatar
@@ -73,51 +113,32 @@ export default class Cameron extends React.Component {
         </TouchableOpacity>
         <Text>Add Photo</Text>
 
-        {/* <TouchableOpacity style={{ backgroundColor: 'pink' }}> */}
-
-        <View style={{
-          backgroundColor: '#3366FF', width: '80%',
-          borderRadius: 20,
-          overflow: "hidden",
-          width: "80%",
-          alignSelf: "center",
-          top: '30%',
-          padding: 5,
-
-        }}>
-          <Button title="Next" color="red" />
-        </View>
-        {/* </TouchableOpacity> */}
-
-
-
-        {/* <Text style={styles.label}>Name</Text> */}
-        {/* <TextInput
-          type="text"
-          style={styles.inputField}
-          placeholder="UserName"
-          value={this.state.userName}
-          onChangeText={val => this.handleinput("userName", val)}
-          // onChangeText={this.handleinput}
-          name="userName"
-        /> */}
-        {/* <Text style={styles.label}>AnotherField</Text>
-        <TextInput style={styles.inputField} placeholder="anotherfield" /> */}
-        {/* <Button onPress={this.handleinput} /> */}
-
-        {/* {image && (
-          <Image
-            style={styles.image}
-            source={{ uri: image }}
-            style={{ width: 300, height: 300 }}
+        <View
+          style={{
+            backgroundColor: "#3366FF",
+            width: "80%",
+            borderRadius: 20,
+            overflow: "hidden",
+            width: "80%",
+            alignSelf: "center",
+            top: "30%",
+            padding: 5
+          }}
+        >
+          <Button
+            title="Next"
+            color="red"
+            onPress={() => this.props.navigation.navigate("Dashboard")}
           />
-        )} */}
+        </View>
       </View>
     );
   }
 
   componentDidMount() {
     this.getPermissionAsync();
+    this.fetchUserId();
+    this.getUser();
   }
 
   getPermissionAsync = async () => {
@@ -136,7 +157,7 @@ export default class Cameron extends React.Component {
       aspect: [4, 3]
     });
 
-    console.log("image test:", result);
+    // console.log("image test:", result);
 
     if (!result.cancelled) {
       this.setState({ image: result.uri });
@@ -149,8 +170,7 @@ export default class Cameron extends React.Component {
     };
 
     const options = {
-      // keyPrefix: `${this.state.userName}/`,
-      keyPrefix: `monique/`,
+      keyPrefix: `${this.state.userId}/`,
       bucket: "netgiver",
       region: "us-east-2",
       accessKey: AWS_ACCESS_KEY,
@@ -162,14 +182,33 @@ export default class Cameron extends React.Component {
     RNS3.put(file, options).then(res => {
       if (res.status !== 201) throw new Error("Failed to upload image to S3");
       console.log("upload to aws test", res.body);
-      const location = res.data.postResponse.location;
+      const location = res.body.postResponse.location;
       console.log("local test:", location);
-      const name = res.data.postResponse.key;
+      const name = res.body.postResponse.key;
+      // const user_id = JSON.stringify(name.replace(/\D/g, ""));
+      const user_id = JSON.parse(name.replace(/\D/g, ""));
+      console.log("rename", user_id);
+      // const newerName = JSON.parse(newName);
+      // console.log("herewegoagain", newerName);
+      const data = {
+        // user_id,
+        user_id,
+        location
+      };
+      console.log("dataTest:", data);
+
+      // console.log("nametest:", name);
       if (res.status === 201) {
         axios
-          .post("http://localhost:8000/api/location", location, name)
+          .post(
+            "https://net-giver-asset-mngr.herokuapp.com/api/user-images",
+            data
+          )
           .then(res => {
             console.log("post to backend test:", res);
+          })
+          .catch(err => {
+            console.log("that didnt work", err.data);
           });
       }
     });
@@ -199,13 +238,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 5,
     marginLeft: 5
-  },
-  welcome: {
-    // alignSelf: "center",
-    // color: 'pink',
-    // fontSize: 1
-
   }
 });
 
-// res.data.postResponse.location && res.data.postResponse.key
+// ({
+//   method: "post",
+//   url: "https://net-giver-asset-mngr.herokuapp.com/api/user-images",
+//   headers: {
+//     "Content-Type": "application/x-www-form-urlencoded",
+//     Accept: "application/json"
+//   },
+//   data
+// });
