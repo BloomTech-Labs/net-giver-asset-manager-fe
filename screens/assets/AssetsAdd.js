@@ -161,6 +161,11 @@ const AssetsAdd = (props, { navigation }) => {
                   : { uri: "https://i.imgur.com/ltNMlnA.png" }
               }
               size="xlarge"
+              containerStyle={{ 
+                alignSelf: "center", 
+                width: "90%",
+                marginTop: 20
+              }}
             />
           )}
         <Formik
