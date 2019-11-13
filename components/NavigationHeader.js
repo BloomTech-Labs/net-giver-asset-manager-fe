@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     flex: 9,
     paddingLeft: 20,
-    color: "white"
+    color: "white",
+    paddingTop: 50
   },
   menuIcon: {
     flexDirection: "row",

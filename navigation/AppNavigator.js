@@ -32,6 +32,10 @@ import Contact from "../screens/Contact";
 import Legal from "../screens/Legal";
 import About from "../screens/About";
 
+import AuthyRegisterScreen from "../screens/AuthyRegister";
+import AuthyLoginScreen from "../screens/AuthyLogin";
+import AuthyConfirmScreen from "../screens/AuthyConfirm";
+
 const DevStack = createStackNavigator(
   {
     Home: HomeScreen,
@@ -49,7 +53,10 @@ const DevStack = createStackNavigator(
     Ipick: Cameron,
     Contact: Contact,
     Legal: Legal,
-    About: About
+    About: About,
+    AuthyRegister: AuthyRegisterScreen,
+    AuthyLogin: AuthyLoginScreen,
+    AuthyConfirm: AuthyConfirmScreen
   },
   {
     initialRouteName: "Home"
@@ -113,6 +120,41 @@ const ScannerScreen = createStackNavigator({
   }
 });
 
+const AssetsScreen = createStackNavigator({
+  DashboardScreen: {
+    screen: AssetsList,
+    navigationOptions: props => ({
+      title: "Simple Asset Tracker",
+      headerStyle: {
+        backgroundColor: "#EFEFF4"
+      },
+      headerTitleStyle: {
+        color: "black",
+        fontSize: 20,
+        fontWeight: "500",
+      },
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+      headerLeft: (
+        <SafeAreaView>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+              <Icon name="arrow-back" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+    })
+  }
+});
+
 const AppStack = createDrawerNavigator(
   {
     Dashboard: {
@@ -121,8 +163,9 @@ const AppStack = createDrawerNavigator(
     Scanner: {
       screen: ScannerScreen
     },
-    Register: RegisterNameText,
-    Login: LoginText
+    Assets: {
+      screen: AssetsScreen,
+    },
   },
   {
     contentComponent: CustomDrawer,
