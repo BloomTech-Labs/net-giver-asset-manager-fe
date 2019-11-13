@@ -59,7 +59,7 @@ const DevStack = createStackNavigator(
     AuthyConfirm: AuthyConfirmScreen
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Location"
   }
 );
 
@@ -257,7 +257,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Landing"
+    initialRouteName: "Dev"
   }
 );
 
