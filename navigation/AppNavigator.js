@@ -31,6 +31,7 @@ import Cameron from "../screens/Cameron";
 import Contact from "../screens/Contact";
 import Legal from "../screens/Legal";
 import About from "../screens/About";
+import TextMsg from "../screens/TextMsg";
 
 const DevStack = createStackNavigator(
   {
@@ -49,7 +50,8 @@ const DevStack = createStackNavigator(
     Ipick: Cameron,
     Contact: Contact,
     Legal: Legal,
-    About: About
+    About: About,
+    Text: TextMsg
   },
   {
     initialRouteName: "Home"
