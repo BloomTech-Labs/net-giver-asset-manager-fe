@@ -33,6 +33,10 @@ import Legal from "../screens/Legal";
 import About from "../screens/About";
 import TextMsg from "../screens/TextMsg";
 
+import AuthyRegisterScreen from "../screens/AuthyRegister";
+import AuthyLoginScreen from "../screens/AuthyLogin";
+import AuthyConfirmScreen from "../screens/AuthyConfirm";
+
 const DevStack = createStackNavigator(
   {
     Home: HomeScreen,
@@ -51,7 +55,10 @@ const DevStack = createStackNavigator(
     Contact: Contact,
     Legal: Legal,
     About: About,
-    Text: TextMsg
+    Text: TextMsg,
+    AuthyRegister: AuthyRegisterScreen,
+    AuthyLogin: AuthyLoginScreen,
+    AuthyConfirm: AuthyConfirmScreen
   },
   {
     initialRouteName: "Home"
@@ -115,6 +122,76 @@ const ScannerScreen = createStackNavigator({
   }
 });
 
+const AssetsScreen = createStackNavigator({
+  DashboardScreen: {
+    screen: AssetsList,
+    navigationOptions: props => ({
+      title: "Simple Asset Tracker",
+      headerStyle: {
+        backgroundColor: "#EFEFF4"
+      },
+      headerTitleStyle: {
+        color: "black",
+        fontSize: 20,
+        fontWeight: "500"
+      },
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+      headerLeft: (
+        <SafeAreaView>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+              <Icon name="arrow-back" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      )
+    })
+  }
+});
+
+const AssetsAddScreen = createStackNavigator({
+  DashboardScreen: {
+    screen: AssetsAdd,
+    navigationOptions: props => ({
+      title: "Simple Asset Tracker",
+      headerStyle: {
+        backgroundColor: "#EFEFF4"
+      },
+      headerTitleStyle: {
+        color: "black",
+        fontSize: 20,
+        fontWeight: "500"
+      },
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+      headerLeft: (
+        <SafeAreaView>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+              <Icon name="arrow-back" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      )
+    })
+  }
+});
+
 const AppStack = createDrawerNavigator(
   {
     Dashboard: {
@@ -123,8 +200,12 @@ const AppStack = createDrawerNavigator(
     Scanner: {
       screen: ScannerScreen
     },
-    Register: RegisterNameText,
-    Login: LoginText
+    Assets: {
+      screen: AssetsScreen
+    },
+    Add: {
+      screen: AssetsAddScreen
+    }
   },
   {
     contentComponent: CustomDrawer,
