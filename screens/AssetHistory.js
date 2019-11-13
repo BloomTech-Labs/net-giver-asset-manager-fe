@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text, StatusBar } from "react-native";
+import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text, StatusBar, TextInput } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import _ from "lodash";
 import axios from "axios";
@@ -13,7 +13,9 @@ const AssetHistory = ({ navigation }) => {
   const [myHistory, setMyHistory] = useState([]);
   const [isMine, setIsMine] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [userId, setUserId] = useState(0)
+  const [userId, setUserId] = useState();
+  const [searchedHistory, setSearchedHistory] = useState();
+  const [ query, setQuery] = useState('');
 
   useEffect(() => {
     fetchAllAssets();
@@ -39,9 +41,15 @@ const AssetHistory = ({ navigation }) => {
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
       .then(response => {
+        console.log("history axios response: ", response);
         setHistory(response.data);
         setIsLoading(false);
         analytics.track("Asset History Tracking");
+        const myAssets = response.data.filter(asset => {
+          return asset.user_id === userId
+        })
+        setMyHistory(myAssets);
+        setSearchedHistory(response.data);
       })
       .catch(error => {
         console.log(error);
@@ -49,12 +57,28 @@ const AssetHistory = ({ navigation }) => {
   };
 
   // Fetches only the assets associated with the logged in user
-  const fetchMyAssets = () => {
-    const myAssets = history.filter(asset => {
-      return asset.user_id === userId
-    })
-    setMyHistory(myAssets);
-  };
+  // const fetchMyAssets = () => {
+  //   const myAssets = history.filter(asset => {
+  //     return asset.user_id === userId
+  //   })
+  //   setMyHistory(myAssets);
+  // };
+  console.log("myHistory", myHistory);
+  console.log("history", history);
+
+  const search = (items, query) => {
+
+    let filteredItems = items;
+
+    if(query.length) {
+        filteredItems = items.filter(item => {
+            return item.name.toLowerCase().includes(query.toLowerCase());
+        })
+        setSearchedHistory(filteredItems)
+    }
+
+    setSearchedHistory(filteredItems);
+  }
 
   // Conditional rendering
   if (isLoading) {
@@ -71,7 +95,9 @@ const AssetHistory = ({ navigation }) => {
           <TouchableOpacity
             style={styles.allAssets}
             onPress={() => {
-              setIsMine(false)
+              setIsMine(false);
+              setSearchedHistory(history);
+              setQuery('');
             }
             }
           >
@@ -87,8 +113,9 @@ const AssetHistory = ({ navigation }) => {
           <TouchableOpacity
             style={styles.allAssets}
             onPress={() => {
-              fetchMyAssets();
-              setIsMine(true)
+              setIsMine(true);
+              setSearchedHistory(myHistory);
+              setQuery('');
             }
             }
           >
@@ -102,19 +129,32 @@ const AssetHistory = ({ navigation }) => {
             }
           </TouchableOpacity>
         </View>
-
+        <View style={styles.searchContainer}>
+          <TextInput
+            style={styles.searchBar}
+            placeholder="Search"
+            onChangeText={text => !isMine ? (
+              setQuery(text),
+              search(history, text)
+            ) : (
+              setQuery(text),
+              search(myHistory, text)
+            )}
+            value={query}
+            />
+        </View>
         <View style={styles.flatList}>
           {!isMine
             ? <FlatList
               keyExtractor={(item, index) => index.toString()}
-              data={history}
+              data={searchedHistory}
               renderItem={({ item }) => {
                 return <SingleAsset data={item} />
               }}
             />
             : <FlatList
               keyExtractor={(item, index) => index.toString()}
-              data={myHistory}
+              data={searchedHistory}
               renderItem={({ item }) => {
                 return <SingleAsset data={item} />
               }}
@@ -210,6 +250,20 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "center",
   },
+  searchContainer: {
+    height: 60,
+    borderColor: '#7c7777',
+    borderBottomWidth: 1,
+    marginLeft: 25,
+    marginRight: 25
+  },
+  searchBar: {
+    paddingLeft: 15,
+    paddingRight: 15,
+    marginTop: 5,
+    height: '100%',
+    fontSize: 17
+  }
 });
 
 // analytics.track("Asset History Tracking");
