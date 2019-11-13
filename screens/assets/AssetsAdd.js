@@ -161,7 +161,7 @@ const AssetsAdd = (props, { navigation }) => {
                                     </Text>
                                 )}
 
-                                <Text style={styles.assetTitle}>Price</Text>
+                                {/* <Text style={styles.assetTitle}>Price</Text>
                                 <TextInput
                                     value={values.category}
                                     onChangeText={handleChange("category")}
@@ -174,7 +174,7 @@ const AssetsAdd = (props, { navigation }) => {
                                         fontSize: 10, color: "red", paddingLeft: 20, marginTop: 5 }}>
                                         {errors.category}
                                     </Text>
-                                )}
+                                )} */}
 
                                 <Button
                                     iconRight={false}
