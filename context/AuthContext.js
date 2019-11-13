@@ -199,8 +199,7 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: "" };
     case "signout":
       return { token: null, errorMessage: "" };
-    case "update_user_name":
-      return { ...state, username };
+
     default:
       return state;
   }
@@ -225,7 +224,7 @@ const signup = dispatch => async ({ email, password, username }) => {
     await AsyncStorage.setItem("token", response.data.token);
     dispatch({ type: "signin", payload: response.data.token });
 
-    navigate("Ipick");
+    navigate("Dashboard");
   } catch (err) {
     console.log("test context", err);
     dispatch({
