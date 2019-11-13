@@ -13,13 +13,13 @@ const AssetHistory = ({ navigation }) => {
   const [myHistory, setMyHistory] = useState([]);
   const [isMine, setIsMine] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [userId, setUserId] = useState(1);
+  const [userId, setUserId] = useState();
   const [searchedHistory, setSearchedHistory] = useState();
   const [ query, setQuery] = useState('');
 
   useEffect(() => {
     fetchAllAssets();
-    // fetchUserId();
+    fetchUserId();
   }, []);
 
   // Fetches the logged in user's ID
