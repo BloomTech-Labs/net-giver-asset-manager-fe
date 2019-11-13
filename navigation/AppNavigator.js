@@ -126,7 +126,7 @@ const AssetsScreen = createStackNavigator({
       headerTitleStyle: {
         color: "black",
         fontSize: 20,
-        fontWeight: "500",
+        fontWeight: "500"
       },
       headerRight: (
         <SafeAreaView>
@@ -145,7 +145,7 @@ const AssetsScreen = createStackNavigator({
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-      ),
+      )
     })
   }
 });
@@ -161,7 +161,7 @@ const AssetsAddScreen = createStackNavigator({
       headerTitleStyle: {
         color: "black",
         fontSize: 20,
-        fontWeight: "500",
+        fontWeight: "500"
       },
       headerRight: (
         <SafeAreaView>
@@ -180,7 +180,7 @@ const AssetsAddScreen = createStackNavigator({
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-      ),
+      )
     })
   }
 });
@@ -196,7 +196,7 @@ const LocationScreen = createStackNavigator({
       headerTitleStyle: {
         color: "black",
         fontSize: 20,
-        fontWeight: "500",
+        fontWeight: "500"
       },
       headerRight: (
         <SafeAreaView>
@@ -215,7 +215,7 @@ const LocationScreen = createStackNavigator({
             </TouchableOpacity>
           </View>
         </SafeAreaView>
-      ),
+      )
     })
   }
 });
@@ -229,7 +229,7 @@ const AppStack = createDrawerNavigator(
       screen: ScannerScreen
     },
     Assets: {
-      screen: AssetsScreen,
+      screen: AssetsScreen
     },
     Add: {
       screen: AssetsAddScreen

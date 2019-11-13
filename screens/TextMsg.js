@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Alert, Button, StyleSheet, Text, View } from "react-native";
 import Auth0 from "react-native-auth0";
+import { AuthSession } from "expo";
 
 const auth0 = new Auth0({
   domain: "dev-dumq2xvs.auth0.com",
@@ -13,19 +14,21 @@ class TextMsg extends Component {
     this.state = { accessToken: null };
   }
 
-  _onLogin = () => {
-    auth0.webAuth
-      .authorize({
-        scope: "openid profile email"
-      })
-      .then(credentials => {
-        Alert.alert("AccessToken: " + credentials.accessToken);
-        this.setState({ accessToken: credentials.accessToken });
-      })
-      .catch(error => console.log(error));
+  onLogin = async () => {
+    let result = await AuthSession.startAsync(
+      auth0.webAuth
+        .authorize({
+          scope: "openid profile email"
+        })
+        .then(credentials => {
+          Alert.alert("AccessToken: " + credentials.accessToken);
+          this.setState({ accessToken: credentials.accessToken });
+        })
+        .catch(error => console.log(error))
+    );
   };
 
-  _onLogout = () => {
+  onLogout = () => {
     auth0.webAuth
       .clearSession({})
       .then(success => {
@@ -44,7 +47,7 @@ class TextMsg extends Component {
         <Text style={styles.header}> NetGiver Auth0Sample - Login </Text>
         <Text>You are{loggedIn ? " " : " not "}logged in . </Text>
         <Button
-          onPress={loggedIn ? this._onLogout : this._onLogin}
+          onPress={loggedIn ? this.onLogout : this.onLogin}
           title={loggedIn ? "Log Out" : "Log In"}
         />
       </View>
