@@ -199,15 +199,10 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: "" };
     case "signout":
       return { token: null, errorMessage: "" };
-
     default:
       return state;
   }
 };
-
-// const updateUserName = dispatch => async ({ username }) => {
-//   dispatch({ type: "update_user_name" });
-// };
 
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: "clear_error_message" });
@@ -218,8 +213,7 @@ const signup = dispatch => async ({ email, password, username }) => {
     const response = await assetsApi.post("/auth/register", {
       email,
       password,
-      username,
-      id
+      username
     });
     await AsyncStorage.setItem("token", response.data.token);
     dispatch({ type: "signin", payload: response.data.token });
