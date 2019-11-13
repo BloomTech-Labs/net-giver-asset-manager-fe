@@ -199,10 +199,8 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: "" };
     case "signout":
       return { token: null, errorMessage: "" };
-    case "authyregister":
-      return { errorMessage: "", token: action.payload };
-    // case "update_user_name":
-    //   return { ...state, username };
+    case "update_user_name":
+      return { ...state, username };
     default:
       return state;
   }
@@ -216,24 +214,7 @@ const clearErrorMessage = dispatch => () => {
   dispatch({ type: "clear_error_message" });
 };
 
-const authyregister = dispatch => async ({ phone }) => {
-  try {
-    // const response = await assetsApi.post("/auth/register", {
-    //   phone
-    // });
-    // await AsyncStorage.setItem("token", response.data.token)
-    // dispatch({ type: "authyregister", payload: response.data.token });
-    navigate("AuthyConfirm");
-  } catch (err) {
-    console.log("test authy context", err);
-    dispatch({
-      type: "add_error",
-      payload: "Something went wrong with Authy sign up!"
-    });
-  }
-};
-
-const signup = dispatch => async ({ email, password, username, id }) => {
+const signup = dispatch => async ({ email, password, username }) => {
   try {
     const response = await assetsApi.post("/auth/register", {
       email,
@@ -269,7 +250,8 @@ const signin = dispatch => async ({ email, password, username, id }) => {
     ]);
     dispatch({ type: "signin", payload: response.data.token });
     navigate("Ipick");
-    analytics.track("Logged In", { Status: "Successful" });
+
+    analytics.track("Logged In", { Status: "Successful" });
   } catch (err) {
     console.log("signinTest:", err);
     dispatch({
@@ -288,6 +270,6 @@ const signout = dispatch => async () => {
 // destructure off of createdatacontest 3rd input is initialState values
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { authyregister, signin, signup, signout, clearErrorMessage },
+  { signin, signup, signout, clearErrorMessage, updateUserName },
   { token: null, errorMessage: "" }
 );
