@@ -20,6 +20,9 @@ import OrderUpc from "../components/OrderUpc";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import * as yup from 'yup'
+import { Formik } from "formik";
+import axios from "axios";
 
 const LocationForm = (props) => {
   const { state, addLocation, clearErrorMessage } = useContext(Context);
@@ -111,7 +114,6 @@ const LocationForm = (props) => {
               name="qrcode-scan"
               size={25}
             />
-
             {/* {!barkode
               ? <Text style={styles.noCode}>Scan QR Code</Text>
               : <Text style={styles.qrCode}>{barkode}</Text>
@@ -119,6 +121,118 @@ const LocationForm = (props) => {
           </TouchableOpacity>
         </View>
 
+        <Formik
+          enableReinitialize
+          initialValues={{
+            qrCode: '',
+            container: '',
+            address: '',
+            description: ''
+          }}
+
+          // onSubmit={(values) => axios
+          //   .post("https://net-giver-asset-mngr.herokuapp.com/api/assets", values)
+          //   .then(res => {
+          //     Alert.alert(
+          //       'Message',
+          //       'Successfuly Added Item!',
+          //       [
+          //         { text: 'Ok', onPress: () => props.navigation.navigate("AssetsList") }
+          //       ],
+          //       { cancelable: false }
+          //     );
+          //   })
+          //   .catch(err => {
+          //     "Can not add"
+          //   })
+          // }
+
+          validationSchema={yup.object().shape({
+            qrCode: yup
+              .string()
+              .required(),
+            container: yup
+              .string()
+              .required(),
+            description: yup
+              .string()
+              .required()
+          })}
+        >
+
+          {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
+            <View style={styles.container}>
+              <Text style={styles.assetTitle}>QR Code</Text>
+              <TextInput
+                placeholder="95893830"
+                value={values.qrCode}
+                onChangeText={handleChange("qrCode")}
+                onBlur={() => setFieldTouched("qrCode")}
+                clearButtonMode="while-editing"
+                style={styles.textInputField}
+              />
+              {touched.qrCode && errors.qrCode && (
+                <Text style={{
+                  fontSize: 10, color: "red", paddingLeft: 20, marginTop: 5
+                }}>
+                  {errors.qrCode}
+                </Text>
+              )}
+
+              <Text style={styles.assetTitle}>Container</Text>
+              <TextInput
+                placeholder="Where the item is stored"
+                value={values.container}
+                onChangeText={handleChange("container")}
+                onBlur={() => setFieldTouched("container")}
+                clearButtonMode="while-editing"
+                style={styles.textInputField}
+              />
+              {touched.container && errors.container && (
+                <Text style={{
+                  fontSize: 10, color: "red", paddingLeft: 20, marginTop: 5
+                }}>
+                  {errors.container}
+                </Text>
+              )}
+
+              <Text style={styles.assetTitle}>Address</Text>
+              <TextInput
+                placeholder="Optional"
+                value={values.address}
+                onChangeText={handleChange("address")}
+                onBlur={() => setFieldTouched("address")}
+                clearButtonMode="while-editing"
+                style={styles.textInputField}
+              />
+
+              <Text style={styles.assetTitle}>Description</Text>
+              <TextInput
+                value={values.description}
+                onChangeText={handleChange("description")}
+                onBlur={() => setFieldTouched("description")}
+                clearButtonMode="while-editing"
+                style={styles.textInputFieldDesc}
+              />
+              {touched.description && errors.description && (
+                <Text style={{
+                  fontSize: 10, color: "red", paddingLeft: 20, marginTop: 5
+                }}>
+                  {errors.description}
+                </Text>
+              )}
+
+              <Button
+                iconRight={false}
+                title="Add New Storage Location"
+                type="solid"
+                color="blue"
+                onPress={handleSubmit}
+                buttonStyle={styles.button}
+              />
+            </View>
+          )}
+        </Formik>
         <OrderUpc />
       </ScrollView>
     </KeyboardShift>
@@ -163,8 +277,9 @@ const styles = StyleSheet.create({
   qrArrowContainer: {
     flexDirection: "row",
     alignSelf: "center",
-    justifyContent: "center"
-  },  
+    justifyContent: "center",
+    marginBottom: -20
+  },
   upc: {
     marginBottom: 20,
     marginRight: "32%"
@@ -182,6 +297,47 @@ const styles = StyleSheet.create({
   arrowRight: {
     marginTop: -2.5,
     marginLeft: -13
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  button: {
+    width: "90%",
+    alignSelf: "center",
+    marginTop: 32,
+    borderRadius: 5
+  },
+  textInputField: {
+    height: 40,
+    width: "90%",
+    borderColor: "gray",
+    borderRadius: 5,
+    borderWidth: 1,
+    fontSize: 15,
+    alignSelf: "center",
+    paddingLeft: 10,
+    marginTop: 5,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  textInputFieldDesc: {
+    height: 60,
+    width: "90%",
+    borderColor: "gray",
+    borderRadius: 5,
+    borderWidth: 1,
+    fontSize: 15,
+    alignSelf: "center",
+    paddingLeft: 10,
+    marginTop: 5,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  assetTitle: {
+    marginLeft: 20,
+    fontSize: 17,
+    marginTop: 20
   }
 
   // header: {

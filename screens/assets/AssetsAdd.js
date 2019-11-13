@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Button, Input, Icon } from "react-native-elements";
+import { Button } from "react-native-elements";
 import axios from "axios";
 import { StyleSheet, TouchableOpacity, Text, TextInput, View, AsyncStorage, Alert } from "react-native";
 import KeyboardShift from "../../constants/KeyboardShift";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-// import OrderUpc from "../../components/OrderUpc";
 import { withNavigation } from 'react-navigation';
 
 import * as yup from 'yup'
