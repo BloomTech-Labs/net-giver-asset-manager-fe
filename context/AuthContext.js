@@ -270,6 +270,6 @@ const signout = dispatch => async () => {
 // destructure off of createdatacontest 3rd input is initialState values
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signup, signout, clearErrorMessage, updateUserName },
+  { signin, signup, signout, clearErrorMessage },
   { token: null, errorMessage: "" }
 );
