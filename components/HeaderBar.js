@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     flex: 9,
     paddingLeft: 20,
     color: "white"
-
   },
   menuIcon: {
     flexDirection: "row",

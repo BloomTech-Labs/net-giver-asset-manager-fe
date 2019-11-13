@@ -164,7 +164,8 @@ const AssetsAdd = (props, { navigation }) => {
               containerStyle={{ 
                 alignSelf: "center", 
                 width: "90%",
-                marginTop: 20
+                marginTop: 20,
+                height: 165
               }}
             />
           )}
@@ -172,12 +173,12 @@ const AssetsAdd = (props, { navigation }) => {
           enableReinitialize
           initialValues={{
             name: "",
-            category: "",
+            // category: "",
             description: "",
             barcode: "",
             check_in_status: 0,
             user_id: userId,
-            location_id: 1
+            // location_id: 1
           }}
           onSubmit={values =>
             axios
@@ -205,8 +206,8 @@ const AssetsAdd = (props, { navigation }) => {
           validationSchema={yup.object().shape({
             name: yup.string().required(),
             description: yup.string().required(),
-            category: yup.string().required(),
-            location_id: yup.string().required(),
+            // category: yup.string().required(),
+            // location_id: yup.string().required(),
             barcode: yup.string().required()
           })}
         >
@@ -279,7 +280,7 @@ const AssetsAdd = (props, { navigation }) => {
                   </Text>
                 )}
 
-                <Text style={styles.assetTitle}>Location</Text>
+                {/* <Text style={styles.assetTitle}>Location</Text>
                 <TextInput
                   value={values.location_id}
                   onChangeText={handleChange("location_id")}
@@ -298,7 +299,7 @@ const AssetsAdd = (props, { navigation }) => {
                   >
                     {errors.location_id}
                   </Text>
-                )}
+                )} */}
 
                 {/* <Text style={styles.assetTitle}>Price</Text>
                                 <TextInput
@@ -404,7 +405,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
-    height: 130
+    height: 165
   },
   photoIcon: {
     flexDirection: "column",
