@@ -153,16 +153,16 @@ const AssetsAdd = (props, { navigation }) => {
             </View>
           </View>
         ) : (
-          <Avatar
-            PlaceholderContent={<ActivityIndicator />}
-            source={
-              image
-                ? { uri: image }
-                : { uri: "https://i.imgur.com/ltNMlnA.png" }
-            }
-            size="xlarge"
-          />
-        )}
+            <Avatar
+              PlaceholderContent={<ActivityIndicator />}
+              source={
+                image
+                  ? { uri: image }
+                  : { uri: "https://i.imgur.com/ltNMlnA.png" }
+              }
+              size="xlarge"
+            />
+          )}
         <Formik
           enableReinitialize
           initialValues={{
@@ -214,87 +214,88 @@ const AssetsAdd = (props, { navigation }) => {
             isValid,
             handleSubmit
           }) => (
-            <View style={styles.container}>
-              {/* <KeyboardShift> */}
-              <TouchableOpacity
-                onPress={() => props.navigation.navigate("BarcodeScanner")}
-              >
-                <MaterialCommunityIcons
-                  style={styles.upc}
-                  name="qrcode-scan"
-                  size={25}
+              <View style={styles.container}>
+                {/* <KeyboardShift> */}
+                <TouchableOpacity
+                  style={styles.qrSection}
+                  onPress={() => props.navigation.navigate("BarcodeScanner")}
+                >
+                  <MaterialCommunityIcons
+                    style={styles.upc}
+                    name="qrcode-scan"
+                    size={25}
+                  />
+                  {!barkode ? (
+                    <Text style={styles.noCode}>Scan Asset QR Code</Text>
+                  ) : (
+                      <Text style={styles.qrCode}>QR Code: {barkode}</Text>
+                    )}
+                </TouchableOpacity>
+
+                <Text style={styles.assetTitle}>Name</Text>
+                <TextInput
+                  value={values.name}
+                  onChangeText={handleChange("name")}
+                  onBlur={() => setFieldTouched("name")}
+                  clearButtonMode="while-editing"
+                  style={styles.textInputField}
                 />
-                {!barkode ? (
-                  <Text style={styles.noCode}>Scan QR Code</Text>
-                ) : (
-                  <Text style={styles.qrCode}>{barkode}</Text>
+                {touched.name && errors.name && (
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: "red",
+                      paddingLeft: 20,
+                      marginTop: 5
+                    }}
+                  >
+                    {errors.name}
+                  </Text>
                 )}
-              </TouchableOpacity>
 
-              <Text style={styles.assetTitle}>Name</Text>
-              <TextInput
-                value={values.name}
-                onChangeText={handleChange("name")}
-                onBlur={() => setFieldTouched("name")}
-                clearButtonMode="while-editing"
-                style={styles.textInputField}
-              />
-              {touched.name && errors.name && (
-                <Text
-                  style={{
-                    fontSize: 10,
-                    color: "red",
-                    paddingLeft: 20,
-                    marginTop: 5
-                  }}
-                >
-                  {errors.name}
-                </Text>
-              )}
+                <Text style={styles.assetTitle}>Description</Text>
+                <TextInput
+                  value={values.description}
+                  onChangeText={handleChange("description")}
+                  onBlur={() => setFieldTouched("description")}
+                  clearButtonMode="while-editing"
+                  style={styles.textInputField}
+                />
+                {touched.description && errors.description && (
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: "red",
+                      paddingLeft: 20,
+                      marginTop: 5
+                    }}
+                  >
+                    {errors.description}
+                  </Text>
+                )}
 
-              <Text style={styles.assetTitle}>Description</Text>
-              <TextInput
-                value={values.description}
-                onChangeText={handleChange("description")}
-                onBlur={() => setFieldTouched("description")}
-                clearButtonMode="while-editing"
-                style={styles.textInputField}
-              />
-              {touched.description && errors.description && (
-                <Text
-                  style={{
-                    fontSize: 10,
-                    color: "red",
-                    paddingLeft: 20,
-                    marginTop: 5
-                  }}
-                >
-                  {errors.description}
-                </Text>
-              )}
+                <Text style={styles.assetTitle}>Location</Text>
+                <TextInput
+                  value={values.location_id}
+                  onChangeText={handleChange("location_id")}
+                  onBlur={() => setFieldTouched("location_id")}
+                  clearButtonMode="while-editing"
+                  style={styles.textInputField}
+                />
+                {touched.location_id && errors.location_id && (
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: "red",
+                      paddingLeft: 20,
+                      marginTop: 5
+                    }}
+                  >
+                    {errors.location_id}
+                  </Text>
+                )}
 
-              <Text style={styles.assetTitle}>Location</Text>
-              <TextInput
-                value={values.location_id}
-                onChangeText={handleChange("location_id")}
-                onBlur={() => setFieldTouched("location_id")}
-                clearButtonMode="while-editing"
-                style={styles.textInputField}
-              />
-              {touched.location_id && errors.location_id && (
-                <Text
-                  style={{
-                    fontSize: 10,
-                    color: "red",
-                    paddingLeft: 20,
-                    marginTop: 5
-                  }}
-                >
-                  {errors.location_id}
-                </Text>
-              )}
-
-              {/* <Text style={styles.assetTitle}>Price</Text>
+                {/* <Text style={styles.assetTitle}>Price</Text>
                                 <TextInput
                                     value={values.category}
                                     onChangeText={handleChange("category")}
@@ -309,17 +310,17 @@ const AssetsAdd = (props, { navigation }) => {
                                     </Text>
                                 )} */}
 
-              <Button
-                iconRight={false}
-                title="Submit"
-                type="solid"
-                color="blue"
-                onPress={handleSubmit}
-                buttonStyle={styles.button}
-              />
-              {/* </KeyboardShift> */}
-            </View>
-          )}
+                <Button
+                  iconRight={false}
+                  title="Submit"
+                  type="solid"
+                  color="blue"
+                  onPress={handleSubmit}
+                  buttonStyle={styles.button}
+                />
+                {/* </KeyboardShift> */}
+              </View>
+            )}
         </Formik>
       </ScrollView>
     </KeyboardShift>
@@ -337,10 +338,24 @@ const styles = StyleSheet.create({
     marginTop: 32,
     borderRadius: 20
   },
+  qrSection: {
+    flexDirection: "row",
+    justifyContent: "center"
+  },
   upc: {
     marginBottom: -20,
-    marginLeft: 20,
-    marginTop: 20
+    marginTop: 20,
+  },
+  noCode: {
+    marginLeft: 8,
+    marginTop: 25,
+    color: "#3366FF"
+  },
+  qrCode: {
+    marginLeft: 8,
+    marginTop: 25,
+    color: "#BFBFBF",
+    fontStyle: "italic"
   },
   textInputField: {
     height: 40,
@@ -391,14 +406,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1
-  },
-  noCode: {
-    marginLeft: 55
-  },
-  qrCode: {
-    marginLeft: 55,
-    color: "#BFBFBF",
-    fontStyle: "italic"
   },
   assetTitle: {
     marginLeft: 20,
