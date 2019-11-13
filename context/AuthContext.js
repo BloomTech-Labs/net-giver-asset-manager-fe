@@ -199,8 +199,7 @@ const authReducer = (state, action) => {
       return { ...state, errorMessage: "" };
     case "signout":
       return { token: null, errorMessage: "" };
-    case "update_user_name":
-      return { ...state, username };
+
     default:
       return state;
   }
@@ -225,7 +224,7 @@ const signup = dispatch => async ({ email, password, username }) => {
     await AsyncStorage.setItem("token", response.data.token);
     dispatch({ type: "signin", payload: response.data.token });
 
-    navigate("Ipick");
+    navigate("Dashboard");
   } catch (err) {
     console.log("test context", err);
     dispatch({
@@ -270,6 +269,6 @@ const signout = dispatch => async () => {
 // destructure off of createdatacontest 3rd input is initialState values
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { signin, signup, signout, clearErrorMessage, updateUserName },
+  { signin, signup, signout, clearErrorMessage },
   { token: null, errorMessage: "" }
 );
