@@ -15,7 +15,7 @@ const AssetHistory = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [userId, setUserId] = useState();
   const [searchedHistory, setSearchedHistory] = useState();
-  const [ query, setQuery] = useState('');
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     fetchAllAssets();
@@ -41,7 +41,7 @@ const AssetHistory = ({ navigation }) => {
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
       .then(response => {
-        console.log("history axios response: ", response);
+
         setHistory(response.data);
         setIsLoading(false);
         analytics.track("Asset History Tracking");
@@ -70,11 +70,11 @@ const AssetHistory = ({ navigation }) => {
 
     let filteredItems = items;
 
-    if(query.length) {
-        filteredItems = items.filter(item => {
-            return item.name.toLowerCase().includes(query.toLowerCase());
-        })
-        setSearchedHistory(filteredItems)
+    if (query.length) {
+      filteredItems = items.filter(item => {
+        return item.name.toLowerCase().includes(query.toLowerCase());
+      })
+      setSearchedHistory(filteredItems)
     }
 
     setSearchedHistory(filteredItems);
@@ -137,11 +137,11 @@ const AssetHistory = ({ navigation }) => {
               setQuery(text),
               search(history, text)
             ) : (
-              setQuery(text),
-              search(myHistory, text)
-            )}
+                setQuery(text),
+                search(myHistory, text)
+              )}
             value={query}
-            />
+          />
         </View>
         <View style={styles.flatList}>
           {!isMine
