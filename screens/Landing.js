@@ -62,8 +62,9 @@ const Landing = ({ navigation }) => {
             }
           ]}
         >
-          <View style={styles.button}>
+          <View style={styles.buttonWrapper}>
             <Button
+              buttonStyle={styles.btn}
               title="Free Sign Up"
               onPress={() => navigation.navigate("Register")}
             />
@@ -83,10 +84,8 @@ const Landing = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-    // alignSelf: "center"
-    // justifyContent: "center",
-    // alignItems: "center"
+    flex: 1,
+    alignItems: "center"
   },
   logo: {
     // marginTop: 42,
@@ -111,14 +110,7 @@ const styles = StyleSheet.create({
     width: "50%"
   },
   text: {
-    fontSize: 18
-  },
-  button: {
-    backgroundColor: "#3366FF",
-    borderRadius: 20,
-    overflow: "hidden",
-    width: "80%",
-    alignSelf: "center"
+    fontSize: 18,
   },
   navLink: {
     paddingLeft: 40,
@@ -136,7 +128,18 @@ const styles = StyleSheet.create({
   },
   topImg: {
     top: "80%"
-  }
+  },
+  btnWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  btn: {
+    width: 343,
+    height: 40,
+    borderRadius: 15,
+    backgroundColor: "#3366FF",
+  },
 });
 
 export default Landing;

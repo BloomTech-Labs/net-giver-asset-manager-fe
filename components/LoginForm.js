@@ -10,9 +10,9 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
 
   return (
     <>
-      <Text style={styles.inputLabels}>UserName</Text>
+      <Text style={styles.inputLabels}>Username</Text>
       <TextInput
-        placeholder="UserName"
+        placeholder="Username"
         value={username}
         onChangeText={setUserName}
         autoCapitalize="none"
@@ -47,10 +47,10 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
       ) : null}
       <Spacer>
         <Button
+          buttonStyle={styles.btn}
           title={submitButtonText}
           iconRight={true}
           onPress={() => onSubmit({ email, password, username })}
-          style={{ marginTop: 80 }}
         />
       </Spacer>
     </>
@@ -58,6 +58,13 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
 };
 
 const styles = StyleSheet.create({
+  btn: {
+    width: 343,
+    height: 40,
+    borderRadius: 15,
+    backgroundColor: "#3366FF",
+    paddingBottom: 8,
+  },
   errorMessage: {
     fontSize: 16,
     color: "red",
