@@ -11,9 +11,12 @@ const SignupScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Create an account</Text>
+      <Text style={styles.step1}>Step 1 of 2</Text>
+      <Text style={styles.slogan}>
+        Asset Tracker is free and easy to use!
+      </Text>
       <Text style={styles.description}>
-        Anybody is welcome to use Asset Tracker for free once you sign up!
+        Simply fill out this registration form and you're on your way.
       </Text>
       <NavigationEvents onWillBlur={clearErrorMessage} />
       <LoginForm
@@ -34,23 +37,31 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    backgroundColor: "#EFEFF4"
+    alignItems: "center",
+    backgroundColor: "#FEFEFE"
   },
-  header: {
-    marginTop: 10,
+  step1: {
+    position: "absolute",
+    top: 8,
+    left: 8,
+    fontSize: 13,
+  },
+  slogan: {
+    marginTop: 5,
+    marginBottom: 32,
     width: "91%",
     paddingLeft: 10,
-    fontSize: 25,
-    fontWeight: "500"
+    fontSize: 20,
+    fontWeight: "500",
+    color: "black"
   },
   description: {
-    marginTop: 5,
-    marginBottom: 50,
-    width: "91%",
-    paddingLeft: 10,
-    fontSize: 18,
-    color: "#7C7777"
-  }
+    fontSize: 17,
+    color: "#BFBFBF",
+    width: "90%",
+    textAlign: "center",
+    marginBottom: 16,
+  },
 });
 
 export default SignupScreen;
