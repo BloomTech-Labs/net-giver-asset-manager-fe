@@ -9,7 +9,7 @@ const SingleAsset = ({ data, navigation }) => {
   const showDetails = () => {
     const assetId = data.id;;
     console.log("ASSET ID:", assetId);
-    navigation.navigate("SingleAssetCard", { assetId });
+    navigation.navigate("AssetsCardDrawer", { assetId });
   };
 
   return (
