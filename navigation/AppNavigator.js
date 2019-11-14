@@ -33,7 +33,9 @@ import Legal from "../screens/Legal";
 import About from "../screens/About";
 import TextMsg from "../screens/TextMsg";
 
+import SmsLogin from "../screens/SmsLogin";
 const DevStack = createStackNavigator(
+
   {
     Home: HomeScreen,
     AssetsAdd: AssetsAdd,
@@ -51,7 +53,8 @@ const DevStack = createStackNavigator(
     Contact: Contact,
     Legal: Legal,
     About: About,
-    Text: TextMsg
+    Text: TextMsg,
+    SmsLogin: SmsLogin
   },
   {
     initialRouteName: "Home"
@@ -247,31 +250,97 @@ const AppStack = createDrawerNavigator(
   }
 );
 
-const AuthStack = createStackNavigator({
-  Landing: {
-    screen: Landing,
-    navigationOptions: {
-      headerTitle: "Landing"
+const AuthStack = createStackNavigator(
+  {
+    Landing: {
+      screen: Landing,
+      navigationOptions: props => ({
+        headerMode: "none",
+      })
+    },
+    Login: {
+      screen: LoginText,
+      navigationOptions: props => ({
+        title: "Sign In",
+        headerStyle: {
+          backgroundColor: "#FEFEFE",
+        },
+        headerTitleStyle: {
+          color: "black",
+          fontSize: 20,
+          fontWeight: "500"
+        },
+        headerLeft: (
+          <SafeAreaView>
+            <View style={{ marginLeft: 10 }}>
+              <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+                <Icon name="arrow-back" size={30} color="black" />
+              </TouchableOpacity>
+            </View>
+          </SafeAreaView>
+        )
+      })
+    },
+    Register: {
+      screen: RegisterNameText,
+      navigationOptions: props => ({
+        title: "Create Account",
+        headerStyle: {
+          backgroundColor: "#FEFEFE",
+        },
+        headerTitleStyle: {
+          color: "black",
+          fontSize: 20,
+          fontWeight: "500"
+        },
+        headerLeft: (
+          <SafeAreaView>
+            <View style={{ marginLeft: 10 }}>
+              <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+                <Icon name="arrow-back" size={30} color="black" />
+              </TouchableOpacity>
+            </View>
+          </SafeAreaView>
+        )
+      })
+    },
+    Cameron: {
+      screen: Cameron,
+      navigationOptions: props => ({
+        title: "Create Account",
+        headerStyle: {
+          backgroundColor: "#FEFEFE",
+        },
+        headerTitleStyle: {
+          color: "black",
+          fontSize: 20,
+          fontWeight: "500"
+        },
+        headerLeft: (
+          <SafeAreaView>
+            <View style={{ marginLeft: 10 }}>
+              <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+                <Icon name="arrow-back" size={30} color="black" />
+              </TouchableOpacity>
+            </View>
+          </SafeAreaView>
+        )
+      })
     }
   },
-  Login: {
-    screen: LoginText,
-    navigationOptions: {
-      headerTitle: "Login"
-    }
-  },
-  Register: {
-    screen: RegisterNameText,
-    navigationOptions: {
-      headerTitle: "Register"
-    }
+  {
+    initialRouteName: "Landing",
   }
-});
+)
 
 const RootNavigation = createSwitchNavigator(
   {
     Splash: {
       screen: Splash
+    },
+
+    SmsLogin: {
+      screen: SmsLogin
     },
     Landing: {
       screen: Landing
@@ -279,6 +348,7 @@ const RootNavigation = createSwitchNavigator(
     Cameron: {
       screen: Cameron
     },
+
     App: {
       screen: AppStack
     },
@@ -287,10 +357,10 @@ const RootNavigation = createSwitchNavigator(
     },
     Dev: {
       screen: DevStack
-    }
+    },
   },
   {
-    initialRouteName: "App"
+    initialRouteName: "Auth"
   }
 );
 
@@ -309,9 +379,3 @@ export default () => {
     </AuthProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  stackHeader: {
-    backgroundColor: "#3366FF"
-  }
-});
