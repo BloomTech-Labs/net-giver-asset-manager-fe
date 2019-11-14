@@ -1,5 +1,6 @@
 import * as React from "react";
 import {
+  SafeAreaView,
   View,
   StyleSheet,
   TextInput,
@@ -17,6 +18,7 @@ import { AWS_SECRET_ACCESS_KEY, AWS_ACCESS_KEY } from "react-native-dotenv";
 import Spacer from "../components/Spacer";
 import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
+import NavLink from "../navigation/NavLink";
 // import { UsernameContext } from "../context/UsernameContext";
 // import { useContext } from "react";
 // import { username } from "../context/AuthContext";
@@ -71,32 +73,15 @@ export default class Cameron extends React.Component {
     console.log("anotherStateTest:", email);
 
     return (
-      <View
-        style={{
-          flex: 0,
-          alignItems: "center",
-          justifyContent: "center",
-          top: 50
-        }}
-      >
-        {/* <Text style={{ color: "#3366FF" }}>Monique Smith!</Text> */}
-        <Text style={[{ fontSize: 33, textAlign: "center" }, styles.welcome]}>
-          Welcome{" "}
-        </Text>
-        <FlatList
-          data={email}
-          keyExtractor={email => email.email}
-          renderItem={({ item }) => {
-            return item;
-          }}
-        />
-        <Text style={{ color: "lightgrey", fontSize: 22, padding: 20 }}>
-          You are almost there, the final step is to add your avatar picture
-        </Text>
-        <Text>{this.state.userId}</Text>
-        {/* <Text>{this.state.email}</Text> */}
-
-        <Spacer>
+      <SafeAreaView style={styles.mainWrapper}>
+        <Text style={styles.step2}>Step 2 of 2</Text>
+        <View style={styles.welcomeWrapper}>
+          <Text style={styles.welcome}>
+            Welcome!
+          </Text>
+          <Text style={styles.directions}>
+            You're almost there. The final step is to add your picture to complete your profile.
+          </Text>
           <Avatar
             PlaceholderContent={<ActivityIndicator />}
             source={
@@ -107,31 +92,27 @@ export default class Cameron extends React.Component {
             rounded
             size="xlarge"
           />
-        </Spacer>
-        <TouchableOpacity onPress={this.chooseImage}>
-          <Entypo name="camera" size={30} color="#3366FF" />
-        </TouchableOpacity>
-        <Text>Add Photo</Text>
-
-        <View
-          style={{
-            backgroundColor: "#3366FF",
-            width: "80%",
-            borderRadius: 20,
-            overflow: "hidden",
-            width: "80%",
-            alignSelf: "center",
-            top: "30%",
-            padding: 5
-          }}
-        >
+          <TouchableOpacity 
+            onPress={this.chooseImage}
+            style={{marginTop: 5}}>
+            <Entypo name="camera" size={30} color="#3366FF" />
+          </TouchableOpacity>
+          <Text style={{fontWeight: "500"}}>Add Photo</Text>
+        </View>
+        <View style={styles.btnWrapper}>
           <Button
+            buttonStyle={styles.btn}
+            containerStyle={styles.btnContainer}
             title="Next"
-            color="red"
             onPress={() => this.props.navigation.navigate("Dashboard")}
           />
+          <NavLink 
+            text="Already have an account? Log in here."
+            route="Login"
+            style={styles.toLoginLink}
+          />
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 
@@ -217,28 +198,60 @@ export default class Cameron extends React.Component {
 //
 
 const styles = StyleSheet.create({
-  image: {
-    borderColor: "red",
-    borderWidth: 10
+  mainWrapper: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
   },
-  inputField: {
-    height: 40,
+  welcomeWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     width: "91%",
-    borderColor: "gray",
-    borderRadius: 5,
-    borderWidth: 1,
-    alignSelf: "center",
-    paddingLeft: 10,
-    marginTop: 20
+    marginTop: 48,
   },
-  avatar: {
-    marginBottom: 10
+  step2: {
+    position: "absolute",
+    top: 8,
+    left: 8,
+    fontSize: 13,
+  },
+  welcome: {
+    fontSize: 33,
+    textAlign: "center",
+  },
+  directions: {
+    textAlign: "center",
+    fontSize: 17,
+    color: "#BFBFBF",
+    width: "91%",
+    marginBottom: 48,
+  },
+  avatarWrapper: {
+    flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center"
   },
   label: {
     fontSize: 16,
-    marginBottom: 5,
-    marginLeft: 5
-  }
+  },
+  btnWrapper: {
+    flex: 1,
+    alignContent: "center",
+    justifyContent: "center",
+  },
+  btn: {
+    width: 343,
+    height: 40,
+    borderRadius: 15,
+    backgroundColor: "#3366FF",
+    paddingBottom: 8,
+  },
+  toLoginLink: {
+    color: "#3366FF",
+    paddingTop: 20,
+    marginTop: 20,
+  },
 });
 
 // ({
