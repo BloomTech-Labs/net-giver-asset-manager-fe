@@ -66,7 +66,7 @@ const Landing = ({ navigation }) => {
             <Button
               buttonStyle={styles.btn}
               title="Free Sign Up"
-              onPress={() => navigation.navigate("Register")}
+              onPress={() => navigation.navigate("SMS")}
             />
           </View>
 

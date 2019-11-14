@@ -32,10 +32,9 @@ import Contact from "../screens/Contact";
 import Legal from "../screens/Legal";
 import About from "../screens/About";
 import TextMsg from "../screens/TextMsg";
-
 import SmsLogin from "../screens/SmsLogin";
-const DevStack = createStackNavigator(
 
+const DevStack = createStackNavigator(
   {
     Home: HomeScreen,
     AssetsAdd: AssetsAdd,
@@ -234,6 +233,12 @@ const AppStack = createDrawerNavigator(
     Assets: {
       screen: AssetsScreen
     },
+    SingleAssetDrawer: {
+      screen: SingleAssetCard,
+    },
+    AssetsCardDrawer: {
+      screen: OneAsset,
+    },
     Add: {
       screen: AssetsAddScreen
     },
@@ -256,6 +261,29 @@ const AuthStack = createStackNavigator(
       screen: Landing,
       navigationOptions: props => ({
         headerMode: "none",
+      })
+    },
+    SMS: {
+      screen: SmsLogin,
+      navigationOptions: props => ({
+        title: "Sign In",
+        headerStyle: {
+          backgroundColor: "#FEFEFE",
+        },
+        headerTitleStyle: {
+          color: "black",
+          fontSize: 20,
+          fontWeight: "500"
+        },
+        headerLeft: (
+          <SafeAreaView>
+            <View style={{ marginLeft: 10 }}>
+              <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+                <Icon name="arrow-back" size={30} color="black" />
+              </TouchableOpacity>
+            </View>
+          </SafeAreaView>
+        )
       })
     },
     Login: {
@@ -338,17 +366,6 @@ const RootNavigation = createSwitchNavigator(
     Splash: {
       screen: Splash
     },
-
-    SmsLogin: {
-      screen: SmsLogin
-    },
-    Landing: {
-      screen: Landing
-    },
-    Cameron: {
-      screen: Cameron
-    },
-
     App: {
       screen: AppStack
     },
