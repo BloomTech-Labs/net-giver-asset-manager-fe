@@ -69,6 +69,12 @@ export default function HomeScreen({ navigation }) {
             />
           </Spacer>
           <Spacer>
+            <Button
+              title="Text Message"
+              onPress={() => navigation.navigate("SmsLogin")}
+            />
+          </Spacer>
+          <Spacer>
             {/* <Button
           title="SCAN NOW!"
           onPress={() => navigation.navigate("BarcodeScanner")}

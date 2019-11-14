@@ -32,7 +32,7 @@ import Contact from "../screens/Contact";
 import Legal from "../screens/Legal";
 import About from "../screens/About";
 import TextMsg from "../screens/TextMsg";
-
+import SmsLogin from "../screens/SmsLogin";
 const DevStack = createStackNavigator(
   {
     Home: HomeScreen,
@@ -51,7 +51,8 @@ const DevStack = createStackNavigator(
     Contact: Contact,
     Legal: Legal,
     About: About,
-    Text: TextMsg
+    Text: TextMsg,
+    SmsLogin: SmsLogin
   },
   {
     initialRouteName: "Home"
@@ -272,6 +273,9 @@ const RootNavigation = createSwitchNavigator(
   {
     Splash: {
       screen: Splash
+    },
+    SmsLogin: {
+      screen: SmsLogin
     },
     Landing: {
       screen: Landing
