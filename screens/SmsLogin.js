@@ -22,7 +22,7 @@ import Form from "react-native-form";
 import CountryPicker from "react-native-country-picker-modal";
 
 const api = new Frisbee({
-    baseURI: "https://p1x0u.sse.codesandbox.io",
+    baseURI: "https://netgiverauth.herokuapp.com",
     headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
