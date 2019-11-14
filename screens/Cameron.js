@@ -41,7 +41,7 @@ export default class Cameron extends React.Component {
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/auth/users")
       .then(res => {
-        console.log("usertest:", res.data);
+        // console.log("usertest:", res.data);
         //  ( res.data === this.state.userId ? this.setState({ email: res.data.email}) : this.state.email)
         if (res.data.id === this.state.userId) {
           // console.log("logicTest:", this.state.userId);
@@ -76,11 +76,10 @@ export default class Cameron extends React.Component {
       <SafeAreaView style={styles.mainWrapper}>
         <Text style={styles.step2}>Step 2 of 2</Text>
         <View style={styles.welcomeWrapper}>
-          <Text style={styles.welcome}>
-            Welcome!
-          </Text>
+          <Text style={styles.welcome}>Welcome!</Text>
           <Text style={styles.directions}>
-            You're almost there. The final step is to add your picture to complete your profile.
+            You're almost there. The final step is to add your picture to
+            complete your profile.
           </Text>
           <Avatar
             PlaceholderContent={<ActivityIndicator />}
@@ -92,12 +91,10 @@ export default class Cameron extends React.Component {
             rounded
             size="xlarge"
           />
-          <TouchableOpacity 
-            onPress={this.chooseImage}
-            style={{marginTop: 5}}>
+          <TouchableOpacity onPress={this.chooseImage} style={{ marginTop: 5 }}>
             <Entypo name="camera" size={30} color="#3366FF" />
           </TouchableOpacity>
-          <Text style={{fontWeight: "500"}}>Add Photo</Text>
+          <Text style={{ fontWeight: "500" }}>Add Photo</Text>
         </View>
         <View style={styles.btnWrapper}>
           <Button
@@ -106,7 +103,7 @@ export default class Cameron extends React.Component {
             title="Next"
             onPress={() => this.props.navigation.navigate("Dashboard")}
           />
-          <NavLink 
+          <NavLink
             text="Already have an account? Log in here."
             route="Login"
             style={styles.toLoginLink}
@@ -158,17 +155,17 @@ export default class Cameron extends React.Component {
       secretKey: AWS_SECRET_ACCESS_KEY,
       successActionStatus: 201
     };
-    console.log("options test", options);
+    // console.log("options test", options);
 
     RNS3.put(file, options).then(res => {
       if (res.status !== 201) throw new Error("Failed to upload image to S3");
       console.log("upload to aws test", res.body);
       const location = res.body.postResponse.location;
-      console.log("local test:", location);
+      // console.log("local test:", location);
       const name = res.body.postResponse.key;
       // const user_id = JSON.stringify(name.replace(/\D/g, ""));
       const user_id = JSON.parse(name.replace(/\D/g, ""));
-      console.log("rename", user_id);
+      // console.log("rename", user_id);
       // const newerName = JSON.parse(newName);
       // console.log("herewegoagain", newerName);
       const data = {
@@ -186,7 +183,11 @@ export default class Cameron extends React.Component {
             data
           )
           .then(res => {
-            console.log("post to backend test:", res);
+            console.log("post to backend test was a success!");
+            // console.log("post to backend test was a success!", res);
+            // res
+            //   .status(201)
+            //   .json({ message: "congraulations post is a success" });
           })
           .catch(err => {
             console.log("that didnt work", err.data);
@@ -201,31 +202,31 @@ const styles = StyleSheet.create({
   mainWrapper: {
     flex: 1,
     justifyContent: "flex-start",
-    alignItems: "center",
+    alignItems: "center"
   },
   welcomeWrapper: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     width: "91%",
-    marginTop: 48,
+    marginTop: 48
   },
   step2: {
     position: "absolute",
     top: 8,
     left: 8,
-    fontSize: 13,
+    fontSize: 13
   },
   welcome: {
     fontSize: 33,
-    textAlign: "center",
+    textAlign: "center"
   },
   directions: {
     textAlign: "center",
     fontSize: 17,
     color: "#BFBFBF",
     width: "91%",
-    marginBottom: 48,
+    marginBottom: 48
   },
   avatarWrapper: {
     flex: 1,
@@ -233,25 +234,25 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   label: {
-    fontSize: 16,
+    fontSize: 16
   },
   btnWrapper: {
     flex: 1,
     alignContent: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   btn: {
     width: 343,
     height: 40,
     borderRadius: 15,
     backgroundColor: "#3366FF",
-    paddingBottom: 8,
+    paddingBottom: 8
   },
   toLoginLink: {
     color: "#3366FF",
     paddingTop: 20,
-    marginTop: 20,
-  },
+    marginTop: 20
+  }
 });
 
 // ({

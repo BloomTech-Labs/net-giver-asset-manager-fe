@@ -33,9 +33,10 @@ import Legal from "../screens/Legal";
 import About from "../screens/About";
 import TextMsg from "../screens/TextMsg";
 
+console.disableYellowBox = true;
+
 import SmsLogin from "../screens/SmsLogin";
 const DevStack = createStackNavigator(
-
   {
     Home: HomeScreen,
     AssetsAdd: AssetsAdd,
@@ -255,7 +256,7 @@ const AuthStack = createStackNavigator(
     Landing: {
       screen: Landing,
       navigationOptions: props => ({
-        headerMode: "none",
+        headerMode: "none"
       })
     },
     Login: {
@@ -263,7 +264,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Sign In",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
@@ -286,7 +287,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Create Account",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
@@ -309,7 +310,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Create Account",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
@@ -329,9 +330,9 @@ const AuthStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Landing",
+    initialRouteName: "Landing"
   }
-)
+);
 
 const RootNavigation = createSwitchNavigator(
   {
@@ -357,7 +358,7 @@ const RootNavigation = createSwitchNavigator(
     },
     Dev: {
       screen: DevStack
-    },
+    }
   },
   {
     initialRouteName: "Auth"
