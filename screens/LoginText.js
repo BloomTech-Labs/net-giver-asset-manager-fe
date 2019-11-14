@@ -15,7 +15,7 @@ const LoginText = () => {
   console.log("logTest:", state);
 
   return (
-    <View>
+    <View style={styles.mainWrapper}>
       <View style={{ display: "flex" }}>
         <Image
           source={require("../assets/images/assetTracker.jpg")}
@@ -30,7 +30,7 @@ const LoginText = () => {
         submitButtonText="Log In"
       />
       <NavLink
-        text="Dont have an account? Sign up instead"
+        text="Dont have an account? Sign up instead!"
         routeName="Register"
         style={styles.toRegister}
       />
@@ -39,6 +39,10 @@ const LoginText = () => {
 };
 
 const styles = StyleSheet.create({
+  mainWrapper: {
+    flex: 1,
+    alignItems: "center",
+  },
   logo: {
     alignSelf: "center",
     marginTop: 50,
