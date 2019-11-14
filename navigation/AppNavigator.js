@@ -15,7 +15,7 @@ import LoginText from "../screens/LoginText";
 import AssetHistory from "../screens/AssetHistory";
 import Landing from "../screens/Landing";
 import BarcodeScanner from "../screens/BarcodeScanner";
-import HomeScreen from "../screens/HomeScreen";
+
 import AssetsAdd from "../screens/assets/AssetsAdd";
 import LocationForm from "../screens/LocationForm";
 import Camera from "../screens/Camera";
@@ -35,7 +35,7 @@ import TextMsg from "../screens/TextMsg";
 import SmsLogin from "../screens/SmsLogin";
 const DevStack = createStackNavigator(
   {
-    Home: HomeScreen,
+
     AssetsAdd: AssetsAdd,
     BarcodeScanner: BarcodeScanner,
     Location: LocationForm,
@@ -53,9 +53,6 @@ const DevStack = createStackNavigator(
     About: About,
     Text: TextMsg,
     SmsLogin: SmsLogin
-  },
-  {
-    initialRouteName: "Home"
   }
 );
 
