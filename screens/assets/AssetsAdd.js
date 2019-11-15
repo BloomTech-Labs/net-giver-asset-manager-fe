@@ -146,6 +146,7 @@ const AssetsAdd = (props, { navigation }) => {
   if (props.navigation.state.params) {
     var barkode = props.navigation.state.params.dataString;
   }
+  console.log("Barcode Scanned", barkode)
 
   // const redirect = () => {
   //     props.navigation.navigate("AssetsList");
@@ -177,22 +178,22 @@ const AssetsAdd = (props, { navigation }) => {
             </View>
           </View>
         ) : (
-          <Avatar
-            PlaceholderContent={<ActivityIndicator />}
-            source={
-              image
-                ? { uri: image }
-                : { uri: "https://i.imgur.com/ltNMlnA.png" }
-            }
-            size="xlarge"
-            containerStyle={{
-              alignSelf: "center",
-              width: "90%",
-              marginTop: 20,
-              height: 165
-            }}
-          />
-        )}
+            <Avatar
+              PlaceholderContent={<ActivityIndicator />}
+              source={
+                image
+                  ? { uri: image }
+                  : { uri: "https://i.imgur.com/ltNMlnA.png" }
+              }
+              size="xlarge"
+              containerStyle={{
+                alignSelf: "center",
+                width: "90%",
+                marginTop: 20,
+                height: 165
+              }}
+            />
+          )}
         <Formik
           enableReinitialize
           initialValues={{
@@ -244,67 +245,67 @@ const AssetsAdd = (props, { navigation }) => {
             isValid,
             handleSubmit
           }) => (
-            <View style={styles.container}>
-              {/* <KeyboardShift> */}
-              <TouchableOpacity
-                style={styles.qrSection}
-                onPress={() => props.navigation.navigate("BarcodeScanner")}
-              >
-                <MaterialCommunityIcons
-                  style={styles.upc}
-                  name="qrcode-scan"
-                  size={25}
+              <View style={styles.container}>
+                {/* <KeyboardShift> */}
+                <TouchableOpacity
+                  style={styles.qrSection}
+                  onPress={() => props.navigation.navigate("Scanner")}
+                >
+                  <MaterialCommunityIcons
+                    style={styles.upc}
+                    name="qrcode-scan"
+                    size={25}
+                  />
+                  {!barkode ? (
+                    <Text style={styles.noCode}>Scan Asset QR Code</Text>
+                  ) : (
+                      <Text style={styles.qrCode}>QR Code: {barkode}</Text>
+                    )}
+                </TouchableOpacity>
+
+                <Text style={styles.assetTitle}>Name</Text>
+                <TextInput
+                  value={values.name}
+                  onChangeText={handleChange("name")}
+                  onBlur={() => setFieldTouched("name")}
+                  clearButtonMode="while-editing"
+                  style={styles.textInputField}
                 />
-                {!barkode ? (
-                  <Text style={styles.noCode}>Scan Asset QR Code</Text>
-                ) : (
-                  <Text style={styles.qrCode}>QR Code: {barkode}</Text>
+                {touched.name && errors.name && (
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: "red",
+                      paddingLeft: 20,
+                      marginTop: 5
+                    }}
+                  >
+                    {errors.name}
+                  </Text>
                 )}
-              </TouchableOpacity>
 
-              <Text style={styles.assetTitle}>Name</Text>
-              <TextInput
-                value={values.name}
-                onChangeText={handleChange("name")}
-                onBlur={() => setFieldTouched("name")}
-                clearButtonMode="while-editing"
-                style={styles.textInputField}
-              />
-              {touched.name && errors.name && (
-                <Text
-                  style={{
-                    fontSize: 10,
-                    color: "red",
-                    paddingLeft: 20,
-                    marginTop: 5
-                  }}
-                >
-                  {errors.name}
-                </Text>
-              )}
+                <Text style={styles.assetTitle}>Description</Text>
+                <TextInput
+                  value={values.description}
+                  onChangeText={handleChange("description")}
+                  onBlur={() => setFieldTouched("description")}
+                  clearButtonMode="while-editing"
+                  style={styles.textInputField}
+                />
+                {touched.description && errors.description && (
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: "red",
+                      paddingLeft: 20,
+                      marginTop: 5
+                    }}
+                  >
+                    {errors.description}
+                  </Text>
+                )}
 
-              <Text style={styles.assetTitle}>Description</Text>
-              <TextInput
-                value={values.description}
-                onChangeText={handleChange("description")}
-                onBlur={() => setFieldTouched("description")}
-                clearButtonMode="while-editing"
-                style={styles.textInputField}
-              />
-              {touched.description && errors.description && (
-                <Text
-                  style={{
-                    fontSize: 10,
-                    color: "red",
-                    paddingLeft: 20,
-                    marginTop: 5
-                  }}
-                >
-                  {errors.description}
-                </Text>
-              )}
-
-              {/* <Text style={styles.assetTitle}>Location</Text>
+                {/* <Text style={styles.assetTitle}>Location</Text>
                 <TextInput
                   value={values.location_id}
                   onChangeText={handleChange("location_id")}
@@ -325,7 +326,7 @@ const AssetsAdd = (props, { navigation }) => {
                   </Text>
                 )} */}
 
-              {/* <Text style={styles.assetTitle}>Price</Text>
+                {/* <Text style={styles.assetTitle}>Price</Text>
                                 <TextInput
                                     value={values.category}
                                     onChangeText={handleChange("category")}
@@ -340,17 +341,17 @@ const AssetsAdd = (props, { navigation }) => {
                                     </Text>
                                 )} */}
 
-              <Button
-                iconRight={false}
-                title="Submit"
-                type="solid"
-                color="blue"
-                onPress={handleSubmit}
-                buttonStyle={styles.button}
-              />
-              {/* </KeyboardShift> */}
-            </View>
-          )}
+                <Button
+                  iconRight={false}
+                  title="Submit"
+                  type="solid"
+                  color="blue"
+                  onPress={handleSubmit}
+                  buttonStyle={styles.button}
+                />
+                {/* </KeyboardShift> */}
+              </View>
+            )}
         </Formik>
       </ScrollView>
     </KeyboardShift>

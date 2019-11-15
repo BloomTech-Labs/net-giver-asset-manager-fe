@@ -133,24 +133,24 @@ const AssetHistory = ({ navigation }) => {
 
         <View style={styles.qrSearchContainer}>
 
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchBar}
-            placeholder="Search"
-            onChangeText={text => !isMine ? (
-              setQuery(text),
-              search(history, text)
-            ) : (
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.searchBar}
+              placeholder="Search"
+              onChangeText={text => !isMine ? (
                 setQuery(text),
-                search(myHistory, text)
-              )}
-            value={query}
-          />
-        </View>
+                search(history, text)
+              ) : (
+                  setQuery(text),
+                  search(myHistory, text)
+                )}
+              value={query}
+            />
+          </View>
 
-        <TouchableOpacity
+          <TouchableOpacity
             style={styles.qrSection}
-            onPress={() => navigation.navigate("BarcodeScanner")}
+            onPress={() => navigation.navigate("Scanner")}
           >
             <MaterialCommunityIcons
               style={styles.upc}
@@ -158,7 +158,7 @@ const AssetHistory = ({ navigation }) => {
               size={25}
             />
           </TouchableOpacity>
-      </View>
+        </View>
 
         <View style={styles.flatList}>
           {!isMine

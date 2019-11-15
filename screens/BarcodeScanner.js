@@ -150,11 +150,11 @@ export default class BarcodeScanner extends React.Component {
           var id = correctID2
           console.log('ID getting sent', id)
 
-          this.props.navigation.navigate("SingleAssetCard", { id });
+          this.props.navigation.navigate("SingleAssetScreen", { id });
 
         } else {
 
-          this.props.navigation.navigate("AssetsAdd", { dataString });
+          this.props.navigation.navigate("Add", { dataString });
 
 
         }
