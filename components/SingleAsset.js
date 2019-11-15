@@ -31,16 +31,16 @@ const SingleAsset = ({ data, navigation }) => {
     const id = data.id;;
     console.log("ASSET ID:", id);
     navigation.navigate("SingleAssetScreen", { id });
-
+  };
     // console.log("INDIVIDUAL ASSET DATA", data);
 
     // Handles clicking an individual asset in the Dashboard screen
-    const showDetails = () => {
-      const assetId = data.id;
-      console.log("ASSET ID:", assetId);
-      navigation.navigate("SingleAssetDrawer", { assetId });
+    // const showDetails = () => {
+    //   const assetId = data.id;
+    //   console.log("ASSET ID:", assetId);
+    //   navigation.navigate("SingleAssetDrawer", { assetId });
 
-    };
+    // };
 
     return (
       <TouchableOpacity onPress={showDetails}>
@@ -69,7 +69,6 @@ const SingleAsset = ({ data, navigation }) => {
       </TouchableOpacity>
     );
   };
-};
 
 const styles = StyleSheet.create({
   assetWrapper: {

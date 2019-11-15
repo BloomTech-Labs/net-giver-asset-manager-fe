@@ -119,16 +119,18 @@ const styles = StyleSheet.create({
   middleImg: {
     marginTop: 10,
     marginBottom: 5,
-    width: 315,
-    height: 320
+    // width: 315,
+    // height: 320
+    width: 350,
+    height: 355
   },
   blueTitle: {
     color: "#3366FF"
   },
   purposeContainer: {
-    flexDirection: "column",
     alignItems: "center",
-    marginBottom: 25
+    marginTop: -45,
+    marginBottom: 25,
   },
   purpose: {
     fontSize: 23,
