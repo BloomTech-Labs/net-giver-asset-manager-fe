@@ -32,10 +32,10 @@ import Contact from "../screens/Contact";
 import Legal from "../screens/Legal";
 import About from "../screens/About";
 import TextMsg from "../screens/TextMsg";
+import SmsLogin from "../screens/SmsLogin";
 
 console.disableYellowBox = true;
 
-import SmsLogin from "../screens/SmsLogin";
 const DevStack = createStackNavigator(
   {
     Home: HomeScreen,
