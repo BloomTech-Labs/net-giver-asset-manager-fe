@@ -207,7 +207,7 @@ const authReducer = (state, action) => {
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: "clear_error_message" });
 };
-
+// taking out passowrd from line 211 + 215
 const signup = dispatch => async ({ email, password, username, id }) => {
   try {
     const response = await assetsApi.post("/auth/register", {
@@ -232,7 +232,7 @@ const signup = dispatch => async ({ email, password, username, id }) => {
     });
   }
 };
-
+// removing passsword from the flow
 const signin = dispatch => async ({ email, password, username, id }) => {
   // console.log("Btn Clicked")
   try {
