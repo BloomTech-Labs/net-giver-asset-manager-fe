@@ -237,7 +237,7 @@ const AppStack = createDrawerNavigator(
       screen: SingleAssetCard,
     },
     AssetsCardDrawer: {
-      screen: OneAsset,
+      screen: AssetsCard,
     },
     Add: {
       screen: AssetsAddScreen
@@ -260,7 +260,9 @@ const AuthStack = createStackNavigator(
     Landing: {
       screen: Landing,
       navigationOptions: props => ({
-        headerMode: "none",
+        headerStyle: { 
+          borderBottomWidth: 0
+        }
       })
     },
     SMS: {

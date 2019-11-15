@@ -1,39 +1,47 @@
 import React from "react";
 import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native";
-import { Button, Icon } from "react-native-elements";
+import { Button, Icon, ThemeProvider } from "react-native-elements";
 import NavLink from "../navigation/NavLink";
+
+// const theme = {
+//   Button: {
+//     titleStyle: {
+//       color: '#3366FF'
+//     }
+//   }
+// };
+
 
 const Landing = ({ navigation }) => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <View styles={styles.bottomZ}>
+    <SafeAreaView>
+      <View style={styles.mainContainer}>
+        {/* <View styles={styles.bottomZ}>
           <Image source={require("../assets/images/real_cog.jpg")} />
-        </View>
+        </View> */}
 
-        <View
-          style={[
-            {
-              alignSelf: "center",
-              position: "absolute",
-              margin: "auto",
-              zIndex: 0
-            },
-            styles.logo
-          ]}
-        >
+        <View style={styles.logo}>
           <Image
             style={styles.topImg}
             source={require("../assets/images/assetTracker.jpg")}
           />
         </View>
 
-        <View style={[styles.topZ]}>
-          <Text style={styles.purpose}>
-            Asset Tracker makes it simple to keep track of all assets.
-          </Text>
+        <View style={styles.landingImage}>
+          <Image
+            style={styles.middleImg}
+            source={require("../assets/images/landing.jpg")}
+          />
+        </View>
 
-          <View style={styles.mainPointsContainer}>
+        <View>
+          <View style={styles.purposeContainer}>
+            <Text style={styles.purpose}>
+              <Text style={styles.blueTitle}>Asset Tracker</Text> makes it easy to keep track of all items.
+            </Text>
+          </View>
+
+          {/* <View style={styles.mainPointsContainer}>
             <View style={styles.mainPoints}>
               <Icon name="check" color="blue" />
               <Text style={styles.text}>No trials.</Text>
@@ -48,10 +56,27 @@ const Landing = ({ navigation }) => {
                 No more time wasted looking for an asset.
               </Text>
             </View>
-          </View>
+          </View> */}
         </View>
 
-        <View
+        <View style={styles.buttons}>
+          <Button
+            buttonStyle={styles.registerBtn}
+            title="Free Sign Up"
+            onPress={() => navigation.navigate("SMS")}
+          />
+          <ThemeProvider>
+            <Button
+              buttonStyle={styles.loginBtn}
+              titleStyle={{ color: '#3366FF' }}
+              type="outline"
+              title="Log In Here"
+              onPress={() => navigation.navigate("SMS")}
+            />
+          </ThemeProvider>
+        </View>
+
+        {/* <View
           style={[
             {
               alignSelf: "center",
@@ -76,70 +101,61 @@ const Landing = ({ navigation }) => {
               routeName="Login"
             />
           </View>
-        </View>
+        </View> */}
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center"
-  },
-  logo: {
-    // marginTop: 42,
-    position: "absolute"
-  },
-  purpose: {
-    paddingTop: 40,
-    paddingLeft: 50,
-    marginTop: "15%",
-    marginBottom: 46,
-    fontSize: 23,
-    width: "50%"
-  },
-  mainPoints: {
-    display: "flex",
-    flexDirection: "row",
-    marginBottom: 5
-  },
-  mainPointsContainer: {
-    flex: 0.2,
-    paddingLeft: 20,
-    width: "50%"
-  },
-  text: {
-    fontSize: 18,
-  },
-  navLink: {
-    paddingLeft: 40,
-    paddingRight: 40
-  },
-  bottomZ: {
-    position: "absolute",
-    zIndex: -1
-  },
-  topZ: {
-    position: "absolute",
-    top: "25%",
-    left: 0,
-    zIndex: 0
+  mainContainer: {
+    flexDirection: "column",
+    alignContent: "center",
+    justifyContent: "center"
   },
   topImg: {
-    top: "80%"
+    marginTop: 5
   },
-  btnWrapper: {
-    flex: 1,
-    justifyContent: "center",
+  logo: {
+    marginTop: 0,
+    marginLeft: 75,
+    marginRight: 75,
+    alignSelf: "center"
+  },
+  landingImage: {
+    alignSelf: "center"
+  },
+  middleImg: {
+    width: 325,
+    height: 330
+  },
+  blueTitle: {
+    color: "#3366FF"
+  },
+  purposeContainer: {
+    flexDirection: "column",
     alignItems: "center",
+    marginBottom: 25
   },
-  btn: {
-    width: 343,
-    height: 40,
-    borderRadius: 15,
+  purpose: {
+    fontSize: 23,
+    width: "60%",
+    textAlign: "center"
+  },
+  buttons: {
+    marginLeft: 20,
+    marginRight: 20
+  },
+  registerBtn: {
     backgroundColor: "#3366FF",
+    borderRadius: 15,
+    marginBottom: 20
   },
+  loginBtn: {
+    borderColor: "#3366FF",
+    backgroundColor: "white",
+    borderRadius: 15,
+  }
 });
 
 export default Landing;
