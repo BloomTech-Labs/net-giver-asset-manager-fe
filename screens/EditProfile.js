@@ -26,27 +26,22 @@ export default class EditProfile extends React.Component {
 
     this.state = {
       image: null,
-      userName: "",
-      name: "",
       userId: 0,
-      email: ""
+      email: "",
+      username: ""
     };
   }
 
-  getUser = () => {
+  updateUser = () => {
     axios
-      .get("https://net-giver-asset-mngr.herokuapp.com/api/auth/users")
+      .put(
+        `https://net-giver-asset-mngr.herokuapp.com/api/auth/register${user_id}`
+      )
       .then(res => {
-        // console.log("usertest:", res.data);
-        //  ( res.data === this.state.userId ? this.setState({ email: res.data.email}) : this.state.email)
-        if (res.data.id === this.state.userId) {
-          // console.log("logicTest:", this.state.userId);
-          this.setState({ email: email });
-          console.log("emailtest:", email);
-        }
+        console.log("put test:", res.data);
       })
       .catch(err => {
-        console.log("failed to get user:", err);
+        console.log(err);
       });
   };
 
@@ -64,9 +59,6 @@ export default class EditProfile extends React.Component {
 
   render() {
     let { image } = this.state;
-    let { email } = this.state;
-
-    console.log("anotherStateTest:", email);
 
     return (
       <SafeAreaView style={styles.mainWrapper}>
@@ -91,19 +83,27 @@ export default class EditProfile extends React.Component {
           </TouchableOpacity>
           <Text style={{ fontWeight: "500" }}>Add Photo</Text>
         </View>
-
+        <Spacer />
+        <View>
+          <Text style={styles.inputLabels}>username</Text>
+          <TextInput placeholder="username" style={styles.inputLabels} />
+          <Text style={styles.inputLabels}>email</Text>
+          <TextInput placeholder="email" style={styles.inputLabels} />
+        </View>
         <View style={styles.btnWrapper}>
           <Button
             buttonStyle={styles.btn}
             containerStyle={styles.btnContainer}
-            title="Next"
-            onPress={() => this.props.navigation.navigate("Dashboard")}
+            title="Update Profile"
+            onPress={() => {
+              image !== null ? { updateUser } : alert("Please Include a Photo");
+            }}
           />
-          <NavLink
+          {/* <NavLink
             text="Already have an account? Log in here."
             route="Login"
             style={styles.toLoginLink}
-          />
+          /> */}
         </View>
       </SafeAreaView>
     );
@@ -112,7 +112,6 @@ export default class EditProfile extends React.Component {
   componentDidMount() {
     this.getPermissionAsync();
     this.fetchUserId();
-    this.getUser();
   }
 
   getPermissionAsync = async () => {
@@ -248,5 +247,20 @@ const styles = StyleSheet.create({
     color: "#3366FF",
     paddingTop: 20,
     marginTop: 20
+  },
+  inputField: {
+    height: 40,
+    width: "91%",
+    borderColor: "gray",
+    borderRadius: 5,
+    borderWidth: 1,
+    alignSelf: "center",
+    paddingLeft: 10,
+    marginTop: 20
+  },
+  inputLabels: {
+    width: "91%",
+    alignSelf: "center",
+    fontSize: 17
   }
 });
