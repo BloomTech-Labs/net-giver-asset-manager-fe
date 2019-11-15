@@ -233,9 +233,6 @@ const AppStack = createDrawerNavigator(
     SingleAssetDrawer: {
       screen: SingleAssetCard,
     },
-    AssetsCardDrawer: {
-      screen: OneAsset,
-    },
     Add: {
       screen: AssetsAddScreen
     },
@@ -263,7 +260,7 @@ const AuthStack = createStackNavigator(
     SMS: {
       screen: SmsLogin,
       navigationOptions: props => ({
-        title: "Sign In",
+        title: "Landing Page",
         headerStyle: {
           backgroundColor: "#FEFEFE",
         },
@@ -286,7 +283,7 @@ const AuthStack = createStackNavigator(
     Login: {
       screen: LoginText,
       navigationOptions: props => ({
-        title: "Sign In",
+        title: "Register",
         headerStyle: {
           backgroundColor: "#FEFEFE",
         },
@@ -309,7 +306,7 @@ const AuthStack = createStackNavigator(
     Register: {
       screen: RegisterNameText,
       navigationOptions: props => ({
-        title: "Create Account",
+        title: "Phone Number",
         headerStyle: {
           backgroundColor: "#FEFEFE",
         },
