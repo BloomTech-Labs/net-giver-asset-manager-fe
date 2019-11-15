@@ -27,7 +27,7 @@ import { Formik } from "formik";
 import { Entypo } from "@expo/vector-icons";
 
 const AssetsAdd = (props, { navigation }) => {
-  console.log("state test:", props);
+  //   console.log("state test:", props);
   const [userId, setUserId] = useState(0);
   const [image, setImage] = useState(null);
 
@@ -56,6 +56,25 @@ const AssetsAdd = (props, { navigation }) => {
     getPermissionAsync();
   }, []);
 
+  const asset_img_id = Date.now();
+  console.log("RNG test:", asset_img_id);
+
+  const file = {
+    uri: result.uri,
+    name: "image.png",
+    type: "image/png"
+  };
+
+  const options = {
+    keyPrefix: `${userId}/${asset_id}`,
+    bucket: "netgiver",
+    region: "us-east-2",
+    accessKey: AWS_ACCESS_KEY,
+    secretKey: AWS_SECRET_ACCESS_KEY,
+    successActionStatus: 201
+  };
+  console.log("options test", options);
+
   const chooseImage = async () => {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -68,6 +87,9 @@ const AssetsAdd = (props, { navigation }) => {
     if (!result.cancelled) {
       setImage(result.uri);
     }
+    asset_img_id;
+    const asset_img_id = Date.now();
+    console.log("RNG test:", asset_img_id);
 
     const file = {
       uri: result.uri,
@@ -76,7 +98,7 @@ const AssetsAdd = (props, { navigation }) => {
     };
 
     const options = {
-      keyPrefix: `${userId}/${asseItd}`,
+      keyPrefix: `${userId}/${asset_id}`,
       bucket: "netgiver",
       region: "us-east-2",
       accessKey: AWS_ACCESS_KEY,
@@ -89,16 +111,17 @@ const AssetsAdd = (props, { navigation }) => {
       if (res.status !== 201) throw new Error("Failed to upload image to S3");
       console.log("upload to aws test", res.body);
       const location = res.body.postResponse.location;
-      console.log("local test:", location);
-      const name = res.body.postResponse.key;
+      //   console.log("local test:", location);
+      //   const name = res.body.postResponse.key;
       // const user_id = JSON.stringify(name.replace(/\D/g, ""));
-      const asset_id = JSON.parse(name.replace(/\D/g, ""));
-      console.log("rename", asset_id);
+      //   const asset_id = JSON.parse(name.replace(/\D/g, ""));
+      //   console.log("rename", asset_id);
       // const newerName = JSON.parse(newName);
       // console.log("herewegoagain", newerName);
+      console.log("userTest:", userId);
       const data = {
         // user_id,
-        asset_id,
+        asset_id: 3,
         location
       };
       console.log("dataTest:", data);
@@ -111,7 +134,7 @@ const AssetsAdd = (props, { navigation }) => {
             data
           )
           .then(res => {
-            console.log("post to backend test:", res);
+            console.log("post to backend test success!!!!!!!!!!!!");
           })
           .catch(err => {
             console.log("that didnt work", err.data);
@@ -123,6 +146,7 @@ const AssetsAdd = (props, { navigation }) => {
   if (props.navigation.state.params) {
     var barkode = props.navigation.state.params.dataString;
   }
+  console.log("Barcode Scanned", barkode)
 
   // const redirect = () => {
   //     props.navigation.navigate("AssetsList");
@@ -162,8 +186,8 @@ const AssetsAdd = (props, { navigation }) => {
                   : { uri: "https://i.imgur.com/ltNMlnA.png" }
               }
               size="xlarge"
-              containerStyle={{ 
-                alignSelf: "center", 
+              containerStyle={{
+                alignSelf: "center",
                 width: "90%",
                 marginTop: 20,
                 height: 165
@@ -178,7 +202,7 @@ const AssetsAdd = (props, { navigation }) => {
             description: "",
             barcode: "",
             check_in_status: 0,
-            user_id: userId,
+            user_id: userId
             // location_id: 1
           }}
           onSubmit={values =>
@@ -225,7 +249,7 @@ const AssetsAdd = (props, { navigation }) => {
                 {/* <KeyboardShift> */}
                 <TouchableOpacity
                   style={styles.qrSection}
-                  onPress={() => props.navigation.navigate("BarcodeScanner")}
+                  onPress={() => props.navigation.navigate("Scanner")}
                 >
                   <MaterialCommunityIcons
                     style={styles.upc}
@@ -351,7 +375,7 @@ const styles = StyleSheet.create({
   },
   upc: {
     marginBottom: -20,
-    marginTop: 20,
+    marginTop: 20
   },
   noCode: {
     marginLeft: 8,

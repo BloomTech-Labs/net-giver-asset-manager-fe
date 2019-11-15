@@ -207,15 +207,20 @@ const authReducer = (state, action) => {
 const clearErrorMessage = dispatch => () => {
   dispatch({ type: "clear_error_message" });
 };
-
-const signup = dispatch => async ({ email, password, username }) => {
+// taking out passowrd from line 211 + 215
+const signup = dispatch => async ({ email, password, username, id }) => {
   try {
     const response = await assetsApi.post("/auth/register", {
       email,
       password,
-      username
+      username,
+      id
     });
-    await AsyncStorage.setItem("token", response.data.token);
+    // await AsyncStorage.setItem("token", response.data.token);
+    await AsyncStorage.multiSet([
+      ["token", response.data.token],
+      ["user_id", JSON.stringify(response.data.user.id)]
+    ]);
     dispatch({ type: "signin", payload: response.data.token });
 
     navigate("Dashboard");
@@ -227,7 +232,7 @@ const signup = dispatch => async ({ email, password, username }) => {
     });
   }
 };
-
+// removing passsword from the flow
 const signin = dispatch => async ({ email, password, username, id }) => {
   // console.log("Btn Clicked")
   try {

@@ -50,7 +50,8 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
           buttonStyle={styles.btn}
           title={submitButtonText}
           iconRight={true}
-          onPress={() => onSubmit({ email, password, username })}
+          // onPress={() => onSubmit({ email, password, username })}
+          onPress={() => onSubmit({ email, username, password })}
         />
       </Spacer>
     </>
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 15,
     backgroundColor: "#3366FF",
-    paddingBottom: 8,
+    paddingBottom: 8
   },
   errorMessage: {
     fontSize: 16,

@@ -1,10 +1,10 @@
 import React from "react";
-import { SafeAreaView, View, TouchableOpacity, StyleSheet } from "react-native";
+import { SafeAreaView, View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import { Icon } from "react-native-elements";
 import {
   createAppContainer,
   createSwitchNavigator,
-  createStackNavigator
+  createStackNavigator, screenProps
 } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { Provider as AuthProvider } from "../context/AuthContext";
@@ -33,6 +33,9 @@ import Legal from "../screens/Legal";
 import About from "../screens/About";
 import TextMsg from "../screens/TextMsg";
 import SmsLogin from "../screens/SmsLogin";
+import OneAsset from "../screens/assets/singleAsset/OneAsset";
+
+console.disableYellowBox = true;
 
 const DevStack = createStackNavigator(
   {
@@ -46,14 +49,15 @@ const DevStack = createStackNavigator(
     Previewer: Previewer,
     Avatar: getImage,
     Upload: ImageUpload,
-    SingleAssetCard: SingleAssetCard,
     AssetsCard: AssetsCard,
     Ipick: Cameron,
     Contact: Contact,
     Legal: Legal,
     About: About,
     Text: TextMsg,
-    SmsLogin: SmsLogin
+    SmsLogin: SmsLogin,
+    // SingleAssetCard: SingleAssetCard,
+    // OneAsset: OneAsset,
   },
   {
     initialRouteName: "Home"
@@ -85,6 +89,42 @@ const DashboardScreen = createStackNavigator({
     })
   }
 });
+
+const SingleAssetScreen = createStackNavigator({
+  SingleAssetScreen: {
+    screen: SingleAssetCard,
+    navigationOptions: props => ({
+      title: "Simple Asset Tracker",
+      headerStyle: {
+        backgroundColor: "#EFEFF4"
+      },
+      headerTitleStyle: {
+        color: "black",
+        fontSize: 20,
+        fontWeight: "500"
+      },
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+      headerLeft: (
+        <SafeAreaView>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+              <Icon name="arrow-back" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      )
+    })
+  }
+});
+
 
 const ScannerScreen = createStackNavigator({
   DashboardScreen: {
@@ -234,10 +274,10 @@ const AppStack = createDrawerNavigator(
       screen: AssetsScreen
     },
     SingleAssetDrawer: {
-      screen: SingleAssetCard,
+      screen: SingleAssetScreen,
     },
     AssetsCardDrawer: {
-      screen: AssetsCard,
+      screen: AssetsCard
     },
     Add: {
       screen: AssetsAddScreen
@@ -270,7 +310,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Sign In",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
@@ -293,7 +333,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Sign In",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
@@ -316,7 +356,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Create Account",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
@@ -339,7 +379,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Create Account",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
@@ -359,9 +399,9 @@ const AuthStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Landing",
+    initialRouteName: "Landing"
   }
-)
+);
 
 const RootNavigation = createSwitchNavigator(
   {
@@ -376,7 +416,7 @@ const RootNavigation = createSwitchNavigator(
     },
     Dev: {
       screen: DevStack
-    },
+    }
   },
   {
     initialRouteName: "Auth"

@@ -1,15 +1,7 @@
 import React from "react";
 import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native";
-import { Button, Icon, ThemeProvider } from "react-native-elements";
+import { Button } from "react-native-elements";
 import NavLink from "../navigation/NavLink";
-
-// const theme = {
-//   Button: {
-//     titleStyle: {
-//       color: '#3366FF'
-//     }
-//   }
-// };
 
 
 const Landing = ({ navigation }) => {
@@ -65,15 +57,14 @@ const Landing = ({ navigation }) => {
             title="Free Sign Up"
             onPress={() => navigation.navigate("SMS")}
           />
-          <ThemeProvider>
-            <Button
-              buttonStyle={styles.loginBtn}
-              titleStyle={{ color: '#3366FF' }}
-              type="outline"
-              title="Log In Here"
-              onPress={() => navigation.navigate("SMS")}
-            />
-          </ThemeProvider>
+  
+          <Button
+            buttonStyle={styles.loginBtn}
+            titleStyle={{ color: '#3366FF' }}
+            type="outline"
+            title="Log In Here"
+            onPress={() => navigation.navigate("SMS")}
+          />
         </View>
 
         {/* <View
@@ -91,14 +82,14 @@ const Landing = ({ navigation }) => {
             <Button
               buttonStyle={styles.btn}
               title="Free Sign Up"
-              onPress={() => navigation.navigate("SMS")}
+              onPress={() => navigation.navigate("Ipick")}
             />
           </View>
 
           <View style={styles.navLink}>
             <NavLink
               text="Have an account already?  Login here."
-              routeName="Login"
+              routeName="SMS"
             />
           </View>
         </View> */}
@@ -154,8 +145,19 @@ const styles = StyleSheet.create({
   loginBtn: {
     borderColor: "#3366FF",
     backgroundColor: "white",
-    borderRadius: 15,
+    borderRadius: 15
   }
+  // btnWrapper: {
+  //   flex: 1,
+  //   justifyContent: "center",
+  //   alignItems: "center"
+  // },
+  // btn: {
+  //   width: 343,
+  //   height: 40,
+  //   borderRadius: 15,
+  //   backgroundColor: "#3366FF"
+  // }
 });
 
 export default Landing;
