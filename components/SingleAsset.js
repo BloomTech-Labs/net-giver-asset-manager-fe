@@ -1,8 +1,10 @@
+
 import React, { useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { withNavigation } from "react-navigation";
 import axios from "axios";
 const SingleAsset = ({ data, navigation }) => {
+
 
   getAssetImage = () => {
     var currentAssetID = data.id
@@ -29,6 +31,15 @@ const SingleAsset = ({ data, navigation }) => {
     const id = data.id;;
     console.log("ASSET ID:", id);
     navigation.navigate("SingleAssetScreen", { id });
+
+  // console.log("INDIVIDUAL ASSET DATA", data);
+
+  // Handles clicking an individual asset in the Dashboard screen
+  const showDetails = () => {
+    const assetId = data.id;
+    console.log("ASSET ID:", assetId);
+    navigation.navigate("SingleAssetDrawer", { assetId });
+
   };
 
   return (
@@ -36,6 +47,7 @@ const SingleAsset = ({ data, navigation }) => {
       <View style={styles.assetWrapper}>
         <View style={styles.imageWrapper} />{data.photo}
         <View style={styles.textWrapper}>
+
           <View style={styles.textWrapper}>
             <Text style={styles.assetName}>{data.name}</Text>
             <Text style={styles.assetID}>QR #{data.barcode}</Text>
@@ -53,6 +65,7 @@ const SingleAsset = ({ data, navigation }) => {
             </View>
 
           </View>
+
         </View>
       </View>
     </TouchableOpacity>
@@ -90,11 +103,11 @@ const styles = StyleSheet.create({
   },
   assetDescription: {
     fontSize: 14,
-    fontWeight: "normal",
+    fontWeight: "normal"
   },
   assetLocation: {
     color: "#82A0FD"
-  },
+  }
 });
 
 export default withNavigation(SingleAsset);

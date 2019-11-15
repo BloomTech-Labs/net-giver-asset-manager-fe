@@ -56,6 +56,25 @@ const AssetsAdd = (props, { navigation }) => {
     getPermissionAsync();
   }, []);
 
+  const asset_img_id = Date.now();
+  console.log("RNG test:", asset_img_id);
+
+  const file = {
+    uri: result.uri,
+    name: "image.png",
+    type: "image/png"
+  };
+
+  const options = {
+    keyPrefix: `${userId}/${asset_id}`,
+    bucket: "netgiver",
+    region: "us-east-2",
+    accessKey: AWS_ACCESS_KEY,
+    secretKey: AWS_SECRET_ACCESS_KEY,
+    successActionStatus: 201
+  };
+  console.log("options test", options);
+
   const chooseImage = async () => {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -68,9 +87,9 @@ const AssetsAdd = (props, { navigation }) => {
     if (!result.cancelled) {
       setImage(result.uri);
     }
-
-    const asset_id = Date.now();
-    console.log("RNG test:", asset_id);
+    asset_img_id;
+    const asset_img_id = Date.now();
+    console.log("RNG test:", asset_img_id);
 
     const file = {
       uri: result.uri,
@@ -99,9 +118,10 @@ const AssetsAdd = (props, { navigation }) => {
       //   console.log("rename", asset_id);
       // const newerName = JSON.parse(newName);
       // console.log("herewegoagain", newerName);
+      console.log("userTest:", userId);
       const data = {
         // user_id,
-        asset_id: 1,
+        asset_id: 3,
         location
       };
       console.log("dataTest:", data);
