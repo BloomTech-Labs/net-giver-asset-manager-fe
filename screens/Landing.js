@@ -117,8 +117,10 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   middleImg: {
-    width: 325,
-    height: 330
+    marginTop: 10,
+    marginBottom: 5,
+    width: 315,
+    height: 320
   },
   blueTitle: {
     color: "#3366FF"
