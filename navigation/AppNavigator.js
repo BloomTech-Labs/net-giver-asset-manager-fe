@@ -34,6 +34,8 @@ import About from "../screens/About";
 import TextMsg from "../screens/TextMsg";
 import SmsLogin from "../screens/SmsLogin";
 
+console.disableYellowBox = true;
+
 const DevStack = createStackNavigator(
   {
     Home: HomeScreen,
@@ -260,7 +262,7 @@ const AuthStack = createStackNavigator(
     Landing: {
       screen: Landing,
       navigationOptions: props => ({
-        headerMode: "none",
+        headerMode: "none"
       })
     },
     SMS: {
@@ -291,7 +293,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Sign In",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
@@ -314,7 +316,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Create Account",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
@@ -337,7 +339,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Create Account",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
@@ -357,9 +359,9 @@ const AuthStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Landing",
+    initialRouteName: "Landing"
   }
-)
+);
 
 const RootNavigation = createSwitchNavigator(
   {
@@ -374,7 +376,7 @@ const RootNavigation = createSwitchNavigator(
     },
     Dev: {
       screen: DevStack
-    },
+    }
   },
   {
     initialRouteName: "Auth"
