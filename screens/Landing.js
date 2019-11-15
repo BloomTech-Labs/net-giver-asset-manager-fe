@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     width: "50%"
   },
   text: {
-    fontSize: 18,
+    fontSize: 18
   },
   navLink: {
     paddingLeft: 40,
@@ -132,14 +132,14 @@ const styles = StyleSheet.create({
   btnWrapper: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   btn: {
     width: 343,
     height: 40,
     borderRadius: 15,
-    backgroundColor: "#3366FF",
-  },
+    backgroundColor: "#3366FF"
+  }
 });
 
 export default Landing;
