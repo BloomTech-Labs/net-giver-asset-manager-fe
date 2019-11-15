@@ -1,22 +1,22 @@
-
-import React, { useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useEffect } from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
 import axios from "axios";
+
 const SingleAsset = ({ data, navigation }) => {
-
-
   getAssetImage = () => {
-    var currentAssetID = data.id
+    var currentAssetID = data.id;
     axios
-      .get(`https://net-giver-asset-mngr.herokuapp.com/api/assets/img/${currentAssetID}`)
+      .get(
+        `https://net-giver-asset-mngr.herokuapp.com/api/assets/img/${currentAssetID}`
+      )
       .then(response => {
         var assetImage = response.data;
 
         // var image = assetImage.map(function (e) {
         //   return e.location
         // });
-        console.log('images', assetImage)
+        console.log("images", assetImage);
       })
       .catch(error => {
         console.log(error);
@@ -28,48 +28,46 @@ const SingleAsset = ({ data, navigation }) => {
 
   // Handles clicking an individual asset in the Dashboard screen
   const showDetails = () => {
-    const id = data.id;;
+    const id = data.id;
     console.log("ASSET ID:", id);
     navigation.navigate("SingleAssetScreen", { id });
 
-  // console.log("INDIVIDUAL ASSET DATA", data);
+    // console.log("INDIVIDUAL ASSET DATA", data);
 
-  // Handles clicking an individual asset in the Dashboard screen
-  const showDetails = () => {
-    const assetId = data.id;
-    console.log("ASSET ID:", assetId);
-    navigation.navigate("SingleAssetDrawer", { assetId });
+    // Handles clicking an individual asset in the Dashboard screen
+    const showDetails = () => {
+      const assetId = data.id;
+      console.log("ASSET ID:", assetId);
+      navigation.navigate("SingleAssetDrawer", { assetId });
+    };
 
-  };
-
-  return (
-    <TouchableOpacity onPress={showDetails}>
-      <View style={styles.assetWrapper}>
-        <View style={styles.imageWrapper} />{data.photo}
-        <View style={styles.textWrapper}>
-
+    return (
+      <TouchableOpacity onPress={showDetails}>
+        <View style={styles.assetWrapper}>
+          <View style={styles.imageWrapper} />
+          {data.photo}
           <View style={styles.textWrapper}>
-            <Text style={styles.assetName}>{data.name}</Text>
-            <Text style={styles.assetID}>QR #{data.barcode}</Text>
-            <Text>Description: {data.description}</Text>
-            <View>
-              {data.check_in_status == true ?
-                (<View>
-                  <Text style={styles.assetName}>Status: Check-In</Text>
-                </View>)
-                :
-                (<View>
-                  <Text style={styles.assetName}>Status: Check-Out</Text>
-                </View>)
-              }
+            <View style={styles.textWrapper}>
+              <Text style={styles.assetName}>{data.name}</Text>
+              <Text style={styles.assetID}>QR #{data.barcode}</Text>
+              <Text>Description: {data.description}</Text>
+              <View>
+                {data.check_in_status == true ? (
+                  <View>
+                    <Text style={styles.assetName}>Status: Check-In</Text>
+                  </View>
+                ) : (
+                  <View>
+                    <Text style={styles.assetName}>Status: Check-Out</Text>
+                  </View>
+                )}
+              </View>
             </View>
-
           </View>
-
         </View>
-      </View>
-    </TouchableOpacity>
-  );
+      </TouchableOpacity>
+    );
+  };
 };
 
 const styles = StyleSheet.create({

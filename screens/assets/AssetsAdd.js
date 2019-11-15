@@ -56,29 +56,10 @@ const AssetsAdd = (props, { navigation }) => {
     getPermissionAsync();
   }, []);
 
-  const asset_img_id = Date.now();
-  console.log("RNG test:", asset_img_id);
-
-  const file = {
-    uri: result.uri,
-    name: "image.png",
-    type: "image/png"
-  };
-
-  const options = {
-    keyPrefix: `${userId}/${asset_id}`,
-    bucket: "netgiver",
-    region: "us-east-2",
-    accessKey: AWS_ACCESS_KEY,
-    secretKey: AWS_SECRET_ACCESS_KEY,
-    successActionStatus: 201
-  };
-  console.log("options test", options);
-
   const chooseImage = async () => {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
+      allowsEditing: false,
       aspect: [4, 3]
     });
 
@@ -87,7 +68,7 @@ const AssetsAdd = (props, { navigation }) => {
     if (!result.cancelled) {
       setImage(result.uri);
     }
-    asset_img_id;
+
     const asset_img_id = Date.now();
     console.log("RNG test:", asset_img_id);
 
@@ -98,30 +79,29 @@ const AssetsAdd = (props, { navigation }) => {
     };
 
     const options = {
-      keyPrefix: `${userId}/${asset_id}`,
+      keyPrefix: `${userId}/${asset_img_id}`,
       bucket: "netgiver",
       region: "us-east-2",
       accessKey: AWS_ACCESS_KEY,
       secretKey: AWS_SECRET_ACCESS_KEY,
       successActionStatus: 201
     };
-    console.log("options test", options);
+    // console.log("options test", options);
 
     RNS3.put(file, options).then(res => {
       if (res.status !== 201) throw new Error("Failed to upload image to S3");
       console.log("upload to aws test", res.body);
       const location = res.body.postResponse.location;
-      //   console.log("local test:", location);
+      console.log("local test:", location);
       //   const name = res.body.postResponse.key;
       // const user_id = JSON.stringify(name.replace(/\D/g, ""));
       //   const asset_id = JSON.parse(name.replace(/\D/g, ""));
       //   console.log("rename", asset_id);
       // const newerName = JSON.parse(newName);
       // console.log("herewegoagain", newerName);
-      console.log("userTest:", userId);
+      // console.log("userTest:", userId);
       const data = {
-        // user_id,
-        asset_id: 3,
+        asset_img_id,
         location
       };
       console.log("dataTest:", data);
@@ -134,10 +114,10 @@ const AssetsAdd = (props, { navigation }) => {
             data
           )
           .then(res => {
-            console.log("post to backend test success!!!!!!!!!!!!");
+            console.log("post to backend test success!!!!!!!!!!!!", res);
           })
           .catch(err => {
-            console.log("that didnt work", err.data);
+            console.log("that didnt work:", err.message);
           });
       }
     });
@@ -146,7 +126,7 @@ const AssetsAdd = (props, { navigation }) => {
   if (props.navigation.state.params) {
     var barkode = props.navigation.state.params.dataString;
   }
-  console.log("Barcode Scanned", barkode)
+  console.log("Barcode Scanned", barkode);
 
   // const redirect = () => {
   //     props.navigation.navigate("AssetsList");
@@ -159,14 +139,6 @@ const AssetsAdd = (props, { navigation }) => {
           <Text style={styles.activeText}>ASSET ENTRY</Text>
           <View style={styles.activeTab} />
         </View>
-        {/* <Avatar
-          PlaceholderContent={<ActivityIndicator />}
-          source={
-            image ? { uri: image } : { uri: "https://i.imgur.com/ltNMlnA.png" }
-          }
-          rounded
-          size="xlarge"
-        /> */}
 
         {image === null ? (
           <View style={styles.photoContainer}>
@@ -178,22 +150,22 @@ const AssetsAdd = (props, { navigation }) => {
             </View>
           </View>
         ) : (
-            <Avatar
-              PlaceholderContent={<ActivityIndicator />}
-              source={
-                image
-                  ? { uri: image }
-                  : { uri: "https://i.imgur.com/ltNMlnA.png" }
-              }
-              size="xlarge"
-              containerStyle={{
-                alignSelf: "center",
-                width: "90%",
-                marginTop: 20,
-                height: 165
-              }}
-            />
-          )}
+          <Avatar
+            PlaceholderContent={<ActivityIndicator />}
+            source={
+              image
+                ? { uri: image }
+                : { uri: "https://i.imgur.com/ltNMlnA.png" }
+            }
+            size="xlarge"
+            containerStyle={{
+              alignSelf: "center",
+              width: "90%",
+              marginTop: 20,
+              height: 165
+            }}
+          />
+        )}
         <Formik
           enableReinitialize
           initialValues={{
@@ -209,7 +181,8 @@ const AssetsAdd = (props, { navigation }) => {
             axios
               .post(
                 "https://net-giver-asset-mngr.herokuapp.com/api/assets",
-                values
+                values,
+                asset_img_id
               )
               .then(res => {
                 Alert.alert(
@@ -245,113 +218,82 @@ const AssetsAdd = (props, { navigation }) => {
             isValid,
             handleSubmit
           }) => (
-              <View style={styles.container}>
-                {/* <KeyboardShift> */}
-                <TouchableOpacity
-                  style={styles.qrSection}
-                  onPress={() => props.navigation.navigate("Scanner")}
+            <View style={styles.container}>
+              {/* <KeyboardShift> */}
+              <TouchableOpacity
+                style={styles.qrSection}
+                onPress={() => props.navigation.navigate("Scanner")}
+              >
+                <MaterialCommunityIcons
+                  style={styles.upc}
+                  name="qrcode-scan"
+                  size={25}
+                />
+                {!barkode ? (
+                  <Text style={styles.noCode}>Scan Asset QR Code</Text>
+                ) : (
+                  <Text style={styles.qrCode}>QR Code: {barkode}</Text>
+                )}
+              </TouchableOpacity>
+
+              <Text style={styles.assetTitle}>Name</Text>
+              <TextInput
+                value={values.name}
+                onChangeText={handleChange("name")}
+                onBlur={() => setFieldTouched("name")}
+                clearButtonMode="while-editing"
+                style={styles.textInputField}
+              />
+              {touched.name && errors.name && (
+                <Text
+                  style={{
+                    fontSize: 10,
+                    color: "red",
+                    paddingLeft: 20,
+                    marginTop: 5
+                  }}
                 >
-                  <MaterialCommunityIcons
-                    style={styles.upc}
-                    name="qrcode-scan"
-                    size={25}
-                  />
-                  {!barkode ? (
-                    <Text style={styles.noCode}>Scan Asset QR Code</Text>
-                  ) : (
-                      <Text style={styles.qrCode}>QR Code: {barkode}</Text>
-                    )}
-                </TouchableOpacity>
+                  {errors.name}
+                </Text>
+              )}
 
-                <Text style={styles.assetTitle}>Name</Text>
-                <TextInput
-                  value={values.name}
-                  onChangeText={handleChange("name")}
-                  onBlur={() => setFieldTouched("name")}
-                  clearButtonMode="while-editing"
-                  style={styles.textInputField}
-                />
-                {touched.name && errors.name && (
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      color: "red",
-                      paddingLeft: 20,
-                      marginTop: 5
-                    }}
-                  >
-                    {errors.name}
-                  </Text>
-                )}
+              <Text style={styles.assetTitle}>Description</Text>
+              <TextInput
+                value={values.description}
+                onChangeText={handleChange("description")}
+                onBlur={() => setFieldTouched("description")}
+                clearButtonMode="while-editing"
+                style={styles.textInputField}
+              />
+              {touched.description && errors.description && (
+                <Text
+                  style={{
+                    fontSize: 10,
+                    color: "red",
+                    paddingLeft: 20,
+                    marginTop: 5
+                  }}
+                >
+                  {errors.description}
+                </Text>
+              )}
 
-                <Text style={styles.assetTitle}>Description</Text>
-                <TextInput
-                  value={values.description}
-                  onChangeText={handleChange("description")}
-                  onBlur={() => setFieldTouched("description")}
-                  clearButtonMode="while-editing"
-                  style={styles.textInputField}
-                />
-                {touched.description && errors.description && (
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      color: "red",
-                      paddingLeft: 20,
-                      marginTop: 5
-                    }}
-                  >
-                    {errors.description}
-                  </Text>
-                )}
+              <Button
+                iconRight={false}
+                title="Submit"
+                type="solid"
+                color="blue"
+                onPress={() => {
+                  image !== null
+                    ? { handleSubmit }
+                    : alert("Please Include a Photo");
+                }}
+                buttonStyle={styles.button}
+              />
 
-                {/* <Text style={styles.assetTitle}>Location</Text>
-                <TextInput
-                  value={values.location_id}
-                  onChangeText={handleChange("location_id")}
-                  onBlur={() => setFieldTouched("location_id")}
-                  clearButtonMode="while-editing"
-                  style={styles.textInputField}
-                />
-                {touched.location_id && errors.location_id && (
-                  <Text
-                    style={{
-                      fontSize: 10,
-                      color: "red",
-                      paddingLeft: 20,
-                      marginTop: 5
-                    }}
-                  >
-                    {errors.location_id}
-                  </Text>
-                )} */}
-
-                {/* <Text style={styles.assetTitle}>Price</Text>
-                                <TextInput
-                                    value={values.category}
-                                    onChangeText={handleChange("category")}
-                                    onBlur={() => setFieldTouched("category")}
-                                    clearButtonMode="while-editing"
-                                    style={styles.textInputField}
-                                />
-                                {touched.category && errors.category && (
-                                    <Text style={{ 
-                                        fontSize: 10, color: "red", paddingLeft: 20, marginTop: 5 }}>
-                                        {errors.category}
-                                    </Text>
-                                )} */}
-
-                <Button
-                  iconRight={false}
-                  title="Submit"
-                  type="solid"
-                  color="blue"
-                  onPress={handleSubmit}
-                  buttonStyle={styles.button}
-                />
-                {/* </KeyboardShift> */}
-              </View>
-            )}
+              {/* </KeyboardShift> */}
+            </View>
+          )}
         </Formik>
       </ScrollView>
     </KeyboardShift>
