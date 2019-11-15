@@ -1,15 +1,15 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
 
 const SingleAsset = ({ data, navigation }) => {
-  console.log("INDIVIDUAL ASSET DATA", data);
-  
+  // console.log("INDIVIDUAL ASSET DATA", data);
+
   // Handles clicking an individual asset in the Dashboard screen
   const showDetails = () => {
-    const assetId = data.id;;
+    const assetId = data.id;
     console.log("ASSET ID:", assetId);
-    navigation.navigate("AssetsCardDrawer", { assetId });
+    navigation.navigate("SingleAssetDrawer", { assetId });
   };
 
   return (
@@ -17,9 +17,9 @@ const SingleAsset = ({ data, navigation }) => {
       <View style={styles.assetWrapper}>
         <View style={styles.imageWrapper} />
         <View style={styles.textWrapper}>
-          <Text style={styles.assetName}>{ data.name }</Text>
-          <Text style={styles.assetID}>QR ID: { data.barcode }</Text>
-          <Text>{ data.description }</Text>
+          <Text style={styles.assetName}>{data.name}</Text>
+          <Text style={styles.assetID}>QR ID: {data.barcode}</Text>
+          <Text>{data.description}</Text>
           <Text style={styles.assetLocation}>Returned: True</Text>
         </View>
       </View>
@@ -58,11 +58,11 @@ const styles = StyleSheet.create({
   },
   assetDescription: {
     fontSize: 14,
-    fontWeight: "normal",
+    fontWeight: "normal"
   },
   assetLocation: {
     color: "#82A0FD"
-  },
+  }
 });
 
 export default withNavigation(SingleAsset);

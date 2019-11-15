@@ -236,10 +236,10 @@ const AppStack = createDrawerNavigator(
       screen: AssetsScreen
     },
     SingleAssetDrawer: {
-      screen: SingleAssetCard,
+      screen: SingleAssetCard
     },
     AssetsCardDrawer: {
-      screen: OneAsset,
+      screen: AssetsCard
     },
     Add: {
       screen: AssetsAddScreen
@@ -270,7 +270,7 @@ const AuthStack = createStackNavigator(
       navigationOptions: props => ({
         title: "Sign In",
         headerStyle: {
-          backgroundColor: "#FEFEFE",
+          backgroundColor: "#FEFEFE"
         },
         headerTitleStyle: {
           color: "black",
