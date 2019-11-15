@@ -7,6 +7,7 @@ import SingleAsset from "../components/SingleAsset";
 import { REACT_APP_MIXPANEL_SECRET_API_KEY } from 'react-native-dotenv';
 import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
 const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const AssetHistory = ({ navigation }) => {
   const [history, setHistory] = useState([]);
@@ -129,6 +130,9 @@ const AssetHistory = ({ navigation }) => {
             }
           </TouchableOpacity>
         </View>
+
+        <View style={styles.qrSearchContainer}>
+
         <View style={styles.searchContainer}>
           <TextInput
             style={styles.searchBar}
@@ -143,6 +147,19 @@ const AssetHistory = ({ navigation }) => {
             value={query}
           />
         </View>
+
+        <TouchableOpacity
+            style={styles.qrSection}
+            onPress={() => navigation.navigate("BarcodeScanner")}
+          >
+            <MaterialCommunityIcons
+              style={styles.upc}
+              name="qrcode-scan"
+              size={25}
+            />
+          </TouchableOpacity>
+      </View>
+
         <View style={styles.flatList}>
           {!isMine
             ? <FlatList
@@ -255,14 +272,21 @@ const styles = StyleSheet.create({
     borderColor: '#7c7777',
     borderBottomWidth: 1,
     marginLeft: 25,
-    marginRight: 25
+    marginRight: 12,
+    width: '79%'
   },
   searchBar: {
     paddingLeft: 15,
     paddingRight: 15,
-    marginTop: 5,
+    marginTop: 12,
     height: '100%',
-    fontSize: 17
+    fontSize: 17,
+  },
+  qrSearchContainer: {
+    flexDirection: "row"
+  },
+  upc: {
+    marginTop: 35
   }
 });
 
