@@ -33,6 +33,7 @@ import Legal from "../screens/Legal";
 import About from "../screens/About";
 import TextMsg from "../screens/TextMsg";
 import SmsLogin from "../screens/SmsLogin";
+import EditProfile from "../screens/EditProfile";
 
 console.disableYellowBox = true;
 
@@ -55,7 +56,8 @@ const DevStack = createStackNavigator(
     Legal: Legal,
     About: About,
     Text: TextMsg,
-    SmsLogin: SmsLogin
+    SmsLogin: SmsLogin,
+    EditP: EditProfile
   },
   {
     initialRouteName: "Home"

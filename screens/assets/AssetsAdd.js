@@ -194,6 +194,7 @@ const AssetsAdd = (props, { navigation }) => {
           />
         )}
         <Formik
+          image={image}
           enableReinitialize
           initialValues={{
             name: "",
@@ -345,7 +346,9 @@ const AssetsAdd = (props, { navigation }) => {
                 title="Submit"
                 type="solid"
                 color="blue"
-                onPress={handleSubmit}
+                onPress={
+                  image !== null ? { handleSubmit } : alert("must add a photo")
+                }
                 buttonStyle={styles.button}
               />
               {/* </KeyboardShift> */}
