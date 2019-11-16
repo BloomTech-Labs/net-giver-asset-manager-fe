@@ -1,10 +1,17 @@
 import React from "react";
-import { SafeAreaView, View, TouchableOpacity, StyleSheet, Text } from "react-native";
+import {
+  SafeAreaView,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Text
+} from "react-native";
 import { Icon } from "react-native-elements";
 import {
   createAppContainer,
   createSwitchNavigator,
-  createStackNavigator, screenProps
+  createStackNavigator,
+  screenProps
 } from "react-navigation";
 import { createDrawerNavigator } from "react-navigation-drawer";
 import { Provider as AuthProvider } from "../context/AuthContext";
@@ -33,6 +40,7 @@ import Legal from "../screens/Legal";
 import About from "../screens/About";
 import TextMsg from "../screens/TextMsg";
 import SmsLogin from "../screens/SmsLogin";
+import EditProfile from "../screens/EditProfile";
 import OneAsset from "../screens/assets/singleAsset/OneAsset";
 
 console.disableYellowBox = true;
@@ -56,6 +64,7 @@ const DevStack = createStackNavigator(
     About: About,
     Text: TextMsg,
     SmsLogin: SmsLogin,
+    EditP: EditProfile
     // SingleAssetCard: SingleAssetCard,
     // OneAsset: OneAsset,
   },
@@ -124,7 +133,6 @@ const SingleAssetScreen = createStackNavigator({
     })
   }
 });
-
 
 const ScannerScreen = createStackNavigator({
   DashboardScreen: {
@@ -274,7 +282,7 @@ const AppStack = createDrawerNavigator(
       screen: AssetsScreen
     },
     SingleAssetDrawer: {
-      screen: SingleAssetScreen,
+      screen: SingleAssetScreen
     },
     AssetsCardDrawer: {
       screen: AssetsCard
