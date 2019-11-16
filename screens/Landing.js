@@ -56,6 +56,7 @@ const Landing = ({ navigation }) => {
             buttonStyle={styles.registerBtn}
             title="Free Sign Up"
             onPress={() => navigation.navigate("SMS")}
+            // onPress={() => navigation.navigate("OneAsset")}
           />
   
           <Button
@@ -119,8 +120,6 @@ const styles = StyleSheet.create({
   middleImg: {
     marginTop: 10,
     marginBottom: 5,
-    // width: 315,
-    // height: 320
     width: 350,
     height: 355
   },
