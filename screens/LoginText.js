@@ -4,17 +4,18 @@ import { NavigationEvents } from "react-navigation";
 import LoginForm from "../components/LoginForm";
 import NavLink from "../navigation/NavLink";
 import { Context } from "../context/AuthContext";
-import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
-const analytics = new ExpoMixpanelAnalytics(process.env.MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
-
+import ExpoMixpanelAnalytics from "@benawad/expo-mixpanel-analytics";
+const analytics = new ExpoMixpanelAnalytics(
+  process.env.MIXPANEL_SECRET_API_KEY
+); //planning on putting token it in an env file if it passes
 analytics.track("Logged In", { "Referred By": "Friend" });
-
 
 const LoginText = () => {
   const { state, signin, clearErrorMessage } = useContext(Context);
+  console.log("logTest:", state);
 
   return (
-    <View>
+    <View style={styles.mainWrapper}>
       <View style={{ display: "flex" }}>
         <Image
           source={require("../assets/images/assetTracker.jpg")}
@@ -29,7 +30,7 @@ const LoginText = () => {
         submitButtonText="Log In"
       />
       <NavLink
-        text="Dont have an account? Sign up instead"
+        text="Dont have an account? Sign up instead!"
         routeName="Register"
         style={styles.toRegister}
       />
@@ -38,6 +39,10 @@ const LoginText = () => {
 };
 
 const styles = StyleSheet.create({
+  mainWrapper: {
+    flex: 1,
+    alignItems: "center",
+  },
   logo: {
     alignSelf: "center",
     marginTop: 50,
@@ -47,7 +52,7 @@ const styles = StyleSheet.create({
   },
   toRegister: {
     color: "red"
-  },
+  }
 });
 
 export default LoginText;

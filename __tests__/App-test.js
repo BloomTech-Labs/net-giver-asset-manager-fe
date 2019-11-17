@@ -1,29 +1,21 @@
 import React from 'react';
 import NavigationTestUtils from 'react-navigation/NavigationTestUtils';
 import renderer from 'react-test-renderer';
+import * as SMSLogin from '../screens/SmsLogin';
+import LocationForm from '../screens/LocationForm'
+jest.mock('../screens/SmsLogin');
 
-import App from '../App';
+it('renders SMS login page', () => {
+  const snap = renderer.create(<LocationForm />).toJSON();
+  expect(snap).toMatchSnapshot();
+});
 
-jest.mock('expo', () => ({
-  AppLoading: 'AppLoading',
-}));
 
-jest.mock('../navigation/AppNavigator', () => 'AppNavigator');
-
-describe('App', () => {
+describe('Location Form', () => {
   jest.useFakeTimers();
 
   beforeEach(() => {
     NavigationTestUtils.resetInternalState();
   });
 
-  it(`renders the loading screen`, () => {
-    const tree = renderer.create(<App />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`renders the root without loading screen`, () => {
-    const tree = renderer.create(<App skipLoadingScreen />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
 });

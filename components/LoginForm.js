@@ -6,18 +6,30 @@ import Spacer from "./Spacer";
 const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUserName] = useState("");
 
   return (
     <>
-        <Text style={styles.inputLabels}>Email</Text>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          autoCapitalize="none"
-          autoCorrect={false}
-          style={styles.inputField}
-        />
+      <Text style={styles.inputLabels}>Username</Text>
+      <TextInput
+        placeholder="Username"
+        value={username}
+        onChangeText={setUserName}
+        autoCapitalize="none"
+        autoCorrect={false}
+        style={styles.inputField}
+      />
+      <Spacer />
+
+      <Text style={styles.inputLabels}>Email</Text>
+      <TextInput
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        autoCapitalize="none"
+        autoCorrect={false}
+        style={styles.inputField}
+      />
       <Spacer />
 
       <Text style={styles.inputLabels}>Password</Text>
@@ -35,10 +47,11 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
       ) : null}
       <Spacer>
         <Button
+          buttonStyle={styles.btn}
           title={submitButtonText}
           iconRight={true}
-          onPress={() => onSubmit({ email, password })}
-          style={{marginTop: 80}}
+          // onPress={() => onSubmit({ email, password, username })}
+          onPress={() => onSubmit({ email, username, password })}
         />
       </Spacer>
     </>
@@ -46,6 +59,13 @@ const LoginForm = ({ errorMessage, onSubmit, submitButtonText }) => {
 };
 
 const styles = StyleSheet.create({
+  btn: {
+    width: 343,
+    height: 40,
+    borderRadius: 15,
+    backgroundColor: "#3366FF",
+    paddingBottom: 8
+  },
   errorMessage: {
     fontSize: 16,
     color: "red",
@@ -65,7 +85,7 @@ const styles = StyleSheet.create({
   inputLabels: {
     width: "91%",
     alignSelf: "center",
-    fontSize: 17,
+    fontSize: 17
   }
 });
 

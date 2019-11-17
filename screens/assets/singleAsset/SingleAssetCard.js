@@ -1,130 +1,155 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, StyleSheet, Button } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Button,
+  AsyncStorage
+} from "react-native";
 import axios from "axios";
-import AssetsCard from "../AssetsCard";
+import OneAsset from "./OneAsset";
 import { ListItem } from "react-native-elements";
+import { withNavigation } from "react-navigation";
 
-const SingleAssetCard = (props) => {
+const SingleAssetCard = props => {
+  console.log("sa test", props);
 
-    if (props.navigation.state.params) {
-        var id = props.navigation.state.params.id
-    }
+  const [userId, setUserId] = useState(0);
 
-    console.log('test', id)
+  useEffect(() => {
+    console.log("useeffect run");
+    AsyncStorage.getItem("user_id")
+      .then(response => {
+        var userId = JSON.parse(response);
+        setUserId(userId);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
+  if (props.navigation.state.params) {
+    var currentAssetId = props.navigation.state.params.id;
+  }
 
+  const [singleAsset, setSingleAsset] = useState({
+    id: currentAssetId,
+    check_in_status: false
+  });
+  const assetHistory = { asset_id: currentAssetId, user_id: userId };
+  const [assetStatus, setAssetStatus] = useState({});
 
-    const [assets, setAssets] = useState();
-    const [assetHistory, setAssetHistory] = useState({
+  const checkInStatus = () => {
+    var statusAsset = singleAsset.map(function(e) {
+      if (e.check_in_status == true) {
+        return (e.check_in_status = { check_in_status: false });
+      } else {
+        return (e.check_in_status = { check_in_status: true });
+      }
+    });
 
-        user_id: 1,
-        asset_id: 4
-    })
+    var AssetID = singleAsset.map(function(ids) {
+      return ids.id;
+    });
 
-    const [assetStatus, setAssetStatus] = useState({});
+    var newObj = Object.assign({}, ...statusAsset);
 
-    const checkInStatus = () => {
+    axios
+      .put(
+        `https://net-giver-asset-mngr.herokuapp.com/api/assets/${AssetID}`,
+        newObj
+      )
+      .then(response => {
+        console.log("Updated Check In Status", newObj);
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
-        var statusAsset = assets.map(function (e) {
+    axios
+      .post(
+        "https://net-giver-asset-mngr.herokuapp.com/api/history/",
+        assetHistory
+      )
+      .then(response => {
+        console.log("New Asset History Added!");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-            if (e.check_in_status == true) {
-                return e.check_in_status = { check_in_status: false };
-            } else {
-                return e.check_in_status = { check_in_status: true };
-            }
-        });
+  // Fetch assets
+  const getAssetsList = () => {
+    axios
+      .get(
+        `https://net-giver-asset-mngr.herokuapp.com/api/assets/${currentAssetId}`
+      )
+      .then(response => {
+        setSingleAsset(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-        var AssetID = assets.map(function (ids) {
+  useEffect(() => {
+    getAssetsList();
+  }, []);
 
-            return ids.id;
+  console.log("Checkin Status in SinglePage", singleAsset.check_in_status);
 
-        });
+  return (
+    <View>
+      <View style={styles.headerWrapper}>
+        <Text style={styles.headerTitle}>Single Asset Overview</Text>
+      </View>
 
-        var newObj = Object.assign({}, ...statusAsset);
-        console.log(AssetID)
-        axios
-            .put(`https://net-giver-asset-mngr.herokuapp.com/api/assets/${AssetID}`, newObj)
-            .then(response => {
-                console.log('Updated Status', newObj)
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={singleAsset}
+        renderItem={({ item }) => {
+          return <OneAsset data={item} />;
+        }}
+      />
 
-            })
-            .catch(error => {
-                console.log(error);
-            });
-
-        axios
-            .post("https://net-giver-asset-mngr.herokuapp.com/api/history/", assetHistory)
-            .then(response => {
-                console.log('Added New History')
-
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
-
-
-
-
-    // Fetch assets
-    const getAssetsList = () => {
-        axios
-            .get("https://net-giver-asset-mngr.herokuapp.com/api/assets/4")
-            .then(response => {
-
-                setAssets(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-
-    useEffect(() => {
-        getAssetsList();
-    }, []);
-
-
-
-
-
-    return (
-        <View>
-            <View style={styles.headerWrapper}>
-                <Text style={styles.headerTitle}>Single Asset Overview</Text>
-            </View>
-
-            <FlatList
-                keyExtractor={(item, index) => item.id}
-                data={assets}
-                renderItem={({ item }) => {
-                    return <AssetsCard data={item} />;
-                }}
-            />
-            <Button
-                title="RETURN and ADD ASSET HISTORY"
-                onPress={checkInStatus}
-
-            />
-
-        </View>
-    );
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={singleAsset}
+        renderItem={({ item }) => {
+          {
+            return item.check_in_status == false ? (
+              <View>
+                <Button title="RETURN" onPress={checkInStatus} />
+              </View>
+            ) : (
+              <View>
+                <Button title="CHECK-OUT" onPress={checkInStatus} />
+              </View>
+            );
+          }
+        }}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    headerWrapper: {
-        flexDirection: "row",
-        backgroundColor: "#3366FF",
-        borderBottomColor: "black",
-        height: 95
-    },
-    headerTitle: {
-        fontWeight: "bold",
-        fontSize: 20,
-        alignSelf: "center",
-        flex: 9,
-        paddingLeft: 20,
-        color: "white"
-    }
+  headerWrapper: {
+    flexDirection: "row",
+    backgroundColor: "#3366FF",
+    borderBottomColor: "black",
+    height: 95
+  },
+  headerTitle: {
+    fontWeight: "bold",
+    fontSize: 20,
+    alignSelf: "center",
+    flex: 9,
+    paddingLeft: 20,
+    color: "white"
+  }
 });
 
-export default SingleAssetCard;
+export default withNavigation(SingleAssetCard);
