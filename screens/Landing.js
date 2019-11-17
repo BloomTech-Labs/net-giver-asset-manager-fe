@@ -1,17 +1,11 @@
 import React from "react";
 import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native";
 import { Button } from "react-native-elements";
-import NavLink from "../navigation/NavLink";
-
 
 const Landing = ({ navigation }) => {
   return (
     <SafeAreaView>
       <View style={styles.mainContainer}>
-        {/* <View styles={styles.bottomZ}>
-          <Image source={require("../assets/images/real_cog.jpg")} />
-        </View> */}
-
         <View style={styles.logo}>
           <Image
             style={styles.topImg}
@@ -22,7 +16,7 @@ const Landing = ({ navigation }) => {
         <View style={styles.landingImage}>
           <Image
             style={styles.middleImg}
-            source={require("../assets/images/landing.jpg")}
+            source={require("../assets/images/landing.png")}
           />
         </View>
 
@@ -32,23 +26,6 @@ const Landing = ({ navigation }) => {
               <Text style={styles.blueTitle}>Asset Tracker</Text> makes it easy to keep track of all items.
             </Text>
           </View>
-
-          {/* <View style={styles.mainPointsContainer}>
-            <View style={styles.mainPoints}>
-              <Icon name="check" color="blue" />
-              <Text style={styles.text}>No trials.</Text>
-            </View>
-            <View style={styles.mainPoints}>
-              <Icon name="check" color="blue" />
-              <Text style={styles.text}>No more losing valuable items.</Text>
-            </View>
-            <View style={styles.mainPoints}>
-              <Icon name="check" color="blue" />
-              <Text style={styles.text}>
-                No more time wasted looking for an asset.
-              </Text>
-            </View>
-          </View> */}
         </View>
 
         <View style={styles.buttons}>
@@ -56,9 +33,7 @@ const Landing = ({ navigation }) => {
             buttonStyle={styles.registerBtn}
             title="Free Sign Up"
             onPress={() => navigation.navigate("SMS")}
-            // onPress={() => navigation.navigate("OneAsset")}
           />
-  
           <Button
             buttonStyle={styles.loginBtn}
             titleStyle={{ color: '#3366FF' }}
@@ -67,33 +42,6 @@ const Landing = ({ navigation }) => {
             onPress={() => navigation.navigate("SMS")}
           />
         </View>
-
-        {/* <View
-          style={[
-            {
-              alignSelf: "center",
-              padding: 2,
-              width: "100%",
-              position: "relative",
-              top: "65%"
-            }
-          ]}
-        >
-          <View style={styles.buttonWrapper}>
-            <Button
-              buttonStyle={styles.btn}
-              title="Free Sign Up"
-              onPress={() => navigation.navigate("Ipick")}
-            />
-          </View>
-
-          <View style={styles.navLink}>
-            <NavLink
-              text="Have an account already?  Login here."
-              routeName="SMS"
-            />
-          </View>
-        </View> */}
       </View>
     </SafeAreaView>
   );
@@ -150,17 +98,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 15
   }
-  // btnWrapper: {
-  //   flex: 1,
-  //   justifyContent: "center",
-  //   alignItems: "center"
-  // },
-  // btn: {
-  //   width: 343,
-  //   height: 40,
-  //   borderRadius: 15,
-  //   backgroundColor: "#3366FF"
-  // }
 });
 
 export default Landing;
