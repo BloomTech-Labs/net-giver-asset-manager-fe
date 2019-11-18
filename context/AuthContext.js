@@ -262,7 +262,7 @@ const signin = dispatch => async ({ email, password, username, id }) => {
 const signout = dispatch => async () => {
   await AsyncStorage.removeItem("token");
   dispatch({ type: "signout" });
-  navigate("Login");
+  navigate("Landing");
 };
 
 // destructure off of createdatacontest 3rd input is initialState values

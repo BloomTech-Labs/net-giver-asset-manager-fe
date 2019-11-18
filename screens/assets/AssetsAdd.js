@@ -59,7 +59,7 @@ const AssetsAdd = (props, { navigation }) => {
   const chooseImage = async () => {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: false,
+      allowsEditing: true,
       aspect: [4, 3]
     });
 
@@ -114,7 +114,7 @@ const AssetsAdd = (props, { navigation }) => {
             data
           )
           .then(res => {
-            console.log("post to backend test success!!!!!!!!!!!!", res);
+            console.log("post to backend test success!!!!!!!!!!!!", res.data);
           })
           .catch(err => {
             console.log("that didnt work:", err.message);
@@ -181,10 +181,10 @@ const AssetsAdd = (props, { navigation }) => {
             axios
               .post(
                 "https://net-giver-asset-mngr.herokuapp.com/api/assets",
-                values,
-                asset_img_id
+                values
               )
               .then(res => {
+                console.log("assetAddTest:", res);
                 Alert.alert(
                   "Message",
                   "Successfuly Added Item!",

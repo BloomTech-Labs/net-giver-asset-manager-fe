@@ -42,6 +42,7 @@ import TextMsg from "../screens/TextMsg";
 import SmsLogin from "../screens/SmsLogin";
 import EditProfile from "../screens/EditProfile";
 import OneAsset from "../screens/assets/singleAsset/OneAsset";
+import SignOut from "../screens/SignOut";
 
 console.disableYellowBox = true;
 
@@ -64,7 +65,8 @@ const DevStack = createStackNavigator(
     About: About,
     Text: TextMsg,
     SmsLogin: SmsLogin,
-    EditP: EditProfile
+    EditP: EditProfile,
+    SignOut: SignOut
     // SingleAssetCard: SingleAssetCard,
     // OneAsset: OneAsset,
   },
