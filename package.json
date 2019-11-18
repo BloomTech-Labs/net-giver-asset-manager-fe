@@ -9,7 +9,18 @@
     "test": "jest --watchAll"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|sentry-expo|native-base)"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/jest.setup.js"
+    ]
   },
   "dependencies": {
     "@benawad/expo-mixpanel-analytics": "^0.1.7",
@@ -62,6 +73,7 @@
     "react-navigation-drawer": "^2.3.1",
     "react-navigation-material-bottom-tabs": "^2.1.2",
     "react-navigation-tabs": "^2.5.6",
+    "react-test-renderer": "16.8.3",
     "yup": "^0.27.0"
   },
   "devDependencies": {
