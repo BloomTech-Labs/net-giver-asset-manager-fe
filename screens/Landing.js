@@ -19,7 +19,6 @@ const Landing = ({ navigation }) => {
             source={require("../assets/images/landing.png")}
           />
         </View>
-
         <View>
           <View style={styles.purposeContainer}>
             <Text style={styles.purpose}>
