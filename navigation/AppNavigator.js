@@ -129,9 +129,7 @@ const SingleAssetScreen = createStackNavigator({
       headerLeft: (
         <SafeAreaView>
           <View style={{ marginLeft: 10 }}>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate("DashboardScreen")}
-            >
+            <TouchableOpacity onPress={() => props.navigation.navigate("Dashboard")}>
               <Icon name="arrow-back" size={30} color="black" />
             </TouchableOpacity>
           </View>
@@ -285,15 +283,12 @@ const AppStack = createDrawerNavigator(
     Scanner: {
       screen: ScannerScreen
     },
-    Assets: {
-      screen: AssetsScreen
-    },
     SingleAssetDrawer: {
-      screen: SingleAssetScreen
+      screen: SingleAssetScreen,
     },
-    AssetsCardDrawer: {
-      screen: AssetsCard
-    },
+    // AssetsCardDrawer: {
+    //   screen: AssetsCard
+    // },
     AssetsAdd: {
       screen: AssetsAddScreen
     },

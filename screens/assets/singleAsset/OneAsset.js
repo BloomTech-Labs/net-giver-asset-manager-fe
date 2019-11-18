@@ -1,72 +1,68 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-class OneAsset extends React.Component {
+const OneAsset = props => {
+	console.log("ONE ASSET PROPS:", props.data.name);
 
+  return (
+    <View style={styles.assetWrapper}>
+      <Image
+        style={styles.img}
+        source={require('../../../assets/images/camera.jpg')}
+      />
+      <View style={styles.textWrapper}>
+        <Text style={styles.assetHeader}>Name</Text>
+				<Text style={styles.assetStatus}>{props.data.name}</Text>
 
-    render() {
-        console.log('currectID in oneasset', this.props.data.id)
-        return (
-            <View style={styles.assetWrapper}>
-                {/* Needs to be replaced with an image primitive component */}
-                <Image
-                    style={styles.imageWrapper}
-                    source={require('../../../assets/images/macbook100.jpg')}
-                />
-                <View style={styles.textWrapper}>
-                    <Text style={styles.assetName}>{this.props.data.id}</Text>
-                    <Text style={styles.assetName}>{this.props.data.name}</Text>
-                    <Text style={styles.assetID}>Barcode # {this.props.data.barcode}</Text>
-                    <Text>Category: {this.props.data.category}</Text>
-                    <Text>Description: {this.props.data.description}</Text>
-                    <View>
-                        {this.props.data.check_in_status == true ?
-                            (<View>
-                                <Text>Status: Check-In</Text>
-                            </View>)
-                            :
-                            (<View>
-                                <Text>Status: Check-Out</Text>
-                            </View>)
-                        }
-                    </View>
+        <Text style={styles.assetHeader}>Description</Text>
+				<Text style={styles.assetStatus}>{props.data.description}</Text>
 
-                </View>
-            </View>
-        );
-    }
+        <Text style={styles.assetHeader}>Location</Text>
+        <View>
+          {props.data.check_in_status == true ?
+            (<View>
+              <Text>Checked-In</Text>
+            </View>)
+            :
+            (<View>
+              <Text>Checked-Out</Text>
+            </View>)
+          }
+        </View>
+      </View>
+    </View>
+  );
 };
-
-
 
 const styles = StyleSheet.create({
     assetWrapper: {
-        flexDirection: "column",
-        // marginTop: 25,
-
+				flexDirection: "column",
+				alignItems: "center",
     },
-    imageWrapper: {
+    img: {
         alignItems: "center",
         alignSelf: "center",
-        width: 100,
-        height: 100,
-        marginLeft: 10
+        width: "95%",
+        height: 200,
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 10,
     },
     textWrapper: {
-        flex: 2,
-        marginLeft: 30,
-        padding: 15,
+				flex: 2,
+				width: "95%",
+				marginTop: 10,
+				alignItems: "flex-start",
     },
-    assetName: {
-        fontWeight: "bold"
-    },
-    assetID: {
-        color: "#7C7777",
-        fontStyle: "italic"
-    },
-    assetLocation: {
-        color: "#82A0FD"
-    }
+		assetHeader: {
+			fontSize: 17,
+			color: "#BFBFBF",
+			marginBottom: 5,
+		},
+		assetStatus: {
+			fontSize: 14,
+			marginBottom: 21,
+		},
 });
 
 export default OneAsset;
