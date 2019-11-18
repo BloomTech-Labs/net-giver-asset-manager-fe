@@ -19,6 +19,7 @@ import Spacer from "../components/Spacer";
 import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import NavLink from "../navigation/NavLink";
+import CustomTabBar from "../components/CustomTabBar"
 
 export default class EditProfile extends React.Component {
   constructor(props) {
@@ -58,8 +59,10 @@ export default class EditProfile extends React.Component {
   render() {
     let { image } = this.state;
 
+    const leftBtnTxt = "Edit Profile"
     return (
       <SafeAreaView style={styles.mainWrapper}>
+        <CustomTabBar leftBtn={leftBtnTxt} />
         <View style={styles.welcomeWrapper}>
           <Text style={styles.welcome}>Edit Profile</Text>
           {/* <Text style={styles.directions}>
