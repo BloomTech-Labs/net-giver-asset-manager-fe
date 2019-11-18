@@ -4,7 +4,8 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  Text
+  Text,
+  Platform
 } from "react-native";
 import { Icon } from "react-native-elements";
 import {
@@ -308,7 +309,16 @@ const AuthStack = createStackNavigator(
     Landing: {
       screen: Landing,
       navigationOptions: props => ({
-        headerMode: "none"
+        headerStyle: { 
+          borderBottomWidth: 0,
+          ...Platform.select({
+            android: {
+              elevation: 0,
+              shadowColor: "transparent",
+              opacity: 0
+            },
+          }),
+        }
       })
     },
     SMS: {

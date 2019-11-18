@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, SafeAreaView, View, StyleSheet, Image } from "react-native";
+import { ScrollView, SafeAreaView, View, StyleSheet, Image, Platform } from "react-native";
 import { DrawerItems } from "react-navigation";
 
 const CustomDrawer = (props) => {
@@ -25,7 +25,14 @@ const styles = StyleSheet.create({
   },
   logo: {
     alignSelf: "center",
-    marginTop: 25
+    ...Platform.select({
+      ios: {
+        marginTop: 25
+      },
+      android: {
+        marginTop: 45
+      },
+    }),
   }
 });
 
