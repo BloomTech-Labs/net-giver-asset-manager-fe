@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View, Text, StyleSheet, Image } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, Image, Platform } from "react-native";
 import { Button } from "react-native-elements";
 
 const Landing = ({ navigation }) => {
@@ -54,7 +54,14 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   topImg: {
-    marginTop: 5
+    ...Platform.select({
+      ios: {
+        marginTop: 5
+      },
+      android: {
+        marginTop: -20
+      },
+    }),
   },
   logo: {
     marginTop: 0,
@@ -68,8 +75,16 @@ const styles = StyleSheet.create({
   middleImg: {
     marginTop: 10,
     marginBottom: 5,
-    width: 350,
-    height: 355
+    ...Platform.select({
+      ios: {
+        width: 350,
+        height: 355
+      },
+      android: {
+        width: 325,
+        height: 330
+      }
+    }),
   },
   blueTitle: {
     color: "#3366FF"
