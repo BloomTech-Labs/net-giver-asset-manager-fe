@@ -19,6 +19,7 @@ import Spacer from "../components/Spacer";
 import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import NavLink from "../navigation/NavLink";
+import CustomTabBar from "../components/CustomTabBar"
 
 export default class EditProfile extends React.Component {
   constructor(props) {
@@ -58,13 +59,15 @@ export default class EditProfile extends React.Component {
   render() {
     let { image } = this.state;
 
+    const leftBtnTxt = "Edit Profile"
     return (
       <SafeAreaView style={styles.mainWrapper}>
+        <CustomTabBar leftBtn={leftBtnTxt} />
         <View style={styles.welcomeWrapper}>
-          <Text style={styles.welcome}>Welcome!</Text>
-          <Text style={styles.directions}>
+          <Text style={styles.welcome}>Edit Profile</Text>
+          {/* <Text style={styles.directions}>
             You're Here go On and Edit yourself!
-          </Text>
+          </Text> */}
           <Avatar
             PlaceholderContent={<ActivityIndicator />}
             source={
@@ -76,16 +79,20 @@ export default class EditProfile extends React.Component {
             size="xlarge"
           />
           <TouchableOpacity onPress={this.chooseImage} style={{ marginTop: 5 }}>
-            <Entypo name="camera" size={30} color="#3366FF" />
+            {/* <Entypo name="camera" size={30} color="#3366FF" /> */}
+            <Text color="#3366FF" style={{ color: "#3366FF" }}>Change Photo</Text>
           </TouchableOpacity>
-          <Text style={{ fontWeight: "500" }}>Add Photo</Text>
+          {/* <Text style={[styles.inputLabels, { fontWeight: "500" }]}>Add Photo</Text> */}
         </View>
         <Spacer />
-        <View>
-          <Text style={styles.inputLabels}>username</Text>
-          <TextInput placeholder="username" style={styles.inputLabels} />
-          <Text style={styles.inputLabels}>email</Text>
-          <TextInput placeholder="email" style={styles.inputLabels} />
+        <View style={styles.contain}>
+          <Text style={styles.inputLabels}>Username</Text>
+          <TextInput
+            placeholder="username"
+            // autoCorrect={false}
+            style={styles.inputField} />
+          <Text style={styles.inputLabels}>Email</Text>
+          <TextInput placeholder="email" style={styles.inputField} />
         </View>
         <View style={styles.btnWrapper}>
           <Button
@@ -98,20 +105,20 @@ export default class EditProfile extends React.Component {
                 : alert("Please Include a Photo");
             }}
 
-            // onPress={() => {
-            //   updateUser = () => {
-            //     axios
-            //       .put(
-            //         `https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`
-            //       )
-            //       .then(res => {
-            //         console.log("put test:", res.data);
-            //       })
-            //       .catch(err => {
-            //         console.log(err);
-            //       });
-            //   };
-            // }}
+          // onPress={() => {
+          //   updateUser = () => {
+          //     axios
+          //       .put(
+          //         `https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`
+          //       )
+          //       .then(res => {
+          //         console.log("put test:", res.data);
+          //       })
+          //       .catch(err => {
+          //         console.log(err);
+          //       });
+          //   };
+          // }}
           />
           {/* <NavLink
             text="Already have an account? Log in here."
@@ -222,6 +229,13 @@ export default class EditProfile extends React.Component {
 //
 
 const styles = StyleSheet.create({
+  contain: {
+    // flex: 1,
+    // justifyContent: "center",
+    // alignItems: "left",
+    // backgroundColor: "green",
+    width: "90%"
+  },
   mainWrapper: {
     flex: 1,
     justifyContent: "flex-start",
@@ -257,7 +271,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   label: {
-    fontSize: 16
+    fontSize: 16,
   },
   btnWrapper: {
     flex: 1,
@@ -278,17 +292,18 @@ const styles = StyleSheet.create({
   },
   inputField: {
     height: 40,
-    width: "91%",
+    width: "100%",
     borderColor: "gray",
     borderRadius: 5,
     borderWidth: 1,
     alignSelf: "center",
     paddingLeft: 10,
-    marginTop: 20
+    marginTop: 5,
   },
   inputLabels: {
     width: "91%",
-    alignSelf: "center",
-    fontSize: 17
+    // alignSelf: "center",
+    fontSize: 17,
+    marginTop: 20,
   }
 });
