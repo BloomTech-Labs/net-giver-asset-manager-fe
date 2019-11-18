@@ -37,19 +37,19 @@ export default class Cameron extends React.Component {
     };
   }
 
-  getUserImage = () => {
-    axios
-      .get(
-        `https://net-giver-asset-mngr.herokuapp.com/api/user-images/${this.state.userId}`
-      )
-      .then(res => {
-        console.log("usertestForImage:", res.data);
-        this.setState({ avatar: res.data.location });
-      })
-      .catch(err => {
-        console.log("failed to get user:", err);
-      });
-  };
+  // getUserImage = () => {
+  //   axios
+  //     .get(
+  //       `https://net-giver-asset-mngr.herokuapp.com/api/user-images/${this.state.userId}`
+  //     )
+  //     .then(res => {
+  //       console.log("usertestForImage:", res.data);
+  //       this.setState({ avatar: res.data.location });
+  //     })
+  //     .catch(err => {
+  //       console.log("failed to get user:", err);
+  //     });
+  // };
 
   fetchUserId = () => {
     AsyncStorage.getItem("user_id")
@@ -80,7 +80,7 @@ export default class Cameron extends React.Component {
             You're almost there. The final step is to add your picture to
             complete your profile.
           </Text>
-          {!userId ? (
+          {/* {!userId ? (
             <Avatar
               PlaceholderContent={<ActivityIndicator />}
               source={
@@ -98,7 +98,18 @@ export default class Cameron extends React.Component {
               rounded
               size="xlarge"
             />
-          )}
+          )} */}
+
+          <Avatar
+            PlaceholderContent={<ActivityIndicator />}
+            source={
+              image
+                ? { uri: image }
+                : { uri: "https://i.imgur.com/ltNMlnA.png" }
+            }
+            rounded
+            size="xlarge"
+          />
 
           <TouchableOpacity onPress={this.chooseImage} style={{ marginTop: 5 }}>
             <Entypo name="camera" size={30} color="#3366FF" />
@@ -117,7 +128,6 @@ export default class Cameron extends React.Component {
             route="Login"
             style={styles.toLoginLink}
           />
-          <Button onPress={this.getUserImage} />
         </View>
       </SafeAreaView>
     );

@@ -28,20 +28,41 @@ export default class EditProfile extends React.Component {
       image: null,
       userId: 0,
       email: "",
-      username: ""
+      username: "",
+      avatar: ""
     };
   }
 
-  //   updateUser = () => {
-  //     axios
-  //       .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`)
-  //       .then(res => {
-  //         console.log("put test:", res.data);
-  //       })
-  //       .catch(err => {
-  //         console.log(err);
-  //       });
-  //   };
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  getUserImage = () => {
+    axios
+      .get(
+        `https://net-giver-asset-mngr.herokuapp.com/api/user-images/${this.state.userId}`
+      )
+      .then(res => {
+        console.log("usertestForImage:", res.data);
+        this.setState({ avatar: res.data.location });
+      })
+      .catch(err => {
+        console.log("failed to get user:", err);
+      });
+  };
+
+  updateUser = () => {
+    axios
+      .put(
+        `https://net-giver-asset-mngr.herokuapp.com/api/auth/users/${this.state.userId}`
+      )
+      .then(res => {
+        console.log("put test:", res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   fetchUserId = () => {
     AsyncStorage.getItem("user_id")
@@ -57,6 +78,11 @@ export default class EditProfile extends React.Component {
 
   render() {
     let { image } = this.state;
+    let { avatar } = this.state;
+    let { userId } = this.state;
+
+    console.log("anotherStateTestforavatar:", avatar);
+    console.log("anotherStateTestforuser:", userId);
 
     return (
       <SafeAreaView style={styles.mainWrapper}>
@@ -81,22 +107,35 @@ export default class EditProfile extends React.Component {
           <Text style={{ fontWeight: "500" }}>Add Photo</Text>
         </View>
         <Spacer />
-        <View>
-          <Text style={styles.inputLabels}>username</Text>
-          <TextInput placeholder="username" style={styles.inputLabels} />
-          <Text style={styles.inputLabels}>email</Text>
-          <TextInput placeholder="email" style={styles.inputLabels} />
-        </View>
+        <Form>
+          <View>
+            <Text style={styles.inputLabels}>username</Text>
+            <TextInput
+              placeholder="username"
+              style={styles.inputLabels}
+              // value={this.state.username}
+              onChangeText={this.setState.username}
+            />
+            <Text style={styles.inputLabels}>email</Text>
+            <TextInput
+              placeholder="email"
+              style={styles.inputLabels}
+              // value={this.state.email}
+              onChangeText={this.setState.email}
+            />
+          </View>
+        </Form>
         <View style={styles.btnWrapper}>
           <Button
             buttonStyle={styles.btn}
             containerStyle={styles.btnContainer}
             title="Update Profile"
-            onPress={() => {
-              image !== null
-                ? { profileUpdater }
-                : alert("Please Include a Photo");
-            }}
+            // onPress={() => {
+            //   image !== null
+            //     ? { profileUpdater }
+            //     : alert("Please Include a Photo");
+            // }}
+            onPress={this.updateUser(this.state.username, this.state.email)}
 
             // onPress={() => {
             //   updateUser = () => {
@@ -118,26 +157,37 @@ export default class EditProfile extends React.Component {
             route="Login"
             style={styles.toLoginLink}
           /> */}
+          <Button onPress={this.getUserImage} />
         </View>
       </SafeAreaView>
     );
   }
 
-  profileUpdater = () => {
-    axios
-      .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`)
-      .then(res => {
-        console.log("put test:", res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  // profileUpdater = () => {
+  //   axios
+  //     .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`)
+  //     .then(res => {
+  //       console.log("put test:", res.data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
   componentDidMount() {
     this.getPermissionAsync();
     this.fetchUserId();
+    if (this.state.userId) {
+      this.getUserImage();
+    }
   }
+
+  // componentDidUpdate(avatar) {
+  //   if (avatar === null) {
+  //     this.getUserImage();
+  //     // this.setState();
+  //   }
+  // }
 
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
