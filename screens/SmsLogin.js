@@ -22,14 +22,14 @@ import Form from "react-native-form";
 import CountryPicker from "react-native-country-picker-modal";
 
 const api = new Frisbee({
-    baseURI: "https://netgiverauth.herokuapp.com",
+    baseURI: "https://netgiverdb.herokuapp.com/api/smsAuth",
     headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
     }
 
 });
-console.log("baseURI", api)
+
 const MAX_LENGTH_CODE = 6;
 const MAX_LENGTH_NUMBER = 20;
 

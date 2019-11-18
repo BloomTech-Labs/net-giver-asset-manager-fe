@@ -26,10 +26,18 @@ import { Formik } from "formik";
 
 import { Entypo } from "@expo/vector-icons";
 
-const AssetsAdd = (props, { navigation }) => {
+const AssetsAdd = (props) => {
   //   console.log("state test:", props);
   const [userId, setUserId] = useState(0);
   const [image, setImage] = useState(null);
+  const [imageAsset, setImageAsset] = useState({ id: "", location: "" });
+
+  const fetchassetImgID = () => {
+    var assetImgID = imageAsset.map(function (e) {
+      return console.log(e.id)
+    });
+  }
+
 
   const fetchUserId = () => {
     AsyncStorage.getItem("user_id")
@@ -54,6 +62,7 @@ const AssetsAdd = (props, { navigation }) => {
   useEffect(() => {
     fetchUserId();
     getPermissionAsync();
+    fetchassetImgID();
   }, []);
 
   const chooseImage = async () => {
@@ -114,7 +123,9 @@ const AssetsAdd = (props, { navigation }) => {
             data
           )
           .then(res => {
-            console.log("post to backend test success!!!!!!!!!!!!", res);
+
+            setImageAsset(res.data)
+            console.log("post to backend test success!!!!!!!!!!!!");
           })
           .catch(err => {
             console.log("that didnt work:", err.message);
@@ -127,11 +138,10 @@ const AssetsAdd = (props, { navigation }) => {
     var barkode = props.navigation.state.params.dataString;
   }
   console.log("Barcode Scanned", barkode);
-
+  console.log('imageAssetID', imageAsset)
   // const redirect = () => {
   //     props.navigation.navigate("AssetsList");
   // }
-
   return (
     <KeyboardShift>
       <ScrollView>
@@ -150,39 +160,37 @@ const AssetsAdd = (props, { navigation }) => {
             </View>
           </View>
         ) : (
-          <Avatar
-            PlaceholderContent={<ActivityIndicator />}
-            source={
-              image
-                ? { uri: image }
-                : { uri: "https://i.imgur.com/ltNMlnA.png" }
-            }
-            size="xlarge"
-            containerStyle={{
-              alignSelf: "center",
-              width: "90%",
-              marginTop: 20,
-              height: 165
-            }}
-          />
-        )}
+            <Avatar
+              PlaceholderContent={<ActivityIndicator />}
+              source={
+                image
+                  ? { uri: image }
+                  : { uri: "https://i.imgur.com/ltNMlnA.png" }
+              }
+              size="xlarge"
+              containerStyle={{
+                alignSelf: "center",
+                width: "90%",
+                marginTop: 20,
+                height: 165
+              }}
+            />
+          )}
         <Formik
           enableReinitialize
           initialValues={{
             name: "",
-            // category: "",
             description: "",
-            barcode: "",
+            barcode: barkode,
             check_in_status: 0,
-            user_id: userId
-            // location_id: 1
+            user_id: userId,
+            asset_img_id: "1573891129988"
           }}
           onSubmit={values =>
             axios
               .post(
                 "https://net-giver-asset-mngr.herokuapp.com/api/assets",
-                values,
-                asset_img_id
+                values
               )
               .then(res => {
                 Alert.alert(
@@ -191,7 +199,7 @@ const AssetsAdd = (props, { navigation }) => {
                   [
                     {
                       text: "Ok",
-                      onPress: () => props.navigation.navigate("AssetsList")
+                      onPress: () => props.navigation.navigate("DashboardScreen")
                     }
                   ],
                   { cancelable: false }
@@ -218,82 +226,82 @@ const AssetsAdd = (props, { navigation }) => {
             isValid,
             handleSubmit
           }) => (
-            <View style={styles.container}>
-              {/* <KeyboardShift> */}
-              <TouchableOpacity
-                style={styles.qrSection}
-                onPress={() => props.navigation.navigate("Scanner")}
-              >
-                <MaterialCommunityIcons
-                  style={styles.upc}
-                  name="qrcode-scan"
-                  size={25}
+              <View style={styles.container}>
+                {/* <KeyboardShift> */}
+                <TouchableOpacity
+                  style={styles.qrSection}
+                  onPress={() => props.navigation.navigate("Scanner")}
+                >
+                  <MaterialCommunityIcons
+                    style={styles.upc}
+                    name="qrcode-scan"
+                    size={25}
+                  />
+                  {!barkode ? (
+                    <Text style={styles.noCode}>Scan Asset QR Code</Text>
+                  ) : (
+                      <Text style={styles.qrCode}>QR Code: {values.barcode}</Text>
+                    )}
+                </TouchableOpacity>
+
+                <Text style={styles.assetTitle}>Name</Text>
+                <TextInput
+                  value={values.name}
+                  onChangeText={handleChange("name")}
+                  onBlur={() => setFieldTouched("name")}
+                  clearButtonMode="while-editing"
+                  style={styles.textInputField}
                 />
-                {!barkode ? (
-                  <Text style={styles.noCode}>Scan Asset QR Code</Text>
-                ) : (
-                  <Text style={styles.qrCode}>QR Code: {barkode}</Text>
+                {touched.name && errors.name && (
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: "red",
+                      paddingLeft: 20,
+                      marginTop: 5
+                    }}
+                  >
+                    {errors.name}
+                  </Text>
                 )}
-              </TouchableOpacity>
 
-              <Text style={styles.assetTitle}>Name</Text>
-              <TextInput
-                value={values.name}
-                onChangeText={handleChange("name")}
-                onBlur={() => setFieldTouched("name")}
-                clearButtonMode="while-editing"
-                style={styles.textInputField}
-              />
-              {touched.name && errors.name && (
-                <Text
-                  style={{
-                    fontSize: 10,
-                    color: "red",
-                    paddingLeft: 20,
-                    marginTop: 5
+                <Text style={styles.assetTitle}>Description</Text>
+                <TextInput
+                  value={values.description}
+                  onChangeText={handleChange("description")}
+                  onBlur={() => setFieldTouched("description")}
+                  clearButtonMode="while-editing"
+                  style={styles.textInputField}
+                />
+                {touched.description && errors.description && (
+                  <Text
+                    style={{
+                      fontSize: 10,
+                      color: "red",
+                      paddingLeft: 20,
+                      marginTop: 5
+                    }}
+                  >
+                    {errors.description}
+                  </Text>
+                )}
+
+                <Button
+                  iconRight={false}
+                  title="Submit"
+                  type="solid"
+                  color="blue"
+                  onPress={() => {
+                    image !== null
+                      ? { handleSubmit }
+                      : alert("Please Include a Photo");
                   }}
-                >
-                  {errors.name}
-                </Text>
-              )}
+                  buttonStyle={styles.button}
+                />
 
-              <Text style={styles.assetTitle}>Description</Text>
-              <TextInput
-                value={values.description}
-                onChangeText={handleChange("description")}
-                onBlur={() => setFieldTouched("description")}
-                clearButtonMode="while-editing"
-                style={styles.textInputField}
-              />
-              {touched.description && errors.description && (
-                <Text
-                  style={{
-                    fontSize: 10,
-                    color: "red",
-                    paddingLeft: 20,
-                    marginTop: 5
-                  }}
-                >
-                  {errors.description}
-                </Text>
-              )}
-
-              <Button
-                iconRight={false}
-                title="Submit"
-                type="solid"
-                color="blue"
-                onPress={() => {
-                  image !== null
-                    ? { handleSubmit }
-                    : alert("Please Include a Photo");
-                }}
-                buttonStyle={styles.button}
-              />
-
-              {/* </KeyboardShift> */}
-            </View>
-          )}
+                {/* </KeyboardShift> */}
+              </View>
+            )}
         </Formik>
       </ScrollView>
     </KeyboardShift>

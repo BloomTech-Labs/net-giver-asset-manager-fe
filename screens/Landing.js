@@ -66,14 +66,14 @@ const Landing = ({ navigation }) => {
             <Button
               buttonStyle={styles.btn}
               title="Free Sign Up"
-              onPress={() => navigation.navigate("Ipick")}
+              onPress={() => navigation.navigate("SMS")}
             />
           </View>
 
           <View style={styles.navLink}>
             <NavLink
               text="Have an account already?  Login here."
-              routeName="SMS"
+              routeName="Login"
             />
           </View>
         </View>

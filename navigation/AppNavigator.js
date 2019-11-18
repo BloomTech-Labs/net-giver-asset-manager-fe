@@ -64,9 +64,9 @@ const DevStack = createStackNavigator(
     About: About,
     Text: TextMsg,
     SmsLogin: SmsLogin,
-    EditP: EditProfile
-    // SingleAssetCard: SingleAssetCard,
-    // OneAsset: OneAsset,
+    EditP: EditProfile,
+    SingleAssetCard: SingleAssetCard,
+    OneAsset: OneAsset,
   },
   {
     initialRouteName: "Home"
@@ -100,6 +100,7 @@ const DashboardScreen = createStackNavigator({
 });
 
 const SingleAssetScreen = createStackNavigator({
+
   SingleAssetScreen: {
     screen: SingleAssetCard,
     navigationOptions: props => ({
@@ -124,7 +125,7 @@ const SingleAssetScreen = createStackNavigator({
       headerLeft: (
         <SafeAreaView>
           <View style={{ marginLeft: 10 }}>
-            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("DashboardScreen")}>
               <Icon name="arrow-back" size={30} color="black" />
             </TouchableOpacity>
           </View>
@@ -201,7 +202,7 @@ const AssetsScreen = createStackNavigator({
 });
 
 const AssetsAddScreen = createStackNavigator({
-  DashboardScreen: {
+  AssetsAddScreen: {
     screen: AssetsAdd,
     navigationOptions: props => ({
       title: "Simple Asset Tracker",
@@ -287,7 +288,7 @@ const AppStack = createDrawerNavigator(
     AssetsCardDrawer: {
       screen: AssetsCard
     },
-    Add: {
+    AssetsAdd: {
       screen: AssetsAddScreen
     },
     Location: {

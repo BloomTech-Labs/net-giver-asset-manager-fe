@@ -32,43 +32,37 @@ const SingleAsset = ({ data, navigation }) => {
     console.log("ASSET ID:", id);
     navigation.navigate("SingleAssetScreen", { id });
 
-    // console.log("INDIVIDUAL ASSET DATA", data);
+  };
 
-    // Handles clicking an individual asset in the Dashboard screen
-    const showDetails = () => {
-      const assetId = data.id;
-      console.log("ASSET ID:", assetId);
-      navigation.navigate("SingleAssetDrawer", { assetId });
-    };
 
-    return (
-      <TouchableOpacity onPress={showDetails}>
-        <View style={styles.assetWrapper}>
-          <View style={styles.imageWrapper} />
-          {data.photo}
+  return (
+    <TouchableOpacity onPress={showDetails}>
+      <View style={styles.assetWrapper}>
+        <View style={styles.imageWrapper} />
+        {data.photo}
+        <View style={styles.textWrapper}>
           <View style={styles.textWrapper}>
-            <View style={styles.textWrapper}>
-              <Text style={styles.assetName}>{data.name}</Text>
-              <Text style={styles.assetID}>QR #{data.barcode}</Text>
-              <Text>Description: {data.description}</Text>
-              <View>
-                {data.check_in_status == true ? (
-                  <View>
-                    <Text style={styles.assetName}>Status: Check-In</Text>
-                  </View>
-                ) : (
+            <Text style={styles.assetName}>{data.name}</Text>
+            <Text style={styles.assetID}>QR #{data.barcode}</Text>
+            <Text>Description: {data.description}</Text>
+            <View>
+              {data.check_in_status == true ? (
+                <View>
+                  <Text style={styles.assetName}>Status: Check-In</Text>
+                </View>
+              ) : (
                   <View>
                     <Text style={styles.assetName}>Status: Check-Out</Text>
                   </View>
                 )}
-              </View>
             </View>
           </View>
         </View>
-      </TouchableOpacity>
-    );
-  };
+      </View>
+    </TouchableOpacity>
+  );
 };
+
 
 const styles = StyleSheet.create({
   assetWrapper: {
