@@ -39,7 +39,7 @@ const Landing = ({ navigation }) => {
           <Button
             buttonStyle={styles.registerBtn}
             title="Free Sign Up"
-            onPress={() => navigation.navigate("Ipick")}
+            onPress={() => navigation.navigate("Register")}
           />
           <Button
             buttonStyle={styles.loginBtn}
