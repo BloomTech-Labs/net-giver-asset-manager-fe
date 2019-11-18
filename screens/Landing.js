@@ -38,7 +38,7 @@ const Landing = ({ navigation }) => {
             titleStyle={{ color: '#3366FF' }}
             type="outline"
             title="Log In Here"
-            onPress={() => navigation.navigate("SMS")}
+            onPress={() => navigation.navigate("Login")}
           />
         </View>
       </View>
