@@ -26,27 +26,30 @@ import { Formik } from "formik";
 
 import { Entypo } from "@expo/vector-icons";
 
-const AssetsAdd = (props) => {
+const AssetsAdd = props => {
   //   console.log("state test:", props);
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState();
   const [image, setImage] = useState(null);
-  const [imageAsset, setImageAsset] = useState({ id: "", location: "" });
+  const [imageAsset, setImageAsset] = useState({ id: "" });
+  console.log("imageassettest:", imageAsset);
 
-  const fetchassetImgID = () => {
-    var assetImgID = imageAsset.map(function (e) {
-      return console.log(e.id)
-    });
-  }
+  // const fetchassetImgID = () => {
+  //   var assetImgID = imageAsset.map(function(e) {
+  //     return console.log(e.id);
+  //   });
+  // };
 
 
+  // Fetches the logged in user's ID
   const fetchUserId = () => {
     AsyncStorage.getItem("user_id")
       .then(response => {
         const user_id = JSON.parse(response);
         setUserId(user_id);
+        console.log("User ID fetched!", user_id)
       })
       .catch(error => {
-        console.log(error);
+        console.log(error)
       });
   };
 
@@ -62,13 +65,13 @@ const AssetsAdd = (props) => {
   useEffect(() => {
     fetchUserId();
     getPermissionAsync();
-    fetchassetImgID();
+    // fetchassetImgID();
   }, []);
 
   const chooseImage = async () => {
     let result = await ImagePicker.launchCameraAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: false,
+      allowsEditing: true,
       aspect: [4, 3]
     });
 
@@ -123,9 +126,8 @@ const AssetsAdd = (props) => {
             data
           )
           .then(res => {
-
-            setImageAsset(res.data)
-            console.log("post to backend test success!!!!!!!!!!!!");
+            console.log("post to backend test success!!!!!!!!!!!!", res.data);
+            setImageAsset(res.data.id);
           })
           .catch(err => {
             console.log("that didnt work:", err.message);
@@ -138,7 +140,8 @@ const AssetsAdd = (props) => {
     var barkode = props.navigation.state.params.dataString;
   }
   console.log("Barcode Scanned", barkode);
-  console.log('imageAssetID', imageAsset)
+  console.log('use id', userId)
+  console.log("imageAssetID", imageAsset);
   // const redirect = () => {
   //     props.navigation.navigate("AssetsList");
   // }
@@ -184,7 +187,7 @@ const AssetsAdd = (props) => {
             barcode: barkode,
             check_in_status: 0,
             user_id: userId,
-            asset_img_id: "1573891129988"
+            pic_img_id: imageAsset
           }}
           onSubmit={values =>
             axios
@@ -193,13 +196,15 @@ const AssetsAdd = (props) => {
                 values
               )
               .then(res => {
+                console.log("assetAddTest:", res);
                 Alert.alert(
                   "Message",
                   "Successfuly Added Item!",
                   [
                     {
                       text: "Ok",
-                      onPress: () => props.navigation.navigate("DashboardScreen")
+                      onPress: () =>
+                        props.navigation.navigate("DashboardScreen")
                     }
                   ],
                   { cancelable: false }
@@ -291,11 +296,12 @@ const AssetsAdd = (props) => {
                   title="Submit"
                   type="solid"
                   color="blue"
-                  onPress={() => {
-                    image !== null
-                      ? { handleSubmit }
-                      : alert("Please Include a Photo");
-                  }}
+                  // onPress={() => {
+                  //   image !== null
+                  //     ? { handleSubmit }
+                  //     : alert("Please Include a Photo");
+                  // }}
+                  onPress={handleSubmit}
                   buttonStyle={styles.button}
                 />
 
