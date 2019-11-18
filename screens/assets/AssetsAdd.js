@@ -30,7 +30,8 @@ const AssetsAdd = props => {
   //   console.log("state test:", props);
   const [userId, setUserId] = useState(0);
   const [image, setImage] = useState(null);
-  const [imageAsset, setImageAsset] = useState({ id: "", location: "" });
+  const [imageAsset, setImageAsset] = useState({ id: "" });
+  console.log("imageassettest:", imageAsset);
 
   // const fetchassetImgID = () => {
   //   var assetImgID = imageAsset.map(function(e) {
@@ -123,6 +124,7 @@ const AssetsAdd = props => {
           )
           .then(res => {
             console.log("post to backend test success!!!!!!!!!!!!", res.data);
+            setImageAsset(res.data.id);
           })
           .catch(err => {
             console.log("that didnt work:", err.message);
@@ -180,8 +182,8 @@ const AssetsAdd = props => {
             description: "",
             barcode: barkode,
             check_in_status: 0,
-            user_id: userId
-            // pic_img_id: `${res.data.id}`
+            user_id: userId,
+            pic_img_id: 1
           }}
           onSubmit={values =>
             axios
@@ -290,11 +292,12 @@ const AssetsAdd = props => {
                 title="Submit"
                 type="solid"
                 color="blue"
-                onPress={() => {
-                  image !== null
-                    ? { handleSubmit }
-                    : alert("Please Include a Photo");
-                }}
+                // onPress={() => {
+                //   image !== null
+                //     ? { handleSubmit }
+                //     : alert("Please Include a Photo");
+                // }}
+                onPress={handleSubmit}
                 buttonStyle={styles.button}
               />
 
