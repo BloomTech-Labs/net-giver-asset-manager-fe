@@ -1,30 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { withNavigation } from "react-navigation";
-import axios from "axios";
+
 
 const SingleAsset = ({ data, navigation }) => {
-  getAssetImage = () => {
-    var currentAssetID = data.id;
-    axios
-      .get(
-        `https://net-giver-asset-mngr.herokuapp.com/api/assets/img/${currentAssetID}`
-      )
-      .then(response => {
-        var assetImage = response.data;
-
-        // var image = assetImage.map(function (e) {
-        //   return e.location
-        // });
-        console.log("images", assetImage);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-  useEffect(() => {
-    getAssetImage();
-  }, []);
 
   // Handles clicking an individual asset in the Dashboard screen
   const showDetails = () => {
