@@ -39,14 +39,14 @@ const Landing = ({ navigation }) => {
           <Button
             buttonStyle={styles.registerBtn}
             title="Free Sign Up"
-            onPress={() => navigation.navigate("Ipick")}
+            onPress={() => navigation.navigate("SMS")}
           />
           <Button
             buttonStyle={styles.loginBtn}
             titleStyle={{ color: "#3366FF" }}
             type="outline"
             title="Log In Here"
-            onPress={() => navigation.navigate("SMS")}
+            onPress={() => navigation.navigate("Login")}
           />
         </View>
       </View>

@@ -123,11 +123,11 @@ export default class Cameron extends React.Component {
             title="Next"
             onPress={() => this.props.navigation.navigate("Dashboard")}
           />
-          <NavLink
+          {/* <NavLink
             text="Already have an account? Log in here."
             route="Login"
             style={styles.toLoginLink}
-          />
+          /> */}
         </View>
       </SafeAreaView>
     );

@@ -6,7 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   AsyncStorage,
-  FlatList
+  FlatList,
+  Form
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
@@ -34,8 +35,11 @@ export default class EditProfile extends React.Component {
   }
 
   handleChange(event) {
+    event.preventDefault();
     this.setState({ value: event.target.value });
   }
+
+  // handleSubmit = ({ username, email }) => {};
 
   getUserImage = () => {
     axios
@@ -112,16 +116,18 @@ export default class EditProfile extends React.Component {
             <Text style={styles.inputLabels}>username</Text>
             <TextInput
               placeholder="username"
+              name="username"
               style={styles.inputLabels}
-              // value={this.state.username}
-              onChangeText={this.setState.username}
+              value={this.state.username}
+              onChangeText={this.handleChange}
             />
             <Text style={styles.inputLabels}>email</Text>
             <TextInput
               placeholder="email"
+              name="email"
               style={styles.inputLabels}
-              // value={this.state.email}
-              onChangeText={this.setState.email}
+              value={this.state.email}
+              onChangeText={this.handleChange}
             />
           </View>
         </Form>
