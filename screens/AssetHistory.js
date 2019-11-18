@@ -64,8 +64,6 @@ const AssetHistory = ({ navigation }) => {
   //   })
   //   setMyHistory(myAssets);
   // };
-  console.log("myHistory", myHistory);
-  console.log("history", history);
 
   const search = (items, query) => {
 

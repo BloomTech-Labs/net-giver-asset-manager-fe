@@ -112,7 +112,7 @@ export default class BarcodeScanner extends React.Component {
     this.setState({ scanned: true });
     // Alert.alert(
     //   `Your QR Code # is ${[data]}`);
-    const { navigate } = this.props.navigation;
+
     // Axios call to fetch assets
     axios
       .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
@@ -131,7 +131,7 @@ export default class BarcodeScanner extends React.Component {
         console.log("filtered: ", intersectionString)
         console.log("Scanned: ", dataString)
 
-
+        const { navigate } = this.props.navigation;
         if (intersectionString === dataString) {
           var correctID = storedAssets.map(function (theID) {
 
@@ -150,13 +150,13 @@ export default class BarcodeScanner extends React.Component {
           var id = correctID2
           console.log('ID getting sent', id)
 
-          this.props.navigation.navigate("SingleAssetScreen", { id });
+          navigate("SingleAssetScreen", { id });
 
         } else {
 
-          this.props.navigation.navigate("Add", { dataString });
+          navigate("AssetsAddScreen", { dataString });
 
-
+          console.log('after scanned', dataString)
         }
       })
       .catch(error => {

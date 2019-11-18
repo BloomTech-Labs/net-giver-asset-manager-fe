@@ -84,12 +84,12 @@ export default function HomeScreen({ navigation }) {
               onPress={() => navigation.navigate("Ipick")}
             />
           </Spacer>
-          <Spacer>
+          {/* <Spacer>
             <Button
               title="Avatar"
               onPress={() => navigation.navigate("Avatar")}
             />
-          </Spacer>
+          </Spacer> */}
           <Spacer>
             <Button
               title="Legal"

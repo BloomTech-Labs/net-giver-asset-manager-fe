@@ -26,10 +26,17 @@ import { Formik } from "formik";
 
 import { Entypo } from "@expo/vector-icons";
 
-const AssetsAdd = (props, { navigation }) => {
+const AssetsAdd = props => {
   //   console.log("state test:", props);
   const [userId, setUserId] = useState(0);
   const [image, setImage] = useState(null);
+  const [imageAsset, setImageAsset] = useState({ id: "", location: "" });
+
+  // const fetchassetImgID = () => {
+  //   var assetImgID = imageAsset.map(function(e) {
+  //     return console.log(e.id);
+  //   });
+  // };
 
   const fetchUserId = () => {
     AsyncStorage.getItem("user_id")
@@ -54,6 +61,7 @@ const AssetsAdd = (props, { navigation }) => {
   useEffect(() => {
     fetchUserId();
     getPermissionAsync();
+    // fetchassetImgID();
   }, []);
 
   const chooseImage = async () => {
@@ -127,11 +135,10 @@ const AssetsAdd = (props, { navigation }) => {
     var barkode = props.navigation.state.params.dataString;
   }
   console.log("Barcode Scanned", barkode);
-
+  console.log("imageAssetID", imageAsset);
   // const redirect = () => {
   //     props.navigation.navigate("AssetsList");
   // }
-
   return (
     <KeyboardShift>
       <ScrollView>
@@ -170,12 +177,11 @@ const AssetsAdd = (props, { navigation }) => {
           enableReinitialize
           initialValues={{
             name: "",
-            // category: "",
             description: "",
-            barcode: "",
+            barcode: barkode,
             check_in_status: 0,
             user_id: userId
-            // location_id: 1
+            // pic_img_id: `${res.data.id}`
           }}
           onSubmit={values =>
             axios
@@ -191,7 +197,8 @@ const AssetsAdd = (props, { navigation }) => {
                   [
                     {
                       text: "Ok",
-                      onPress: () => props.navigation.navigate("AssetsList")
+                      onPress: () =>
+                        props.navigation.navigate("DashboardScreen")
                     }
                   ],
                   { cancelable: false }
@@ -232,7 +239,7 @@ const AssetsAdd = (props, { navigation }) => {
                 {!barkode ? (
                   <Text style={styles.noCode}>Scan Asset QR Code</Text>
                 ) : (
-                  <Text style={styles.qrCode}>QR Code: {barkode}</Text>
+                  <Text style={styles.qrCode}>QR Code: {values.barcode}</Text>
                 )}
               </TouchableOpacity>
 
