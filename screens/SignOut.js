@@ -57,7 +57,7 @@ const SignOut = ({ navigation }) => {
             buttonStyle={[{ marginTop: -30 }, styles.btn]}
             containerStyle={styles.btnContainer}
             title="Logout"
-            onPress={}
+          // onPress={}
           />
           {/* </View> */}
         </TouchableOpacity>
