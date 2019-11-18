@@ -33,21 +33,18 @@ export default class Cameron extends React.Component {
       userName: "",
       name: "",
       userId: 0,
-      email: ""
+      avatar: ""
     };
   }
 
-  getUser = () => {
+  getUserImage = () => {
     axios
-      .get("https://net-giver-asset-mngr.herokuapp.com/api/auth/users")
+      .get(
+        `https://net-giver-asset-mngr.herokuapp.com/api/user-images/${this.state.userId}`
+      )
       .then(res => {
-        // console.log("usertest:", res.data);
-        //  ( res.data === this.state.userId ? this.setState({ email: res.data.email}) : this.state.email)
-        if (res.data.id === this.state.userId) {
-          // console.log("logicTest:", this.state.userId);
-          this.setState({ email: email });
-          console.log("emailtest:", email);
-        }
+        console.log("usertestForImage:", res.data);
+        this.setState({ avatar: res.data.location });
       })
       .catch(err => {
         console.log("failed to get user:", err);
@@ -68,9 +65,11 @@ export default class Cameron extends React.Component {
 
   render() {
     let { image } = this.state;
-    let { email } = this.state;
+    let { avatar } = this.state;
+    let { userId } = this.state;
 
-    console.log("anotherStateTest:", email);
+    console.log("anotherStateTestforavatar:", avatar);
+    console.log("anotherStateTestforuser:", userId);
 
     return (
       <SafeAreaView style={styles.mainWrapper}>
@@ -81,16 +80,26 @@ export default class Cameron extends React.Component {
             You're almost there. The final step is to add your picture to
             complete your profile.
           </Text>
-          <Avatar
-            PlaceholderContent={<ActivityIndicator />}
-            source={
-              image
-                ? { uri: image }
-                : { uri: "https://i.imgur.com/ltNMlnA.png" }
-            }
-            rounded
-            size="xlarge"
-          />
+          {!userId ? (
+            <Avatar
+              PlaceholderContent={<ActivityIndicator />}
+              source={
+                image
+                  ? { uri: image }
+                  : { uri: "https://i.imgur.com/ltNMlnA.png" }
+              }
+              rounded
+              size="xlarge"
+            />
+          ) : (
+            <Avatar
+              PlaceholderContent={<ActivityIndicator />}
+              source={avatar}
+              rounded
+              size="xlarge"
+            />
+          )}
+
           <TouchableOpacity onPress={this.chooseImage} style={{ marginTop: 5 }}>
             <Entypo name="camera" size={30} color="#3366FF" />
           </TouchableOpacity>
@@ -108,6 +117,7 @@ export default class Cameron extends React.Component {
             route="Login"
             style={styles.toLoginLink}
           />
+          <Button onPress={this.getUserImage} />
         </View>
       </SafeAreaView>
     );
@@ -116,7 +126,14 @@ export default class Cameron extends React.Component {
   componentDidMount() {
     this.getPermissionAsync();
     this.fetchUserId();
-    this.getUser();
+    // this.getUserImage();
+  }
+
+  componentDidUpdate(avatar) {
+    if (avatar === null) {
+      this.getUserImage();
+      // this.setState();
+    }
   }
 
   getPermissionAsync = async () => {

@@ -32,25 +32,23 @@ export default class EditProfile extends React.Component {
     };
   }
 
-  updateUser = () => {
-    axios
-      .put(
-        `https://net-giver-asset-mngr.herokuapp.com/api/auth/register${user_id}`
-      )
-      .then(res => {
-        console.log("put test:", res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  //   updateUser = () => {
+  //     axios
+  //       .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`)
+  //       .then(res => {
+  //         console.log("put test:", res.data);
+  //       })
+  //       .catch(err => {
+  //         console.log(err);
+  //       });
+  //   };
 
   fetchUserId = () => {
     AsyncStorage.getItem("user_id")
       .then(response => {
         const user_id = JSON.parse(response);
         this.setState({ userId: user_id });
-        console.log("User ID fetched! on cameron", user_id);
+        console.log("User ID fetched! on editprofile", user_id);
       })
       .catch(error => {
         console.log(error);
@@ -62,7 +60,6 @@ export default class EditProfile extends React.Component {
 
     return (
       <SafeAreaView style={styles.mainWrapper}>
-        <Text style={styles.step2}>Step 2 of 2</Text>
         <View style={styles.welcomeWrapper}>
           <Text style={styles.welcome}>Welcome!</Text>
           <Text style={styles.directions}>
@@ -96,8 +93,25 @@ export default class EditProfile extends React.Component {
             containerStyle={styles.btnContainer}
             title="Update Profile"
             onPress={() => {
-              image !== null ? { updateUser } : alert("Please Include a Photo");
+              image !== null
+                ? { profileUpdater }
+                : alert("Please Include a Photo");
             }}
+
+            // onPress={() => {
+            //   updateUser = () => {
+            //     axios
+            //       .put(
+            //         `https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`
+            //       )
+            //       .then(res => {
+            //         console.log("put test:", res.data);
+            //       })
+            //       .catch(err => {
+            //         console.log(err);
+            //       });
+            //   };
+            // }}
           />
           {/* <NavLink
             text="Already have an account? Log in here."
@@ -108,6 +122,17 @@ export default class EditProfile extends React.Component {
       </SafeAreaView>
     );
   }
+
+  profileUpdater = () => {
+    axios
+      .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`)
+      .then(res => {
+        console.log("put test:", res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   componentDidMount() {
     this.getPermissionAsync();
@@ -136,6 +161,8 @@ export default class EditProfile extends React.Component {
       this.setState({ image: result.uri });
     }
 
+    const folderLocation = Date.now();
+
     const file = {
       uri: result.uri,
       name: "image.png",
@@ -160,6 +187,7 @@ export default class EditProfile extends React.Component {
       const name = res.body.postResponse.key;
       // const user_id = JSON.stringify(name.replace(/\D/g, ""));
       const user_id = JSON.parse(name.replace(/\D/g, ""));
+      const secondField = user_id(Math.floor);
       // console.log("rename", user_id);
       // const newerName = JSON.parse(newName);
       // console.log("herewegoagain", newerName);

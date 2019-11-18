@@ -12,7 +12,7 @@ analytics.track("Logged In", { "Referred By": "Friend" });
 
 const LoginText = () => {
   const { state, signin, clearErrorMessage } = useContext(Context);
-  console.log("logTest:", state);
+  // console.log("logTest:", state);
 
   return (
     <View style={styles.mainWrapper}>
@@ -41,7 +41,7 @@ const LoginText = () => {
 const styles = StyleSheet.create({
   mainWrapper: {
     flex: 1,
-    alignItems: "center",
+    alignItems: "center"
   },
   logo: {
     alignSelf: "center",

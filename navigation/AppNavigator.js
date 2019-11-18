@@ -43,6 +43,7 @@ import TextMsg from "../screens/TextMsg";
 import SmsLogin from "../screens/SmsLogin";
 import EditProfile from "../screens/EditProfile";
 import OneAsset from "../screens/assets/singleAsset/OneAsset";
+import SignOut from "../screens/SignOut";
 
 console.disableYellowBox = true;
 
@@ -66,8 +67,11 @@ const DevStack = createStackNavigator(
     Text: TextMsg,
     SmsLogin: SmsLogin,
     EditP: EditProfile,
+    SignOut: SignOut,
+    // SingleAssetCard: SingleAssetCard,
+    // OneAsset: OneAsset,
     SingleAssetCard: SingleAssetCard,
-    OneAsset: OneAsset,
+    OneAsset: OneAsset
   },
   {
     initialRouteName: "Home"
@@ -101,7 +105,6 @@ const DashboardScreen = createStackNavigator({
 });
 
 const SingleAssetScreen = createStackNavigator({
-
   SingleAssetScreen: {
     screen: SingleAssetCard,
     navigationOptions: props => ({
@@ -126,7 +129,9 @@ const SingleAssetScreen = createStackNavigator({
       headerLeft: (
         <SafeAreaView>
           <View style={{ marginLeft: 10 }}>
-            <TouchableOpacity onPress={() => props.navigation.navigate("DashboardScreen")}>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate("DashboardScreen")}
+            >
               <Icon name="arrow-back" size={30} color="black" />
             </TouchableOpacity>
           </View>
@@ -310,15 +315,15 @@ const AuthStack = createStackNavigator(
     Landing: {
       screen: Landing,
       navigationOptions: props => ({
-        headerStyle: { 
+        headerStyle: {
           borderBottomWidth: 0,
           ...Platform.select({
             android: {
               elevation: 0,
               shadowColor: "transparent",
               opacity: 0
-            },
-          }),
+            }
+          })
         }
       })
     },
