@@ -129,9 +129,7 @@ const SingleAssetScreen = createStackNavigator({
       headerLeft: (
         <SafeAreaView>
           <View style={{ marginLeft: 10 }}>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate("DashboardScreen")}
-            >
+            <TouchableOpacity onPress={() => props.navigation.navigate("Dashboard")}>
               <Icon name="arrow-back" size={30} color="black" />
             </TouchableOpacity>
           </View>
@@ -277,6 +275,41 @@ const LocationScreen = createStackNavigator({
   }
 });
 
+const EditProfileScreen = createStackNavigator({
+  EditProfileScreen: {
+    screen: EditProfile,
+    navigationOptions: props => ({
+      title: "Simple Asset Tracker",
+      headerStyle: {
+        backgroundColor: "#EFEFF4"
+      },
+      headerTitleStyle: {
+        color: "black",
+        fontSize: 20,
+        fontWeight: "500"
+      },
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+      headerLeft: (
+        <SafeAreaView>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+              <Icon name="arrow-back" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      )
+    })
+  }
+});
+
 const AppStack = createDrawerNavigator(
   {
     Dashboard: {
@@ -285,20 +318,20 @@ const AppStack = createDrawerNavigator(
     Scanner: {
       screen: ScannerScreen
     },
-    Assets: {
-      screen: AssetsScreen
-    },
     SingleAssetDrawer: {
-      screen: SingleAssetScreen
+      screen: SingleAssetScreen,
     },
-    AssetsCardDrawer: {
-      screen: AssetsCard
-    },
+    // AssetsCardDrawer: {
+    //   screen: AssetsCard
+    // },
     AssetsAdd: {
       screen: AssetsAddScreen
     },
     Location: {
       screen: LocationScreen
+    },
+    EditProfile: {
+      screen: EditProfileScreen
     }
   },
   {
