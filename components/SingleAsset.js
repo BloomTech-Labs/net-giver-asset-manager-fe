@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { withNavigation } from "react-navigation";
+import { withNavigation, NavigationActions } from "react-navigation";
 import axios from "axios";
 
 const SingleAsset = ({ data, navigation }) => {
@@ -31,7 +31,6 @@ const SingleAsset = ({ data, navigation }) => {
     const id = data.id;
     console.log("ASSET ID:", id);
     navigation.navigate("SingleAssetScreen", { id });
-
   };
 
 
