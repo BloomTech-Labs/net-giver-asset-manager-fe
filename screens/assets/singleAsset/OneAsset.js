@@ -12,6 +12,7 @@ const OneAsset = props => {
                 source={require('../../../assets/images/camera.jpg')}
             />
             <View style={styles.textWrapper}>
+                <Text style={styles.assetID}>QR #{props.data.barcode}</Text>
                 <Text style={styles.assetHeader}>Name</Text>
                 <Text style={styles.assetStatus}>{props.data.name}</Text>
 
@@ -64,6 +65,12 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginBottom: 21,
     },
+    assetID: {
+        fontSize: 14,
+        color: "#7C7777",
+        fontStyle: "italic",
+        marginBottom: 21,
+    }
 });
 
 export default OneAsset;
