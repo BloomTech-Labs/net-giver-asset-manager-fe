@@ -6,7 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   AsyncStorage,
-  FlatList
+  FlatList,
+  Form
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
@@ -19,7 +20,7 @@ import Spacer from "../components/Spacer";
 import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import NavLink from "../navigation/NavLink";
-import CustomTabBar from "../components/CustomTabBar"
+import CustomTabBar from "../components/CustomTabBar";
 
 export default class EditProfile extends React.Component {
   constructor(props) {
@@ -29,20 +30,44 @@ export default class EditProfile extends React.Component {
       image: null,
       userId: 0,
       email: "",
-      username: ""
+      username: "",
+      avatar: ""
     };
   }
 
-  //   updateUser = () => {
-  //     axios
-  //       .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`)
-  //       .then(res => {
-  //         console.log("put test:", res.data);
-  //       })
-  //       .catch(err => {
-  //         console.log(err);
-  //       });
-  //   };
+  handleChange(event) {
+    event.preventDefault();
+    this.setState({ value: event.target.value });
+  }
+
+  // handleSubmit = ({ username, email }) => {};
+
+  getUserImage = () => {
+    axios
+      .get(
+        `https://net-giver-asset-mngr.herokuapp.com/api/user-images/${this.state.userId}`
+      )
+      .then(res => {
+        console.log("usertestForImage:", res.data);
+        this.setState({ avatar: res.data.location });
+      })
+      .catch(err => {
+        console.log("failed to get user:", err);
+      });
+  };
+
+  updateUser = () => {
+    axios
+      .put(
+        `https://net-giver-asset-mngr.herokuapp.com/api/auth/users/${this.state.userId}`
+      )
+      .then(res => {
+        console.log("put test:", res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   fetchUserId = () => {
     AsyncStorage.getItem("user_id")
@@ -58,8 +83,13 @@ export default class EditProfile extends React.Component {
 
   render() {
     let { image } = this.state;
+    let { avatar } = this.state;
+    let { userId } = this.state;
 
-    const leftBtnTxt = "Edit Profile"
+    console.log("anotherStateTestforavatar:", avatar);
+    console.log("anotherStateTestforuser:", userId);
+
+    const leftBtnTxt = "Edit Profile";
     return (
       <SafeAreaView style={styles.mainWrapper}>
         <CustomTabBar leftBtn={leftBtnTxt} />
@@ -80,7 +110,9 @@ export default class EditProfile extends React.Component {
           />
           <TouchableOpacity onPress={this.chooseImage} style={{ marginTop: 5 }}>
             {/* <Entypo name="camera" size={30} color="#3366FF" /> */}
-            <Text color="#3366FF" style={{ color: "#3366FF" }}>Change Photo</Text>
+            <Text color="#3366FF" style={{ color: "#3366FF" }}>
+              Change Photo
+            </Text>
           </TouchableOpacity>
           {/* <Text style={[styles.inputLabels, { fontWeight: "500" }]}>Add Photo</Text> */}
         </View>
@@ -90,7 +122,8 @@ export default class EditProfile extends React.Component {
           <TextInput
             placeholder="username"
             // autoCorrect={false}
-            style={styles.inputField} />
+            style={styles.inputField}
+          />
           <Text style={styles.inputLabels}>Email</Text>
           <TextInput placeholder="email" style={styles.inputField} />
         </View>
@@ -99,52 +132,64 @@ export default class EditProfile extends React.Component {
             buttonStyle={styles.btn}
             containerStyle={styles.btnContainer}
             title="Update Profile"
-            onPress={() => {
-              image !== null
-                ? { profileUpdater }
-                : alert("Please Include a Photo");
-            }}
+            // onPress={() => {
+            //   image !== null
+            //     ? { profileUpdater }
+            //     : alert("Please Include a Photo");
+            // }}
+            onPress={this.updateUser(this.state.username, this.state.email)}
 
-          // onPress={() => {
-          //   updateUser = () => {
-          //     axios
-          //       .put(
-          //         `https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`
-          //       )
-          //       .then(res => {
-          //         console.log("put test:", res.data);
-          //       })
-          //       .catch(err => {
-          //         console.log(err);
-          //       });
-          //   };
-          // }}
+            // onPress={() => {
+            //   updateUser = () => {
+            //     axios
+            //       .put(
+            //         `https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`
+            //       )
+            //       .then(res => {
+            //         console.log("put test:", res.data);
+            //       })
+            //       .catch(err => {
+            //         console.log(err);
+            //       });
+            //   };
+            // }}
           />
           {/* <NavLink
             text="Already have an account? Log in here."
             route="Login"
             style={styles.toLoginLink}
           /> */}
+          <Button onPress={this.getUserImage} />
         </View>
       </SafeAreaView>
     );
   }
 
-  profileUpdater = () => {
-    axios
-      .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`)
-      .then(res => {
-        console.log("put test:", res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
+  // profileUpdater = () => {
+  //   axios
+  //     .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`)
+  //     .then(res => {
+  //       console.log("put test:", res.data);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
 
   componentDidMount() {
     this.getPermissionAsync();
     this.fetchUserId();
+    if (this.state.userId) {
+      this.getUserImage();
+    }
   }
+
+  // componentDidUpdate(avatar) {
+  //   if (avatar === null) {
+  //     this.getUserImage();
+  //     // this.setState();
+  //   }
+  // }
 
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
@@ -271,7 +316,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   label: {
-    fontSize: 16,
+    fontSize: 16
   },
   btnWrapper: {
     flex: 1,
@@ -298,12 +343,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignSelf: "center",
     paddingLeft: 10,
-    marginTop: 5,
+    marginTop: 5
   },
   inputLabels: {
     width: "91%",
     // alignSelf: "center",
     fontSize: 17,
-    marginTop: 20,
+    marginTop: 20
   }
 });
