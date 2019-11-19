@@ -37,19 +37,19 @@ export default class Cameron extends React.Component {
     };
   }
 
-  getUserImage = () => {
-    axios
-      .get(
-        `https://net-giver-asset-mngr.herokuapp.com/api/user-images/${this.state.userId}`
-      )
-      .then(res => {
-        console.log("usertestForImage:", res.data);
-        this.setState({ avatar: res.data.location });
-      })
-      .catch(err => {
-        console.log("failed to get user:", err);
-      });
-  };
+  // getUserImage = () => {
+  //   axios
+  //     .get(
+  //       `https://net-giver-asset-mngr.herokuapp.com/api/user-images/${this.state.userId}`
+  //     )
+  //     .then(res => {
+  //       console.log("usertestForImage:", res.data);
+  //       this.setState({ avatar: res.data.location });
+  //     })
+  //     .catch(err => {
+  //       console.log("failed to get user:", err);
+  //     });
+  // };
 
   fetchUserId = () => {
     AsyncStorage.getItem("user_id")
@@ -80,7 +80,7 @@ export default class Cameron extends React.Component {
             You're almost there. The final step is to add your picture to
             complete your profile.
           </Text>
-          {!userId ? (
+          {/* {!userId ? (
             <Avatar
               PlaceholderContent={<ActivityIndicator />}
               source={
@@ -98,7 +98,18 @@ export default class Cameron extends React.Component {
               rounded
               size="xlarge"
             />
-          )}
+          )} */}
+
+          <Avatar
+            PlaceholderContent={<ActivityIndicator />}
+            source={
+              image
+                ? { uri: image }
+                : { uri: "https://i.imgur.com/ltNMlnA.png" }
+            }
+            rounded
+            size="xlarge"
+          />
 
           <TouchableOpacity onPress={this.chooseImage} style={{ marginTop: 5 }}>
             <Entypo name="camera" size={30} color="#3366FF" />
@@ -108,16 +119,15 @@ export default class Cameron extends React.Component {
         <View style={styles.btnWrapper}>
           <Button
             buttonStyle={styles.btn}
-            containerStyle={styles.btnContainer}
+            // containerStyle={styles.btnContainer}
             title="Next"
             onPress={() => this.props.navigation.navigate("Dashboard")}
           />
-          <NavLink
+          {/* <NavLink
             text="Already have an account? Log in here."
             route="Login"
             style={styles.toLoginLink}
-          />
-          <Button onPress={this.getUserImage} />
+          /> */}
         </View>
       </SafeAreaView>
     );
@@ -217,33 +227,32 @@ export default class Cameron extends React.Component {
 
 const styles = StyleSheet.create({
   mainWrapper: {
-    flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center"
+    flex: 1
   },
   welcomeWrapper: {
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width: "91%",
+    // width: "91%",
     marginTop: 48
   },
   step2: {
-    position: "absolute",
-    top: 8,
-    left: 8,
-    fontSize: 13
+    marginTop: 10,
+    marginLeft: 20,
+    fontSize: 13,
+    fontWeight: "500"
   },
   welcome: {
     fontSize: 33,
-    textAlign: "center"
+    textAlign: "center",
+    marginBottom: 10
   },
   directions: {
     textAlign: "center",
     fontSize: 17,
     color: "#BFBFBF",
     width: "91%",
-    marginBottom: 48
+    marginBottom: 50
   },
   avatarWrapper: {
     flex: 1,
@@ -254,22 +263,27 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   btnWrapper: {
-    flex: 1,
+    // flex: 1,
+    marginTop: 100,
     alignContent: "center",
     justifyContent: "center"
   },
   btn: {
-    width: 343,
     height: 40,
-    borderRadius: 15,
+    borderRadius: 20,
     backgroundColor: "#3366FF",
-    paddingBottom: 8
+    paddingBottom: 8,
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "center",
+    marginLeft: 20,
+    marginRight: 20
   },
-  toLoginLink: {
-    color: "#3366FF",
-    paddingTop: 20,
-    marginTop: 20
-  }
+  // toLoginLink: {
+  //   color: "#3366FF",
+  //   paddingTop: 20,
+  //   marginTop: 20
+  // }
 });
 
 // ({
