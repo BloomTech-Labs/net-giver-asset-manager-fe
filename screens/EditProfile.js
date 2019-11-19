@@ -126,7 +126,9 @@ export default class EditProfile extends React.Component {
     let { avatar } = this.state;
     let { userId } = this.state;
 
-    console.log("anotherStateTestforavatar:", avatar);
+    console.log("got the location", this.location);
+
+    // console.log("anotherStateTestforavatar:", this.fetchUserPhoto());
     // console.log("anotherStateTestforuser:", userId);
 
     const leftBtnTxt = "Edit Profile";

@@ -211,13 +211,7 @@ export default class Cameron extends React.Component {
           )
           .then(res => {
             console.log("post to backend test was a success!", res.data);
-            const savedLocation = async location => {
-              try {
-                await AsyncStorage.setItem("location", res.data.location);
-              } catch (err) {
-                console.log(err.message);
-              }
-            };
+            AsyncStorage.setItem("location", res.data.location);
 
             // console.log("asynchTest:", res.data.locataion);
             // console.log("post to backend test was a success!", res);
