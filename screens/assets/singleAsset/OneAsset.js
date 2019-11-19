@@ -2,91 +2,68 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image } from 'react-native';
 import axios from "axios";
 
-const OneAsset = ({ data, navigation }) => {
-    const [assetImage, setAssetImage] = useState()
+const OneAsset = props => {
+    console.log("ONE ASSET PROPS:", props.data.name);
 
-    var currentAssetID = data.pic_img_id;
-    const getAssetImage = () => {
-        console.log('inside getAssetImage Function', currentAssetID)
-        axios
-            .get(
-                `http://localhost:8000/api/assets/img/${currentAssetID}`
-            )
-            .then(response => {
-                setAssetImage(response.data)
-                console.log('location', response.data)
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-
-    useEffect(() => {
-        getAssetImage();
-    }, []);
-
-    console.log('currectID in oneasset', currentAssetID)
     return (
         <View style={styles.assetWrapper}>
-            {/* Needs to be replaced with an image primitive component */}
             <Image
-                style={styles.imageWrapper}
-                source={require('../../../assets/images/macbook100.jpg')}
+                style={styles.img}
+                source={require('../../../assets/images/camera.jpg')}
             />
             <View style={styles.textWrapper}>
-                <Text style={styles.assetName}>{data.id}</Text>
-                <Text style={styles.assetName}>{data.name}</Text>
-                <Text style={styles.assetID}>Barcode # {data.barcode}</Text>
-                <Text>Category: {data.category}</Text>
-                <Text>Description: {data.description}</Text>
+                <Text style={styles.assetHeader}>Name</Text>
+                <Text style={styles.assetStatus}>{props.data.name}</Text>
+
+                <Text style={styles.assetHeader}>Description</Text>
+                <Text style={styles.assetStatus}>{props.data.description}</Text>
+
+                <Text style={styles.assetHeader}>Location</Text>
                 <View>
-                    {data.check_in_status == true ?
+                    {props.data.check_in_status == true ?
                         (<View>
-                            <Text>Status: Check-In</Text>
+                            <Text>Checked-In</Text>
                         </View>)
                         :
                         (<View>
-                            <Text>Status: Check-Out</Text>
+                            <Text>Checked-Out</Text>
                         </View>)
                     }
                 </View>
-
             </View>
         </View>
     );
-
 };
-
-
 
 const styles = StyleSheet.create({
     assetWrapper: {
         flexDirection: "column",
-        // marginTop: 25,
-
+        alignItems: "center",
     },
-    imageWrapper: {
+    img: {
         alignItems: "center",
         alignSelf: "center",
-        width: 100,
-        height: 100,
-        marginLeft: 10
+        width: "95%",
+        height: 200,
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 10,
     },
     textWrapper: {
         flex: 2,
-        marginLeft: 30,
-        padding: 15,
+        width: "95%",
+        marginTop: 10,
+        alignItems: "flex-start",
     },
-    assetName: {
-        fontWeight: "bold"
+    assetHeader: {
+        fontSize: 17,
+        color: "#BFBFBF",
+        marginBottom: 5,
     },
-    assetID: {
-        color: "#7C7777",
-        fontStyle: "italic"
+    assetStatus: {
+        fontSize: 14,
+        marginBottom: 21,
     },
-    assetLocation: {
-        color: "#82A0FD"
-    }
 });
 
 export default OneAsset;

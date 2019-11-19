@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e7c5b770-ba69-43d7-8ad6-00d2807960e2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/SingleAsset.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/SingleAsset.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navigation/AppNavigator.js" beforeDir="false" afterPath="$PROJECT_DIR$/navigation/AppNavigator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/AssetHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/AssetHistory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/Splash.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/Splash.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/assets/AssetsCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/assets/AssetsCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens/assets/AssetsList.js" beforeDir="false" afterPath="$PROJECT_DIR$/screens/assets/AssetsList.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,14 +14,12 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_29" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_XL_API_29" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-306" />
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -35,9 +27,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="34" />
-    <option name="y" value="32" />
+    <option name="y" value="25" />
     <option name="width" value="1341" />
     <option name="height" value="813" />
   </component>
@@ -104,10 +96,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="74" y="23" width="1341" height="813" extended-state="0" />
+    <frame x="34" y="25" width="1341" height="813" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.4973139" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.4969697" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
@@ -147,9 +140,7 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306" />
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">

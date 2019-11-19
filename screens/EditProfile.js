@@ -19,6 +19,9 @@ import Spacer from "../components/Spacer";
 import { Entypo } from "@expo/vector-icons";
 import axios from "axios";
 import NavLink from "../navigation/NavLink";
+import CustomTabBar from "../components/CustomTabBar"
+import * as yup from "yup";
+import { Formik } from "formik";
 
 export default class EditProfile extends React.Component {
   constructor(props) {
@@ -55,89 +58,150 @@ export default class EditProfile extends React.Component {
       });
   };
 
+
   render() {
+
+    console.log("and ID", this.state.userId)
+
     let { image } = this.state;
 
+    const leftBtnTxt = "Edit Profile"
     return (
-      <SafeAreaView style={styles.mainWrapper}>
-        <View style={styles.welcomeWrapper}>
-          <Text style={styles.welcome}>Welcome!</Text>
-          <Text style={styles.directions}>
-            You're Here go On and Edit yourself!
-          </Text>
-          <Avatar
-            PlaceholderContent={<ActivityIndicator />}
-            source={
-              image
-                ? { uri: image }
-                : { uri: "https://i.imgur.com/ltNMlnA.png" }
-            }
-            rounded
-            size="xlarge"
-          />
-          <TouchableOpacity onPress={this.chooseImage} style={{ marginTop: 5 }}>
-            <Entypo name="camera" size={30} color="#3366FF" />
-          </TouchableOpacity>
-          <Text style={{ fontWeight: "500" }}>Add Photo</Text>
-        </View>
-        <Spacer />
-        <View>
-          <Text style={styles.inputLabels}>username</Text>
-          <TextInput placeholder="username" style={styles.inputLabels} />
-          <Text style={styles.inputLabels}>email</Text>
-          <TextInput placeholder="email" style={styles.inputLabels} />
-        </View>
-        <View style={styles.btnWrapper}>
-          <Button
-            buttonStyle={styles.btn}
-            containerStyle={styles.btnContainer}
-            title="Update Profile"
-            onPress={() => {
-              image !== null
-                ? { profileUpdater }
-                : alert("Please Include a Photo");
-            }}
+      <Formik
 
-            // onPress={() => {
-            //   updateUser = () => {
-            //     axios
-            //       .put(
-            //         `https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`
-            //       )
-            //       .then(res => {
-            //         console.log("put test:", res.data);
-            //       })
-            //       .catch(err => {
-            //         console.log(err);
-            //       });
-            //   };
-            // }}
-          />
-          {/* <NavLink
+        initialValues={{
+          email: "",
+          username: "",
+          password: ""
+        }}
+        onSubmit={values =>
+          axios
+            .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users/${29}`, values
+            )
+            .then(res => {
+              console.log("values", values)
+              this.setState(res.data)
+            })
+            .catch(err => {
+              "Can not add";
+            })
+        }
+      // validationSchema={yup.object().shape({
+      //   name: yup.string().required(),
+      //   description: yup.string().required(),
+      //   // category: yup.string().required(),
+      //   // location_id: yup.string().required(),
+      //   barcode: yup.string().required()
+      // })}
+      >
+        {({
+          values,
+          handleChange,
+          errors,
+          setFieldTouched,
+          touched,
+          isValid,
+          handleSubmit
+        }) => (
+
+            <SafeAreaView style={styles.mainWrapper}>
+              <CustomTabBar leftBtn={leftBtnTxt} />
+              <View style={styles.welcomeWrapper}>
+                <Text style={styles.welcome}>Edit Profile</Text>
+                {/* <Text style={styles.directions}>
+            You're Here go On and Edit yourself!
+          </Text> */}
+                <Avatar
+                  PlaceholderContent={<ActivityIndicator />}
+                  source={
+                    image
+                      ? { uri: image }
+                      : { uri: "https://i.imgur.com/ltNMlnA.png" }
+                  }
+                  rounded
+                  size="xlarge"
+                />
+                <TouchableOpacity onPress={this.chooseImage} style={{ marginTop: 5 }}>
+                  {/* <Entypo name="camera" size={30} color="#3366FF" /> */}
+                  <Text color="#3366FF" style={{ color: "#3366FF" }}>Change Photo</Text>
+                </TouchableOpacity>
+                {/* <Text style={[styles.inputLabels, { fontWeight: "500" }]}>Add Photo</Text> */}
+              </View>
+              <Spacer />
+              <View style={styles.contain}>
+
+                <Text style={styles.inputLabels}>Username</Text>
+                <TextInput
+                  placeholder="username"
+                  value={values.username}
+                  onChangeText={handleChange('username')}
+                  onBlur={() => setFieldTouched("username")}
+                  clearButtonMode="while-editing"
+                  // autoCorrect={false}
+                  style={styles.inputField}
+                />
+
+                <Text style={styles.inputLabels}>Email</Text>
+                <TextInput
+                  placeholder="email"
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  onBlur={() => setFieldTouched("email")}
+                  clearButtonMode="while-editing"
+                  style={styles.inputField}
+                />
+
+                <Text style={styles.inputLabels}>Password</Text>
+                <TextInput
+                  secureTextEntry
+                  placeholder="password"
+                  value={values.password}
+                  onChangeText={handleChange('password')}
+                  onBlur={() => setFieldTouched("password")}
+                  clearButtonMode="while-editing"
+                  style={styles.inputField}
+                />
+              </View>
+              <View style={styles.btnWrapper}>
+                <Button
+                  buttonStyle={styles.btn}
+                  containerStyle={styles.btnContainer}
+                  title="Update Profile"
+                  onPress={() => {
+                    image !== null
+                      ? { handleSubmit }
+                      : alert("Please Include a Photo");
+                  }}
+
+                // onPress={() => {
+                //   updateUser = () => {
+                //     axios
+                //       .put(
+                //         `https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`
+                //       )
+                //       .then(res => {
+                //         console.log("put test:", res.data);
+                //       })
+                //       .catch(err => {
+                //         console.log(err);
+                //       });
+                //   };
+                // }}
+                />
+                {/* <NavLink
             text="Already have an account? Log in here."
             route="Login"
             style={styles.toLoginLink}
           /> */}
-        </View>
-      </SafeAreaView>
+              </View>
+            </SafeAreaView>
+          )}
+      </Formik>
     );
   }
 
-  profileUpdater = () => {
-    axios
-      .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`)
-      .then(res => {
-        console.log("put test:", res.data);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
-  componentDidMount() {
-    this.getPermissionAsync();
-    this.fetchUserId();
-  }
+
 
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
@@ -222,6 +286,13 @@ export default class EditProfile extends React.Component {
 //
 
 const styles = StyleSheet.create({
+  contain: {
+    // flex: 1,
+    // justifyContent: "center",
+    // alignItems: "left",
+    // backgroundColor: "green",
+    width: "90%"
+  },
   mainWrapper: {
     flex: 1,
     justifyContent: "flex-start",
@@ -257,7 +328,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   label: {
-    fontSize: 16
+    fontSize: 16,
   },
   btnWrapper: {
     flex: 1,
@@ -278,17 +349,18 @@ const styles = StyleSheet.create({
   },
   inputField: {
     height: 40,
-    width: "91%",
+    width: "100%",
     borderColor: "gray",
     borderRadius: 5,
     borderWidth: 1,
     alignSelf: "center",
     paddingLeft: 10,
-    marginTop: 20
+    marginTop: 5,
   },
   inputLabels: {
     width: "91%",
-    alignSelf: "center",
-    fontSize: 17
+    // alignSelf: "center",
+    fontSize: 17,
+    marginTop: 20,
   }
 });

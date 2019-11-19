@@ -44,6 +44,7 @@ import SmsLogin from "../screens/SmsLogin";
 import EditProfile from "../screens/EditProfile";
 import OneAsset from "../screens/assets/singleAsset/OneAsset";
 import SignOut from "../screens/SignOut";
+import LocationScanner from "../screens/LocationScanner"
 
 console.disableYellowBox = true;
 
@@ -53,6 +54,7 @@ const DevStack = createStackNavigator(
     AssetsAdd: AssetsAdd,
     BarcodeScanner: BarcodeScanner,
     Location: LocationForm,
+    LocationScanner: LocationScanner,
     AssetHistory: AssetHistory,
     AssetList: AssetsList,
     Camera: Camera,
@@ -129,9 +131,7 @@ const SingleAssetScreen = createStackNavigator({
       headerLeft: (
         <SafeAreaView>
           <View style={{ marginLeft: 10 }}>
-            <TouchableOpacity
-              onPress={() => props.navigation.navigate("DashboardScreen")}
-            >
+            <TouchableOpacity onPress={() => props.navigation.navigate("Dashboard")}>
               <Icon name="arrow-back" size={30} color="black" />
             </TouchableOpacity>
           </View>
@@ -145,7 +145,7 @@ const ScannerScreen = createStackNavigator({
   DashboardScreen: {
     screen: BarcodeScanner,
     navigationOptions: props => ({
-      title: "Scanner",
+      title: "Asset Scanner",
       headerTitleStyle: {
         color: "white"
       },
@@ -171,6 +171,38 @@ const ScannerScreen = createStackNavigator({
     })
   }
 });
+
+const LocationScannerStack = createStackNavigator({
+  DashboardScreen: {
+    screen: LocationScanner,
+    navigationOptions: props => ({
+      title: "Location Scanner",
+      headerTitleStyle: {
+        color: "white"
+      },
+      headerTransparent: true,
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+      headerLeft: (
+        <SafeAreaView>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+              <Icon name="arrow-back" size={30} color="white" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      )
+    })
+  }
+});
+
 
 const AssetsScreen = createStackNavigator({
   DashboardScreen: {
@@ -277,6 +309,41 @@ const LocationScreen = createStackNavigator({
   }
 });
 
+const EditProfileScreen = createStackNavigator({
+  EditProfileScreen: {
+    screen: EditProfile,
+    navigationOptions: props => ({
+      title: "Simple Asset Tracker",
+      headerStyle: {
+        backgroundColor: "#EFEFF4"
+      },
+      headerTitleStyle: {
+        color: "black",
+        fontSize: 20,
+        fontWeight: "500"
+      },
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+      headerLeft: (
+        <SafeAreaView>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+              <Icon name="arrow-back" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      )
+    })
+  }
+});
+
 const AppStack = createDrawerNavigator(
   {
     Dashboard: {
@@ -285,20 +352,23 @@ const AppStack = createDrawerNavigator(
     Scanner: {
       screen: ScannerScreen
     },
-    Assets: {
-      screen: AssetsScreen
-    },
     SingleAssetDrawer: {
-      screen: SingleAssetScreen
+      screen: SingleAssetScreen,
     },
-    AssetsCardDrawer: {
-      screen: AssetsCard
-    },
+    // AssetsCardDrawer: {
+    //   screen: AssetsCard
+    // },
     AssetsAdd: {
       screen: AssetsAddScreen
     },
     Location: {
       screen: LocationScreen
+    },
+    LocationScanner: {
+      screen: LocationScannerStack
+    },
+    EditProfile: {
+      screen: EditProfileScreen
     }
   },
   {
