@@ -40,8 +40,7 @@ const LoginText = () => {
 
 const styles = StyleSheet.create({
   mainWrapper: {
-    flex: 1,
-    alignItems: "center"
+    flex: 1
   },
   logo: {
     alignSelf: "center",

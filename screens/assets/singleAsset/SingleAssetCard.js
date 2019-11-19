@@ -5,10 +5,10 @@ import {
     Text,
     FlatList,
     StyleSheet,
-    Button,
     AsyncStorage,
     TouchableOpacity
 } from "react-native";
+import { Button } from "react-native-elements";
 import axios from "axios";
 import OneAsset from "./OneAsset";
 import { withNavigation } from "react-navigation";
@@ -143,56 +143,45 @@ const SingleAssetCard = (props) => {
               }
             </TouchableOpacity>
           </View>
-          <View>
           {!isAssetHistory
-            ? <FlatList
-                keyExtractor={(item, index) => item.id}
-                data={singleAsset}
-                renderItem={({ item }) => {
-                  return <OneAsset data={item} />;
-                }}
-              />
+            ? <View>
+                <FlatList
+                  keyExtractor={(item, index) => item.id}
+                  data={singleAsset}
+                  renderItem={({ item }) => {
+                    return <OneAsset data={item} />;
+                  }}
+                />
+                <View style={styles.btnWrapper}>
+                  <Button 
+                    title={singleAsset.check_in_status ? "Check Out" : "Return"}
+                    onPress={checkInStatus}
+                    buttonStyle={styles.btn}
+                  />
+                </View> 
+              </View>
             : <Text style={{fontWeight: "500", textAlign: "center", marginTop: 50}}>There is no history for this asset yet.</Text>
           }
-          </View>
-
-            {/* <FlatList
-                keyExtractor={(item, index) => item.id}
-                data={singleAsset}
-                renderItem={({ item }) => {
-                    {
-                        return item.check_in_status == false ? (
-                            <View>
-                                <Button title="RETURN" onPress={checkInStatus} />
-                            </View>
-                        ) : (
-                                <View>
-                                    <Button title="CHECK-OUT" onPress={checkInStatus} />
-                                </View>
-                            );
-                    }
-                }}
-            /> */}
         </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    headerWrapper: {
-        flexDirection: "row",
-        backgroundColor: "#3366FF",
-        borderBottomColor: "black",
-        height: 95
-    },
-    headerTitle: {
-        fontWeight: "bold",
-        fontSize: 20,
-        alignSelf: "center",
-        flex: 9,
-        paddingLeft: 20,
-        color: "white"
-    },
-    // Active/inactive styling <Views> at the buttom of each button
+  headerWrapper: {
+    flexDirection: "row",
+    backgroundColor: "#3366FF",
+    borderBottomColor: "black",
+    height: 95
+  },
+  headerTitle: {
+    fontWeight: "bold",
+    fontSize: 20,
+    alignSelf: "center",
+    flex: 9,
+    paddingLeft: 20,
+    color: "white"
+  },
+  // Active/inactive styling <Views> at the buttom of each button
   activeTab: {
     width: "100%",
     height: 1,
@@ -231,6 +220,19 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     width: "50%",
+  },
+  // Check-in/Check-out button styling
+  btnWrapper: {
+    flex: 1,
+    marginTop: 50,
+    alignItems: "center",
+  },
+  btn: {
+    width: 343,
+    height: 40,
+    borderRadius: 15,
+    backgroundColor: "#3366FF",
+    paddingBottom: 8,
   },
 });
 
