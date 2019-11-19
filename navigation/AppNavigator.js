@@ -43,6 +43,7 @@ import TextMsg from "../screens/TextMsg";
 import SmsLogin from "../screens/SmsLogin";
 import EditProfile from "../screens/EditProfile";
 import OneAsset from "../screens/assets/singleAsset/OneAsset";
+import SignOut from "../screens/SignOut";
 
 console.disableYellowBox = true;
 
@@ -66,8 +67,11 @@ const DevStack = createStackNavigator(
     Text: TextMsg,
     SmsLogin: SmsLogin,
     EditP: EditProfile,
+    SignOut: SignOut,
+    // SingleAssetCard: SingleAssetCard,
+    // OneAsset: OneAsset,
     SingleAssetCard: SingleAssetCard,
-    OneAsset: OneAsset,
+    OneAsset: OneAsset
   },
   {
     initialRouteName: "Home"
@@ -101,7 +105,6 @@ const DashboardScreen = createStackNavigator({
 });
 
 const SingleAssetScreen = createStackNavigator({
-
   SingleAssetScreen: {
     screen: SingleAssetCard,
     navigationOptions: props => ({
@@ -126,7 +129,7 @@ const SingleAssetScreen = createStackNavigator({
       headerLeft: (
         <SafeAreaView>
           <View style={{ marginLeft: 10 }}>
-            <TouchableOpacity onPress={() => props.navigation.navigate("DashboardScreen")}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("Dashboard")}>
               <Icon name="arrow-back" size={30} color="black" />
             </TouchableOpacity>
           </View>
@@ -272,6 +275,76 @@ const LocationScreen = createStackNavigator({
   }
 });
 
+const EditProfileScreen = createStackNavigator({
+  EditProfileScreen: {
+    screen: EditProfile,
+    navigationOptions: props => ({
+      title: "Simple Asset Tracker",
+      headerStyle: {
+        backgroundColor: "#EFEFF4"
+      },
+      headerTitleStyle: {
+        color: "black",
+        fontSize: 20,
+        fontWeight: "500"
+      },
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+      headerLeft: (
+        <SafeAreaView>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+              <Icon name="arrow-back" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      )
+    })
+  }
+});
+
+const SignOutScreen = createStackNavigator({
+  SignOutScreen: {
+    screen: SignOut,
+    navigationOptions: props => ({
+      title: "Simple Asset Tracker",
+      headerStyle: {
+        backgroundColor: "#EFEFF4"
+      },
+      headerTitleStyle: {
+        color: "black",
+        fontSize: 20,
+        fontWeight: "500"
+      },
+      headerRight: (
+        <SafeAreaView>
+          <View style={{ marginRight: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+              <Icon name="menu" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      ),
+      headerLeft: (
+        <SafeAreaView>
+          <View style={{ marginLeft: 10 }}>
+            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+              <Icon name="arrow-back" size={30} color="black" />
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      )
+    })
+  }
+});
+
 const AppStack = createDrawerNavigator(
   {
     Dashboard: {
@@ -280,20 +353,23 @@ const AppStack = createDrawerNavigator(
     Scanner: {
       screen: ScannerScreen
     },
-    Assets: {
-      screen: AssetsScreen
-    },
     SingleAssetDrawer: {
-      screen: SingleAssetScreen
+      screen: SingleAssetScreen,
     },
-    AssetsCardDrawer: {
-      screen: AssetsCard
-    },
+    // AssetsCardDrawer: {
+    //   screen: AssetsCard
+    // },
     AssetsAdd: {
       screen: AssetsAddScreen
     },
     Location: {
       screen: LocationScreen
+    },
+    EditProfile: {
+      screen: EditProfileScreen
+    },
+    SignOut: {
+      screen: SignOutScreen
     }
   },
   {
@@ -310,15 +386,15 @@ const AuthStack = createStackNavigator(
     Landing: {
       screen: Landing,
       navigationOptions: props => ({
-        headerStyle: { 
+        headerStyle: {
           borderBottomWidth: 0,
           ...Platform.select({
             android: {
               elevation: 0,
               shadowColor: "transparent",
               opacity: 0
-            },
-          }),
+            }
+          })
         }
       })
     },

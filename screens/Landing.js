@@ -1,5 +1,12 @@
 import React from "react";
-import { SafeAreaView, View, Text, StyleSheet, Image, Platform } from "react-native";
+import {
+  SafeAreaView,
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Platform
+} from "react-native";
 import { Button } from "react-native-elements";
 
 const Landing = ({ navigation }) => {
@@ -22,7 +29,8 @@ const Landing = ({ navigation }) => {
         <View>
           <View style={styles.purposeContainer}>
             <Text style={styles.purpose}>
-              <Text style={styles.blueTitle}>Asset Tracker</Text> makes it easy to keep track of all items.
+              <Text style={styles.blueTitle}>Asset Tracker</Text> makes it easy
+              to keep track of all items.
             </Text>
           </View>
         </View>
@@ -31,15 +39,15 @@ const Landing = ({ navigation }) => {
           <Button
             buttonStyle={styles.registerBtn}
             title="Free Sign Up"
-            // onPress={() => navigation.navigate("SMS")}
-            onPress={() => navigation.navigate("Dashboard")}
+            // onPress={() => navigation.navigate("Dashboard")}
+            onPress={() => navigation.navigate("Register")}
           />
           <Button
             buttonStyle={styles.loginBtn}
-            titleStyle={{ color: '#3366FF' }}
+            titleStyle={{ color: "#3366FF" }}
             type="outline"
             title="Log In Here"
-            onPress={() => navigation.navigate("SMS")}
+            onPress={() => navigation.navigate("Login")}
           />
         </View>
       </View>
@@ -60,8 +68,8 @@ const styles = StyleSheet.create({
       },
       android: {
         marginTop: -20
-      },
-    }),
+      }
+    })
   },
   logo: {
     marginTop: 0,
@@ -84,7 +92,7 @@ const styles = StyleSheet.create({
         width: 325,
         height: 330
       }
-    }),
+    })
   },
   blueTitle: {
     color: "#3366FF"
@@ -92,7 +100,7 @@ const styles = StyleSheet.create({
   purposeContainer: {
     alignItems: "center",
     marginTop: -45,
-    marginBottom: 25,
+    marginBottom: 25
   },
   purpose: {
     fontSize: 23,
