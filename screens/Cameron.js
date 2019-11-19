@@ -210,7 +210,12 @@ export default class Cameron extends React.Component {
             data
           )
           .then(res => {
-            console.log("post to backend test was a success!");
+            console.log("post to backend test was a success!", res.data);
+            AsyncStorage.setItem("location", res.data.location);
+
+            // fixed this stuff
+
+            // console.log("asynchTest:", res.data.locataion);
             // console.log("post to backend test was a success!", res);
             // res
             //   .status(201)
@@ -278,7 +283,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginLeft: 20,
     marginRight: 20
-  },
+  }
   // toLoginLink: {
   //   color: "#3366FF",
   //   paddingTop: 20,
