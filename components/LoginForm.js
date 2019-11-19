@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#3366FF",
     paddingBottom: 8,
+    marginTop: 20,
     width: "100%"
   },
   errorMessage: {
@@ -81,7 +82,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignSelf: "center",
     paddingLeft: 10,
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 0
   },
   inputLabels: {
     width: "91%",

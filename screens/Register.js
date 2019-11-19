@@ -19,7 +19,6 @@ const SignupScreen = ({ navigation }) => {
 
       <NavigationEvents onWillBlur={clearErrorMessage} />
       <LoginForm
-        style={styles.registerButton}
         headerText="Sign Up for Net Giver Tracker"
         errorMessage={clearErrorMessage}
         submitButtonText="Create Account"
@@ -53,9 +52,6 @@ const styles = StyleSheet.create({
     color: "#BFBFBF",
     marginBottom: 40,
     marginLeft: 20
-  },
-  registerButton: {
-    width: "100%"
   }
 });
 
