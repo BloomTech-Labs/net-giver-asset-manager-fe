@@ -44,6 +44,7 @@ import SmsLogin from "../screens/SmsLogin";
 import EditProfile from "../screens/EditProfile";
 import OneAsset from "../screens/assets/singleAsset/OneAsset";
 import SignOut from "../screens/SignOut";
+import Hidden from "../components/Hidden";
 
 console.disableYellowBox = true;
 
@@ -115,7 +116,7 @@ const SingleAssetScreen = createStackNavigator({
       headerTitleStyle: {
         color: "black",
         fontSize: 20,
-        fontWeight: "500"
+        fontWeight: "500",
       },
       headerRight: (
         <SafeAreaView>
@@ -353,24 +354,41 @@ const AppStack = createDrawerNavigator(
     Scanner: {
       screen: ScannerScreen
     },
+    // If drawer label is hidden, we wanted to keep the
+    // screen in the navigator but hide in the drawer
     SingleAssetDrawer: {
       screen: SingleAssetScreen,
+      navigationOptions: {
+        drawerLabel: <Hidden />
+      },
     },
-    // AssetsCardDrawer: {
-    //   screen: AssetsCard
-    // },
+    AssetsCardDrawer: {
+      screen: AssetsCard,
+      navigationOptions: {
+        drawerLabel: <Hidden />
+      },
+    },
     AssetsAdd: {
-      screen: AssetsAddScreen
+      screen: AssetsAddScreen,
+      navigationOptions: {
+        drawerLabel: <Hidden />
+      },
     },
     Location: {
-      screen: LocationScreen
+      screen: LocationScreen,
+      navigationOptions: {
+        drawerLabel: <Hidden />
+      },
     },
     EditProfile: {
-      screen: EditProfileScreen
+      screen: EditProfileScreen,
+      navigationOptions: {
+        title: "Edit Profile"
+      },
     },
     SignOut: {
       screen: SignOutScreen
-    }
+    },
   },
   {
     contentComponent: CustomDrawer,
@@ -512,7 +530,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Auth"
+    initialRouteName: "Splash"
   }
 );
 
