@@ -16,7 +16,7 @@ const Landing = ({ navigation }) => {
         <View style={styles.landingImage}>
           <Image
             style={styles.middleImg}
-            source={require("../assets/images/landing.png")}
+            source={require("../assets/images/landing.jpg")}
           />
         </View>
         <View>
@@ -31,7 +31,8 @@ const Landing = ({ navigation }) => {
           <Button
             buttonStyle={styles.registerBtn}
             title="Free Sign Up"
-            onPress={() => navigation.navigate("SMS")}
+            // onPress={() => navigation.navigate("SMS")}
+            onPress={() => navigation.navigate("Dashboard")}
           />
           <Button
             buttonStyle={styles.loginBtn}
