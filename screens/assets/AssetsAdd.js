@@ -204,7 +204,7 @@ const AssetsAdd = props => {
                     {
                       text: "Ok",
                       onPress: () =>
-                        props.navigation.navigate("DashboardScreen")
+                        props.navigation.navigate("Dashboard")
                     }
                   ],
                   { cancelable: false }
