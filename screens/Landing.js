@@ -39,7 +39,6 @@ const Landing = ({ navigation }) => {
           <Button
             buttonStyle={styles.registerBtn}
             title="Free Sign Up"
-            // onPress={() => navigation.navigate("Dashboard")}
             onPress={() => navigation.navigate("Register")}
           />
           <Button
