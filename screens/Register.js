@@ -13,16 +13,16 @@ const SignupScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.step1}>Step 1 of 2</Text>
       <Text style={styles.slogan}>
-        Asset Tracker is free and easy to use!
+        <Text style={styles.logoColor}>Asset Tracker</Text> is free and easy to use!{"\n"}
+        Simply fill out this form and you're on your way.
       </Text>
-      <Text style={styles.description}>
-        Simply fill out this registration form and you're on your way.
-      </Text>
+
       <NavigationEvents onWillBlur={clearErrorMessage} />
       <LoginForm
+        style={styles.registerButton}
         headerText="Sign Up for Net Giver Tracker"
         errorMessage={clearErrorMessage}
-        submitButtonText="Register"
+        submitButtonText="Create Account"
         onSubmit={signup}
       />
       <NavLink
@@ -36,32 +36,27 @@ const SignupScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: "#FEFEFE"
   },
+  logoColor: {
+    color: "#3366FF"
+  },
   step1: {
-    position: "absolute",
-    top: 8,
-    left: 8,
+    marginTop: 10,
+    marginLeft: 20,
+    marginBottom: 35,
     fontSize: 13,
+    fontWeight: "500"
   },
   slogan: {
-    marginTop: 5,
-    marginBottom: 32,
-    width: "91%",
-    paddingLeft: 10,
-    fontSize: 20,
-    fontWeight: "500",
-    color: "black"
-  },
-  description: {
     fontSize: 17,
     color: "#BFBFBF",
-    width: "90%",
-    textAlign: "center",
-    marginBottom: 16,
+    marginBottom: 40,
+    marginLeft: 20
   },
+  registerButton: {
+    width: "100%"
+  }
 });
 
 export default SignupScreen;
