@@ -18,6 +18,8 @@ const AssetHistory = ({ navigation }) => {
   const [searchedHistory, setSearchedHistory] = useState();
   const [query, setQuery] = useState('');
 
+  const [tab, setTab] = useState(false);
+
   useEffect(() => {
     fetchAllAssets();
     fetchUserId();
@@ -97,8 +99,7 @@ const AssetHistory = ({ navigation }) => {
               setIsMine(false);
               setSearchedHistory(history);
               setQuery('');
-            }
-            }
+            }}
           >
             {!isMine
               ? <Text style={styles.activeText}>ALL ASSETS</Text>
@@ -115,8 +116,7 @@ const AssetHistory = ({ navigation }) => {
               setIsMine(true);
               setSearchedHistory(myHistory);
               setQuery('');
-            }
-            }
+            }}
           >
             {!isMine
               ? <Text style={styles.inactiveText}>MY ASSETS</Text>
@@ -157,6 +157,54 @@ const AssetHistory = ({ navigation }) => {
             />
           </TouchableOpacity>
         </View>
+
+        {/* TAB SECTION */}
+        {/* <View style={styles.toggleTabContainer}>
+          <TouchableOpacity
+            // style={styles.allAssets}
+            onPress={() => {
+              setTab(false);
+              setSearchedHistory(history);
+              setQuery('');
+            }}
+          >
+            {!tab
+              ? <Text style={styles.currentActiveTab}>Current Assets</Text>
+              : <Text style={styles.currentInactiveTab}>Current Assets</Text>
+            }
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.allAssets}
+            onPress={() => {
+              setTab(true);
+              setSearchedHistory(myHistory);
+              setQuery('');
+            }}
+          >
+            {!tab
+              ? <Text style={styles.currentInactiveTab}>History</Text>
+              : <Text style={styles.currentActiveTab}>History</Text>
+            }
+          </TouchableOpacity>
+        </View> */}
+        {/* TAB SECTION */}
+
+
+        {/* <Button
+          title="Current Assets"
+          buttonStyle={styles.currentActiveTab}
+          type="outline"
+          titleStyle={{ color: 'white' }}
+        />
+        <Button
+          title="History"
+          type="outline"
+          buttonStyle={styles.currentInactiveTab}
+          titleStyle={{ color: 'black' }}
+          onPress={() => {
+
+          }}
+        /> */}
 
         <View style={styles.flatList}>
           {!isMine
@@ -285,6 +333,47 @@ const styles = StyleSheet.create({
   },
   upc: {
     marginTop: 35
+  },
+  // Active/Inactive styling for Current Assets & History buttons
+  toggleTabContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignContent: "center",
+    marginTop: 20
+  },
+  currentAssetsTab: {
+    // width: 175,
+    // height: 40,
+    // backgroundColor: "white",
+    // borderColor: "#3366FF",
+    borderBottomLeftRadius: 10,
+    borderTopLeftRadius: 10
+  },
+  historyAssetTab: {
+    // width: 175,
+    // height: 40,
+    // color: "white",
+    // backgroundColor: "#3366FF",
+    borderBottomRightRadius: 10,
+    borderTopRightRadius: 10
+  },
+  currentActiveTab: {
+    width: 175,
+    height: 40,
+    textAlign: "center",
+    justifyContent: "center",
+    backgroundColor: "#3366FF",
+    borderColor: "#3366FF",
+    color: "white"
+  },
+  currentInactiveTab: {
+    width: 175,
+    height: 40,
+    marginLeft: -0.5,
+    textAlign: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    borderColor: "#3366FF"
   }
 });
 
