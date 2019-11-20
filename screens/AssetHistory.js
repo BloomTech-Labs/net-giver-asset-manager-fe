@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text, StatusBar, TextInput } from "react-native";
+import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text, StatusBar, TextInput, Alert } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import _ from "lodash";
 import axios from "axios";
@@ -8,7 +8,7 @@ import { REACT_APP_MIXPANEL_SECRET_API_KEY } from 'react-native-dotenv';
 import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
 const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Spacer from "../components/Spacer";
+import { NavigationEvents } from 'react-navigation';
 
 const AssetHistory = ({ navigation }) => {
   const [history, setHistory] = useState([]);
@@ -61,26 +61,24 @@ const AssetHistory = ({ navigation }) => {
   };
 
   // Fetches only the assets associated with the logged in user
-  // const fetchMyAssets = () => {
-  //   const myAssets = history.filter(asset => {
-  //     return asset.user_id === userId
-  //   })
-  //   setMyHistory(myAssets);
-  // };
+  const fetchMyAssets = () => {
+    myAssets = history.filter(asset => {
+      return asset.user_id === userId
+    })
+    setMyHistory(myAssets);
+  };
 
   const search = (items, query) => {
-
     let filteredItems = items;
-
     if (query.length) {
       filteredItems = items.filter(item => {
         return item.name.toLowerCase().includes(query.toLowerCase());
       })
       setSearchedHistory(filteredItems)
     }
-
     setSearchedHistory(filteredItems);
   }
+
 
   // Conditional rendering
   if (isLoading) {
@@ -116,6 +114,7 @@ const AssetHistory = ({ navigation }) => {
             onPress={() => {
               setIsMine(true);
               setSearchedHistory(myHistory);
+              fetchMyAssets();
               setQuery('');
             }}
           >
@@ -157,91 +156,6 @@ const AssetHistory = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        {/* TAB SECTION */}
-        {/* <View style={styles.toggleTabContainer}>
-          <TouchableOpacity
-            // style={styles.allAssets}
-            onPress={() => {
-              setTab(false);
-              setSearchedHistory(history);
-              setQuery('');
-            }}
-          >
-            {!tab
-              ? <Text style={styles.currentActiveTab}>Current Assets</Text>
-              : <Text style={styles.currentInactiveTab}>Current Assets</Text>
-            }
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.allAssets}
-            onPress={() => {
-              setTab(true);
-              setSearchedHistory(myHistory);
-              setQuery('');
-            }}
-          >
-            {!tab
-              ? <Text style={styles.currentInactiveTab}>History</Text>
-              : <Text style={styles.currentActiveTab}>History</Text>
-            }
-          </TouchableOpacity>
-        </View> */}
-        {/* TAB SECTION */}
-
-
-        {/* <Button
-          title="Current Assets"
-          buttonStyle={styles.currentActiveTab}
-          type="outline"
-          titleStyle={{ color: 'white' }}
-        />
-        <Button
-          title="History"
-          type="outline"
-          buttonStyle={styles.currentInactiveTab}
-          titleStyle={{ color: 'black' }}
-          onPress={() => {
-
-          }}
-        /> */}
-
-        {/* <View style={styles.toggleSection}>
-          <TouchableOpacity
-            style={styles.allAssets}
-            onPress={() => {
-              setIsMine(false);
-              setSearchedHistory(history);
-              setQuery('');
-            }}
-          >
-            {!isMine
-              ? <Text style={styles.activeText}>ALL ASSETS</Text>
-              : <Text style={styles.inactiveText}>ALL ASSETS</Text>
-            }
-            {!isMine
-              ? <View style={styles.activeTab} />
-              : <View style={styles.inactiveTab} />
-            }
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.allAssets}
-            onPress={() => {
-              setIsMine(true);
-              setSearchedHistory(myHistory);
-              setQuery('');
-            }}
-          >
-            {!isMine
-              ? <Text style={styles.inactiveText}>MY ASSETS</Text>
-              : <Text style={styles.activeText}>MY ASSETS</Text>
-            }
-            {!isMine
-              ? <View style={styles.inactiveTab} />
-              : <View style={styles.activeTab} />
-            }
-          </TouchableOpacity>
-        </View> */}
-
         <View style={styles.flatList}>
           {!isMine
             ? <FlatList
@@ -259,6 +173,11 @@ const AssetHistory = ({ navigation }) => {
               }}
             />
           }
+        </View>
+        <View>
+          <NavigationEvents
+            onDidFocus={() => fetchAllAssets()}
+          />
         </View>
 
         <Button
@@ -282,7 +201,7 @@ const AssetHistory = ({ navigation }) => {
 const styles = StyleSheet.create({
   mainWrapper: {
     flexDirection: "column",
-    flex: 1,
+    flex: 1
   },
   loading: {
     flex: 1,
@@ -303,6 +222,7 @@ const styles = StyleSheet.create({
   },
   flatList: {
     zIndex: 0,
+    marginBottom: 150
   },
   // Floating action button styling at bottom of page
   addBtn: {
