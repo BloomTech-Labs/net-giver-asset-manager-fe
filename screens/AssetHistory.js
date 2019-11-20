@@ -60,24 +60,21 @@ const AssetHistory = ({ navigation }) => {
   };
 
   // Fetches only the assets associated with the logged in user
-  // const fetchMyAssets = () => {
-  //   const myAssets = history.filter(asset => {
-  //     return asset.user_id === userId
-  //   })
-  //   setMyHistory(myAssets);
-  // };
+  const fetchMyAssets = () => {
+    myAssets = history.filter(asset => {
+      return asset.user_id === userId
+    })
+    setMyHistory(myAssets);
+  };
 
   const search = (items, query) => {
-
     let filteredItems = items;
-
     if (query.length) {
       filteredItems = items.filter(item => {
         return item.name.toLowerCase().includes(query.toLowerCase());
       })
       setSearchedHistory(filteredItems)
     }
-
     setSearchedHistory(filteredItems);
   }
 
@@ -115,6 +112,7 @@ const AssetHistory = ({ navigation }) => {
             onPress={() => {
               setIsMine(true);
               setSearchedHistory(myHistory);
+              fetchMyAssets();
               setQuery('');
             }}
           >
@@ -157,54 +155,6 @@ const AssetHistory = ({ navigation }) => {
             />
           </TouchableOpacity>
         </View>
-
-        {/* TAB SECTION */}
-        {/* <View style={styles.toggleTabContainer}>
-          <TouchableOpacity
-            // style={styles.allAssets}
-            onPress={() => {
-              setTab(false);
-              setSearchedHistory(history);
-              setQuery('');
-            }}
-          >
-            {!tab
-              ? <Text style={styles.currentActiveTab}>Current Assets</Text>
-              : <Text style={styles.currentInactiveTab}>Current Assets</Text>
-            }
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.allAssets}
-            onPress={() => {
-              setTab(true);
-              setSearchedHistory(myHistory);
-              setQuery('');
-            }}
-          >
-            {!tab
-              ? <Text style={styles.currentInactiveTab}>History</Text>
-              : <Text style={styles.currentActiveTab}>History</Text>
-            }
-          </TouchableOpacity>
-        </View> */}
-        {/* TAB SECTION */}
-
-
-        {/* <Button
-          title="Current Assets"
-          buttonStyle={styles.currentActiveTab}
-          type="outline"
-          titleStyle={{ color: 'white' }}
-        />
-        <Button
-          title="History"
-          type="outline"
-          buttonStyle={styles.currentInactiveTab}
-          titleStyle={{ color: 'black' }}
-          onPress={() => {
-
-          }}
-        /> */}
 
         <View style={styles.flatList}>
           {!isMine
