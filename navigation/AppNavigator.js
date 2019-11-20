@@ -75,7 +75,7 @@ const DevStack = createStackNavigator(
     OneAsset: OneAsset
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "AssetHistory"
   }
 );
 
@@ -530,7 +530,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Splash"
+    initialRouteName: "Dev"
   }
 );
 

@@ -8,6 +8,7 @@ import { REACT_APP_MIXPANEL_SECRET_API_KEY } from 'react-native-dotenv';
 import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
 const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Spacer from "../components/Spacer";
 
 const AssetHistory = ({ navigation }) => {
   const [history, setHistory] = useState([]);
@@ -130,7 +131,6 @@ const AssetHistory = ({ navigation }) => {
         </View>
 
         <View style={styles.qrSearchContainer}>
-
           <View style={styles.searchContainer}>
             <TextInput
               style={styles.searchBar}
@@ -145,7 +145,6 @@ const AssetHistory = ({ navigation }) => {
               value={query}
             />
           </View>
-
           <TouchableOpacity
             style={styles.qrSection}
             onPress={() => navigation.navigate("Scanner")}
@@ -205,6 +204,43 @@ const AssetHistory = ({ navigation }) => {
 
           }}
         /> */}
+
+        {/* <View style={styles.toggleSection}>
+          <TouchableOpacity
+            style={styles.allAssets}
+            onPress={() => {
+              setIsMine(false);
+              setSearchedHistory(history);
+              setQuery('');
+            }}
+          >
+            {!isMine
+              ? <Text style={styles.activeText}>ALL ASSETS</Text>
+              : <Text style={styles.inactiveText}>ALL ASSETS</Text>
+            }
+            {!isMine
+              ? <View style={styles.activeTab} />
+              : <View style={styles.inactiveTab} />
+            }
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.allAssets}
+            onPress={() => {
+              setIsMine(true);
+              setSearchedHistory(myHistory);
+              setQuery('');
+            }}
+          >
+            {!isMine
+              ? <Text style={styles.inactiveText}>MY ASSETS</Text>
+              : <Text style={styles.activeText}>MY ASSETS</Text>
+            }
+            {!isMine
+              ? <View style={styles.inactiveTab} />
+              : <View style={styles.activeTab} />
+            }
+          </TouchableOpacity>
+        </View> */}
 
         <View style={styles.flatList}>
           {!isMine
