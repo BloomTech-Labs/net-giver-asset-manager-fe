@@ -62,9 +62,11 @@ const styles = StyleSheet.create({
   btn: {
     width: 343,
     height: 40,
-    borderRadius: 15,
+    borderRadius: 20,
     backgroundColor: "#3366FF",
-    paddingBottom: 8
+    paddingBottom: 8,
+    marginTop: 20,
+    width: "100%"
   },
   errorMessage: {
     fontSize: 16,
@@ -75,12 +77,13 @@ const styles = StyleSheet.create({
   inputField: {
     height: 40,
     width: "91%",
-    borderColor: "gray",
+    borderColor: "#BFBFBF",
     borderRadius: 5,
     borderWidth: 1,
     alignSelf: "center",
     paddingLeft: 10,
-    marginTop: 20
+    marginTop: 10,
+    marginBottom: 0
   },
   inputLabels: {
     width: "91%",

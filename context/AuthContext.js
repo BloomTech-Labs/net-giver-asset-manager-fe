@@ -41,7 +41,7 @@ const signup = dispatch => async ({ email, password, username, id }) => {
     ]);
     dispatch({ type: "signin", payload: response.data.token });
 
-    navigate("Dashboard");
+    navigate("Cameron");
   } catch (err) {
     console.log("test context", err);
     dispatch({

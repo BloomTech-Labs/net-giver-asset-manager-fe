@@ -119,7 +119,7 @@ export default class Cameron extends React.Component {
         <View style={styles.btnWrapper}>
           <Button
             buttonStyle={styles.btn}
-            containerStyle={styles.btnContainer}
+            // containerStyle={styles.btnContainer}
             title="Next"
             onPress={() => this.props.navigation.navigate("Dashboard")}
           />
@@ -210,7 +210,12 @@ export default class Cameron extends React.Component {
             data
           )
           .then(res => {
-            console.log("post to backend test was a success!");
+            console.log("post to backend test was a success!", res.data);
+            AsyncStorage.setItem("location", res.data.location);
+
+            // fixed this stuff
+
+            // console.log("asynchTest:", res.data.locataion);
             // console.log("post to backend test was a success!", res);
             // res
             //   .status(201)
@@ -227,33 +232,32 @@ export default class Cameron extends React.Component {
 
 const styles = StyleSheet.create({
   mainWrapper: {
-    flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center"
+    flex: 1
   },
   welcomeWrapper: {
-    flex: 1,
+    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    width: "91%",
+    // width: "91%",
     marginTop: 48
   },
   step2: {
-    position: "absolute",
-    top: 8,
-    left: 8,
-    fontSize: 13
+    marginTop: 10,
+    marginLeft: 20,
+    fontSize: 13,
+    fontWeight: "500"
   },
   welcome: {
     fontSize: 33,
-    textAlign: "center"
+    textAlign: "center",
+    marginBottom: 10
   },
   directions: {
     textAlign: "center",
     fontSize: 17,
     color: "#BFBFBF",
     width: "91%",
-    marginBottom: 48
+    marginBottom: 50
   },
   avatarWrapper: {
     flex: 1,
@@ -264,22 +268,27 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   btnWrapper: {
-    flex: 1,
+    // flex: 1,
+    marginTop: 100,
     alignContent: "center",
     justifyContent: "center"
   },
   btn: {
-    width: 343,
     height: 40,
-    borderRadius: 15,
+    borderRadius: 20,
     backgroundColor: "#3366FF",
-    paddingBottom: 8
-  },
-  toLoginLink: {
-    color: "#3366FF",
-    paddingTop: 20,
-    marginTop: 20
+    paddingBottom: 8,
+    flexDirection: "row",
+    alignContent: "center",
+    justifyContent: "center",
+    marginLeft: 20,
+    marginRight: 20
   }
+  // toLoginLink: {
+  //   color: "#3366FF",
+  //   paddingTop: 20,
+  //   marginTop: 20
+  // }
 });
 
 // ({

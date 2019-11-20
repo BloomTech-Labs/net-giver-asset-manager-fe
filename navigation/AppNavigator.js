@@ -44,7 +44,7 @@ import SmsLogin from "../screens/SmsLogin";
 import EditProfile from "../screens/EditProfile";
 import OneAsset from "../screens/assets/singleAsset/OneAsset";
 import SignOut from "../screens/SignOut";
-import LocationScanner from "../screens/LocationScanner"
+import Hidden from "../components/Hidden";
 
 console.disableYellowBox = true;
 
@@ -54,7 +54,6 @@ const DevStack = createStackNavigator(
     AssetsAdd: AssetsAdd,
     BarcodeScanner: BarcodeScanner,
     Location: LocationForm,
-    LocationScanner: LocationScanner,
     AssetHistory: AssetHistory,
     AssetList: AssetsList,
     Camera: Camera,
@@ -117,7 +116,7 @@ const SingleAssetScreen = createStackNavigator({
       headerTitleStyle: {
         color: "black",
         fontSize: 20,
-        fontWeight: "500"
+        fontWeight: "500",
       },
       headerRight: (
         <SafeAreaView>
@@ -172,36 +171,36 @@ const ScannerScreen = createStackNavigator({
   }
 });
 
-const LocationScannerStack = createStackNavigator({
-  DashboardScreen: {
-    screen: LocationScanner,
-    navigationOptions: props => ({
-      title: "Location Scanner",
-      headerTitleStyle: {
-        color: "white"
-      },
-      headerTransparent: true,
-      headerRight: (
-        <SafeAreaView>
-          <View style={{ marginRight: 10 }}>
-            <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
-              <Icon name="menu" size={30} color="white" />
-            </TouchableOpacity>
-          </View>
-        </SafeAreaView>
-      ),
-      headerLeft: (
-        <SafeAreaView>
-          <View style={{ marginLeft: 10 }}>
-            <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
-              <Icon name="arrow-back" size={30} color="white" />
-            </TouchableOpacity>
-          </View>
-        </SafeAreaView>
-      )
-    })
-  }
-});
+// const LocationScannerStack = createStackNavigator({
+//   DashboardScreen: {
+//     screen: LocationScanner,
+//     navigationOptions: props => ({
+//       title: "Location Scanner",
+//       headerTitleStyle: {
+//         color: "white"
+//       },
+//       headerTransparent: true,
+//       headerRight: (
+//         <SafeAreaView>
+//           <View style={{ marginRight: 10 }}>
+//             <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+//               <Icon name="menu" size={30} color="white" />
+//             </TouchableOpacity>
+//           </View>
+//         </SafeAreaView>
+//       ),
+//       headerLeft: (
+//         <SafeAreaView>
+//           <View style={{ marginLeft: 10 }}>
+//             <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+//               <Icon name="arrow-back" size={30} color="white" />
+//             </TouchableOpacity>
+//           </View>
+//         </SafeAreaView>
+//       )
+//     })
+//   }
+// });
 
 
 const AssetsScreen = createStackNavigator({
@@ -387,27 +386,44 @@ const AppStack = createDrawerNavigator(
     Scanner: {
       screen: ScannerScreen
     },
+    // If drawer label is hidden, we wanted to keep the
+    // screen in the navigator but hide in the drawer
     SingleAssetDrawer: {
       screen: SingleAssetScreen,
+      navigationOptions: {
+        drawerLabel: <Hidden />
+      },
     },
-    // AssetsCardDrawer: {
-    //   screen: AssetsCard
-    // },
+    AssetsCardDrawer: {
+      screen: AssetsCard,
+      navigationOptions: {
+        drawerLabel: <Hidden />
+      },
+    },
     AssetsAdd: {
-      screen: AssetsAddScreen
+      screen: AssetsAddScreen,
+      navigationOptions: {
+        drawerLabel: <Hidden />
+      },
     },
     Location: {
-      screen: LocationScreen
-    },
-    LocationScanner: {
-      screen: LocationScannerStack
+      screen: LocationScreen,
+      navigationOptions: {
+        drawerLabel: <Hidden />
+      },
     },
     EditProfile: {
-      screen: EditProfileScreen
+      screen: EditProfileScreen,
+      navigationOptions: {
+        title: "Edit Profile"
+      },
     },
     SignOut: {
-      screen: SignOutScreen
-    }
+      screen: SignOutScreen,
+      navigationOptions: {
+        title: "Sign Out"
+      }
+    },
   },
   {
     contentComponent: CustomDrawer,
@@ -549,7 +565,7 @@ const RootNavigation = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Auth"
+    initialRouteName: "Splash"
   }
 );
 

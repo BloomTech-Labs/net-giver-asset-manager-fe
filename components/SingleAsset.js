@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { withNavigation } from "react-navigation";
 
 
@@ -10,15 +10,17 @@ const SingleAsset = ({ data, navigation }) => {
     const id = data.id;
     console.log("ASSET ID:", id);
     navigation.navigate("SingleAssetScreen", { id });
-
   };
 
 
   return (
     <TouchableOpacity onPress={showDetails}>
       <View style={styles.assetWrapper}>
-        <View style={styles.imageWrapper} />
-        {data.photo}
+        {/* {data.photo} */}
+        <Image
+          source={require('../assets/images/imageasset.jpg')}
+          style={styles.profileImage}
+        />
         <View style={styles.textWrapper}>
           <View style={styles.textWrapper}>
             <Text style={styles.assetName}>{data.name}</Text>
@@ -53,8 +55,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignItems: "center",
     backgroundColor: "grey",
-    width: 100,
-    height: 100
+    width: 120,
+    height: 120
   },
   textWrapper: {
     flex: 3,
@@ -78,6 +80,10 @@ const styles = StyleSheet.create({
   },
   assetLocation: {
     color: "#82A0FD"
+  },
+  profileImage: {
+    width: 100,
+    height: 100
   }
 });
 

@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   AsyncStorage,
   FlatList,
-  Form
+  Form,
+  Alert
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Constants from "expo-constants";
@@ -24,6 +25,7 @@ import CustomTabBar from "../components/CustomTabBar";
 
 export default class EditProfile extends React.Component {
   constructor(props) {
+    console.log("navPropsTest:", props);
     super(props);
 
     this.state = {
@@ -35,12 +37,33 @@ export default class EditProfile extends React.Component {
     };
   }
 
-  handleChange(event) {
-    event.preventDefault();
-    this.setState({ value: event.target.value });
-  }
+  // const updatedProfile = {
+  //   email: this.state.email,
+  //   username: this.state.username
+  // };
 
-  // handleSubmit = ({ username, email }) => {};
+  onLogin() {
+    const { username, email } = this.state;
+    Alert.alert(
+      `username changed to: ${username}, and email changed to: ${email} `,
+      "Look Good?",
+      [
+        {
+          text: "Confirm changes",
+          onPress: () => {
+            this.updateUser();
+          }
+        }
+      ]
+    );
+
+    // Alert.alert(
+    //   "Here Are Your Changes:",
+    //   `${username} + ${password}`
+    //   "Press Ok to Submit"
+    //    [{ text: "commit changes", onPress(updateUser)}]
+    // );
+  }
 
   getUserImage = () => {
     axios
@@ -56,10 +79,15 @@ export default class EditProfile extends React.Component {
       });
   };
 
-  updateUser = () => {
+  updateUser = async () => {
+    const updatedProfile = {
+      email: this.state.email,
+      username: this.state.username
+    };
     axios
       .put(
-        `https://net-giver-asset-mngr.herokuapp.com/api/auth/users/${this.state.userId}`
+        `https://net-giver-asset-mngr.herokuapp.com/api/auth/users/${this.state.userId}`,
+        updatedProfile
       )
       .then(res => {
         console.log("put test:", res.data);
@@ -67,6 +95,18 @@ export default class EditProfile extends React.Component {
       .catch(err => {
         console.log(err);
       });
+  };
+
+  fetchUserPhoto = async () => {
+    let location = "";
+    try {
+      location = await AsyncStorage.getItem("location");
+      console.log("got the location", location);
+      this.setState({ avatar: location });
+    } catch (err) {
+      console.log(err);
+    }
+    return location;
   };
 
   fetchUserId = () => {
@@ -86,8 +126,10 @@ export default class EditProfile extends React.Component {
     let { avatar } = this.state;
     let { userId } = this.state;
 
-    console.log("anotherStateTestforavatar:", avatar);
-    console.log("anotherStateTestforuser:", userId);
+    console.log("got the location", this.location);
+
+    // console.log("anotherStateTestforavatar:", this.fetchUserPhoto());
+    // console.log("anotherStateTestforuser:", userId);
 
     const leftBtnTxt = "Edit Profile";
     return (
@@ -101,8 +143,8 @@ export default class EditProfile extends React.Component {
           <Avatar
             PlaceholderContent={<ActivityIndicator />}
             source={
-              image
-                ? { uri: image }
+              avatar
+                ? { uri: avatar }
                 : { uri: "https://i.imgur.com/ltNMlnA.png" }
             }
             rounded
@@ -121,75 +163,38 @@ export default class EditProfile extends React.Component {
           <Text style={styles.inputLabels}>Username</Text>
           <TextInput
             placeholder="username"
+            value={this.state.username}
+            onChangeText={username => this.setState({ username })}
             // autoCorrect={false}
             style={styles.inputField}
           />
           <Text style={styles.inputLabels}>Email</Text>
-          <TextInput placeholder="email" style={styles.inputField} />
+          <TextInput
+            placeholder="email"
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+            style={styles.inputField}
+          />
         </View>
         <View style={styles.btnWrapper}>
           <Button
             buttonStyle={styles.btn}
             containerStyle={styles.btnContainer}
             title="Update Profile"
-            // onPress={() => {
-            //   image !== null
-            //     ? { profileUpdater }
-            //     : alert("Please Include a Photo");
-            // }}
-            onPress={this.updateUser(this.state.username, this.state.email)}
-
-          // onPress={() => {
-          //   updateUser = () => {
-          //     axios
-          //       .put(
-          //         `https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`
-          //       )
-          //       .then(res => {
-          //         console.log("put test:", res.data);
-          //       })
-          //       .catch(err => {
-          //         console.log(err);
-          //       });
-          //   };
-          // }}
+            onPress={this.onLogin.bind(this)}
           />
-          {/* <NavLink
-            text="Already have an account? Log in here."
-            route="Login"
-            style={styles.toLoginLink}
-          /> */}
+
           <Button onPress={this.getUserImage} />
         </View>
       </SafeAreaView>
     );
   }
 
-  // profileUpdater = () => {
-  //   axios
-  //     .put(`https://net-giver-asset-mngr.herokuapp.com/api/auth/users${userId}`)
-  //     .then(res => {
-  //       console.log("put test:", res.data);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
-
   componentDidMount() {
     this.getPermissionAsync();
     this.fetchUserId();
-    if (this.state.userId) {
-      this.getUserImage();
-    }
+    this.fetchUserPhoto();
   }
-
-  // componentDidUpdate(avatar) {
-  //   if (avatar === null) {
-  //     this.getUserImage();
-  //     // this.setState();
-  //   }
-  // }
 
   getPermissionAsync = async () => {
     if (Constants.platform.ios) {
