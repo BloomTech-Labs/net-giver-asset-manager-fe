@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import OneAsset from "./OneAsset";
-import { withNavigation } from "react-navigation";
+import { withNavigation, NavigationEvents } from "react-navigation";
 
 const SingleAssetCard = (props) => {
   const [userId, setUserId] = useState(0);
@@ -83,14 +83,15 @@ const SingleAssetCard = (props) => {
       )
       .then(response => {
         console.log("New Asset History Added!");
+        // setIsAssetHistory(response.data)
       })
       .catch(error => {
         console.log(error);
       });
 
     Alert.alert(
-      "Message",
-      "Success",
+      "",
+      "Success!",
       [
         {
           text: "Ok",
@@ -121,7 +122,7 @@ const SingleAssetCard = (props) => {
     getAssetsList();
   }, [currentAssetId]);
 
-  console.log("Checkin Status in SinglePage", singleAsset.check_in_status);
+  console.log("isAssetHistory", isAssetHistory.asset_id);
 
   return (
     <SafeAreaView>
@@ -188,6 +189,11 @@ const SingleAssetCard = (props) => {
           }
         }}
       />
+      <View>
+        <NavigationEvents
+          onDidFocus={() => getAssetsList()}
+        />
+      </View>
     </SafeAreaView>
   );
 };

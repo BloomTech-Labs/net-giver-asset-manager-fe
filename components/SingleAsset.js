@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import { withNavigation } from "react-navigation";
-
 
 const SingleAsset = ({ data, navigation }) => {
 

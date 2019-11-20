@@ -1,42 +1,38 @@
-import { AsyncStorage, Alert } from "react-native";
-import createDataContext from "./createDataContext";
-import assetsApi from "../api/assets";
-import { navigate } from "../navigationRef";
+import react, { useState, createContext } from 'react';
+import axios from 'axios';
 
-const assetReducer = (state, action) => {
-  switch (action.type) {
-    default:
-      return state;
-  }
-};
+export const AssetContext = createContext();
 
-// const handleScan = dispatch => async ({ type, data }) => {
-//   try {
-//     const response = await assetsApi.get("/auth/assets", { type, data });
-//     if (response.data === req.body)
-//     dispatch({ type: handleScan, payload: response.data.data });
-//   } catch (err) {
-//     if (!response.data.data && checkin = true) {
-//       Alert.alert( `Bar code with type ${type} and data ${data} has been scanned!`,
-//       "time to work",
-//       [
-//         {
-//           text: "Create New Item",
-//           onPress: () =>
-//             this.props.navigation.navigate("AssetForm", {
-//               asset: data
-//             })
-//     }
-//   } else if {
+export const assetProvider = () => {
+  const [assets, setAssets] = useState([]);
 
-//   }
-// };
 
-const populateAssetForm = () => {};
+  console.log("all data", assets)
 
-export const { Provider, Context } = createDataContext(assetReducer, {});
+  useEffect(() => {
+    fetchAllAssets();
+  }, []);
 
-// dispatch({
-//   type: "handle_error",
-//   payload: "please scan again"
-// });
+  // Fetches all assets upon rendering regardless of user
+  const fetchAllAssets = () => {
+    axios
+      .get("https://net-giver-asset-mngr.herokuapp.com/api/assets")
+      .then(response => {
+
+        setHistory(response.data);
+
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+
+
+
+  return (
+    <AssetContext.Provider>
+      {props.children}
+    </AssetContext.Provider>
+  )
+}
