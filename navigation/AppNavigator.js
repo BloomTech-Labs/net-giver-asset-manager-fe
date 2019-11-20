@@ -144,7 +144,7 @@ const ScannerScreen = createStackNavigator({
   DashboardScreen: {
     screen: BarcodeScanner,
     navigationOptions: props => ({
-      title: "Scanner",
+      title: "Asset Scanner",
       headerTitleStyle: {
         color: "white"
       },
@@ -170,6 +170,38 @@ const ScannerScreen = createStackNavigator({
     })
   }
 });
+
+// const LocationScannerStack = createStackNavigator({
+//   DashboardScreen: {
+//     screen: LocationScanner,
+//     navigationOptions: props => ({
+//       title: "Location Scanner",
+//       headerTitleStyle: {
+//         color: "white"
+//       },
+//       headerTransparent: true,
+//       headerRight: (
+//         <SafeAreaView>
+//           <View style={{ marginRight: 10 }}>
+//             <TouchableOpacity onPress={() => props.navigation.toggleDrawer()}>
+//               <Icon name="menu" size={30} color="white" />
+//             </TouchableOpacity>
+//           </View>
+//         </SafeAreaView>
+//       ),
+//       headerLeft: (
+//         <SafeAreaView>
+//           <View style={{ marginLeft: 10 }}>
+//             <TouchableOpacity onPress={() => props.navigation.goBack(null)}>
+//               <Icon name="arrow-back" size={30} color="white" />
+//             </TouchableOpacity>
+//           </View>
+//         </SafeAreaView>
+//       )
+//     })
+//   }
+// });
+
 
 const AssetsScreen = createStackNavigator({
   DashboardScreen: {
@@ -387,7 +419,10 @@ const AppStack = createDrawerNavigator(
       },
     },
     SignOut: {
-      screen: SignOutScreen
+      screen: SignOutScreen,
+      navigationOptions: {
+        title: "Sign Out"
+      }
     },
   },
   {

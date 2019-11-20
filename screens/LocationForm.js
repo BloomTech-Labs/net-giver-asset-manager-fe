@@ -27,64 +27,15 @@ import axios from "axios";
 const LocationForm = (props) => {
   const { state, addLocation, clearErrorMessage } = useContext(Context);
 
+  if (props.navigation.state.params) {
+    var barkode = props.navigation.state.params.dataString2;
+  }
+  console.log("Barcode Scanned", barkode);
+
+
   return (
     <KeyboardShift>
       <ScrollView>
-        {/* <HeadBar /> */}
-        {/* <Text style={styles.header}>Choose Locations</Text> */}
-        {/* <Picker style={styles.picker} itemStyle={styles.pickerItem}>
-          <Picker.Item label="Office" value="office" />
-          <Picker.Item label="Locker" value="locker" />
-          <Picker.Item label="Garage" value="garage" />
-          <Picker.Item label="House" value="house" />
-        </Picker> */}
-        {/* <Spacer> */}
-        {/* <Tile */}
-        {/* //   imageSrc={require("../assets/images/MapImg.jpg")}
-            //   imageSrc={{ uri: "https://i.imgur.com/YQJKz2w.jpg" }}
-            // imageSrc={{ uri: "https://i.imgur.com/tEM7UOQ.jpg" }}
-            title="You can lose a lot of things don't forget to add the location"
-            titleStyle={"black"}
-            featured
-            caption="Net Giver here to help"
-            PlaceholderContent={<ActivityIndicator />} */}
-        {/* /> */}
-        {/* </Spacer> */}
-        {/* <Text style={styles.inputLabels}>Location</Text>
-      <TextInput
-        style={styles.inputField}
-        value={name}
-        onChangeText={setName}
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
-      <Text style={styles.inputLabels}>Description</Text>
-      <TextInput
-        style={styles.inputField}
-        value={description}
-        onChangeText={setDescription}
-        autoCapitalize="none"
-        autoCorrect={false}
-      /> */}
-        {/* <Spacer /> */}
-        {/* <Button
-        iconRight={false}
-        title="Add New Location"
-        type="solid"
-        color="blue"
-        //   onPress={handleSubmit}
-        icon={<Icon name="check" color="white" />}
-        // disabled={!isValid}
-        //   onPress={handleSubmit}
-        containerStyle={styles.button}
-      /> */}
-        {/* <LocField
-          headerText=""
-          errorMessage={state.errorMessage}
-          onSubmit={addLocation}
-          submitButtonText="Add New Storage Location"
-        /> */}
-
         <View style={styles.assetSection}>
           <Text style={styles.activeText}>ADD LOCATION</Text>
           <View style={styles.activeTab} />
@@ -107,57 +58,54 @@ const LocationForm = (props) => {
           <Entypo style={styles.arrowRight} name="chevron-small-right" color="#3366FF" size={30} />
 
           <TouchableOpacity
-            onPress={() => props.navigation.navigate("BarcodeScanner")}
+            onPress={() => props.navigation.navigate("LocationScannerStack")}
           >
             <MaterialCommunityIcons
               style={styles.upc}
               name="qrcode-scan"
               size={25}
             />
-            {/* {!barkode
-              ? <Text style={styles.noCode}>Scan QR Code</Text>
-              : <Text style={styles.qrCode}>{barkode}</Text>
-            } */}
           </TouchableOpacity>
         </View>
 
         <Formik
-          enableReinitialize
+
           initialValues={{
-            qrCode: '',
+            name: "",
+            location_qrcode: barkode,
             container: '',
             address: '',
             description: ''
           }}
 
-          // onSubmit={(values) => axios
-          //   .post("https://net-giver-asset-mngr.herokuapp.com/api/assets", values)
-          //   .then(res => {
-          //     Alert.alert(
-          //       'Message',
-          //       'Successfuly Added Item!',
-          //       [
-          //         { text: 'Ok', onPress: () => props.navigation.navigate("AssetsList") }
-          //       ],
-          //       { cancelable: false }
-          //     );
-          //   })
-          //   .catch(err => {
-          //     "Can not add"
-          //   })
-          // }
+          onSubmit={(values) => axios
+            .post("https://net-giver-asset-mngr.herokuapp.com/api/location", values)
+            .then(res => {
+              Alert.alert(
+                'Message',
+                'Successfuly Added Item!',
+                [
+                  { text: 'Ok', onPress: () => props.navigation.navigate("AssetsList") }
+                ],
+                { cancelable: false }
+              );
+            })
+            .catch(err => {
+              "Can not add"
+            })
+          }
 
-          validationSchema={yup.object().shape({
-            qrCode: yup
-              .string()
-              .required(),
-            container: yup
-              .string()
-              .required(),
-            description: yup
-              .string()
-              .required()
-          })}
+        // validationSchema={yup.object().shape({
+        //   qrCode: yup
+        //     .string()
+        //     .required(),
+        //   container: yup
+        //     .string()
+        //     .required(),
+        //   description: yup
+        //     .string()
+        //     .required()
+        // })}
         >
 
           {({ values, handleChange, errors, setFieldTouched, touched, isValid, handleSubmit }) => (
@@ -165,17 +113,17 @@ const LocationForm = (props) => {
               <Text style={styles.assetTitle}>QR Code</Text>
               <TextInput
                 placeholder="95893830"
-                value={values.qrCode}
-                onChangeText={handleChange("qrCode")}
-                onBlur={() => setFieldTouched("qrCode")}
+                value={values.location_qrcode}
+                onChangeText={handleChange("location_qrcode")}
+                onBlur={() => setFieldTouched("location_qrcode")}
                 clearButtonMode="while-editing"
                 style={styles.textInputField}
               />
-              {touched.qrCode && errors.qrCode && (
+              {touched.location_qrcode && errors.location_qrcode && (
                 <Text style={{
                   fontSize: 10, color: "red", paddingLeft: 20, marginTop: 5
                 }}>
-                  {errors.qrCode}
+                  {errors.location_qrcode}
                 </Text>
               )}
 
@@ -385,5 +333,3 @@ const styles = StyleSheet.create({
 });
 
 export default LocationForm;
-
-// imageSrc={require('../assets/images/MapImg.jpg')}

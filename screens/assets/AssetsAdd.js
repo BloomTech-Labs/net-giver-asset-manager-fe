@@ -81,7 +81,7 @@ const AssetsAdd = props => {
       setImage(result.uri);
     }
 
-    const asset_img_id = Date.now();
+    const asset_img_id = 626189;
     console.log("RNG test:", asset_img_id);
 
     const file = {

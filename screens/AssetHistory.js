@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text, StatusBar, TextInput } from "react-native";
+import { SafeAreaView, View, FlatList, ActivityIndicator, StyleSheet, AsyncStorage, TouchableOpacity, Text, StatusBar, TextInput, Alert } from "react-native";
 import { Button, Icon } from "react-native-elements";
 import _ from "lodash";
 import axios from "axios";
@@ -8,6 +8,7 @@ import { REACT_APP_MIXPANEL_SECRET_API_KEY } from 'react-native-dotenv';
 import ExpoMixpanelAnalytics from '@benawad/expo-mixpanel-analytics';
 const analytics = new ExpoMixpanelAnalytics(REACT_APP_MIXPANEL_SECRET_API_KEY); //planning on putting token it in an env file if it passes
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { NavigationEvents } from 'react-navigation';
 
 const AssetHistory = ({ navigation }) => {
   const [history, setHistory] = useState([]);
@@ -77,6 +78,7 @@ const AssetHistory = ({ navigation }) => {
     }
     setSearchedHistory(filteredItems);
   }
+
 
   // Conditional rendering
   if (isLoading) {
@@ -174,6 +176,11 @@ const AssetHistory = ({ navigation }) => {
             />
           }
         </View>
+        <View>
+          <NavigationEvents
+            onDidFocus={() => fetchAllAssets()}
+          />
+        </View>
 
         <Button
           buttonStyle={styles.addBtn}
@@ -196,7 +203,7 @@ const AssetHistory = ({ navigation }) => {
 const styles = StyleSheet.create({
   mainWrapper: {
     flexDirection: "column",
-    flex: 1,
+    flex: 1
   },
   loading: {
     flex: 1,
@@ -217,6 +224,7 @@ const styles = StyleSheet.create({
   },
   flatList: {
     zIndex: 0,
+    marginBottom: 150
   },
   // Floating action button styling at bottom of page
   addBtn: {
