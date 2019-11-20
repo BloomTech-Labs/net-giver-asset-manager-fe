@@ -23,7 +23,7 @@ const Landing = ({ navigation }) => {
         <View style={styles.landingImage}>
           <Image
             style={styles.middleImg}
-            source={require("../assets/images/landing.jpg")}
+            source={require("../assets/images/landing.png")}
           />
         </View>
         <View>

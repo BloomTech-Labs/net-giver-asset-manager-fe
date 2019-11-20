@@ -130,7 +130,6 @@ const AssetHistory = ({ navigation }) => {
         </View>
 
         <View style={styles.qrSearchContainer}>
-
           <View style={styles.searchContainer}>
             <TextInput
               style={styles.searchBar}
@@ -145,7 +144,6 @@ const AssetHistory = ({ navigation }) => {
               value={query}
             />
           </View>
-
           <TouchableOpacity
             style={styles.qrSection}
             onPress={() => navigation.navigate("Scanner")}
